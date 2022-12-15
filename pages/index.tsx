@@ -67,22 +67,22 @@ const countdownRenderer = ({
   minutes,
 }: CountdownRendererProps) => {
   return (
-    <div className="flex items-center justify-center my-8">
-      <div className="flex flex-col items-center mx-10 md:mx-20">
+    <div className="flex items-center justify-center my-8 w-full px-2">
+      <div className="flex flex-col items-center mx-2 md:mx-20">
         <p className="text-3xl font-thin mb-2">Days</p>
         <p className="text-6xl">{days}</p>
       </div>
-      <div className="self-end pb-3">
+      <div className="self-end pb-3 mx-4">
         <p className="text-3xl font-thin">:</p>
       </div>
-      <div className="flex flex-col items-center mx-10 md:mx-20">
+      <div className="flex flex-col items-center mx-2 md:mx-20">
         <p className="text-3xl font-thin mb-2">Hours</p>
         <p className="text-6xl">{hours}</p>
       </div>
-      <div className="self-end pb-3">
+      <div className="self-end pb-3 mx-4">
         <p className="text-3xl font-thin">:</p>
       </div>
-      <div className="flex flex-col items-center mx-10 md:mx-20">
+      <div className="flex flex-col items-center mx-2 md:mx-20">
         <p className="text-3xl font-thin mb-2">Minutes</p>
         <p className="text-6xl">{minutes}</p>
       </div>
@@ -92,7 +92,7 @@ const countdownRenderer = ({
 
 export default function Home() {
   return (
-    <div className="bg-black">
+    <div className="bg-black min-w-screen">
       <div className="flex min-h-screen flex-col font-akshar font-semibold text-gray-200 bg-stang-skinny bg-cover md:bg-stang md:bg-contain bg-no-repeat md:bg-center md:bg-origin-content">
         <div className="bg-black bg-opacity-60 h-screen inset-0">
           <Head>
@@ -107,7 +107,7 @@ export default function Home() {
               date={new Date("January 1, 2023 00:00:00")}
               renderer={countdownRenderer}
             />
-            <h2 className="text-2xl md:text-4xl font-akshar font-semibold uppercase">
+            <h2 className="text-2xl text-center md:text-4xl font-akshar font-semibold uppercase">
               But you will be able to rent it...
             </h2>
             <div>
