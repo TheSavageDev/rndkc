@@ -15,10 +15,11 @@ export default async (req, res) => {
     email_address: email,
     status: "subscribed",
   };
+  const base64Key = Buffer.from(`anystring:${API_KEY}`).toString("base64");
   const options = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `apikey ${API_KEY}`,
+      Authorization: `Basic ${base64Key}`,
     },
   };
 

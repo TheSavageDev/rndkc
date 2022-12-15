@@ -1,6 +1,6 @@
 import axios from "axios";
 import Head from "next/head";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Countdown from "react-countdown";
 
 function NewsLettterSignUpForm() {
