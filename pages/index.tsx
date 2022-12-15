@@ -96,20 +96,21 @@ export default function Home() {
       <div className="flex min-h-screen flex-col font-akshar font-semibold text-gray-200 bg-stang-skinny bg-cover md:bg-stang md:bg-contain bg-no-repeat md:bg-center md:bg-origin-content">
         <div className="bg-black bg-opacity-60 h-screen inset-0">
           <Head>
-            <title>R&D Garage</title>
+            <title>RND KC</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <main className="flex flex-col justify-center items-center w-screen h-screen">
             <h2 className="text-2xl md:text-4xl font-akshar font-thin uppercase">
               Money can't buy happiness
             </h2>
+            <h2 className="text-xl text-center md:text-4xl font-akshar font-semibold uppercase">
+              But you will be able to rent it in
+            </h2>
             <Countdown
               date={new Date("January 1, 2023 00:00:00")}
               renderer={countdownRenderer}
             />
-            <h2 className="text-2xl text-center md:text-4xl font-akshar font-semibold uppercase">
-              But you will be able to rent it...
-            </h2>
+
             <div>
               <NewsLettterSignUpForm />
             </div>
