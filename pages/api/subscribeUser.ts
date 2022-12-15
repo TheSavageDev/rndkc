@@ -7,22 +7,24 @@ export default async (req, res) => {
     return res.status(400).json({ error: "Email is required" });
   }
 
-  const AUDIENCE_ID = process.env.NEXT_PUBLIC_MAILCHIMP_API_KEY;
-  const API_KEY = process.env.NEXT_PUBLIC_MAILCHIMP_AUDIENCE_ID;
+  const AUDIENCE_ID = process.env.NEXT_PUBLIC_MAILCHIMP_AUDIENCE_ID;
+  const API_KEY = process.env.NEXT_PUBLIC_MAILCHIMP_API_KEY;
   const API_SERVER = process.env.NEXT_PUBLIC_MAILCHIMP_API_SERVER;
   const url = `https://${API_SERVER}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`;
   const data = {
     email_address: email,
     status: "subscribed",
   };
-  const base64Key = Buffer.from(`anystring:${API_KEY}`).toString("base64");
+
   const options = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Basic ${base64Key}`,
+      Authorization: `api-key ${API_KEY}`,
     },
   };
 
+  console.log(API_KEY);
+  console.log(data);
   try {
     const response = await axios.post(url, data, options);
 
