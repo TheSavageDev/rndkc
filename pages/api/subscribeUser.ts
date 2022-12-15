@@ -18,7 +18,7 @@ export default async (req, res) => {
   const options = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `api_key ${API_KEY}`,
+      Authorization: `apikey ${API_KEY}`,
     },
   };
 
