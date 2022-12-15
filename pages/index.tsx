@@ -1,86 +1,121 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import axios from "axios";
+import Head from "next/head";
+import { useRef, useState } from "react";
+import Countdown from "react-countdown";
 
-const Home: NextPage = () => {
+function NewsLettterSignUpForm() {
+  const [email, setEmail] = useState("");
+  const [state, setState] = useState("idle");
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const subscribe = async (e) => {
+    e.preventDefault();
+    setState("loading");
+
+    try {
+      const response = await axios.post("/api/subscribeUser", { email });
+      console.log(response);
+      setState("Success");
+      setEmail("");
+    } catch (e) {
+      console.log(e.response.data.error);
+      setErrorMessage(e.response.data.error);
+      setState("Error");
+    }
+  };
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+    <form onSubmit={subscribe}>
+      <>
+        <input
+          type="email"
+          id="email-input"
+          name="email"
+          placeholder="Enter your email for updates"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          autoCapitalize="off"
+          autoCorrect="off"
+          className="mt-4 mb-10 mr-2 px-4 py-2 rounded font-thin text-black"
+        />
+        <button
+          type="submit"
+          disabled={state === "Loading"}
+          onClick={subscribe}
+          className="border-2 border-accent px-4 py-2 bg-accent text-black rounded hover:bg-secondary hover:text-white hover:border-secondary"
         >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
-    </div>
-  )
+          Sign Up
+        </button>
+        {state === "Error" && <p>{errorMessage}</p>}
+        {state === "Success" && <p>Awesome, you've been subscribed</p>}
+      </>
+    </form>
+  );
 }
 
-export default Home
+type CountdownRendererProps = {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
+
+const countdownRenderer = ({
+  days,
+  hours,
+  minutes,
+}: CountdownRendererProps) => {
+  return (
+    <div className="flex items-center justify-center my-8">
+      <div className="flex flex-col items-center mx-10 md:mx-20">
+        <p className="text-3xl font-thin mb-2">Days</p>
+        <p className="text-6xl">{days}</p>
+      </div>
+      <div className="self-end pb-3">
+        <p className="text-3xl font-thin">:</p>
+      </div>
+      <div className="flex flex-col items-center mx-10 md:mx-20">
+        <p className="text-3xl font-thin mb-2">Hours</p>
+        <p className="text-6xl">{hours}</p>
+      </div>
+      <div className="self-end pb-3">
+        <p className="text-3xl font-thin">:</p>
+      </div>
+      <div className="flex flex-col items-center mx-10 md:mx-20">
+        <p className="text-3xl font-thin mb-2">Minutes</p>
+        <p className="text-6xl">{minutes}</p>
+      </div>
+    </div>
+  );
+};
+
+export default function Home() {
+  return (
+    <div className="bg-black">
+      <div className="flex min-h-screen flex-col font-akshar font-semibold text-gray-200 bg-stang-skinny bg-cover md:bg-stang md:bg-contain bg-no-repeat md:bg-center md:bg-origin-content">
+        <div className="bg-black bg-opacity-60 h-screen inset-0">
+          <Head>
+            <title>R&D Garage</title>
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <main className="flex flex-col justify-center items-center w-screen h-screen">
+            <h2 className="text-2xl md:text-4xl font-akshar font-thin uppercase">
+              Money can't buy happiness
+            </h2>
+            <Countdown
+              date={new Date("January 1, 2023 00:00:00")}
+              renderer={countdownRenderer}
+            />
+            <h2 className="text-2xl md:text-4xl font-akshar font-semibold uppercase">
+              But you will be able to rent it...
+            </h2>
+            <div>
+              <NewsLettterSignUpForm />
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  );
+}
