@@ -23,12 +23,8 @@ export default async (req, res) => {
     },
   };
 
-  console.log(API_KEY);
-  console.log(data);
   try {
     const response = await axios.post(url, data, options);
-
-    console.log(response);
     if (response.status >= 400) {
       return res.status(400).json({
         error:

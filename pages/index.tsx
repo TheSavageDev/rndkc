@@ -3,6 +3,8 @@ import Head from "next/head";
 import { useState } from "react";
 import Countdown from "react-countdown";
 
+import * as ga from "../lib/ga";
+
 function NewsLettterSignUpForm() {
   const [email, setEmail] = useState("");
   const [state, setState] = useState("idle");
@@ -14,11 +16,15 @@ function NewsLettterSignUpForm() {
 
     try {
       const response = await axios.post("/api/subscribeUser", { email });
-      console.log(response);
       setState("Success");
       setEmail("");
+      ga.event({
+        action: "subscribe",
+        params: {
+          email,
+        },
+      });
     } catch (e) {
-      console.log(e.response.data.error);
       setErrorMessage(e.response.data.error);
       setState("Error");
     }
