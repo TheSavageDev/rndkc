@@ -24,6 +24,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>RND KC</title>
+        <link rel="shortcut icon" href="/img/RNDBlack2.svg" />
+        <link rel="icon" href="/img/RNDBlack2.svg" />
       </Head>
       <Script id="google-tag-manager" strategy="afterInteractive">
         {`

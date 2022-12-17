@@ -1,5 +1,4 @@
 import axios from "axios";
-import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import Countdown from "react-countdown";
@@ -102,10 +101,6 @@ export default function Home() {
     <div className="bg-black min-w-screen">
       <div className="flex min-h-screen flex-col font-akshar font-semibold text-gray-200 bg-stang-skinny bg-cover md:bg-stang md:bg-contain bg-no-repeat md:bg-center md:bg-origin-content">
         <div className="bg-black bg-opacity-60 h-screen inset-0">
-          <Head>
-            <title>RND KC</title>
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
           <main className="flex flex-col justify-center items-center w-screen h-screen">
             <Image
               src="/img/RNDWhite1.svg"
