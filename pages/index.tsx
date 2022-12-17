@@ -109,7 +109,7 @@ export default function Home() {
               height="100"
               className="mb-4"
             />
-            <h2 className="text-2xl md:text-4xl font-akshar font-thin uppercase">
+            <h2 className="text-2xl text-center md:text-4xl font-akshar font-thin uppercase">
               Money can't buy happiness
             </h2>
             <h2 className="text-xl text-center md:text-4xl font-akshar font-semibold uppercase">
