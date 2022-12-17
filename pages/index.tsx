@@ -1,5 +1,6 @@
 import axios from "axios";
 import Head from "next/head";
+import Image from "next/image";
 import { useState } from "react";
 import Countdown from "react-countdown";
 
@@ -106,6 +107,13 @@ export default function Home() {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <main className="flex flex-col justify-center items-center w-screen h-screen">
+            <Image
+              src="/img/RNDWhite1.svg"
+              alt="RND KC"
+              width="200"
+              height="100"
+              className="mb-4"
+            />
             <h2 className="text-2xl md:text-4xl font-akshar font-thin uppercase">
               Money can't buy happiness
             </h2>
