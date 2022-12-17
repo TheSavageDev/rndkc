@@ -5,7 +5,7 @@ import Countdown from "react-countdown";
 
 import * as ga from "../lib/ga";
 
-function NewsLettterSignUpForm() {
+function NewsLetterSignUpForm() {
   const [email, setEmail] = useState("");
   const [state, setState] = useState("idle");
   const [errorMessage, setErrorMessage] = useState(null);
@@ -118,7 +118,7 @@ export default function Home() {
             />
 
             <div>
-              <NewsLettterSignUpForm />
+              <NewsLetterSignUpForm />
             </div>
           </main>
         </div>

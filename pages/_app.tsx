@@ -34,6 +34,19 @@ function MyApp({ Component, pageProps }: AppProps) {
         })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTMID}');
       `}
       </Script>
+      <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_TRACKING_ID}`}
+      ></script>
+      <Script id="google-tag-manager" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_TRACKING_ID}');
+      `}
+      </Script>
       <Component {...pageProps} />
     </>
   );
