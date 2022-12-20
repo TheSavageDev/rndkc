@@ -116,7 +116,7 @@ export default function Home() {
               But you will be able to rent it in
             </h2>
             <Countdown
-              date={new Date("January 1, 2023 00:00:00")}
+              date={new Date("January 15, 2023 00:00:00")}
               renderer={countdownRenderer}
             />
 
