@@ -9,6 +9,9 @@ module.exports = {
     extend: {
       fontFamily: {
         akshar: ["Akshar", "sans-serif"],
+        khand: ["Khand", "sans-serif"],
+        manrope: ["Manrope", "sans-serif"],
+        gemunuLibre: ["Gemunu Libre", "sans-serif"],
       },
       colors: {
         primary: "rgb(78,127,118)",
@@ -19,11 +22,16 @@ module.exports = {
         secondary: "#282828",
         accent: "#FF9D0B",
         text: "#A5A5A5",
+        light: "#fefefe",
+        background: "rgb(103, 113, 112)",
+        lightBg: "#e5e5e5",
       },
       backgroundImage: {
         car: "url('../public/img/car.jpg')",
         stang: "url('../public/img/stang.png')",
         "stang-skinny": "url('../public/img/stang-skinny.png')",
+        camaroText: "url('../public/img/67Txt.svg')",
+        contactBg: "url('../public/img/ContactBkgd.png')",
       },
     },
   },

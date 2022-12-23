@@ -1,4 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Akshar:wght@300;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@200;300;400;500;600;700;800&display=swap");
+
+#camaro {
+  background-image: url("/img/67Txt.svg");
+  background-repeat: no-repeat;
+  object-fit: cover;
+  background-position: center;
+  background-color: rgb(103, 113, 112);
+}
+.header {
+  clip-path: polygon(95% 0, 90% 85%, 89% 100%, 0 100%, 0 0);
+}
