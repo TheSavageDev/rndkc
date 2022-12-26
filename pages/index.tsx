@@ -12,16 +12,22 @@ export default function Home() {
       <NavBar />
       <main className="flex flex-col items-center w-screen bg-lightBg">
         <section id="hero" className="pt-8 w-full px-7 bg-background">
-          <h1 className="text-white font-akshar font-light uppercase text-2xl">
+          <h1 className="text-white font-akshar font-light uppercase text-2xl sm:text-4xl">
             Money can't buy happiness...
           </h1>
-          <h2 className="text-white font-akshar uppercase font-semibold text-2xl">
+          <h2 className="text-white font-akshar uppercase font-semibold text-4xl">
             but you can rent it for <span className="text-accent">$350.</span>
           </h2>
           <NewsLetterSignUpForm />
         </section>
         <section className="relative mb-10 pt-2 bg-background">
-          <Image src="/img/67Txt.svg" alt="Camaro" width="1000" height="100" />
+          <Image
+            src="/img/67Txt.svg"
+            priority
+            alt="Camaro"
+            width="1000"
+            height="100"
+          />
           <Image
             src="/img/CamaroImg.png"
             alt="67"

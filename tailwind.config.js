@@ -18,6 +18,7 @@ module.exports = {
         primaryLight: "#50c2ae",
         tertiary: "#657170",
         gradientDark: "rgba(217,217,217,0)",
+        blackTransparent: "rgba(0, 0, 0, 0.5)",
         primaryDark: "rgb(45,67,68)",
         secondary: "#282828",
         accent: "#FF9D0B",

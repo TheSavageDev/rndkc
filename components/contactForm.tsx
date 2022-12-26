@@ -1,40 +1,17 @@
 import { useState } from "react";
-import axios from "axios";
-import * as ga from "../lib/ga";
 
 export const ContactForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [state, setState] = useState("idle");
-  const [errorMessage, setErrorMessage] = useState(null);
-
-  const contact = async (e) => {
-    e.preventDefault();
-    setState("loading");
-
-    try {
-      await axios.post("/api/contact", { email });
-      setState("Success");
-      setEmail("");
-      ga.event({
-        action: "contact",
-        params: {
-          name,
-          email,
-        },
-      });
-    } catch (e) {
-      setErrorMessage(e.response.data.error);
-      setState("Error");
-    }
-  };
 
   return (
     <form
-      onSubmit={contact}
       className="flex flex-col justify-between space-y-3 w-full"
+      data-netlify="true"
+      method="POST"
     >
+      <input type="hidden" name="contact-form" value="contact" />
       <input
         type="name"
         id="name-input"
@@ -67,14 +44,10 @@ export const ContactForm = () => {
       ></textarea>
       <button
         type="submit"
-        disabled={state === "Loading"}
-        onClick={contact}
         className="border uppercase font-thin text-sm text-white border-black px-4 py-2 bg-accent rounded hover:bg-secondary hover:text-white hover:border-secondary"
       >
         Send Message
       </button>
-      {state === "Error" && <p>{errorMessage}</p>}
-      {state === "Success" && <p>Awesome, we'll be in touch</p>}
     </form>
   );
 };
