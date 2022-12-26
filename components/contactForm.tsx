@@ -10,6 +10,7 @@ export const ContactForm = () => {
       className="flex flex-col justify-between space-y-3 w-full"
       data-netlify="true"
       method="POST"
+      action="/"
     >
       <input type="hidden" name="contact-form" value="contact" />
       <input
