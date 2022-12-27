@@ -52,6 +52,9 @@ export default function Home() {
             <section className="absolute w-full lg:w-1/3 mt-4">
               <Social color="black" />
             </section>
+            <section className="hidden lg:block absolute w-full lg:w-1/3 mt-4">
+              <Social color="white" />
+            </section>
           </article>
         </section>
         <section className="w-full">

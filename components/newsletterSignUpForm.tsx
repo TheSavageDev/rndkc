@@ -2,7 +2,11 @@ import { useState } from "react";
 import axios from "axios";
 import * as ga from "../lib/ga";
 
-export const NewsLetterSignUpForm = () => {
+type NewsLetterSignUpFormProps = {
+  center?: boolean;
+};
+
+export const NewsLetterSignUpForm = ({ center }: NewsLetterSignUpFormProps) => {
   const [email, setEmail] = useState("");
   const [state, setState] = useState("idle");
   const [errorMessage, setErrorMessage] = useState(null);
