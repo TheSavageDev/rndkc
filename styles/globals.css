@@ -6,6 +6,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@200;300;400;500;600;700;800&display=swap");
 
+.noscroll {
+  overflow: hidden;
+}
+
 #camaro {
   background-image: url("/img/67Txt.svg");
   background-repeat: no-repeat;
@@ -14,7 +18,7 @@
   background-color: rgb(103, 113, 112);
 }
 .header {
-  clip-path: polygon(0 0, 90% 0%, 85% 100%, 0 100%);
+  clip-path: polygon(0 0, 85% 0%, 84% 100%, 0 100%);
 }
 
 .itemHeaderPrice {

@@ -34,9 +34,7 @@ export const NewsLetterSignUpForm = ({ center }: NewsLetterSignUpFormProps) => {
   return (
     <form
       onSubmit={subscribe}
-      className={`flex flex-col justify-between space-y-3 w-full md:flex-row md:justify-start ${
-        center ? "md:justify-center" : ""
-      }`}
+      className={`flex flex-col justify-between space-y-3 w-full md:flex-row md:justify-start xl:w-1/2`}
     >
       <input
         type="email"
