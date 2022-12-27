@@ -3,7 +3,9 @@ import { SocialIcon } from "react-social-icons";
 export const Social = ({ color }) => {
   return (
     <article className="flex flex-col items-center">
-      <small className={`font-gemunuLibre text-lg font-normal text-${color}`}>
+      <small
+        className={`font-gemunuLibre text-xl md:text-2xl font-normal text-${color}`}
+      >
         Follow Us for Updates and Special Offers
       </small>
       <article className="flex space-x-2">
