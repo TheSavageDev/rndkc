@@ -2,11 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import * as ga from "../lib/ga";
 
-type NewsLetterSignUpFormProps = {
-  center?: boolean;
-};
-
-export const NewsLetterSignUpForm = ({ center }: NewsLetterSignUpFormProps) => {
+export const NewsLetterSignUpForm = () => {
   const [email, setEmail] = useState("");
   const [state, setState] = useState("idle");
   const [errorMessage, setErrorMessage] = useState(null);
@@ -34,9 +30,7 @@ export const NewsLetterSignUpForm = ({ center }: NewsLetterSignUpFormProps) => {
   return (
     <form
       onSubmit={subscribe}
-      className={`flex flex-col justify-between space-y-3 w-full md:flex-row md:justify-start ${
-        center ? "md:justify-center" : ""
-      }`}
+      className={`flex flex-col justify-between space-y-3 w-full md:flex-row md:justify-start xl:w-1/2`}
     >
       <input
         type="email"

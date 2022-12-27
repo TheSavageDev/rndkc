@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type DividerType = {
   light?: boolean;
 };
@@ -7,7 +9,7 @@ export const Divider = ({ light }: DividerType) => {
     <section
       className={`bg-${light ? "lightBg" : "background"} w-full md:z-10`}
     >
-      <section className="bg-accent text-white flex header">
+      <section className="bg-accent text-white flex header lg:w-4/5">
         <h2 className="block uppercase text-xl pt-1 pl-3 font-normal font-akshar md:hidden">
           KC's Classic Car Rentals
         </h2>

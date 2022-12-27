@@ -12,22 +12,17 @@ export const Social = ({ color }) => {
         <SocialIcon
           fgColor="#fff"
           style={{ height: 40, width: 40 }}
-          url="https://facebook.com"
+          url="https://facebook.com/rndkc"
         />
         <SocialIcon
           fgColor="#fff"
           style={{ height: 40, width: 40 }}
-          url="https://instagram.com"
+          url="https://instagram.com/rnd_kc"
         />
         <SocialIcon
           fgColor="#fff"
           style={{ height: 40, width: 40 }}
           url="https://twitter.com"
-        />
-        <SocialIcon
-          fgColor="#fff"
-          style={{ height: 40, width: 40 }}
-          url="https://tiktok.com"
         />
       </article>
     </article>

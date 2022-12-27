@@ -31,33 +31,32 @@ export default function Home() {
             alt="Camaro"
             width="1000"
             height="100"
-            className="block lg:hidden"
+            className="w-screen lg:hidden"
           />
           <Image
             src="/img/67CamaroTxt.svg"
             priority
             alt="Camaro"
-            width="1300"
+            width="1000"
             height="1000"
-            className="hidden lg:block"
+            className="hidden lg:block lg:w-screen"
           />
           <Image
             src="/img/CamaroImg.png"
             alt="67"
             width="700"
             height="100"
-            className="absolute top-1/2 -translate-y-12 z-1 md:right-0"
+            className="absolute top-1/2 -translate-y-12 z-10 md:right-0 lg:w-1/2 lg:top-1/3"
           />
-          <article className="flex justify-center bg-lightBg w-full absolute bottom-0 h-24 lg:h-auto lg:justify-start">
-            <section className="absolute lg:hidden w-full lg:w-1/3 mt-4">
+          <article className="flex justify-center bg-lightBg w-full absolute bottom-0 h-24 lg:h-36 lg:-bottom-40 lg:justify-start">
+            <section className="absolute w-full lg:w-1/3 mt-4">
               <Social color="black" />
-            </section>
-            <section className="hidden lg:block absolute w-full lg:w-1/3 mt-4">
-              <Social color="white" />
             </section>
           </article>
         </section>
-        <Divider light />
+        <section className="w-full">
+          <Divider light />
+        </section>
         <section className="w-full bg-white text-black flex flex-col items-center z-10">
           <section className="flex justify-center mt-2">
             <aside className="self-center mr-4">
@@ -102,7 +101,16 @@ export default function Home() {
             Our Story
           </h2>
         </section>
-        <Divider />
+        <section className="w-full z-10 relative">
+          <Image
+            src="/img/KCoutline.svg"
+            alt="KC Skyline"
+            width="400"
+            height="200"
+            className="hidden absolute right-0 z-50 bottom-0 lg:block lg:w-1/4 xl:right-10 xl:w-1/5"
+          />
+          <Divider />
+        </section>
         <section className="flex flex-col items-center bg-background">
           <section className="pt-6">
             <Image
@@ -197,8 +205,8 @@ export default function Home() {
               Stay up to date on our progress, new inventory, and special
               events.
             </section>
-            <section className="w-full px-2 mb-4">
-              <NewsLetterSignUpForm center />
+            <section className="w-full px-2 mb-4 flex justify-center">
+              <NewsLetterSignUpForm />
             </section>
             <Social color="white" />
           </section>
