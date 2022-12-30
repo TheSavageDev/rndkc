@@ -10,7 +10,7 @@ export const NavBar = () => {
   return (
     <nav className="bg-secondary py-3 px-3 flex justify-between items-center">
       {open && (
-        <section className="w-screen h-screen bg-blackSemiTransparent absolute top-0 left-0 right-0 bottom-0 z-10">
+        <section className="w-screen h-screen bg-blackSemiTransparent absolute top-0 left-0 right-0 bottom-0 z-50">
           <article className="flex flex-col justify-around text-3xl">
             <a href="#home" className="m-2 p-4" onClick={handleToggleNav}>
               Home
