@@ -1,17 +1,13 @@
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import axios from "axios";
 import * as ga from "../lib/ga";
 
-type NewsLetterSignUpFormProps = {
-  center?: boolean;
-};
-
-export const NewsLetterSignUpForm = ({ center }: NewsLetterSignUpFormProps) => {
+export const NewsLetterSignUpForm = () => {
   const [email, setEmail] = useState("");
   const [state, setState] = useState("idle");
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const subscribe = async (e) => {
+  const subscribe = async (e: SyntheticEvent) => {
     e.preventDefault();
     setState("loading");
 

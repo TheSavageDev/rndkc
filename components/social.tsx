@@ -12,7 +12,7 @@ export const Social = ({ color }) => {
         <SocialIcon
           fgColor="#fff"
           style={{ height: 40, width: 40 }}
-          url="https://facebook.com/rndkc"
+          url="https://facebook.com/RNDKansasCity"
         />
         <SocialIcon
           fgColor="#fff"

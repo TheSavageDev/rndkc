@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import axios from "axios";
 import * as ga from "../lib/ga";
 
@@ -9,7 +9,7 @@ export const ContactForm = () => {
   const [state, setState] = useState("idle");
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const contact = async (e) => {
+  const contact = async (e: SyntheticEvent) => {
     e.preventDefault();
     setState("loading");
 

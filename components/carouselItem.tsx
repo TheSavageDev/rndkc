@@ -7,10 +7,12 @@ export const CarouselItem = ({ src, alt, title, stats, dayPrice }) => {
       <section className="flex w-full absolute bottom-0 justify-between font-gemunuLibre">
         <section className="bg-black text-white flex w-full justify-between">
           <section className="flex flex-col p-2 items-start">
-            <article className="text-xl font-semibold">{title}</article>
-            <article className="font-light">{stats}</article>
+            <article className="text-md sm:text-xl font-semibold">
+              {title}
+            </article>
+            <article className="font-light text-sm sm:text-xl">{stats}</article>
           </section>
-          <article className="text-xl pr-2 font-bold uppercase bg-accent flex items-center justify-end itemHeaderPrice w-1/3">
+          <article className="text-md sm:text-xl pr-2 font-bold uppercase bg-accent flex items-center justify-end itemHeaderPrice w-1/3">
             <span>${dayPrice} Day</span>
           </article>
         </section>

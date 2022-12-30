@@ -46,7 +46,7 @@ export default function Home() {
             alt="67"
             width="700"
             height="100"
-            className="absolute top-1/2 -translate-y-12 z-10 md:right-0 lg:w-1/2 lg:top-1/3"
+            className="absolute top-1/2 -translate-y-20 z-10 md:right-0 lg:w-1/2 lg:top-1/3"
           />
           <article className="flex justify-center bg-lightBg w-full absolute bottom-0 h-24 lg:h-36 lg:-bottom-40 lg:justify-start">
             <section className="absolute w-full lg:w-1/3 mt-4">
@@ -208,7 +208,9 @@ export default function Home() {
             <section className="w-full px-2 mb-4 flex justify-center">
               <NewsLetterSignUpForm />
             </section>
-            <Social color="white" />
+            <section className="w-full px-2 mb-4 flex justify-center text-center">
+              <Social color="white" />
+            </section>
           </section>
         </section>
         <section className="p-4 bg-contactBg pb-36 bg-contain bg-no-repeat bg-bottom bg-background md:bg-cover lg:w-full">
