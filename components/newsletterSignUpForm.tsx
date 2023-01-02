@@ -42,7 +42,7 @@ export const NewsLetterSignUpForm = () => {
         required
         autoCapitalize="off"
         autoCorrect="off"
-        className="mt-4 px-4 py-2 rounded font-thin text-black md:w-3/4 md:text-xl"
+        className="mt-4 px-4 py-2 rounded font-thin font-akshar text-center text-black md:w-3/4 md:text-xl"
       />
       <button
         type="submit"

@@ -10,17 +10,20 @@ export const Social = ({ color }) => {
       </small>
       <article className="flex space-x-2">
         <SocialIcon
-          fgColor="#fff"
+          fgColor={`${color === "white" ? "#000" : "#fff"}`}
+          bgColor={color}
           style={{ height: 40, width: 40 }}
           url="https://facebook.com/RNDKansasCity"
         />
         <SocialIcon
-          fgColor="#fff"
+          fgColor={`${color === "white" ? "#000" : "#fff"}`}
+          bgColor={color}
           style={{ height: 40, width: 40 }}
           url="https://instagram.com/rnd_kc"
         />
         <SocialIcon
-          fgColor="#fff"
+          fgColor={`${color === "white" ? "#000" : "#fff"}`}
+          bgColor={color}
           style={{ height: 40, width: 40 }}
           url="https://twitter.com"
         />

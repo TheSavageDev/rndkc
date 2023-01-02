@@ -4,9 +4,9 @@ export const CarouselItem = ({ src, alt, title, stats, dayPrice }) => {
   return (
     <article className="relative">
       <Image src={src} alt={alt} width="400" height="200" />
-      <section className="flex w-full absolute bottom-0 justify-between font-gemunuLibre">
-        <section className="bg-black text-white flex w-full justify-between">
-          <section className="flex flex-col p-2 items-start">
+      <section className="flex w-full absolute bottom-0 justify-between font-gemunuLibre h-12">
+        <section className="bg-blackTransparent text-white flex w-full justify-between">
+          <section className="flex flex-col pb-2 px-2 items-start">
             <article className="text-md sm:text-xl font-semibold">
               {title}
             </article>

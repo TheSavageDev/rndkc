@@ -19,31 +19,33 @@ export const Hero = () => {
         <NewsLetterSignUpForm />
       </section>
       <section className="relative mb-10 pt-2 bg-background md:mb-32">
-        <Image
-          src="/img/67Txt.svg"
-          priority
-          alt="Camaro"
-          width="1000"
-          height="100"
-          className="w-screen lg:hidden"
-        />
-        <Image
-          src="/img/67CamaroTxt.svg"
-          priority
-          alt="Camaro"
-          width="1000"
-          height="1000"
-          className="hidden lg:block lg:w-screen"
-        />
+        <section className="px-2">
+          <Image
+            src="/img/67Txt.svg"
+            priority
+            alt="Camaro"
+            width="100"
+            height="100"
+            className="w-screen pb-32 lg:hidden"
+          />
+          <Image
+            src="/img/67CamaroTxt.svg"
+            priority
+            alt="Camaro"
+            width="1000"
+            height="1000"
+            className="hidden lg:block lg:w-screen"
+          />
+        </section>
         <Image
           src="/img/CamaroImg.png"
           alt="67"
           width="700"
           height="100"
-          className="absolute top-1/2 -translate-y-20 z-10 md:right-0 lg:w-1/2 lg:top-1/3"
+          className="absolute top-1/2 -translate-y-6 z-10 md:right-0 lg:w-1/2 lg:top-1/3"
         />
-        <article className="flex justify-center bg-lightBg w-full absolute bottom-0 h-24 lg:h-36 lg:-bottom-40 lg:justify-start">
-          <section className="absolute w-full lg:w-1/3 mt-4">
+        <article className="flex justify-center bg-lightBg w-full absolute bottom-0 h-48 lg:h-36 lg:-bottom-40 lg:justify-start">
+          <section className="flex justify-center items-end w-full lg:w-1/3 mt-4">
             <Social color="black" />
           </section>
         </article>

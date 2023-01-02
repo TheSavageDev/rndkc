@@ -46,7 +46,7 @@ export const ContactForm = () => {
         required
         autoCapitalize="off"
         autoCorrect="off"
-        className="mt-4 px-4 py-2 rounded font-thin text-black"
+        className="mt-4 px-4 py-2 rounded font-normal font-akshar text-black"
       />
       <input
         type="email"
@@ -58,11 +58,11 @@ export const ContactForm = () => {
         required
         autoCapitalize="off"
         autoCorrect="off"
-        className="mt-4 px-4 py-2 rounded font-thin text-black"
+        className="mt-4 px-4 py-2 rounded font-normal font-akshar text-black"
       />
       <textarea
         placeholder="Message"
-        className="mt-4 px-4 py-2 rounded font-thin text-black h-40"
+        className="mt-4 px-4 py-2 rounded font-normal font-akshar text-black h-40"
         onChange={(e) => setMessage(e.target.value)}
         value={message}
       ></textarea>
@@ -70,7 +70,7 @@ export const ContactForm = () => {
         type="submit"
         disabled={state === "Loading"}
         onClick={contact}
-        className="border uppercase font-thin text-sm text-white border-black px-4 py-2 bg-accent rounded hover:bg-secondary hover:text-white hover:border-secondary"
+        className="border uppercase font-normal font-akshar text-sm text-white border-black px-4 py-2 bg-accent rounded hover:bg-secondary hover:text-white hover:border-secondary"
       >
         Send Message
       </button>
