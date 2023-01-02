@@ -6,27 +6,30 @@ import { Social } from "./social";
 export const Hero = () => {
   return (
     <>
-      <section id="hero" className="pt-8 w-full px-7 bg-background">
+      <section
+        id="hero"
+        className="pt-8 w-full px-7 bg-background lg:pb-4 lg:overflow-x-hidden"
+      >
         <h1
           id="home"
-          className="text-white font-akshar font-light uppercase text-2xl sm:text-4xl md:text-6xl"
+          className="text-white font-akshar font-light uppercase text-xl sm:text-4xl md:text-5xl lg:text-6xl"
         >
           Money can't buy happiness...
         </h1>
-        <h2 className="text-white font-akshar uppercase font-semibold text-2xl sm:text-4xl md:text-6xl">
-          but you can rent it for <span className="text-accent">$350.</span>
+        <h2 className="text-white font-akshar uppercase font-semibold text-xl sm:text-4xl md:text-5xl lg:text-6xl">
+          but you can rent it for <span className="text-accent">$350</span>
         </h2>
-        <NewsLetterSignUpForm />
+        <NewsLetterSignUpForm justify="start" />
       </section>
-      <section className="relative mb-10 pt-2 bg-background md:mb-32">
-        <section className="px-2">
+      <section className="pt-2 bg-background">
+        <section className="w-screen h-52 sm:h-72 md:h-96 lg:h-48 2xl:h-72 3xl:h-96">
           <Image
             src="/img/67Txt.svg"
             priority
             alt="Camaro"
             width="100"
             height="100"
-            className="w-screen pb-32 lg:hidden"
+            className="w-11/12 mx-auto lg:hidden"
           />
           <Image
             src="/img/67CamaroTxt.svg"
@@ -34,19 +37,21 @@ export const Hero = () => {
             alt="Camaro"
             width="1000"
             height="1000"
-            className="hidden lg:block lg:w-screen"
+            className="hidden lg:block lg:w-100 lg:mx-auto xl:w-full xl:px-3"
           />
         </section>
-        <Image
-          src="/img/CamaroImg.png"
-          alt="67"
-          width="700"
-          height="100"
-          className="absolute top-1/2 -translate-y-6 z-10 md:right-0 lg:w-1/2 lg:top-1/3"
-        />
-        <article className="flex justify-center bg-lightBg w-full absolute bottom-0 h-48 lg:h-36 lg:-bottom-40 lg:justify-start">
-          <section className="flex justify-center items-end w-full lg:w-1/3 mt-4">
-            <Social color="black" />
+        <article className="relative flex flex-col justify-center items-center bg-lightBg w-full h-40 sm:h-64 md:h-72 lg:flex-row lg:h-48 2xl:h-64 3xl:h-72">
+          <section className="absolute flex flex-col justify-center -translate-y-8 z-10 w-full mb-4 sm:-translate-y-16 md:-translate-y-20 lg:flex-row-reverse lg:-translate-y-20 xl:-translate-y-24 3xl:-translate-y-32">
+            <Image
+              src="/img/CamaroImg.png"
+              alt="67"
+              width="1900"
+              height="100"
+              className="lg:w-3/5 lg:translate-x-6 xl:translate-x-20"
+            />
+            <section className="lg:self-end 2xl:pb-4">
+              <Social bgColor="black" fgColor="white" text="black" />
+            </section>
           </section>
         </article>
       </section>

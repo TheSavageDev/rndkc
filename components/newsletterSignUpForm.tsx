@@ -2,7 +2,7 @@ import { SyntheticEvent, useState } from "react";
 import axios from "axios";
 import * as ga from "../lib/ga";
 
-export const NewsLetterSignUpForm = () => {
+export const NewsLetterSignUpForm = ({ justify }) => {
   const [email, setEmail] = useState("");
   const [state, setState] = useState("idle");
   const [errorMessage, setErrorMessage] = useState(null);
@@ -30,7 +30,7 @@ export const NewsLetterSignUpForm = () => {
   return (
     <form
       onSubmit={subscribe}
-      className={`flex flex-col justify-between space-y-3 w-full md:flex-row md:justify-start xl:w-1/2`}
+      className={`flex flex-col justify-${justify} space-y-3 w-full md:flex-row`}
     >
       <input
         type="email"

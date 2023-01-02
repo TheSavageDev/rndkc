@@ -41,7 +41,7 @@ export const Gallery = () => {
       <CarCarousel />
       <ImageGrid />
       <section className="my-4">
-        <Social color="black" />
+        <Social bgColor="black" fgColor="white" text="black" />
       </section>
     </section>
   );

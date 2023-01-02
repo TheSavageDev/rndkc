@@ -2,7 +2,7 @@ import { ImageGridItem } from "./imageGridItem";
 
 export const ImageGrid = () => {
   return (
-    <section className="w-full px-3 mt-2 hidden md:flex md:flex-wrap md:justify-around">
+    <section className="w-full px-3 mt-2 hidden lg:flex lg:flex-wrap lg:justify-around">
       <ImageGridItem
         src="/img/Img1.jpg"
         alt="1968 DODGE CHARGER"

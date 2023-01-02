@@ -4,7 +4,7 @@ import { CarouselItem } from "./carouselItem";
 
 export const CarCarousel = () => {
   return (
-    <section className="w-full px-3 mt-2 flex justify-center md:hidden">
+    <section className="w-full px-3 mt-2 flex justify-center lg:hidden">
       <Carousel
         statusFormatter={() => ""}
         showIndicators={false}

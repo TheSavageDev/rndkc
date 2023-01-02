@@ -10,8 +10,8 @@ export const ImageGridItem = ({ src, alt, title, stats, dayPrice }) => {
     <article className="relative md:mt-2" onClick={handleClick}>
       <Image src={src} alt={alt} width="400" height="300" />
       {show && (
-        <section className="flex w-full absolute bottom-0 justify-between font-gemunuLibre">
-          <section className="bg-black text-white flex w-full justify-between">
+        <section className="flex w-full absolute bottom-0 justify-between font-gemunuLibre md:h-16">
+          <section className="bg-blackTransparent text-white flex w-full justify-between">
             <section className="flex flex-col p-2 items-start">
               <article className="text-xl font-semibold">{title}</article>
               <article className="font-light">{stats}</article>
