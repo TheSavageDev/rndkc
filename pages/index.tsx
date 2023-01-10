@@ -8,9 +8,9 @@ import { GetInTouch } from "../components/getInTouch";
 
 export default function Home() {
   return (
-    <div className="min-w-screen flex min-h-screen flex-col font-khand font-normal text-gray-200 bg-black bg-cover md:bg-stang md:bg-contain bg-no-repeat md:bg-center md:bg-origin-content">
+    <div className="main">
       <NavBar />
-      <main className="flex flex-col items-center w-screen bg-lightBg lg:bg-background">
+      <main className="container">
         <Hero />
         <Gallery />
         <OurStory />

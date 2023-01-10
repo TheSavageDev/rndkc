@@ -28,10 +28,7 @@ export const NewsLetterSignUpForm = ({ justify }) => {
   };
 
   return (
-    <form
-      onSubmit={subscribe}
-      className={`flex flex-col justify-${justify} space-y-3 w-full md:flex-row`}
-    >
+    <form onSubmit={subscribe} className={`newsletter-signup`}>
       <input
         type="email"
         id="email-input"
@@ -42,13 +39,25 @@ export const NewsLetterSignUpForm = ({ justify }) => {
         required
         autoCapitalize="off"
         autoCorrect="off"
-        className="mt-4 px-4 py-2 rounded font-thin font-akshar text-center text-black md:w-3/4 md:text-xl"
+        className="newsletter-signup-email"
+      />
+      <input
+        type="email"
+        id="email-input"
+        name="email"
+        placeholder="Enter email to stay updated on inventory & special event"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+        autoCapitalize="off"
+        autoCorrect="off"
+        className="newsletter-signup-email--alt"
       />
       <button
         type="submit"
         disabled={state === "Loading"}
         onClick={subscribe}
-        className="border uppercase font-normal text-md text-white border-black px-4 py-2 bg-accent rounded hover:bg-secondary hover:text-white hover:border-secondary md:border-2 md:self-end md:text-xl"
+        className="newsletter-signup-button"
       >
         Notify Me
       </button>

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   content: [
@@ -17,6 +18,11 @@ module.exports = {
       "3xl": "1900px",
     },
     extend: {
+      textShadow: {
+        sm: "0 1px 2px rgba(0, 0, 0, 0.8)",
+        DEFAULT: "0 2px 4px rgba(0, 0, 0, 0.8)",
+        lg: "0 8px 16px rgba(0, 0, 0, 0.8)",
+      },
       fontFamily: {
         akshar: ["Akshar", "sans-serif"],
         khand: ["Khand", "sans-serif"],
@@ -34,6 +40,7 @@ module.exports = {
         secondary: "#282828",
         accent: "#FF9D0B",
         text: "#A5A5A5",
+        textDark: "#555555",
         light: "#fefefe",
         background: "rgb(103, 113, 112)",
         lightBg: "#e5e5e5",
@@ -48,5 +55,16 @@ module.exports = {
     },
   },
 
-  plugins: [],
+  plugins: [
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          "text-shadow": (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme("textShadow") }
+      );
+    }),
+  ],
 };

@@ -32,10 +32,7 @@ export const ContactForm = () => {
   };
 
   return (
-    <form
-      onSubmit={contact}
-      className="flex flex-col justify-between space-y-3 w-full"
-    >
+    <form onSubmit={contact} className="contactForm">
       <input
         type="name"
         id="name-input"
@@ -46,7 +43,7 @@ export const ContactForm = () => {
         required
         autoCapitalize="off"
         autoCorrect="off"
-        className="mt-4 px-4 py-2 rounded font-normal font-akshar text-black"
+        className="contactForm-name"
       />
       <input
         type="email"
@@ -58,11 +55,11 @@ export const ContactForm = () => {
         required
         autoCapitalize="off"
         autoCorrect="off"
-        className="mt-4 px-4 py-2 rounded font-normal font-akshar text-black"
+        className="contactForm-email"
       />
       <textarea
         placeholder="Message"
-        className="mt-4 px-4 py-2 rounded font-normal font-akshar text-black h-40"
+        className="contactForm-message"
         onChange={(e) => setMessage(e.target.value)}
         value={message}
       ></textarea>
@@ -70,7 +67,7 @@ export const ContactForm = () => {
         type="submit"
         disabled={state === "Loading"}
         onClick={contact}
-        className="border uppercase font-normal font-akshar text-sm text-white border-black px-4 py-2 bg-accent rounded hover:bg-secondary hover:text-white hover:border-secondary"
+        className="contactForm-button"
       >
         Send Message
       </button>
