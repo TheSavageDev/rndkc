@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { Analytics } from "@vercel/analytics";
+import { Analytics } from "@vercel/analytics/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
