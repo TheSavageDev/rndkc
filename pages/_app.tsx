@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
+import { Analytics } from "@vercel/analytics";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -79,6 +80,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         `}
       </Script>
       <Component {...pageProps} />
+      <Analytics />
     </>
   );
 }
