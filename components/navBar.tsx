@@ -11,7 +11,7 @@ export const NavBar = () => {
     <nav className="navBar">
       {open && (
         <section className="navBar-mobile-pane">
-          <article className="">
+          <article className="navBar-pane">
             <a href="#home" className="" onClick={handleToggleNav}>
               Home
             </a>
