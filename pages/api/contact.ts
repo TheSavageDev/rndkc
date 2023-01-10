@@ -1,5 +1,6 @@
 import axios from "axios";
 import mailchimpClient from "@mailchimp/mailchimp_transactional";
+import * as gtag from "../../lib/gtag";
 
 export default async (req, res) => {
   const { email, name, message } = req.body;
@@ -54,9 +55,17 @@ export default async (req, res) => {
       });
     }
 
+    if (response.status >= 200 && response.status < 300) {
+      gtag.event({
+        action: "submit_form",
+        category: "Contact",
+        label: message,
+        value: email,
+      });
+    }
     return res
       .status(201)
-      .json({ error: `Message Successfully Sent ${email}` });
+      .json({ message: `Message Successfully Sent ${email}` });
   } catch (error) {
     console.log(res);
     return res.status(500).json({ error: error.message });
