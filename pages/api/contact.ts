@@ -1,4 +1,5 @@
 import axios from "axios";
+import mailchimpClient from "@mailchimp/mailchimp_transactional";
 
 export default async (req, res) => {
   const { email, name, message } = req.body;
@@ -13,10 +14,13 @@ export default async (req, res) => {
     return res.status(400).json({ error: "Message is required" });
   }
 
-  const AUDIENCE_ID = process.env.NEXT_PUBLIC_MAILCHIMP_AUDIENCE_ID;
-  const API_KEY = process.env.NEXT_PUBLIC_MAILCHIMP_API_KEY;
-  const API_SERVER = process.env.NEXT_PUBLIC_MAILCHIMP_API_SERVER;
-  const url = `https://${API_SERVER}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/messages/send`;
+  const run = async () => {
+    const response = await mailchimpClient.messages.send({ message });
+    console.log(response);
+  };
+
+  const API_KEY = process.env.NEXT_PUBLIC_MANDRILL_API_KEY;
+  const url = `https://mandrillapp.com/api/1.0/messages/send`;
   const data = {
     key: API_KEY,
     message: {

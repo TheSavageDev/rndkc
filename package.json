@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@mailchimp/mailchimp_transactional": "^1.0.50",
     "@vercel/analytics": "^0.1.6",
     "axios": "^1.2.1",
     "js-cookie": "^3.0.1",
