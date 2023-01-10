@@ -29,11 +29,12 @@ export const Gallery = () => {
             </article>
           </article>
           <p className="gallery-paragraph">
-            KC Classic Cars offers Kansas City some of the most iconic classic
-            cars available to rent. Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nis
+            Owning a classic car is hard, renting one is easy. RND offers Kansas
+            City some of the most iconic and classic cars available to rent. Now
+            you can enjoy classic and exotic vehicles without the cost and
+            hassle of owning one. Sign up for notifications and follow us on
+            social media to stay up to date on new inventory and special events
+            at RND.
           </p>
         </section>
         <CarCarousel />

@@ -61,7 +61,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Script>
       <Script id="facebook-pixel">
         {`
-        <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
         n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -72,7 +71,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         'https://connect.facebook.net/en_US/fbevents.js');
          fbq('init', '6248757275142634');
         fbq('track', 'PageView');
-        </script>
         <noscript>
          <img height="1" width="1"
         src="https://www.facebook.com/tr?id=6248757275142634&ev=PageView
