@@ -24,7 +24,7 @@ export default async (req, res) => {
       from_name: name,
       to: [
         {
-          email: "jason@thesavage.dev",
+          email: "ryan@rndkc.com",
           name: "Ryan Wager",
         },
       ],

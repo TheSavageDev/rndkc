@@ -6,7 +6,9 @@ export const OurStory = () => {
     <section className="our-story-outer">
       <section className="our-story-container">
         <section className="our-story">
-          <h2 className="our-story-title">Our Story</h2>
+          <h2 id="our-story" className="our-story-title">
+            Our Story
+          </h2>
           <section className="w-full z-10 relative">
             <Image
               src="/img/KCoutline.svg"
