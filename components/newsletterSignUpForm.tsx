@@ -4,6 +4,7 @@ export const NewsLetterSignUpForm = ({ justify }) => {
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState<{ email?: string }>({ email: "" });
   const [buttonText, setButtonText] = useState("Notify Me");
+  const [subscribed, setSubscribed] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
 
@@ -28,7 +29,7 @@ export const NewsLetterSignUpForm = ({ justify }) => {
     if (isValidForm) {
       setShowErrorMessage(false);
       setShowSuccessMessage(false);
-      setButtonText("Subscribing");
+      setButtonText("Subscribing...");
       const res = await fetch("/api/subscribeUser", {
         body: JSON.stringify({
           email,
@@ -50,7 +51,9 @@ export const NewsLetterSignUpForm = ({ justify }) => {
       }
       setShowSuccessMessage(true);
       setShowErrorMessage(false);
-      setButtonText("Notify Me");
+      setSubscribed(true);
+      setButtonText("Subscribed!");
+      setEmail("Awesome, we will be in touch");
 
       setTimeout(() => {
         setShowSuccessMessage(false);
@@ -65,7 +68,7 @@ export const NewsLetterSignUpForm = ({ justify }) => {
       )}
       {showErrorMessage && (
         <p className="contactForm-errorMessage">
-          Something went wrong, please try again.
+          The email you entered is incorrect or already on our contact list!
         </p>
       )}
       {showSuccessMessage && (
@@ -83,9 +86,12 @@ export const NewsLetterSignUpForm = ({ justify }) => {
             setErrors({ ...errors, email: "" });
           }}
           required
+          disabled={subscribed}
           autoCapitalize="off"
           autoCorrect="off"
-          className="newsletter-signup-email"
+          className={`newsletter-signup-email ${
+            subscribed ? "newsletter-signup-email--disabled" : ""
+          }`}
         />
         <input
           type="email"
@@ -98,14 +104,20 @@ export const NewsLetterSignUpForm = ({ justify }) => {
             setErrors({ ...errors, email: "" });
           }}
           required
+          disabled={subscribed}
           autoCapitalize="off"
           autoCorrect="off"
-          className="newsletter-signup-email--alt"
+          className={`newsletter-signup-email--alt ${
+            subscribed ? "newsletter-signup-email--alt--disabled" : ""
+          }`}
         />
         <button
           type="submit"
           onClick={subscribe}
-          className="newsletter-signup-button"
+          disabled={subscribed}
+          className={`newsletter-signup-button ${
+            subscribed ? "newsletter-signup-button--disabled" : ""
+          }`}
         >
           {buttonText}
         </button>
