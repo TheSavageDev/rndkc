@@ -7,7 +7,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, name, message } = req.body;
   const msg = {
     to: "jason@thesavage.dev",
-    from: "hello@rndkc.com",
+    from: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
     subject: `Message from ${name} at ${email}`,
     text: message,
     html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
