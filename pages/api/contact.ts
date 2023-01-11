@@ -6,7 +6,7 @@ sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_API_KEY);
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, name, message } = req.body;
   const msg = {
-    to: "hello@rndkc.com",
+    to: "jason@thesavage.dev",
     from: "hello@rndkc.com",
     subject: `Message from ${name} at ${email}`,
     text: message,

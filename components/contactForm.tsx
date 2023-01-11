@@ -31,7 +31,7 @@ export const ContactForm = () => {
     }
 
     setErrors({ ...tempErrors });
-    console.log("errosr", errors);
+    console.log("error", errors);
     return isValid;
   };
 
@@ -40,6 +40,8 @@ export const ContactForm = () => {
     let isValidForm = handleValidation();
 
     if (isValidForm) {
+      setShowErrorMessage(false);
+      setShowSuccessMessage(false);
       setButtonText("Sending");
       const res = await fetch("/api/contact", {
         body: JSON.stringify({
@@ -64,6 +66,10 @@ export const ContactForm = () => {
       setShowSuccessMessage(true);
       setShowErrorMessage(false);
       setButtonText("Send");
+
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 5000);
     }
   };
 
