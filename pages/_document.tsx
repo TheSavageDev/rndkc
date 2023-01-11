@@ -6,7 +6,6 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <title>RND KC</title>
         <link rel="shortcut icon" href="/img/RNDBlack2.svg" />
         <link rel="icon" href="/img/RNDBlack2.svg" />
         <style>
@@ -20,10 +19,6 @@ export default function Document() {
           url("https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@200;300;400;500;600;700;800&display=swap");
         </style>
         {/* Global Site Tag (gtag.js) - Google Analytics */}
-        <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -49,26 +44,10 @@ export default function Document() {
           `,
           }}
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTMID}');
-          `,
-          }}
-        />
       </Head>
       <body>
         <Main />
         <NextScript />
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTMID}" height="0" width="0" style="display: none; visibility: hidden;" />`,
-          }}
-        />
         <noscript>
           <img
             height="1"

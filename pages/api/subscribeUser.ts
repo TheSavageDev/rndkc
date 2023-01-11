@@ -31,9 +31,11 @@ export default async (req, res) => {
           "There was an error subscribing. Contact me at ryan@randdgarage.com to solve this issue",
       });
     }
-
-    return res.status(201).json({ error: `Successfully Subscribed ${email}` });
+    return res
+      .status(201)
+      .json({ message: `Successfully Subscribed ${email}` });
   } catch (error) {
+    console.log(res);
     return res.status(500).json({ error: error.message });
   }
 };

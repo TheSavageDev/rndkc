@@ -22,7 +22,6 @@ export const NewsLetterSignUpForm = ({ justify }) => {
         },
       });
     } catch (e) {
-      setErrorMessage(e.response.data.error);
       setState("Error");
     }
   };

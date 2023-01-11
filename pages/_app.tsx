@@ -6,6 +6,7 @@ import { useEffect } from "react";
 
 import * as gtag from "../lib/gtag";
 import Script from "next/script";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -23,6 +24,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router.events]);
   return (
     <>
+      <Head>
+        <title>RND KC</title>
+      </Head>
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}

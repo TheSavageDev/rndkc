@@ -524,6 +524,27 @@ html {
   padding: 1rem;
 }
 
+.contactForm-successMessage {
+  font-size: 2.2rem;
+  color: #ff9d0b;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+.contactForm-errorMessage {
+  font-size: 2.2rem;
+  color: red;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.contactForm-errorText {
+  color: red;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+  font-size: 1.7rem;
+}
+
+.contactForm-input--error {
+  border: 2px solid red;
+}
+
 @media (min-width: 440px) {
   .hero-images--camaro {
     transform: translateY(-10rem);

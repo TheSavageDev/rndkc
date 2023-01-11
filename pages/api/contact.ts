@@ -1,73 +1,50 @@
-import axios from "axios";
-import mailchimpClient from "@mailchimp/mailchimp_transactional";
+import sgMail from "@sendgrid/mail";
+import { NextApiRequest, NextApiResponse } from "next";
 import * as gtag from "../../lib/gtag";
 
-export default async (req, res) => {
+sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_API_KEY);
+
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, name, message } = req.body;
+  const msg = {
+    to: process.env.NEXT_PUBLIC_FROM_EMAIL,
+    from: process.env.NEXT_PUBLIC_FROM_EMAIL,
+    subject: `Message from ${name} at ${email}`,
+    text: message,
+    html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+    </head>
 
-  if (!email) {
-    return res.status(400).json({ error: "Email is required" });
-  }
-  if (!name) {
-    return res.status(400).json({ error: "Name is required" });
-  }
-  if (!message) {
-    return res.status(400).json({ error: "Message is required" });
-  }
-
-  const run = async () => {
-    const response = await mailchimpClient.messages.send({ message });
-    console.log(response);
-  };
-
-  const API_KEY = process.env.NEXT_PUBLIC_MANDRILL_API_KEY;
-  const url = `https://mandrillapp.com/api/1.0/messages/send`;
-  const data = {
-    key: API_KEY,
-    message: {
-      from_email: email,
-      from_name: name,
-      to: [
-        {
-          email: "hello@rndkc.com",
-          name: "Ryan Wager",
-        },
-      ],
-      subject: "Message from RNDKC.com",
-      text: message,
-    },
-  };
-
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `api-key ${API_KEY}`,
-    },
+    <body>
+      <div class="img-container" style="display: flex;justify-content: center;align-items: center;border-radius: 5px;overflow: hidden; font-family: 'helvetica', 'ui-sans';">
+            </div>
+            <div class="container" style="margin-left: 20px;margin-right: 20px;">
+            <h3>You've got a new mail from ${req.body.name}, their email is: ✉️${req.body.email} </h3>
+            <div style="font-size: 16px;">
+            <p>Message:</p>
+            <p>${req.body.message}</p>
+            <br>
+            </div>
+            </div>
+            </div>
+    </body>
+    </html>`,
   };
 
   try {
-    const response = await axios.post(url, data, options);
-    console.log(response);
-    if (response.status >= 400) {
-      return res.status(400).json({
-        error:
-          "There was an error sending your message. Contact me at ryan@randdgarage.com to solve this issue",
-      });
-    }
-
-    if (response.status >= 200 && response.status < 300) {
-      gtag.event({
-        action: "submit_form",
-        category: "Contact",
-        label: message,
-        value: email,
-      });
-    }
-    return res
-      .status(201)
-      .json({ message: `Message Successfully Sent ${email}` });
+    await sgMail.send(msg);
   } catch (error) {
-    console.log(res);
-    return res.status(500).json({ error: error.message });
+    console.error(error);
+    res.status(error.statusCode || 500).json({ error: error.message });
   }
+
+  gtag.event({
+    action: "submit_form",
+    category: "Contact",
+    label: message,
+    value: email,
+  });
+  return res.status(200).json({ error: "" });
 };
