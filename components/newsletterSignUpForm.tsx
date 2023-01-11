@@ -1,67 +1,115 @@
 import { SyntheticEvent, useState } from "react";
-import axios from "axios";
-import * as ga from "../lib/ga";
 
 export const NewsLetterSignUpForm = ({ justify }) => {
   const [email, setEmail] = useState("");
-  const [state, setState] = useState("idle");
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errors, setErrors] = useState<{ email?: string }>({ email: "" });
+  const [buttonText, setButtonText] = useState("Notify Me");
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+
+  const handleValidation = () => {
+    let tempErrors = {};
+    let isValid = true;
+
+    if (email.length <= 0) {
+      tempErrors["email"] = true;
+      isValid = false;
+    }
+
+    setErrors({ ...tempErrors });
+    console.log("error", errors);
+    return isValid;
+  };
 
   const subscribe = async (e: SyntheticEvent) => {
     e.preventDefault();
-    setState("loading");
+    let isValidForm = handleValidation();
 
-    try {
-      await axios.post("/api/subscribeUser", { email });
-      setState("Success");
-      setEmail("");
-      ga.event({
-        action: "subscribe",
-        params: {
+    if (isValidForm) {
+      setShowErrorMessage(false);
+      setShowSuccessMessage(false);
+      setButtonText("Subscribing");
+      const res = await fetch("/api/subscribeUser", {
+        body: JSON.stringify({
           email,
+        }),
+        headers: {
+          "Content-Type": "application/json",
         },
+        method: "POST",
       });
-    } catch (e) {
-      setState("Error");
+
+      const { error } = await res.json();
+
+      if (error) {
+        console.error(error);
+        setShowSuccessMessage(false);
+        setShowErrorMessage(true);
+        setButtonText("Send");
+        return;
+      }
+      setShowSuccessMessage(true);
+      setShowErrorMessage(false);
+      setButtonText("Send");
+
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 5000);
     }
   };
 
   return (
-    <form onSubmit={subscribe} className={`newsletter-signup`}>
-      <input
-        type="email"
-        id="email-input"
-        name="email"
-        placeholder="Enter Your Email Address"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-        autoCapitalize="off"
-        autoCorrect="off"
-        className="newsletter-signup-email"
-      />
-      <input
-        type="email"
-        id="email-input"
-        name="email"
-        placeholder="Enter email to stay updated on inventory & special event"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-        autoCapitalize="off"
-        autoCorrect="off"
-        className="newsletter-signup-email--alt"
-      />
-      <button
-        type="submit"
-        disabled={state === "Loading"}
-        onClick={subscribe}
-        className="newsletter-signup-button"
-      >
-        Notify Me
-      </button>
-      {state === "Error" && <p>{errorMessage}</p>}
-      {state === "Success" && <p>Awesome, you've been subscribed</p>}
-    </form>
+    <>
+      {errors?.email && (
+        <p className="contactForm-errorText">Email cannot be empty.</p>
+      )}
+      {showErrorMessage && (
+        <p className="contactForm-errorMessage">
+          Something went wrong, please try again.
+        </p>
+      )}
+      {showSuccessMessage && (
+        <p className="contactForm-successMessage">Awesome, we'll be in touch</p>
+      )}
+      <form onSubmit={subscribe} className={`newsletter-signup`}>
+        <input
+          type="email"
+          id="email-input"
+          name="email"
+          placeholder="Enter Your Email Address"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setErrors({ ...errors, email: "" });
+          }}
+          required
+          autoCapitalize="off"
+          autoCorrect="off"
+          className="newsletter-signup-email"
+        />
+        <input
+          type="email"
+          id="email-input"
+          name="email"
+          placeholder="Enter email to stay updated on inventory & special event"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setErrors({ ...errors, email: "" });
+          }}
+          required
+          autoCapitalize="off"
+          autoCorrect="off"
+          className="newsletter-signup-email--alt"
+        />
+        <button
+          type="submit"
+          onClick={subscribe}
+          className="newsletter-signup-button"
+        >
+          {buttonText}
+        </button>
+      </form>
+    </>
   );
 };
