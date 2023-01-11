@@ -1,13 +1,12 @@
 import sgMail from "@sendgrid/mail";
 import { NextApiRequest, NextApiResponse } from "next";
-import * as gtag from "../../lib/gtag";
 
 sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_API_KEY);
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, name, message } = req.body;
   const msg = {
-    to: process.env.NEXT_PUBLIC_FROM_EMAIL,
+    to: process.env.NEXT_PUBLIC_TO_EMAIL,
     from: process.env.NEXT_PUBLIC_FROM_EMAIL,
     subject: `Message from ${name} at ${email}`,
     text: message,
@@ -40,11 +39,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(error.statusCode || 500).json({ error: error.message });
   }
 
-  gtag.event({
-    action: "submit_form",
-    category: "Contact",
-    label: message,
-    value: email,
-  });
   return res.status(200).json({ error: "" });
 };

@@ -1,6 +1,4 @@
 import { SyntheticEvent, useState } from "react";
-import axios from "axios";
-import * as ga from "../lib/ga";
 
 export const ContactForm = () => {
   const [name, setName] = useState("");
@@ -38,46 +36,35 @@ export const ContactForm = () => {
   };
 
   const contact = async (e: SyntheticEvent) => {
-    setButtonText("Sending");
     e.preventDefault();
     let isValidForm = handleValidation();
 
-    const res = await fetch("/api/contact", {
-      body: JSON.stringify({
-        email,
-        name,
-        message,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    });
-
-    const { error } = await res.json();
-    if (error) {
-      console.log(error);
-      setShowSuccessMessage(false);
-      setShowErrorMessage(true);
-      setButtonText("Send");
-      return;
-    }
-    setShowSuccessMessage(true);
-    setShowErrorMessage(false);
-    setButtonText("Send");
-
-    try {
-      await axios.post("/api/contact", { email, name, message });
-      setEmail("");
-      ga.event({
-        action: "contact",
-        params: {
-          name,
+    if (isValidForm) {
+      setButtonText("Sending");
+      const res = await fetch("/api/contact", {
+        body: JSON.stringify({
           email,
+          name,
           message,
+        }),
+        headers: {
+          "Content-Type": "application/json",
         },
+        method: "POST",
       });
-    } catch (e) {}
+
+      const { error } = await res.json();
+      if (error) {
+        console.log(error);
+        setShowSuccessMessage(false);
+        setShowErrorMessage(true);
+        setButtonText("Send");
+        return;
+      }
+      setShowSuccessMessage(true);
+      setShowErrorMessage(false);
+      setButtonText("Send");
+    }
   };
 
   return (
