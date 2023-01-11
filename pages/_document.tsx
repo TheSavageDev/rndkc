@@ -6,18 +6,6 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <link rel="shortcut icon" href="/img/RNDBlack2.svg" />
-        <link rel="icon" href="/img/RNDBlack2.svg" />
-        <style>
-          @import
-          url("https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500;600;700&display=swap");
-          @import
-          url("https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap");
-          @import
-          url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
-          @import
-          url("https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@200;300;400;500;600;700;800&display=swap");
-        </style>
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         <script
           dangerouslySetInnerHTML={{
