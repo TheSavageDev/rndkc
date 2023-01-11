@@ -45,12 +45,12 @@ export const NewsLetterSignUpForm = ({ justify }) => {
         console.error(error);
         setShowSuccessMessage(false);
         setShowErrorMessage(true);
-        setButtonText("Send");
+        setButtonText("Notify Me");
         return;
       }
       setShowSuccessMessage(true);
       setShowErrorMessage(false);
-      setButtonText("Send");
+      setButtonText("Notify Me");
 
       setTimeout(() => {
         setShowSuccessMessage(false);
