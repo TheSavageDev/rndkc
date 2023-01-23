@@ -36,8 +36,8 @@ export const CarCarousel = () => {
         />
         <CarouselItem
           src="/img/Img5.jpg"
-          alt="1969 Dodge Challenger"
-          title="1969 Dodge Challenger"
+          alt="1968 Dodge Charger"
+          title="1968 Dodge Charger"
           dayPrice={325}
         />
         <CarouselItem
