@@ -19,6 +19,14 @@ export const GetInTouch = () => {
               className="getInTouch-logo"
             />
             <h3 className="getInTouch-subtitle">We'd Love to Hear From You!</h3>
+            <article className="getInTouch-paragraph">
+              <p className="getInTouch-paragraph-questions">
+                Have questions about our renting from RND? Need a classic car
+                for an upcoming special event or photoshoot? We’re here to help.
+              </p>
+              <p>Phone: 913-608-4955</p>
+              <p>Email: hello@rndkc.com</p>
+            </article>
             <article className="getInTouch-social hidden md:flex md:mt-10">
               <Social
                 bgColor="white"

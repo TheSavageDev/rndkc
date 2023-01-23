@@ -21,28 +21,40 @@ const TheRoadWereTakingImage = () => {
 
 const Paragraph = () => {
   return (
-    <p className="about-start_your_engines-paragraph">
-      Ryan Wager, founder of R&D Garage, had grown up dreaming about one day
-      owning a 1958 Corvette. However, after achieving this “dream” he quickly
-      realized that he was in way over his head. Between having absolutely no
-      idea how to work on it, finding parts that would fit being nearly
-      impossible, properly figuring out how to install them once acquired,
-      properly storing it, and then ultimately getting and keeping the car on
-      the road was proving to be nearly impossible.
+    <p className="about-theRoad-paragraph">
+      Whether you dream of driving a classic Corvette through downtown KC, or a
+      Dune Buggy through the Plaza, RND has you covered. We make classic and
+      exotic vehicles accessible to everyone. Rent a muscle car for a day, a VW
+      Camper Van for a weekend, or a classic Ford Bronco for a week, we are
+      Kansas City&apos;s classic car rental source. Now you can enjoy all the
+      benefits of driving a classic or exotic vehicle without all the hassles
+      and headaches of ownership.
     </p>
   );
 };
 const SecondParagraph = () => {
   return (
-    <p className="about-theRoad-paragraph">
-      Whether you dream of driving a classic corvette through downtown KC, or
-      wonder what it would be like to drive a Dune Buggy through the plaza, RND
-      has you covered. We make classic and exotic vehicles accessible. Rent a
-      muscle car for a day, a VW Camper Van for a weekend, or a drive a classic
-      Ford Bronco for the week, we are Kansas City’s classic car rental
-      resource. Now you can enjoy all the benefits of driving a classic or
-      exotic vehicle without all the hassles and headaches of ownership.
-    </p>
+    <>
+      <p className="about-start_your_engines-paragraph">
+        Ryan Wager, founder of R&D Garage, had grown up dreaming about one day
+        owning a 1958 Corvette. However, after achieving this “dream” he quickly
+        realized that he was in way over his head. Between having absolutely no
+        idea how to work on it, finding the right parts, figuring out how to
+        install them, storing the vehicle, ultimately keeping the car on the
+        road was proving to be nearly impossible. He realized the challenging
+        and costly realities of ownership and the joy of driving these vehicles
+        were two completely separate things. Ryan wanted to make the enjoyment
+        of driving classic cars accessible to everyone but eliminate the hassles
+        of ownership. RND was created to solve this problem.
+      </p>
+      <p className="about-start_your_engines-paragraph">
+        RND is a Kansas City company that provides classic and exotic car
+        rentals, restoration, and repairs. Our 130,000sq ft warehouse houses
+        over 25 classic cars, 4 lifts, a bodyshop, tire stations, and everything
+        needed to keep these cars running at top performance so you can just
+        enjoy the drive.
+      </p>
+    </>
   );
 };
 

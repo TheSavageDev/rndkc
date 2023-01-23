@@ -477,6 +477,17 @@ html {
   color: #fff;
 }
 
+.getInTouch-paragraph {
+  font-family: Manrope;
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.getInTouch-paragraph-questions {
+  margin-bottom: 2rem;
+}
+
 .getInTouch-social {
   display: none;
 }
