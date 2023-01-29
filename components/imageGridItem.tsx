@@ -1,17 +1,24 @@
 import Image from "next/image";
-import { useState } from "react";
-export const ImageGridItem = ({ src, alt, title, dayPrice }) => {
-  const [show, setShow] = useState(false);
 
-  const handleClick = () => {
-    setShow(!show);
-  };
+export const ImageGridItem = ({
+  src,
+  alt,
+  title,
+  dayPrice,
+  href,
+}: {
+  src: string;
+  alt: string;
+  title: string;
+  dayPrice: number;
+  href?: string;
+}) => {
   return (
-    <article className="relative" onClick={handleClick}>
-      <Image src={src} alt={alt} width="400" height="300" />
-      {show && (
+    <article className="relative bg-black">
+      <a href={href} target="_blank" rel="noopener noreferrer">
+        <Image src={src} alt={alt} width="400" height="300" />
         <section className="flex w-full absolute bottom-0 justify-between font-gemunuLibre md:h-auto">
-          <section className="bg-blackTransparent text-white flex w-full justify-between">
+          <section className="bg-blackTransparent text-white flex w-full justify-between hover:bg-black">
             <section className="flex flex-col p-2 items-start">
               <article className="text-xl font-semibold">{title}</article>
             </section>
@@ -20,7 +27,7 @@ export const ImageGridItem = ({ src, alt, title, dayPrice }) => {
             </article>
           </section>
         </section>
-      )}
+      </a>
     </article>
   );
 };
