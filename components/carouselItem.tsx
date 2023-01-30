@@ -14,8 +14,8 @@ export const CarouselItem = ({
   href?: string;
 }) => {
   return (
-    <article className="relative">
-      <a href={href} target="_blank" rel="noopener noreferrer">
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      <article className="relative">
         <Image src={src} alt={alt} width="400" height="200" />
         <section className="flex w-full absolute bottom-0 justify-between font-gemunuLibre h-12 sm:h-auto">
           <section className="bg-blackTransparent text-white flex w-full justify-between hover:bg-black">
@@ -31,7 +31,7 @@ export const CarouselItem = ({
             </article>
           </section>
         </section>
-      </a>
-    </article>
+      </article>
+    </a>
   );
 };

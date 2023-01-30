@@ -1,9 +1,15 @@
 import { SyntheticEvent, useState } from "react";
 
-export const NewsLetterSignUpForm = ({ justify }) => {
+export const NewsLetterSignUpForm = ({
+  justify,
+  text,
+}: {
+  justify?: string;
+  text?: string;
+}) => {
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState<{ email?: string }>({ email: "" });
-  const [buttonText, setButtonText] = useState("Notify Me");
+  const [buttonText, setButtonText] = useState(text ? text : "Notify Me");
   const [subscribed, setSubscribed] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
