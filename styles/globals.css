@@ -89,27 +89,52 @@ html {
 }
 
 .hero {
+  padding: 0rem 2rem 35rem 2rem;
   background-color: rgb(103, 113, 112);
+  background-image: url("../public/img/img_primary.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hero-container {
+  width: 100%;
 }
 
 .hero-header {
-  padding: 2rem 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-top: 2rem;
 }
 
 .hero-header--title {
-  font-size: 2.3rem;
-  color: #fff;
+  font-size: 3rem;
+  color: #000;
   font-family: Akshar, "sans-serif";
-  font-weight: lighter;
+  font-weight: 200;
   text-transform: uppercase;
 }
+
+.hero-header-sub {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 .hero-header--subtitle {
-  font-size: 2.3rem;
-  color: #fff;
+  font-size: 3.4rem;
+  color: #000;
   font-family: Akshar, "sans-serif";
-  font-weight: bold;
+  font-weight: 500;
   text-transform: uppercase;
-  line-height: 2rem;
+  line-height: 5.5rem;
+  margin-right: 2rem;
+}
+
+.hero-header--logo {
+  width: 12.7rem;
+  height: 5.134rem;
 }
 
 .hero-images--text {
@@ -129,6 +154,24 @@ html {
   transform: translateY(-9rem);
 }
 
+.hero-newsletter {
+  background-color: #282828;
+  padding: 5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-newsletter_heading {
+  font-size: 2.5rem;
+  font-weight: normal;
+  font-family: Akshar;
+  text-transform: uppercase;
+  letter-spacing: 0.03rem;
+  text-align: center;
+}
+
 .hero-social {
   background-color: #e5e5e5;
   transform: translateY(-9rem);
@@ -144,7 +187,7 @@ html {
   color: #fff;
   height: 3.8rem;
   padding: 0.5rem 0 0 1rem;
-  clip-path: polygon(0 0, 85% 0%, 80% 100%, 0 100%);
+  width: 100%;
 }
 
 .divider-box--header {
@@ -195,10 +238,17 @@ html {
 }
 
 .gallery-header--title h2 {
-  font-size: 3rem;
-  line-height: 3rem;
+  font-size: 4rem;
+  line-height: 4rem;
   text-transform: uppercase;
   font-family: Akshar, "sans-serif";
+  font-weight: 200;
+}
+
+.gallery-header--title--bold {
+  font-weight: 500;
+}
+.gallery-header--title--light {
   font-weight: 200;
 }
 
@@ -218,7 +268,7 @@ html {
 
 .gallery-social {
   width: 100%;
-  padding-top: 2rem;
+  padding-top: 0;
   padding-bottom: 2rem;
 }
 
@@ -408,6 +458,7 @@ html {
   color: #282828;
   text-align: center;
   background-color: #fff;
+  height: 4rem;
 }
 
 .newsletter-signup-email--disabled {
@@ -427,6 +478,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 4rem;
 }
 
 .newsletter-signup-button--disabled:hover {
@@ -586,7 +638,6 @@ html {
   }
   .hero-header--subtitle {
     font-size: 4.5rem;
-    margin-bottom: 2rem;
   }
   .hero-images--camaro-box {
     margin-bottom: -13rem;
@@ -602,12 +653,30 @@ html {
 }
 
 @media (min-width: 768px) {
+  .hero-header {
+    padding-left: 12rem;
+  }
+
+  .hero-header-sub {
+    flex-direction: row;
+    align-items: center;
+  }
+
   .divider-box--header {
     display: none;
   }
 
   .divider-box--subheader {
     visibility: visible;
+    text-transform: capitalize;
+    font-size: 2rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 3.036rem;
+    letter-spacing: 12%;
+    font-family: Akshar, "san-serif";
+    width: 100%;
+    margin: 0;
   }
 
   .gallery-paragraph {
@@ -651,26 +720,11 @@ html {
 }
 
 @media (min-width: 1024px) {
-  .hero-container {
-    width: 100vw;
-    background-color: #657170;
-  }
-
-  .divider-box {
-    text-align: center;
-    margin-left: -30rem;
-  }
-
   .gallery-container {
     width: 100vw;
   }
 
   .gallery {
-    max-width: 1024px;
-    margin: 0 auto;
-  }
-
-  .hero {
     max-width: 1024px;
     margin: 0 auto;
   }
@@ -711,35 +765,18 @@ html {
     opacity: 0.5;
   }
 
+  .hero-container {
+    max-width: 100%;
+    background-color: #657170;
+  }
+
+  .hero {
+    max-width: 1024px;
+    margin: 0 auto;
+  }
+
   .hero-header {
-    padding: 1rem 6rem;
-  }
-
-  .hero-header--title {
-    font-size: 3.5rem;
-  }
-
-  .hero-header--subtitle {
-    font-size: 5.5rem;
-    font-weight: 500;
-    line-height: 7.6rem;
-  }
-
-  .hero-images--text {
-    display: none;
-  }
-
-  .hero-images--text-full {
-    display: block;
-  }
-
-  .hero-images--camaro-box {
-    background: #e5e5e5;
-    margin-bottom: -7rem;
-  }
-
-  .hero-images--camaro {
-    transform: translateY(-9rem);
+    padding-left: 20rem;
   }
 
   .hero-social {
@@ -764,7 +801,6 @@ html {
   .newsletter-signup-button {
     width: 14.2rem;
     height: 4rem;
-    background-color: #282828;
     font-size: 2rem;
     padding: 0 1.5rem;
     line-height: 2rem;
@@ -773,7 +809,8 @@ html {
   }
 
   .newsletter-signup-button:hover {
-    background-color: #ff9d0b;
+    background-color: #282828;
+    border: 1px solid #ff9b0b;
   }
 
   .newsletter-signup-button--disabled {
@@ -809,7 +846,8 @@ html {
   }
 
   .divider {
-    width: 100%;
+    /* width: 100%; */
+    max-width: 1024px;
   }
 
   .divider-box {

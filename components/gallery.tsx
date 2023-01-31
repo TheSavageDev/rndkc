@@ -18,13 +18,15 @@ export const Gallery = () => {
             />
             <article className="gallery-header-text">
               <h2>
-                <span className="font-normal">Drive your dreams</span>
+                <span className="gallery-header--title--bold">
+                  Drive your dreams
+                </span>
               </h2>
-              <h2 id="rentals" className="">
+              <h2 id="rentals" className="gallery-header--title--light">
                 by the
-                <span className="font-normal"> day </span>
+                <span className="gallery-header--title--bold"> day </span>
                 or
-                <span className="font-normal"> week</span>
+                <span className="gallery-header--title--bold"> week</span>
               </h2>
             </article>
           </article>

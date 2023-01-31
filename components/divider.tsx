@@ -11,7 +11,6 @@ export const Divider = ({ light }: DividerType) => {
           Kansas City’s New Classic Car Rentals, Museum, Garage, AND MORE...
         </h2>
       </section>
-      <aside className="w-full h-1 bg-accent"></aside>
     </section>
   );
 };
