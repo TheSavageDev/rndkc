@@ -89,46 +89,27 @@ html {
 }
 
 .hero {
-  padding: 0rem 2rem 25rem 15rem;
   background-color: rgb(103, 113, 112);
-  background-image: url("../public/img/img_primary.jpg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .hero-header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
+  padding: 2rem 1.5rem;
 }
 
 .hero-header--title {
   font-size: 2.3rem;
-  color: #000;
+  color: #fff;
   font-family: Akshar, "sans-serif";
   font-weight: lighter;
   text-transform: uppercase;
 }
-
-.hero-header-sub {
-  display: flex;
-  align-items: center;
-}
 .hero-header--subtitle {
   font-size: 2.3rem;
-  color: #000;
+  color: #fff;
   font-family: Akshar, "sans-serif";
   font-weight: bold;
   text-transform: uppercase;
   line-height: 2rem;
-  margin-right: 2rem;
-}
-
-.hero-header--logo {
-  width: 12.7rem;
-  height: 5.134rem;
 }
 
 .hero-images--text {
@@ -146,24 +127,6 @@ html {
 
 .hero-images--camaro {
   transform: translateY(-9rem);
-}
-
-.hero-newsletter {
-  background-color: #282828;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-newsletter_heading {
-  font-size: 2.5rem;
-  font-weight: normal;
-  font-family: Akshar;
-  text-transform: uppercase;
-  letter-spacing: 0.03rem;
-  text-align: center;
 }
 
 .hero-social {
@@ -623,6 +586,7 @@ html {
   }
   .hero-header--subtitle {
     font-size: 4.5rem;
+    margin-bottom: 2rem;
   }
   .hero-images--camaro-box {
     margin-bottom: -13rem;
@@ -800,6 +764,7 @@ html {
   .newsletter-signup-button {
     width: 14.2rem;
     height: 4rem;
+    background-color: #282828;
     font-size: 2rem;
     padding: 0 1.5rem;
     line-height: 2rem;
@@ -808,8 +773,7 @@ html {
   }
 
   .newsletter-signup-button:hover {
-    background-color: #282828;
-    border: 1px solid #ff9b0b;
+    background-color: #ff9d0b;
   }
 
   .newsletter-signup-button--disabled {
