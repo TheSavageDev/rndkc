@@ -850,15 +850,17 @@ html {
 }
 
 .faq_list-item_content {
-  transform: scaleY(0);
+  transform: scale(0);
+  opacity: 0;
   max-height: 0;
-  transition: all ease-in-out 0.6s;
+  transition: all ease-in-out 0.4s;
 }
 
 .faq_list-item_content--open {
-  transform: scaleY(1);
+  transform: scale(1);
+  opacity: 1;
   max-height: 500rem;
-  transition: all ease-in-out 0.6s;
+  transition: all ease-in-out 0.4s;
 }
 
 .faq_list-item_content-text {
