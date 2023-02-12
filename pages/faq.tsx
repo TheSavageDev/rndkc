@@ -31,32 +31,26 @@ export default function FAQ() {
             title="Can I get the car delivered to me?"
             content="$100 delivery fee within 25 mile radius "
           />
-
           <FAQListItem
             title="How many miles are included in the rental?"
             content="200"
           />
-
           <FAQListItem
             title="Is there an age requirement for renting?"
             content="Drivers and renters must be at least 25 years old."
           />
-
           <FAQListItem
             title="Do the vehicles have manual or automatic transmissions?"
             content="RND offers a mix of both manual and automatic transmissions. Drivers renting a manual transmission vehicle must be an expert in using clutches and have extensive experience with manual transmissions. Note: If the drivetrain of a manual transmission is damaged, the renter will be presumed to be at fault and will be held liable for repair of any damaged components of the car."
           />
-
           <FAQListItem
             title="What methods of payment can I use?"
             content="RND accepts all major credit cards, including Visa, Mastercard, Discover and American Express. Pre-paid credit cards are not accepted."
           />
-
           <FAQListItem
             title="When do I get charged for a rental?"
             content="Your card will be charged the full rental as soon as your reservation is confirmed. The deposit will be held for 72 hours before the rental period begins, then released 72 hours after the rental period ends, assuming no damages were incurred."
           />
-          {/* This needs formatting */}
           <FAQListItem title="What is the security deposit for?">
             <article>
               <p className="faq_list-item_content-text">

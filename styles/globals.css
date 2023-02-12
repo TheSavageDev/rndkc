@@ -785,6 +785,164 @@ html {
 }
 
 /* Our Story Page */
+.our-story-page_container {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.our-story-page_hero {
+  background-color: #000;
+  background-image: url("/img/about1.png");
+  height: 40.7rem;
+  background-position: bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 0;
+  padding: 2rem;
+}
+
+.our-story-page_hero_text {
+  font-family: "Khand";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2.2rem;
+  line-height: 3.4rem;
+  text-align: center;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+}
+
+.our-story-page_hero_text--orange {
+  color: #ff9d0b;
+}
+
+.our-story-page_content {
+  display: flex;
+  flex-direction: column;
+}
+
+.our-story-page_content_header {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.our-story-page_content_header-text {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 3rem;
+  line-height: 4.1rem;
+  text-transform: uppercase;
+  color: #000000;
+  opacity: 0.8;
+}
+
+.our-story-page_content_header-text--bold {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 3.2rem;
+  line-height: 4.4rem;
+  text-transform: uppercase;
+  color: #000000;
+  opacity: 0.8;
+}
+
+.our-story-page_content_header-text--bold-orange {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 3.2rem;
+  line-height: 4.4rem;
+  text-transform: uppercase;
+  color: #ff9d0b;
+  opacity: 0.8;
+}
+
+.our-story-page_content_rnd {
+  position: relative;
+  width: 100%;
+}
+
+.our-story-page_content_paragraph {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 3.5rem;
+  color: #1e1e1e;
+  padding: 0 2rem 20rem 2rem;
+}
+
+.our-story-page_content_kc {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.our-story-page_content_ryan {
+  display: flex;
+  flex-direction: column;
+}
+
+.our-story-page_content_ryan_header {
+  padding: 0.4rem 1rem;
+  background: #ff9d0b;
+}
+
+.our-story-page_content_ryan_header-text {
+  font-family: "Khand";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 3.2rem;
+  line-height: 4.9rem;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.our-story-page_content_ryan_content {
+  padding: 3rem 2rem;
+}
+
+.our-story-page_content_ryan_content-text--first {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 3.5rem;
+  color: #1e1e1e;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.our-story-page_content_ryan_content-text {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 3.5rem;
+  color: #1e1e1e;
+  opacity: 0.9;
+  margin: 4rem 0;
+}
+
+.our-story-page_content_ryan_content-link {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 3.5rem;
+  color: #1e1e1e;
+  opacity: 0.9;
+  margin: 4rem 0;
+  text-decoration-line: underline;
+}
+
 /* FAQ Page */
 .faq-container {
   background-color: #657170;
@@ -798,6 +956,7 @@ html {
   line-height: 4rem;
   text-align: center;
   color: #fff;
+  margin-top: 1.5rem;
 }
 
 .faq_header-subtext {
