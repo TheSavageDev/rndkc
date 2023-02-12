@@ -24,10 +24,7 @@ export default function OurStory() {
             Owning a classic car is hard,
           </h2>
           <h2 className="our-story-page_content_header-text--bold">
-            renting one is easy as{" "}
-            <span className="our-story-page_content_header-text--bold-orange">
-              RND
-            </span>
+            renting one is easy as RND
           </h2>
         </section>
         <article className="our-story-page_content_rnd">
