@@ -5,27 +5,31 @@ export const ImageGridItem = ({
   alt,
   title,
   dayPrice,
+  go,
   href,
 }: {
   src: string;
   alt: string;
   title: string;
   dayPrice: number;
+  go?: boolean;
   href?: string;
 }) => {
   return (
-    <article className="relative bg-black">
+    <article className="rental-ready_image-grid_image-box">
       <a href={href} target="_blank" rel="noopener noreferrer">
-        <Image src={src} alt={alt} width="400" height="300" />
-        <section className="flex w-full absolute bottom-0 justify-between font-gemunuLibre md:h-auto">
-          <section className="bg-blackTransparent text-white flex w-full justify-between hover:bg-black">
-            <section className="flex flex-col p-2 items-start">
-              <article className="text-xl font-semibold">{title}</article>
-            </section>
-            <article className="text-xl pr-2 font-bold uppercase bg-accent flex items-center justify-end itemHeaderPrice w-1/3">
-              <span>${dayPrice} Day</span>
-            </article>
-          </section>
+        <img
+          src={go ? "/img/slices/go_icon.svg" : "/img/slices/show_icon.svg"}
+          className="rental-ready_image-grid_image-icon"
+        />
+        <img src={src} alt={alt} />
+        <section className="rental-ready_image-grid_image-banner">
+          <article className="rental-ready_image-grid_image-banner_title">
+            {title}
+          </article>
+          <article className="rental-ready_image-grid_image-banner_cost itemHeaderPrice">
+            <span>${dayPrice} Day</span>
+          </article>
         </section>
       </a>
     </article>

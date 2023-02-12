@@ -10,8 +10,8 @@ export const ContactForm = () => {
     message?: string;
   }>({ name: "", email: "", message: "" });
   const [buttonText, setButtonText] = useState("Send Message");
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleValidation = () => {
     let tempErrors = {};
@@ -40,8 +40,8 @@ export const ContactForm = () => {
     let isValidForm = handleValidation();
 
     if (isValidForm) {
-      setShowErrorMessage(false);
-      setShowSuccessMessage(false);
+      setError(false);
+      setSuccess(false);
       setButtonText("Sending");
       const res = await fetch("/api/contact", {
         body: JSON.stringify({
@@ -58,17 +58,17 @@ export const ContactForm = () => {
       const { error } = await res.json();
       if (error) {
         console.log(error);
-        setShowSuccessMessage(false);
-        setShowErrorMessage(true);
+        setSuccess(false);
+        setError(true);
         setButtonText("Send");
         return;
       }
-      setShowSuccessMessage(true);
-      setShowErrorMessage(false);
-      setButtonText("Send");
+      setSuccess(true);
+      setError(false);
+      setButtonText("We'll Be In Touch Shortly!");
 
       setTimeout(() => {
-        setShowSuccessMessage(false);
+        setSuccess(false);
       }, 5000);
     }
   };
@@ -89,7 +89,7 @@ export const ContactForm = () => {
         autoCapitalize="off"
         autoCorrect="off"
         className={`contactForm-name ${
-          errors?.name && "contactForm-input--error"
+          (error || errors?.name) && "contactForm-input--error"
         }`}
       />
       {errors?.name && (
@@ -119,7 +119,7 @@ export const ContactForm = () => {
         placeholder="Message"
         className={`contactForm-message ${
           errors?.message && "contactForm-input--error"
-        }`}
+        } ${success && "contactForm-message--success"}`}
         onChange={(e) => {
           setMessage(e.target.value);
           setErrors({ ...errors, message: "" });
@@ -129,16 +129,17 @@ export const ContactForm = () => {
       {errors?.message && (
         <p className="contactForm-errorText">Message cannot be empty.</p>
       )}
-      <button type="submit" onClick={contact} className="contactForm-button">
+      <button
+        type="submit"
+        onClick={contact}
+        className={`contactForm-button${success ? "--success" : ""}`}
+      >
         {buttonText}
       </button>
-      {showErrorMessage && (
+      {error && (
         <p className="contactForm-errorMessage">
           Something went wrong, please try again.
         </p>
-      )}
-      {showSuccessMessage && (
-        <p className="contactForm-successMessage">Awesome, we'll be in touch</p>
       )}
     </form>
   );

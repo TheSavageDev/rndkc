@@ -15,12 +15,6 @@ export const Hero = () => {
           </article>
         </article>
       </section>
-      <article className="hero-newsletter">
-        <h2 className="hero-newsletter_heading">
-          Sign up now for discounts and special offers
-        </h2>
-        <NewsLetterSignUpForm justify="start" text="Sign Up" />
-      </article>
     </section>
   );
 };

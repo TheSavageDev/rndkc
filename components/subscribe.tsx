@@ -6,21 +6,15 @@ export const Subscribe = () => {
     <section className="subscribe-container">
       <section className="subscribe-card">
         <h2 className="subscribe-card-title">
-          Subscribe & Follow Us on Social Media
+          Stay up to date on New Inventory, Discounts, and Special Events
         </h2>
         <section className="subscribe-card-subtitle">
-          Stay up to date on our progress, new inventory, and special events.
+          Our inventory is always changing. If we don’t have your dream car
+          today we might just have it tomorrow. Sign up for our newsletter to
+          stay updated on what’s happening at RND.
         </section>
         <section className="subscribe-card-form">
           <NewsLetterSignUpForm justify="center" />
-        </section>
-        <section className="subscribe-card-social">
-          <Social
-            bgColor="white"
-            fgColor="black"
-            text="text"
-            justify="center"
-          />
         </section>
       </section>
     </section>
