@@ -869,7 +869,6 @@ html {
   max-height: 500rem;
   padding: 0.5rem 2.5rem;
   transition: all ease-in-out 0.4s;
-  border-bottom: 1px solid #22222255;
 }
 
 .faq_list-item_content-text {
