@@ -1,7 +1,6 @@
 import { FAQListItem } from "../components/faqListItem";
 import { NavBar } from "../components/navBar";
 import { NavSubheader } from "../components/navSubheader";
-import faqs from "../lib/faq";
 
 export default function FAQ() {
   return (
