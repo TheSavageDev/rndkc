@@ -816,15 +816,21 @@ html {
 
 .faq_list-item_container {
   background-color: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
 }
 
 .faq_list-item {
-  padding: 2rem;
   display: flex;
   flex-direction: column;
 }
 
 .faq_list-item_header {
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -854,13 +860,16 @@ html {
   opacity: 0;
   max-height: 0;
   transition: all ease-in-out 0.4s;
+  padding: 0.5rem 2.5rem;
 }
 
 .faq_list-item_content--open {
   transform: scale(1);
   opacity: 1;
   max-height: 500rem;
+  padding: 0.5rem 2.5rem;
   transition: all ease-in-out 0.4s;
+  border-bottom: 1px solid #22222255;
 }
 
 .faq_list-item_content-text {
