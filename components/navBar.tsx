@@ -12,7 +12,7 @@ export const NavBar = () => {
         <section className="navBar-mobile-pane">
           <article className="navBar-pane">
             <article>
-              <a href="#home" className="" onClick={handleToggleNav}>
+              <a href="/" className="" onClick={handleToggleNav}>
                 Home
               </a>
             </article>
@@ -48,13 +48,13 @@ export const NavBar = () => {
         </Link>
       </article>
       <article className="navBar-wideMenu">
-        <a href="#home">Home</a>
+        <a href="/">Home</a>
         <span>|</span>
-        <a href="#rentals">Rentals</a>
+        <a href="/our-story">Our Story</a>
         <span>|</span>
-        <a href="#our-story">Our Story</a>
+        <a href="/faq">FAQ</a>
         <span>|</span>
-        <a href="#get-in-touch">Get in Touch</a>
+        <a href="contact-us">Contact Us</a>
       </article>
     </nav>
   );
