@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -12,18 +11,26 @@ export const NavBar = () => {
       {open && (
         <section className="navBar-mobile-pane">
           <article className="navBar-pane">
-            <a href="#home" className="" onClick={handleToggleNav}>
-              Home
-            </a>
-            <a href="#rentals" className="" onClick={handleToggleNav}>
-              Rentals
-            </a>
-            <a href="#our-story" className="" onClick={handleToggleNav}>
-              Our Story
-            </a>
-            <a href="#get-in-touch" className="" onClick={handleToggleNav}>
-              Get in Touch
-            </a>
+            <article>
+              <a href="#home" className="" onClick={handleToggleNav}>
+                Home
+              </a>
+            </article>
+            <article>
+              <a href="/our-story" className="" onClick={handleToggleNav}>
+                Our Story
+              </a>
+            </article>
+            <article>
+              <a href="/faq" className="" onClick={handleToggleNav}>
+                FAQ
+              </a>
+            </article>
+            <article>
+              <a href="/contact-us" className="" onClick={handleToggleNav}>
+                Contact Us
+              </a>
+            </article>
           </article>
         </section>
       )}
@@ -37,7 +44,7 @@ export const NavBar = () => {
       </section>
       <article className="navBar-text">
         <Link href="/">
-          <img src="/img/webtext.svg" />
+          <img src="/img/webtext.svg" height={15} />
         </Link>
       </article>
       <article className="navBar-wideMenu">

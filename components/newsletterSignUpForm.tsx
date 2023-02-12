@@ -9,10 +9,11 @@ export const NewsLetterSignUpForm = ({
 }) => {
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState<{ email?: string }>({ email: "" });
-  const [buttonText, setButtonText] = useState(text ? text : "Notify Me");
+  const [buttonText, setButtonText] = useState(text ? text : "Sign Up");
   const [subscribed, setSubscribed] = useState(false);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleValidation = () => {
     let tempErrors = {};
@@ -33,9 +34,9 @@ export const NewsLetterSignUpForm = ({
     let isValidForm = handleValidation();
 
     if (isValidForm) {
-      setShowErrorMessage(false);
-      setShowSuccessMessage(false);
-      setButtonText("Subscribing...");
+      setError(false);
+      setSuccess(false);
+      setButtonText("Signing Up...");
       const res = await fetch("/api/subscribeUser", {
         body: JSON.stringify({
           email,
@@ -50,43 +51,34 @@ export const NewsLetterSignUpForm = ({
 
       if (error) {
         console.error(error);
-        setShowSuccessMessage(false);
-        setShowErrorMessage(true);
+        setSuccess(false);
+        setError(true);
         setButtonText("Notify Me");
+        setMessage("That's not a valid email");
         return;
       }
-      setShowSuccessMessage(true);
-      setShowErrorMessage(false);
+      setSuccess(true);
+      setError(false);
       setSubscribed(true);
-      setButtonText("Subscribed!");
-      setEmail("Awesome, we will be in touch");
+      setButtonText("We'll Keep You Updated!");
+      setMessage("Thanks!");
+      setEmail("");
 
       setTimeout(() => {
-        setShowSuccessMessage(false);
+        setSuccess(false);
       }, 5000);
     }
   };
 
   return (
     <>
-      {errors?.email && (
-        <p className="contactForm-errorText">Email cannot be empty.</p>
-      )}
-      {showErrorMessage && (
-        <p className="contactForm-errorMessage">
-          The email you entered is incorrect or already on our contact list!
-        </p>
-      )}
-      {showSuccessMessage && (
-        <p className="contactForm-successMessage">Awesome, we'll be in touch</p>
-      )}
       <form onSubmit={subscribe} className={`newsletter-signup`}>
         <input
           type="email"
           id="email-input"
           name="email"
-          placeholder="Enter Your Email Address"
-          value={email}
+          placeholder="Enter Your Email"
+          value={success || error ? message : email}
           onChange={(e) => {
             setEmail(e.target.value);
             setErrors({ ...errors, email: "" });
@@ -97,6 +89,8 @@ export const NewsLetterSignUpForm = ({
           autoCorrect="off"
           className={`newsletter-signup-email ${
             subscribed ? "newsletter-signup-email--disabled" : ""
+          } ${success ? "newsletter-signup-email--success" : ""} ${
+            error ? "newsletter-signup-email--error" : ""
           }`}
         />
         <input

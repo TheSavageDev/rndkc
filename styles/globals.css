@@ -10,35 +10,65 @@ html {
   background-color: #657170;
 }
 
-.navBar {
-  width: 100%;
-  background-color: #282828;
-  padding: 2rem;
+.coming-soon {
+  width: 100vw;
+  height: 100vh;
+  background: #657170;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
+.coming-soon_text {
+  font-size: 5.5rem;
+  color: #fff;
+}
+
+.navBar {
+  width: 100%;
+  background-color: #282828;
+  padding: 0.75rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+}
+
 .navBar-mobile-pane {
-  background-color: rgba(0, 0, 0, 0.8);
   position: absolute;
-  top: 0;
+  top: 4rem;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 50;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .navBar-pane {
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+}
+
+.navBar-pane article {
+  width: 100%;
+  border-bottom: 1px solid #a5a5a5;
+  padding: 1rem 0;
 }
 
 .navBar-pane a {
-  font-size: 3.2rem;
-  margin: 2rem 0;
+  padding-left: 2rem;
+  color: #000;
+  font-family: Akshar;
+  font-size: 2.4rem;
+  font-weight: 200;
+}
+
+.navBar-pane a:hover,
+.navBar-pane a:active {
+  color: #ff9d0b;
 }
 
 .navBar-icon-logo {
@@ -48,7 +78,7 @@ html {
 
 .navBar-icon {
   display: block;
-  margin-right: 2rem;
+  margin-right: 0.25rem;
 }
 
 .navBar-icon span {
@@ -60,10 +90,8 @@ html {
 }
 
 .navBar-logo {
-  display: flex;
-  align-items: center;
   width: 9.895rem;
-  height: 4rem;
+  height: 3rem;
 }
 
 .navBar-wideMenu {
@@ -88,17 +116,17 @@ html {
   background-color: #e5e5e5;
 }
 
+.hero-container {
+  width: 100%;
+  height: 37.1rem;
+}
+
 .hero {
-  padding: 0rem 2rem 35rem 2rem;
-  background-color: rgb(103, 113, 112);
+  height: 40.1rem;
   background-image: url("../public/img/img_primary.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-}
-
-.hero-container {
-  width: 100%;
 }
 
 .hero-header {
@@ -106,11 +134,12 @@ html {
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  padding-top: 2rem;
+  padding: 2rem 3rem 0 3rem;
 }
 
 .hero-header--title {
-  font-size: 3rem;
+  font-size: 2.55rem;
+  line-height: 2.3rem;
   color: #000;
   font-family: Akshar, "sans-serif";
   font-weight: 200;
@@ -121,15 +150,18 @@ html {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin: 0;
 }
+
 .hero-header--subtitle {
-  font-size: 3.4rem;
+  font-size: 2.87rem;
+  line-height: 4.5rem;
   color: #000;
   font-family: Akshar, "sans-serif";
   font-weight: 500;
   text-transform: uppercase;
-  line-height: 5.5rem;
   margin-right: 2rem;
+  text-shadow: 0.1rem 0.1rem 0.03rem rgba(0, 0, 0, 0.8);
 }
 
 .hero-header--logo {
@@ -145,31 +177,35 @@ html {
   display: none;
 }
 
-.hero-images--camaro-box {
-  background: #e5e5e5;
-  margin-bottom: -7rem;
-}
-
-.hero-images--camaro {
-  transform: translateY(-9rem);
-}
-
 .hero-newsletter {
   background-color: #282828;
-  padding: 5rem 2rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .hero-newsletter_heading {
-  font-size: 2.5rem;
-  font-weight: normal;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  font-weight: 500;
   font-family: Akshar;
   text-transform: uppercase;
   letter-spacing: 0.03rem;
   text-align: center;
+}
+
+.hero-newsletter_subheading {
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+  font-weight: 200;
+  font-family: Akshar;
+  text-transform: uppercase;
+  letter-spacing: 0.03rem;
+  text-align: center;
+  color: #ff9d0b;
 }
 
 .hero-social {
@@ -207,105 +243,389 @@ html {
   text-transform: uppercase;
 }
 
-.gallery {
-  width: 100%;
+.rental-ready_container {
   background-color: #fff;
   color: #000;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  z-index: 10;
 }
 
-.gallery-header {
+.rental-ready_header {
+  padding: 1rem;
+}
+
+.rental-ready_header_title-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rental-ready_header_title_icon {
+  height: 6rem;
+  margin-right: 2rem;
+}
+
+.rental-ready_header_title {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 5rem;
+  line-height: 6.9rem;
+  text-transform: uppercase;
+  color: #282828;
+  margin: 1.5rem 0;
+}
+
+.rental-ready_header_title--orange {
+  color: #ff9d0b;
+}
+
+.rental-ready_paragraph {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3rem;
+  color: #000000;
+  opacity: 0.7;
+}
+
+.rental-ready_image-grid {
+  display: grid;
+  grid-auto-rows: 1fr;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.rental-ready_image-grid_image-box {
+  position: relative;
+  background-color: #000;
+}
+
+.rental-ready_image-grid_image-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.rental-ready_image-grid_image-banner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.rental-ready_image-grid_image-banner_title {
+  font-family: Akshar;
+  font-weight: 300;
+  font-size: 2.4rem;
+  padding-left: 0.5rem;
+}
+
+.rental-ready_image-grid_image-banner_cost {
+  font-family: "Gemunu Libre";
+  font-weight: 900;
+  font-size: 2.4rem;
+  vertical-align: middle;
+  padding: 0 1rem 0 2rem;
+  clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+  background-color: #ff9d0b;
+}
+
+.vote_container {
+  background-color: #fff;
+  padding: 2rem 1.5rem 12rem 1.5rem;
+  position: relative;
+}
+
+.vote_header {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 55px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #282828;
+}
+
+.vote_paragraph {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 39px;
+  text-align: center;
+  color: #000000;
+  opacity: 0.7;
+}
+
+.vote_form {
+  display: flex;
+  flex-direction: column;
+}
+
+.vote_form_select {
+  padding: 1rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #282828;
+  background: #ffffff;
+  border: 1px solid #a5a5a5;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.vote_form_input {
+  padding: 1rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #000000;
+  background: #ffffff;
+  border: 1px solid #a5a5a5;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.vote_form_button {
+  padding: 1rem;
+  background-color: #ff9d0b;
+  border: 1px solid #a5a5a5;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 3rem;
+  line-height: 4.1rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+.vote_kc {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.rental-status_container {
+  background-color: #1c1c1c;
+  width: 100%;
+}
+
+.rental-status_header-container {
+  background: #222;
+  padding: 4rem 2rem 2rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 1rem;
 }
 
-.gallery-header--title {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 1rem;
+.rental-status_header-container img {
+  height: 7.8rem;
+}
+
+.rental-status_header {
+  font-size: 3.5rem;
+  font-weight: 100;
+  font-family: Akshar;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 3.5rem;
+  padding: 0.5rem 0;
+}
+
+.rental-status_subheader {
+  font-size: 2.4rem;
+  font-weight: 100;
+  font-family: Akshar;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 2.5rem;
+  letter-spacing: 0;
+  opacity: 0.5;
+  margin: 0.5rem 0;
+}
+
+.go-cars_container {
+  background-color: #1c1c1c;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
   width: 100%;
 }
 
-.gallery-header-text {
+.go-cars_header-container {
+  padding: 2rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-.gallery-header--title h2 {
-  font-size: 4rem;
-  line-height: 4rem;
-  text-transform: uppercase;
-  font-family: Akshar, "sans-serif";
-  font-weight: 200;
+.go-cars_header-container img {
+  height: 11.3rem;
+  margin-bottom: 1.5rem;
 }
 
-.gallery-header--title--bold {
+.go-cars_header {
+  font-size: 2.5rem;
   font-weight: 500;
-}
-.gallery-header--title--light {
-  font-weight: 200;
-}
-
-.gallery-paragraph {
-  display: none;
+  font-family: Akshar;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  line-height: 3.5rem;
 }
 
-.gallery-carousel-footer-text {
-  font-size: 2rem;
-  font-weight: 600;
+.go-cars_header-container p {
+  font-size: 2.4rem;
+  font-family: Akshar;
+  font-weight: 300;
+  line-height: 3.5rem;
+  letter-spacing: 0.03rem;
+  color: #fff;
+  opacity: 0.7;
+  text-align: center;
 }
 
-.gallery-carousel-footer-text--price {
-  font-size: 1.6rem;
-  font-weight: 600;
-}
-
-.gallery-social {
+.show-cars_container {
+  background-color: #1c1c1c;
   width: 100%;
-  padding-top: 0;
-  padding-bottom: 2rem;
+}
+
+.show-cars_header-container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.show-cars_header-container img {
+  height: 11.3rem;
+  margin-bottom: 1.5rem;
+}
+
+.show-cars_header {
+  font-size: 2.5rem;
+  font-weight: 500;
+  font-family: Akshar;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  line-height: 3.5rem;
+}
+
+.show-cars_header-container p {
+  font-size: 2.4rem;
+  font-family: Akshar;
+  font-weight: 300;
+  line-height: 3.5rem;
+  letter-spacing: 0.03rem;
+  color: #fff;
+  opacity: 0.7;
+  text-align: center;
+}
+
+.rental-status_divider {
+  background-color: #1c1c1c;
+  border: 1px solid #fff;
+  height: 1px;
+  margin: 5rem auto;
+  opacity: 0.3;
+  width: 30.4rem;
+}
+
+.rental-status_card-container {
+  background-color: #1c1c1c;
+  display: grid;
+  justify-content: center;
+  padding-bottom: 4rem;
+  grid-template-rows: 32rem 32rem 32rem;
+  grid-template-columns: 35.3rem;
+  grid-template-areas:
+    "reverse"
+    "neutral"
+    "drive";
+}
+
+.rental-status_card {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: #282828;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem;
+}
+
+.reverse {
+  grid-area-name: "reverse";
+}
+.neutral {
+  grid-area-name: "neutral";
+}
+.drive {
+  grid-area-name: "drive";
+}
+
+.rental-status_card img {
+  width: auto;
+}
+
+.rental-status_card p {
+  font-size: 1.9rem;
+  font-family: Akshar;
+  font-weight: 400;
+  line-height: 3.5rem;
+  letter-spacing: 0;
+  color: #fff;
+  opacity: 0.7;
+  padding: 1rem;
+}
+
+.rental-status_card p span {
+  font-size: 2.4rem;
+  font-family: Akshar;
+  font-weight: 700;
+  line-height: 3.5rem;
+  letter-spacing: 0;
+  color: #fff;
+  opacity: 0.7;
 }
 
 .our-story-container {
   background-color: rgb(103, 113, 112);
+  padding: 5rem 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .our-story {
   width: 100%;
-  padding: 1rem 0 0 1rem;
   background-color: rgb(103, 113, 112);
-}
-
-.our-story-kc {
-  display: none;
 }
 
 .our-story-title {
-  font-size: 5.5rem;
+  font-size: 4.5rem;
   font-family: Akshar, "sans-serif";
   font-weight: 500;
   text-transform: uppercase;
-  line-height: 5.59rem;
   letter-spacing: 0.03rem;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
-}
-
-.our-story-article {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgb(103, 113, 112);
-  padding-top: 2rem;
-}
-
-.our-story-article-text_container {
-  padding: 2rem 4.5rem;
+  text-align: center;
 }
 
 .our-story-article--text {
@@ -315,75 +635,18 @@ html {
   font-family: Khand, "sans-serif";
   line-height: 4.2rem;
   letter-spacing: 0.03rem;
+  padding-bottom: 1.5rem;
 }
 
-.about-container {
-  display: flex;
-  flex-direction: column;
+.our-story-button {
   background-color: #fff;
-  color: #000;
-  padding-top: 1.5rem;
-}
-
-.about-secondContainer {
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  color: #000;
-  padding-top: 1.5rem;
-}
-
-.about-start_your_engines {
-  display: flex;
-  padding-left: 1.5rem;
-}
-
-.about-theRoad {
-  display: flex;
-  padding-left: 1.5rem;
-}
-
-.about-start_your_engines-text {
-  font-size: 2.4rem;
-  font-family: Khand, "sans-serif";
+  border: 1px solid #a9a9a9;
+  color: #282828;
+  padding: 0.5rem;
+  font-family: Akshar;
   font-weight: 500;
-  text-transform: uppercase;
-  padding-left: 1.4rem;
-}
-
-.about-theRoad-text {
   font-size: 2.4rem;
-  font-family: Khand, "sans-serif";
-  font-weight: 500;
   text-transform: uppercase;
-  padding-left: 1.4rem;
-}
-
-.about-start_your_engines-img {
-  border-radius: 0.5rem;
-}
-
-.about-start_your_engines-paragraph {
-  font-family: Manrope, "sans-serif";
-  font-weight: normal;
-  font-size: 1.7rem;
-  color: #555555;
-  line-height: 2.8rem;
-  padding: 1rem;
-  letter-spacing: 0.03rem;
-}
-
-.about-theRoad-paragraph {
-  font-family: Manrope, "sans-serif";
-  font-weight: normal;
-  font-size: 1.7rem;
-  color: #555555;
-  line-height: 2.8rem;
-  padding: 1rem;
-  letter-spacing: 0.03rem;
-}
-
-.about-the_road_we_are_taking-img {
   border-radius: 0.5rem;
 }
 
@@ -435,10 +698,6 @@ html {
   padding: 1rem 0;
 }
 
-.itemHeaderPrice {
-  clip-path: polygon(40% 0, 100% 0, 100% 100%, 0% 100%);
-}
-
 .newsletter-signup {
   display: flex;
   flex-direction: column;
@@ -463,6 +722,14 @@ html {
 
 .newsletter-signup-email--disabled {
   opacity: 0.7;
+}
+.newsletter-signup-email--success {
+  color: #3cb239;
+  border: 3px solid #30a13b;
+}
+.newsletter-signup-email--error {
+  color: #fe0000;
+  border: 3px solid #c90000;
 }
 
 .newsletter-signup-button {
@@ -494,27 +761,168 @@ html {
   display: none;
 }
 
+.footer {
+  width: 100%;
+  background-color: #282828;
+  padding: 1rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-icon-logo {
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo {
+  width: 9.895rem;
+  height: 3rem;
+}
+
+.footer-social {
+  padding: 0 2rem;
+}
+
+/* Our Story Page */
+/* FAQ Page */
+.faq-container {
+  background-color: #657170;
+}
+
+.faq_header-text {
+  font-family: "Khand";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 3.4rem;
+  line-height: 4rem;
+  text-align: center;
+  color: #fff;
+}
+
+.faq_header-subtext {
+  font-family: "Khand";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.2rem;
+  line-height: 3.5rem;
+  text-align: center;
+  color: #fff;
+}
+
+.faq_header-image {
+  mix-blend-mode: multiply;
+}
+
+.faq_list-item_container {
+  background-color: #fff;
+}
+
+.faq_list-item {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.faq_list-item_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq_list-item_title {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000;
+}
+
+.faq_list-item_arrow {
+  height: 1rem;
+  transition: all ease-in-out 500ms;
+}
+
+.faq_list-item_arrow--open {
+  transform: rotateX(180deg);
+  transition: all ease-in-out 500ms;
+}
+
+.faq_list-item_content {
+  transform: scaleY(0);
+  max-height: 0;
+  transition: all ease-in-out 0.6s;
+}
+
+.faq_list-item_content--open {
+  transform: scaleY(1);
+  max-height: 500rem;
+  transition: all ease-in-out 0.6s;
+}
+
+.faq_list-item_content-text {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.7rem;
+  margin: 0.75rem 0;
+  color: #000;
+}
+
+.faq_list-item_content-text_list {
+  list-style-type: disc;
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.7rem;
+  padding-left: 3rem;
+}
+/* CONTACT PAGE */
 .getInTouch-container {
   width: 100%;
 }
 
+.nav-subheader {
+  height: 4rem;
+  width: 100%;
+  background: #ff9d0b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-subheader--text {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.6rem;
+  line-height: 3.6rem;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.35);
+}
+
 .getInTouch {
-  padding: 0.4rem 2rem 20.6rem 2rem;
+  padding: 0.4rem 2rem 10.6rem 2rem;
   background-image: url("/img/ContactBkgd.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom;
   width: 100%;
-  background-color: rgb(103, 113, 112);
+  background-color: #657170;
 }
 
 .getInTouch-title {
   font-family: Akshar;
-  font-wight: 500;
+  font-weight: 500;
   line-height: 7.59rem;
   letter-spacing: 0.03rem;
   font-size: 5.5rem;
   text-transform: uppercase;
+  color: #fff;
 }
 
 .getInTouch-logo {
@@ -526,14 +934,21 @@ html {
   font-weight: 600;
   font-size: 3.2rem;
   line-height: 4.9rem;
+  letter-spacing: 0;
   color: #fff;
 }
 
 .getInTouch-paragraph {
   font-family: Manrope;
-  font-size: 1.8rem;
-  font-weight: 500;
+  font-size: 2rem;
+  font-weight: 400;
   margin-bottom: 2rem;
+  line-height: 3.5rem;
+  color: #fff;
+}
+
+.getInTouch-paragraph--contact {
+  font-weight: 500;
 }
 
 .getInTouch-paragraph-questions {
@@ -541,7 +956,20 @@ html {
 }
 
 .getInTouch-social {
-  display: none;
+  padding-top: 4rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.getInTouch-social_text {
+  font-family: "Gemunu Libre";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 2.6rem;
+  padding-bottom: 2rem;
 }
 
 .getInTouch-contactForm {
@@ -564,6 +992,7 @@ html {
   margin: 1rem 0;
   padding: 1rem;
   color: #000;
+  border: 1px solid #636363;
 }
 
 .contactForm-email {
@@ -575,6 +1004,7 @@ html {
   margin: 1rem 0;
   padding: 1rem;
   color: #000;
+  border: 1px solid #636363;
 }
 
 .contactForm-message {
@@ -587,6 +1017,24 @@ html {
   padding: 1rem;
   height: 24.3rem;
   color: #000;
+  border: 1px solid #636363;
+}
+
+.contactForm-message--success {
+  color: #3cb239;
+}
+
+.contactForm-button--success {
+  border-radius: 0.5rem;
+  font-family: Akshar;
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 2.5rem;
+  text-align: center;
+  padding: 1rem;
+  background-color: #767676;
+  border: 1px solid #282828;
+  color: #fff;
 }
 
 .contactForm-button {
