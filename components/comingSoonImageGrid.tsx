@@ -12,9 +12,9 @@ export const ComingSoonImageGrid = () => {
         href="https://driveshare.com/collection/60921"
       />
       <ImageGridItem
-        src="/img/inventory/59 Austin Healey/ah4.jpg"
-        alt="MGTD Roadster"
-        title="MGTD Roadster"
+        src="/img/inventory/59 Austin Healy/ah4.jpg"
+        alt="1959 Austin Healy Mark 1"
+        title="1959 Austin Healy Mark 1"
         dayPrice="Coming Soon"
         go
         href="https://driveshare.com/collection/60921"
