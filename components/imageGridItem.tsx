@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export const ImageGridItem = ({
   src,
@@ -11,13 +12,19 @@ export const ImageGridItem = ({
   src: string;
   alt: string;
   title: string;
-  dayPrice: number;
+  dayPrice: number | string;
   go?: boolean;
   href?: string;
 }) => {
+  const router = useRouter();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    router.push(href);
+  };
   return (
     <article className="rental-ready_image-grid_image-box">
-      <a href={href} target="_blank" rel="noopener noreferrer">
+      <a href={href} onClick={handleClick}>
         <img
           src={go ? "/img/slices/go_icon.svg" : "/img/slices/show_icon.svg"}
           className="rental-ready_image-grid_image-icon"
@@ -28,7 +35,9 @@ export const ImageGridItem = ({
             {title}
           </article>
           <article className="rental-ready_image-grid_image-banner_cost itemHeaderPrice">
-            <span>${dayPrice} Day</span>
+            <span>{`${
+              typeof dayPrice === "string" ? dayPrice : "$" + dayPrice + " Day"
+            }`}</span>
           </article>
         </section>
       </a>

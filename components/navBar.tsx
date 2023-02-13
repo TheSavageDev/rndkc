@@ -11,26 +11,18 @@ export const NavBar = () => {
       {open && (
         <section className="navBar-mobile-pane">
           <article className="navBar-pane">
-            <article>
-              <a href="/" className="" onClick={handleToggleNav}>
-                Home
-              </a>
-            </article>
-            <article>
-              <a href="/our-story" className="" onClick={handleToggleNav}>
-                Our Story
-              </a>
-            </article>
-            <article>
-              <a href="/faq" className="" onClick={handleToggleNav}>
-                FAQ
-              </a>
-            </article>
-            <article>
-              <a href="/contact-us" className="" onClick={handleToggleNav}>
-                Contact Us
-              </a>
-            </article>
+            <a href="/" className="" onClick={handleToggleNav}>
+              Home
+            </a>
+            <a href="/our-story" className="" onClick={handleToggleNav}>
+              Our Story
+            </a>
+            <a href="/faq" className="" onClick={handleToggleNav}>
+              FAQ
+            </a>
+            <a href="/contact-us" className="" onClick={handleToggleNav}>
+              Contact Us
+            </a>
           </article>
         </section>
       )}

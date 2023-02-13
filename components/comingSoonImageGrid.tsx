@@ -4,26 +4,26 @@ export const ComingSoonImageGrid = () => {
   return (
     <section className="rental-ready_image-grid">
       <ImageGridItem
-        src="/img/65plymouthSat.jpg"
-        alt="1965 Plymouth Satellite"
-        title="1965 Plymouth Satellite"
+        src="/img/inventory/58 Corvette/58vette3.jpg"
+        alt="1958 Chevy Corvette"
+        title="1958 Chevy Corvette"
         go
-        dayPrice={302}
+        dayPrice="Coming Soon"
         href="https://driveshare.com/collection/60921"
       />
       <ImageGridItem
-        src="/img/69FordStang.jpg"
-        alt="1969 Ford Mustang"
-        title="1969 Ford Mustang"
-        dayPrice={351}
+        src="/img/inventory/59 Austin Healey/ah4.jpg"
+        alt="MGTD Roadster"
+        title="MGTD Roadster"
+        dayPrice="Coming Soon"
         go
         href="https://driveshare.com/collection/60921"
       />
       <ImageGridItem
-        src="/img/67ChevyChevelle.jpg"
-        alt="1967 Chevy Chevelle"
-        title="1967 Chevy Chevelle"
-        dayPrice={383}
+        src="/img/inventory/86 Bronco/86bronco1.jpg"
+        alt="1986 Ford Bronco"
+        title="1986 Ford Bronco"
+        dayPrice="Coming Soon"
         go
         href="https://driveshare.com/collection/60921"
       />

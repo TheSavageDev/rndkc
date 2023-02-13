@@ -12,8 +12,8 @@ export const RentalReadyImageGrid = () => {
       />
       <ImageGridItem
         src="/img/69FordStang.jpg"
-        alt="1969 Ford Mustang"
-        title="1969 Ford Mustang"
+        alt="1969 Mach 1"
+        title="1969 Mach 1"
         dayPrice={351}
         href="https://driveshare.com/car/1969-ford-mustang-9312"
       />

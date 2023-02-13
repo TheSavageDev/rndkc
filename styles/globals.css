@@ -52,13 +52,10 @@ html {
   align-items: flex-start;
 }
 
-.navBar-pane article {
-  width: 100%;
-  border-bottom: 1px solid #a5a5a5;
-  padding: 1rem 0;
-}
-
 .navBar-pane a {
+  width: 100%;
+  padding: 1rem 0;
+  border-bottom: 1px solid #a5a5a5;
   padding-left: 2rem;
   color: #000;
   font-family: Akshar;
@@ -123,7 +120,7 @@ html {
 
 .hero {
   height: 40.1rem;
-  background-image: url("../public/img/img_primary.jpg");
+  background-image: url("../public/img/chevelle_hero.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -138,12 +135,14 @@ html {
 }
 
 .hero-header--title {
-  font-size: 2.55rem;
-  line-height: 2.3rem;
-  color: #000;
-  font-family: Akshar, "sans-serif";
-  font-weight: 200;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 4rem;
+  line-height: 4rem;
   text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.75);
 }
 
 .hero-header-sub {
@@ -154,14 +153,14 @@ html {
 }
 
 .hero-header--subtitle {
-  font-size: 2.87rem;
-  line-height: 4.5rem;
-  color: #000;
-  font-family: Akshar, "sans-serif";
-  font-weight: 500;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 4rem;
+  line-height: 4rem;
   text-transform: uppercase;
-  margin-right: 2rem;
-  text-shadow: 0.1rem 0.1rem 0.03rem rgba(0, 0, 0, 0.8);
+  color: #ff9d0b;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.75);
 }
 
 .hero-header--logo {
@@ -345,8 +344,19 @@ html {
   font-family: "Akshar";
   font-style: normal;
   font-weight: 500;
-  font-size: 40px;
-  line-height: 55px;
+  font-size: 4rem;
+  line-height: 5.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  color: #282828;
+}
+
+.vote_header_text--bold {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 5.5rem;
   text-align: center;
   text-transform: uppercase;
   color: #282828;
@@ -355,9 +365,9 @@ html {
 .vote_paragraph {
   font-family: "Akshar";
   font-style: normal;
-  font-weight: 400;
-  font-size: 28px;
-  line-height: 39px;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
   text-align: center;
   color: #000000;
   opacity: 0.7;
