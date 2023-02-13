@@ -47,9 +47,6 @@ module.exports = {
       },
       backgroundImage: {
         car: "url('../public/img/car.jpg')",
-        stang: "url('../public/img/stang.png')",
-        "stang-skinny": "url('../public/img/stang-skinny.png')",
-        camaroText: "url('../public/img/67Txt.svg')",
         contactBg: "url('../public/img/ContactBkgd.png')",
       },
     },

@@ -2,13 +2,10 @@ import { NavBar } from "../components/navBar";
 import { Hero } from "../components/hero";
 import { Gallery } from "../components/gallery";
 import { OurStory } from "../components/ourStory";
-import { About } from "../components/about";
 import { Subscribe } from "../components/subscribe";
-import { GetInTouch } from "../components/getInTouch";
 import { NewsLetterSignUpForm } from "../components/newsletterSignUpForm";
 import { Footer } from "../components/footer";
 import { RentalStatus } from "../components/rentalStatus";
-import { GoCars } from "../components/goCars";
 import { Vote } from "../components/vote";
 import { ComingSoon } from "../components/comingSoon";
 
