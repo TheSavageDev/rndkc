@@ -297,6 +297,9 @@ html {
 .rental-ready_image-grid_image-box {
   position: relative;
   background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .rental-ready_image-grid_image-icon {
