@@ -9,7 +9,7 @@ export const ComingSoonImageGrid = () => {
         title="1958 Chevy Corvette"
         go
         dayPrice="Coming Soon"
-        href="https://driveshare.com/collection/60921"
+        href="/car/158S100419"
       />
       <ImageGridItem
         src="/img/inventory/59 Austin Healy/ah4.jpg"
@@ -17,7 +17,7 @@ export const ComingSoonImageGrid = () => {
         title="1959 Austin Healy"
         dayPrice="Coming Soon"
         go
-        href="https://driveshare.com/collection/60921"
+        href="/car/AN5L11026"
       />
       <ImageGridItem
         src="/img/car.svg"
@@ -25,7 +25,7 @@ export const ComingSoonImageGrid = () => {
         title="1986 Ford Bronco"
         dayPrice="Coming Soon"
         go
-        href="https://driveshare.com/collection/60921"
+        driveShare="https://driveshare.com/collection/60921"
       />
     </section>
   );

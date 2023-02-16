@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { Divider } from "./divider";
+import Link from "next/link";
 
 export const OurStory = () => {
   return (
@@ -15,7 +14,9 @@ export const OurStory = () => {
           have the knowledge, the tools, the space, and the money. In that
           moment R&D Garage was born. “
         </p>
-        <button className="our-story-button">Read Our Story</button>
+        <Link href="/our-story" className="our-story-button">
+          Read Our Story
+        </Link>
       </section>
     </section>
   );

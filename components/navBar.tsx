@@ -11,18 +11,18 @@ export const NavBar = () => {
       {open && (
         <section className="navBar-mobile-pane">
           <article className="navBar-pane">
-            <a href="/" className="" onClick={handleToggleNav}>
+            <Link href="/" className="" onClick={handleToggleNav}>
               Home
-            </a>
-            <a href="/our-story" className="" onClick={handleToggleNav}>
+            </Link>
+            <Link href="/our-story" className="" onClick={handleToggleNav}>
               Our Story
-            </a>
-            <a href="/faq" className="" onClick={handleToggleNav}>
+            </Link>
+            <Link href="/faq" className="" onClick={handleToggleNav}>
               FAQ
-            </a>
-            <a href="/contact-us" className="" onClick={handleToggleNav}>
+            </Link>
+            <Link href="/contact-us" className="" onClick={handleToggleNav}>
               Contact Us
-            </a>
+            </Link>
           </article>
         </section>
       )}
@@ -40,13 +40,13 @@ export const NavBar = () => {
         </Link>
       </article>
       <article className="navBar-wideMenu">
-        <a href="/">Home</a>
+        <Link href="/">Home</Link>
         <span>|</span>
-        <a href="/our-story">Our Story</a>
+        <Link href="/our-story">Our Story</Link>
         <span>|</span>
-        <a href="/faq">FAQ</a>
+        <Link href="/faq">FAQ</Link>
         <span>|</span>
-        <a href="contact-us">Contact Us</a>
+        <Link href="contact-us">Contact Us</Link>
       </article>
     </nav>
   );

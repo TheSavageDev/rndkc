@@ -14,15 +14,17 @@ import { Footer } from "../../components/footer";
 import { ContactForm } from "../../components/contactForm";
 import { SocialIcon } from "react-social-icons";
 import { ShareModal } from "../../components/shareModal";
+import { BookingForm } from "../../components/bookingForm";
+import { AvailabilitySignUp } from "../../components/availabilitySignUp";
 
 const Car = () => {
   const router = useRouter();
-  const { id } = router.query;
   const [vehicle, setVehicle] = useState<DocumentData>({});
   const [bigImageUrl, setBigImageUrl] = useState("");
   const [showShareModal, setShowShareModal] = useState(false);
+  const [driveShare, setDriveShare] = useState("");
 
-  const getVehicle = () => {
+  const getVehicle = (id) => {
     const q = query(collection(db, "vehicles"), where("vin", "==", id));
     onSnapshot(q, (snap) => {
       setVehicle(snap.docs[0].data());
@@ -34,8 +36,12 @@ const Car = () => {
   };
 
   useEffect(() => {
-    getVehicle();
-  }, [id]);
+    if (router.isReady) {
+      const { id, driveShare } = router.query;
+      getVehicle(id);
+      setDriveShare(driveShare);
+    }
+  }, [router.isReady]);
 
   console.log(vehicle);
 
@@ -43,7 +49,7 @@ const Car = () => {
     <section className="booking">
       <NavBar />
       {showShareModal && (
-        <ShareModal setShowShareModal={setShowShareModal} car={id} />
+        <ShareModal setShowShareModal={setShowShareModal} car={vehicle.vin} />
       )}
       {vehicle && (
         <>
@@ -101,10 +107,18 @@ const Car = () => {
             </section>
           )}
           <section className="booking_information">
-            <img
-              className="booking_information-car-type"
-              src="/img/slices/show_car.svg"
-            />
+            {vehicle.type === "SHOW" && (
+              <img
+                className="booking_information-car-type"
+                src="/img/slices/show_car.svg"
+              />
+            )}
+            {vehicle.type === "GO" && (
+              <img
+                className="booking_information-car-type"
+                src="/img/slices/go_car.svg"
+              />
+            )}
             <h2 className="booking_information_header">
               Buckle up and get ready to cruise Kansas City!
             </h2>
@@ -113,6 +127,13 @@ const Car = () => {
                 <section className="booking_information_status-icon">
                   <img
                     src="/img/slices/drive_status.svg"
+                    className="booking_information_status-icon-svg"
+                  />
+                </section>
+              ) : vehicle.rentalStatus === "R" ? (
+                <section className="booking_information_status-icon">
+                  <img
+                    src="/img/slices/icon_reverse.svg"
                     className="booking_information_status-icon-svg"
                   />
                 </section>
@@ -168,13 +189,22 @@ const Car = () => {
               )}
             </section>
             <section className="booking_information-paragraphs">
-              <p className="booking_information-paragraphs-text">
-                Drive your dream with this beautifully restored 1958 Corvette.
-                It’s available and ready to cruise Kansas City! This is a show
-                car so treat it like you own it. Show Cars require enclosed
-                storage for overnight rentals. Enter your contact info and
-                select the dates to begin booking.
-              </p>
+              {vehicle.rentalStatus === "D" && (
+                <p className="booking_information-paragraphs-text">
+                  Drive your dream with this beautifully restored {vehicle.year}{" "}
+                  {vehicle.model}. It’s available and ready to cruise Kansas
+                  City! This is a show car so treat it like you own it. Show
+                  Cars require enclosed storage for overnight rentals. Enter
+                  your contact info and select the dates to begin booking.
+                </p>
+              )}
+              {vehicle.rentalStatus === "R" && (
+                <p className="booking_information-paragraphs-text">
+                  This {vehicle.year} {vehicle.model} is currently unavailable
+                  but will be back soon. Enter your email and we'll let you know
+                  as soon as it's ready to go.
+                </p>
+              )}
 
               <p className="booking_information-paragraphs-text--bottom">
                 For questions about this rental visit our{" "}
@@ -193,67 +223,12 @@ const Car = () => {
                 </a>
               </p>
             </section>
-            <section className="booking_information-form">
-              <label className="booking_information-form-input-label">
-                Name
-              </label>
-              <input
-                className="booking_information-form-input"
-                placeholder="Enter Full Name"
-              />
-              <label className="booking_information-form-input-label">
-                Email Address
-              </label>
-              <input
-                className="booking_information-form-input"
-                placeholder="Enter Email Address"
-              />
-              <section className="booking_information-form-date">
-                <label className="booking_information-form-input-label">
-                  Start Date
-                </label>
-                <section className="booking_information-form-date_inputs">
-                  <input
-                    className="booking_information-form-input"
-                    placeholder="Enter Email Address"
-                    type="date"
-                  />
-                  <input
-                    className="booking_information-form-input"
-                    placeholder="Enter Email Address"
-                    type="time"
-                  />
-                </section>
-              </section>
-              <section className="booking_information-form-date">
-                <label className="booking_information-form-input-label">
-                  End Date
-                </label>
-                <section className="booking_information-form-date_inputs">
-                  <input
-                    className="booking_information-form-input"
-                    placeholder="Enter Email Address"
-                    type="date"
-                  />
-                  <input
-                    className="booking_information-form-input"
-                    placeholder="Enter Email Address"
-                    type="time"
-                  />
-                </section>
-              </section>
-              <article className="booking_information-form_pricing">
-                <h2 className="booking_information-form_pricing-text">
-                  ${vehicle?.rentalCost?.day} Day
-                </h2>
-                <h2 className="booking_information-form_pricing-text--sub">
-                  2 Days for $ {vehicle?.rentalCost?.day * 2} Total
-                </h2>
-              </article>
-              <button className="booking_information-form-button">
-                Begin Booking
-              </button>
-            </section>
+            {vehicle.rentalStatus === "D" && (
+              <BookingForm vehicle={vehicle} driveShare={driveShare} />
+            )}
+            {vehicle.rentalStatus === "R" && (
+              <AvailabilitySignUp vin={vehicle.vin} />
+            )}
           </section>
         </>
       )}
