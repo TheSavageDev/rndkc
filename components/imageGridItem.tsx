@@ -35,7 +35,7 @@ export const ImageGridItem = ({
           src={go ? "/img/slices/go_icon.svg" : "/img/slices/show_icon.svg"}
           className="rental-ready_image-grid_image-icon"
         />
-        <img src={src} alt={alt} />
+        <img src={src} alt={alt} className="rental-ready_image-grid_image" />
         <section className="rental-ready_image-grid_image-banner">
           <article className="rental-ready_image-grid_image-banner_title">
             {title}

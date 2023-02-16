@@ -242,6 +242,7 @@ html {
   text-transform: uppercase;
 }
 
+/** Rental Ready **/
 .rental-ready_container {
   background-color: #fff;
   color: #000;
@@ -288,10 +289,13 @@ html {
 }
 
 .rental-ready_image-grid {
-  display: grid;
-  grid-auto-rows: 1fr;
+  display: flex;
   padding: 1rem;
   gap: 1rem;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .rental-ready_image-grid_image-box {
@@ -300,14 +304,20 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 20rem;
-  max-height: 25rem;
+  max-height: 29.863rem;
+  max-width: 40.6rem;
+  width: 100%;
 }
 
 .rental-ready_image-grid_image-icon {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.rental-ready_image-grid_image {
+  max-height: 29.863rem;
+  max-width: 40.6rem;
 }
 
 .rental-ready_image-grid_image-banner {
@@ -1785,12 +1795,6 @@ html {
 
 /* ***** Small Breakpoint ***** */
 @media (min-width: 640px) {
-  .hero-header--title {
-    font-size: 4.5rem;
-  }
-  .hero-header--subtitle {
-    font-size: 4.5rem;
-  }
 }
 
 @media (min-width: 768px) {
