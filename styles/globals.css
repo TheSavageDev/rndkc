@@ -300,7 +300,8 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 29.863rem;
+  min-height: 20rem;
+  max-height: 25rem;
 }
 
 .rental-ready_image-grid_image-icon {
