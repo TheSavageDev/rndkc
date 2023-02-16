@@ -138,7 +138,7 @@ html {
   font-family: "Akshar";
   font-style: normal;
   font-weight: 600;
-  font-size: 4rem;
+  font-size: 3.2rem;
   line-height: 4rem;
   text-transform: uppercase;
   color: #ffffff;
@@ -1783,16 +1783,6 @@ html {
   width: 100%;
 }
 
-@media (min-width: 440px) {
-  .hero-images--camaro {
-    transform: translateY(-10rem);
-  }
-
-  .hero-social {
-    transform: translateY(-10rem);
-  }
-}
-
 /* ***** Small Breakpoint ***** */
 @media (min-width: 640px) {
   .hero-header--title {
@@ -1800,17 +1790,6 @@ html {
   }
   .hero-header--subtitle {
     font-size: 4.5rem;
-  }
-  .hero-images--camaro-box {
-    margin-bottom: -13rem;
-  }
-
-  .hero-images--camaro {
-    transform: translateY(-15rem);
-  }
-
-  .hero-social {
-    transform: translateY(-15rem);
   }
 }
 
