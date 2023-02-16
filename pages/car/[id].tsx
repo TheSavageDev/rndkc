@@ -39,7 +39,9 @@ const Car = () => {
     if (router.isReady) {
       const { id, driveShare } = router.query;
       getVehicle(id);
-      setDriveShare(driveShare);
+      if (typeof driveShare === "string") {
+        setDriveShare(driveShare);
+      }
     }
   }, [router.isReady]);
 
