@@ -316,8 +316,8 @@ html {
 }
 
 .rental-ready_image-grid_image {
-  max-height: 29.863rem;
-  max-width: 40.6rem;
+  height: 29.863rem;
+  width: 40.6rem;
 }
 
 .rental-ready_image-grid_image-banner {
@@ -352,7 +352,10 @@ html {
 .vote_container {
   background-color: #fff;
   padding: 2rem 1.5rem 12rem 1.5rem;
-  position: relative;
+  background-image: url("/img/slices/img_kcsilhouette.png");
+  background-position: bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .vote_header {
@@ -449,13 +452,6 @@ html {
   line-height: 4.1rem;
   text-align: center;
   color: #ffffff;
-}
-
-.vote_kc {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
 }
 
 .rental-status_container {

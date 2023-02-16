@@ -80,7 +80,6 @@ export const Vote = ({}) => {
           {buttonText}
         </button>
       </section>
-      <img src="/img/slices/img_kcsilhouette.png" className="vote_kc" />
     </section>
   );
 };
