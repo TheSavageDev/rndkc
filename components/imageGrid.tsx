@@ -7,7 +7,7 @@ export const RentalReadyImageGrid = () => {
         src="https://firebasestorage.googleapis.com/v0/b/rndkc-95667.appspot.com/o/inventory%2FR451158693%2F1.jpg?alt=media&token=ed7fbce8-401c-4d03-a4d1-50ec816ae4e4"
         alt="1965 Plymouth Satellite"
         title="1965 Plymouth Satellite"
-        dayPrice={302}
+        dayPrice={318}
         href="/car/R451158693"
         driveShare="https://driveshare.com/car/1965-plymouth-satellite-9401"
       />
