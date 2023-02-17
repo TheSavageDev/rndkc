@@ -13,9 +13,16 @@ export const RentalStatus = ({}) => {
           status:
         </h3>
       </section>
-      <GoCars />
-      <ShowCars />
+      <section className="rental-status_go-show_container">
+        <GoCars />
+        <ShowCars />
+      </section>
       <section className="rental-status_divider"></section>
+      <header className="rental-status_card-container_header">
+        <h2 className="rental-status_card-container_header-text">
+          Rental Status
+        </h2>
+      </header>
       <RND />
     </section>
   );

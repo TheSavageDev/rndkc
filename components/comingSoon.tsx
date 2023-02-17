@@ -20,6 +20,7 @@ export const ComingSoon = () => {
               </h2>
             </article>
           </section>
+          <section className="rental-ready_header_divider"></section>
           <p className="rental-ready_paragraph">
             These are some of our rentals that are currently being built and
             will be available soon. Inventory is always changing so be sure to

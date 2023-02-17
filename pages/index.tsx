@@ -8,6 +8,7 @@ import { Footer } from "../components/footer";
 import { RentalStatus } from "../components/rentalStatus";
 import { Vote } from "../components/vote";
 import { ComingSoon } from "../components/comingSoon";
+import { AvailableRentals } from "../components/availableRentals";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
           </h3>
           <NewsLetterSignUpForm justify="start" text="Sign Up" />
         </article>
+        <AvailableRentals />
         <Gallery />
         <ComingSoon />
         <Vote />

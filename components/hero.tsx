@@ -1,6 +1,3 @@
-import { NewsLetterSignUpForm } from "./newsletterSignUpForm";
-import "./hero.module.css";
-
 export const Hero = () => {
   return (
     <section className="hero-container">

@@ -23,6 +23,7 @@ export const Gallery = () => {
               </h2>
             </article>
           </section>
+          <section className="rental-ready_header_divider"></section>
           <p className="rental-ready_paragraph">
             These rentals are currently available and ready to roll! Crank the
             windows down, drop the top, and enjoy the ride cruising Kansas City

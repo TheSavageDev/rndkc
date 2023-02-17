@@ -108,136 +108,142 @@ const Car = () => {
               ))}
             </section>
           )}
-          <section className="booking_information">
-            {vehicle.type === "SHOW" && (
-              <img
-                className="booking_information-car-type"
-                src="/img/slices/show_car.svg"
-              />
-            )}
-            {vehicle.type === "GO" && (
-              <img
-                className="booking_information-car-type"
-                src="/img/slices/go_car.svg"
-              />
-            )}
-            <h2 className="booking_information_header">
-              Buckle up and get ready to cruise Kansas City!
-            </h2>
-            <section className="booking_information_status">
-              {vehicle.rentalStatus === "D" ? (
-                <section className="booking_information_status-icon">
-                  <img
-                    src="/img/slices/drive_status.svg"
-                    className="booking_information_status-icon-svg"
-                  />
-                </section>
-              ) : vehicle.rentalStatus === "R" ? (
-                <section className="booking_information_status-icon">
-                  <img
-                    src="/img/slices/icon_reverse.svg"
-                    className="booking_information_status-icon-svg"
-                  />
-                </section>
-              ) : (
-                ""
+          <section className="booking_container">
+            <section className="booking_information">
+              {vehicle.type === "SHOW" && (
+                <img
+                  className="booking_information-car-type"
+                  src="/img/slices/show_car.svg"
+                />
               )}
-              {vehicle.convertible ? (
-                <>
-                  <section className="booking_information_status_divider"></section>
+              {vehicle.type === "GO" && (
+                <img
+                  className="booking_information-car-type"
+                  src="/img/slices/go_car.svg"
+                />
+              )}
+              <h2 className="booking_information_header">
+                Buckle up and get ready to cruise Kansas City!
+              </h2>
+              <section className="booking_information_status">
+                {vehicle.rentalStatus === "D" ? (
                   <section className="booking_information_status-icon">
                     <img
-                      src="/img/slices/icon_convertible.svg"
+                      src="/img/slices/drive_status.svg"
                       className="booking_information_status-icon-svg"
                     />
                   </section>
-                </>
-              ) : (
-                ""
-              )}
-              <section className="booking_information_status_divider"></section>
-              {vehicle.transmission === "M" ? (
-                <section className="booking_information_status-icon">
-                  <img
-                    src="/img/slices/icon_manual.svg"
-                    className="booking_information_status-icon-svg"
-                  />
-                  <p className="booking_information_status-text">Manual</p>
-                </section>
-              ) : (
-                <section className="booking_information_status-icon">
-                  <img
-                    src="/img/slices/icon_auto.svg"
-                    className="booking_information_status-icon-svg"
-                  />
-                  <p className="booking_information_status-text">Auto</p>
-                </section>
-              )}
-              <section className="booking_information_status_divider"></section>
-              {vehicle.cylinders === "V8" ? (
-                <section className="booking_information_status-icon">
-                  <img
-                    src="/img/slices/icon_v8.svg"
-                    className="booking_information_status-icon-svg"
-                  />
-                </section>
-              ) : (
-                <section className="booking_information_status-icon">
-                  <img
-                    src="/img/slices/icon_v6.svg"
-                    className="booking_information_status-icon-svg"
-                  />
-                </section>
-              )}
-            </section>
-            <section className="booking_information-paragraphs">
-              {vehicle.rentalStatus === "D" && (
-                <p className="booking_information-paragraphs-text">
-                  Drive your dream with this beautifully restored {vehicle.year}{" "}
-                  {vehicle.model}. It’s available and ready to cruise Kansas
-                  City! This is a show car so treat it like you own it. Show
-                  Cars require enclosed storage for overnight rentals. Enter
-                  your contact info and select the dates to begin booking.
+                ) : vehicle.rentalStatus === "R" ? (
+                  <section className="booking_information_status-icon">
+                    <img
+                      src="/img/slices/icon_reverse.svg"
+                      className="booking_information_status-icon-svg"
+                    />
+                  </section>
+                ) : (
+                  ""
+                )}
+                {vehicle.convertible ? (
+                  <>
+                    <section className="booking_information_status_divider"></section>
+                    <section className="booking_information_status-icon">
+                      <img
+                        src="/img/slices/icon_convertible.svg"
+                        className="booking_information_status-icon-svg"
+                      />
+                    </section>
+                  </>
+                ) : (
+                  ""
+                )}
+                <section className="booking_information_status_divider"></section>
+                {vehicle.transmission === "M" ? (
+                  <section className="booking_information_status-icon">
+                    <img
+                      src="/img/slices/icon_manual.svg"
+                      className="booking_information_status-icon-svg"
+                    />
+                    <p className="booking_information_status-text">Manual</p>
+                  </section>
+                ) : (
+                  <section className="booking_information_status-icon">
+                    <img
+                      src="/img/slices/icon_auto.svg"
+                      className="booking_information_status-icon-svg"
+                    />
+                    <p className="booking_information_status-text">Auto</p>
+                  </section>
+                )}
+                <section className="booking_information_status_divider"></section>
+                {vehicle.cylinders === "V8" ? (
+                  <section className="booking_information_status-icon">
+                    <img
+                      src="/img/slices/icon_v8.svg"
+                      className="booking_information_status-icon-svg"
+                    />
+                  </section>
+                ) : (
+                  <section className="booking_information_status-icon">
+                    <img
+                      src="/img/slices/icon_v6.svg"
+                      className="booking_information_status-icon-svg"
+                    />
+                    <p className="booking_information_status-text">V6</p>
+                  </section>
+                )}
+              </section>
+              <section className="booking_information-paragraphs">
+                {vehicle.rentalStatus === "D" && (
+                  <p className="booking_information-paragraphs-text">
+                    Drive your dream with this beautifully restored{" "}
+                    {vehicle.year} {vehicle.model}. It’s available and ready to
+                    cruise Kansas City! This is a show car so treat it like you
+                    own it. Show Cars require enclosed storage for overnight
+                    rentals. Enter your contact info and select the dates to
+                    begin booking.
+                  </p>
+                )}
+                {vehicle.rentalStatus === "R" && (
+                  <p className="booking_information-paragraphs-text">
+                    This {vehicle.year} {vehicle.model} is currently unavailable
+                    but will be back soon. Enter your email and we'll let you
+                    know as soon as it's ready to go.
+                  </p>
+                )}
+
+                <p className="booking_information-paragraphs-text--bottom">
+                  For questions about this rental visit our{" "}
+                  <a
+                    href="/faq"
+                    className="booking_information-paragraphs-text--link"
+                  >
+                    F.A.Q. page
+                  </a>{" "}
+                  or contact us at{" "}
+                  <a
+                    href="mailto:hello@rndkc.com"
+                    className="booking_information-paragraphs-text--link"
+                  >
+                    hello@rndkc.com
+                  </a>
                 </p>
+              </section>
+            </section>
+            <section className="booking_information_forms">
+              {vehicle.rentalStatus === "D" && (
+                <BookingForm vehicle={vehicle} driveShare={driveShare} />
               )}
               {vehicle.rentalStatus === "R" && (
-                <p className="booking_information-paragraphs-text">
-                  This {vehicle.year} {vehicle.model} is currently unavailable
-                  but will be back soon. Enter your email and we'll let you know
-                  as soon as it's ready to go.
-                </p>
+                <AvailabilitySignUp vin={vehicle.vin} />
               )}
-
-              <p className="booking_information-paragraphs-text--bottom">
-                For questions about this rental visit our{" "}
-                <a
-                  href="/faq"
-                  className="booking_information-paragraphs-text--link"
-                >
-                  F.A.Q. page
-                </a>{" "}
-                or contact us at{" "}
-                <a
-                  href="mailto:hello@rndkc.com"
-                  className="booking_information-paragraphs-text--link"
-                >
-                  hello@rndkc.com
-                </a>
-              </p>
             </section>
-            {vehicle.rentalStatus === "D" && (
-              <BookingForm vehicle={vehicle} driveShare={driveShare} />
-            )}
-            {vehicle.rentalStatus === "R" && (
-              <AvailabilitySignUp vin={vehicle.vin} />
-            )}
           </section>
         </>
       )}
       <RentalStatus />
       <section className="getInTouch">
-        <section className="flex flex-col md:flex-row md:justify-between">
-          <article className="flex flex-col md:w-3/4">
+        <section className="flex flex-col getInTouch_container">
+          <article className="flex flex-col">
             <h3 className="booking_questions_header">Have Questions?</h3>
             <article className="">
               <p className="booking_questions_header-text">

@@ -72,7 +72,7 @@ export const NewsLetterSignUpForm = ({
 
   return (
     <>
-      <form onSubmit={subscribe} className={`newsletter-signup`}>
+      <form onSubmit={subscribe} className="newsletter-signup">
         <input
           type="email"
           id="email-input"
@@ -91,24 +91,6 @@ export const NewsLetterSignUpForm = ({
             subscribed ? "newsletter-signup-email--disabled" : ""
           } ${success ? "newsletter-signup-email--success" : ""} ${
             error ? "newsletter-signup-email--error" : ""
-          }`}
-        />
-        <input
-          type="email"
-          id="email-input"
-          name="email"
-          placeholder="Enter email to stay updated on inventory & special event"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-            setErrors({ ...errors, email: "" });
-          }}
-          required
-          disabled={subscribed}
-          autoCapitalize="off"
-          autoCorrect="off"
-          className={`newsletter-signup-email--alt ${
-            subscribed ? "newsletter-signup-email--alt--disabled" : ""
           }`}
         />
         <button

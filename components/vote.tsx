@@ -35,10 +35,10 @@ export const Vote = ({}) => {
     }, 5000);
   };
 
-  const handleChange = (e, key) => {
+  const handleChange = (e) => {
     setData({
       ...data,
-      [key]: e.target.value,
+      [e.target.id]: e.target.value,
     });
   };
   return (
@@ -58,8 +58,9 @@ export const Vote = ({}) => {
         <select
           className="vote_form_select"
           value={data.vehicle}
+          id="vehicle"
           onChange={(e) => {
-            handleChange(e, "vehicle");
+            handleChange(e);
           }}
         >
           <option>Select Vehicle</option>
@@ -67,11 +68,30 @@ export const Vote = ({}) => {
             <option>{vehicle}</option>
           ))}
         </select>
+        <section className="vote_form_select--alt">
+          {options.map((vehicle) => (
+            <article
+              key={vehicle}
+              className={`vote_form_select--alt_buttons${
+                vehicle === data.vehicle ? "--selected" : ""
+              }`}
+              onClick={() => setData({ ...data, vehicle })}
+            >
+              {vehicle}
+              {vehicle === data.vehicle ? (
+                <img src="/img/slices/icon_white_check.svg" />
+              ) : (
+                ""
+              )}
+            </article>
+          ))}
+        </section>
         <input
           className="vote_form_input"
           placeholder="Enter Email Address"
           value={data.email}
-          onChange={(e) => handleChange(e, "email")}
+          id="email"
+          onChange={(e) => handleChange(e)}
         />
         <button
           className={`vote_form_button${success ? "--success" : ""}`}
