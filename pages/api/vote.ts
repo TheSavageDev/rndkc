@@ -2,11 +2,28 @@ import sgMail from "@sendgrid/mail";
 import { NextApiRequest, NextApiResponse } from "next";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/clientApp";
+import axios from "axios";
 
 sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_API_KEY);
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { vehicle, email } = req.body;
+  const AUDIENCE_ID = process.env.NEXT_PUBLIC_MAILCHIMP_AUDIENCE_ID;
+  const API_KEY = process.env.NEXT_PUBLIC_MAILCHIMP_API_KEY;
+  const API_SERVER = process.env.NEXT_PUBLIC_MAILCHIMP_API_SERVER;
+  const url = `https://${API_SERVER}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`;
+  const data = {
+    email_address: email,
+    status: "subscribed",
+  };
+
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `api-key ${API_KEY}`,
+    },
+  };
+  await axios.post(url, data, options);
   const vehicleDoc = doc(db, "marketing", "voting", "nextVehicle", vehicle);
   const vehicleSnap = await getDoc(vehicleDoc);
   const msg = {

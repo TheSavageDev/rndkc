@@ -4,10 +4,7 @@ import { db } from "../../firebase/clientApp";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, vin } = req.body;
-  console.log(email);
-  console.log(vin);
   const vehicleDoc = doc(db, "marketing", "updates", "rentalStatus", vin);
-  console.log(vehicleDoc);
   const vehicleSnap = await getDoc(vehicleDoc);
   try {
     if (vehicleSnap.exists()) {
@@ -15,14 +12,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       if (vehicleSnap.data().emails.includes(email)) {
         return res.status(500).json({ message: "Already Subscribed" });
       } else {
-        const updateRes = await setDoc(
+        await setDoc(
           vehicleDoc,
           {
             emails: [...vehicleSnap.data().emails, email],
           },
           { merge: true }
         );
-        console.log(updateRes);
       }
       return res.status(200).json({ vehicle: vehicleSnap.data() });
     } else {
