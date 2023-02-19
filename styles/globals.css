@@ -423,6 +423,21 @@ html {
   margin: 1rem 0;
 }
 
+.vote_form_select--error {
+  padding: 1rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #282828;
+  background: #ffffff;
+  border: 1px solid #ce0000;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
 .vote_form_input {
   padding: 1rem;
   font-family: "Akshar";
@@ -438,10 +453,39 @@ html {
   margin: 1rem 0;
 }
 
+.vote_form_input--error {
+  padding: 1rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #fe0000;
+  background: #ffffff;
+  border: 1px solid #ce0000;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
 .vote_form_button {
   padding: 1rem;
   background-color: #ff9d0b;
   border: 1px solid #a5a5a5;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 3rem;
+  line-height: 4.1rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+.vote_form_button--error {
+  padding: 1rem;
+  background-color: #fe0000;
+  border: 1px solid #ce0000;
   border-radius: 0.5rem;
   font-family: "Akshar";
   font-style: normal;
@@ -801,8 +845,54 @@ html {
 }
 
 .newsletter-signup-button--disabled:hover {
-  background: #ff9b0b;
   opacity: 0.7;
+  text-transform: uppercase;
+  font-style: normal;
+  color: #fff;
+  background-color: #ff9b0b;
+  border-radius: 0.5rem;
+  font-family: Akshar;
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+}
+
+.newsletter-signup-button--success {
+  background-color: #3cb239;
+  border: 3px solid #30a13b;
+  text-transform: uppercase;
+  font-style: normal;
+  color: #fff;
+  border-radius: 0.5rem;
+  font-family: Akshar;
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+}
+
+.newsletter-signup-button--error {
+  border: 3px solid #c90000;
+  text-transform: uppercase;
+  font-style: normal;
+  color: #fff;
+  background-color: #fe0000;
+  border-radius: 0.5rem;
+  font-family: Akshar;
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
 }
 
 .footer {
@@ -1426,7 +1516,7 @@ html {
   font-style: normal;
   font-weight: 500;
   font-size: 4rem;
-  line-height: 5.5rem;
+  line-height: 5rem;
   letter-spacing: 0.03rem;
   color: #ffffff;
   text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.25);
@@ -1512,6 +1602,7 @@ html {
   display: flex;
   flex-direction: column;
   margin-bottom: 8rem;
+  padding: 2rem;
 }
 
 .booking_information-form_contact {
@@ -1542,10 +1633,82 @@ html {
   border-radius: 0.5rem;
 }
 
+.booking_information-form-input--error {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  background-color: #fff;
+  border: 2px solid #fe0000;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  border-radius: 0.5rem;
+}
+
 .booking_information-form-date_inputs {
   display: flex;
   justify-content: space-between;
   border-radius: 0.5rem;
+}
+
+.booking_information-form-input--date {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  background-color: #ffffff;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  border-radius: 0.5rem;
+  width: 65%;
+}
+
+.booking_information-form-input--time {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  background-color: #ffffff;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  border-radius: 0.5rem;
+  width: 30%;
+}
+
+.booking_information-form-input--date--error {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  border: 2px solid #fe0000;
+  background-color: #ffffff;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  border-radius: 0.5rem;
+  width: 65%;
+}
+
+.booking_information-form-input--time--error {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  border: 2px solid #fe0000;
+  background-color: #ffffff;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  border-radius: 0.5rem;
+  width: 30%;
 }
 
 .booking_information-form_pricing {
@@ -1808,26 +1971,6 @@ html {
   .vote_container {
     padding-bottom: 20rem;
   }
-
-  .booking_information-form_contact {
-    width: 92%;
-    margin: 0 auto;
-  }
-
-  .booking_information-form-dates_container {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .booking_information-form-date {
-    width: 50%;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .booking_information-form-date_inputs {
-    justify-content: space-evenly;
-  }
 }
 
 /** Large Breakpoint **/
@@ -2002,6 +2145,38 @@ html {
     min-width: 18.6rem;
   }
 
+  .newsletter-signup-button--success {
+    background-color: #3cb239;
+    border: 3px solid #30a13b;
+    border-radius: 0 0.5rem 0.5rem 0;
+    font-family: "Akshar";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2.4rem;
+    line-height: 3.3rem;
+    text-align: center;
+    color: #ffffff;
+    height: 6rem;
+    padding: 0.5rem;
+    min-width: 18.6rem;
+  }
+
+  .newsletter-signup-button--error {
+    border: 3px solid #c90000;
+    background-color: #fe0000;
+    border-radius: 0 0.5rem 0.5rem 0;
+    font-family: "Akshar";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2.4rem;
+    line-height: 3.3rem;
+    text-align: center;
+    color: #ffffff;
+    height: 6rem;
+    padding: 0.5rem;
+    min-width: 18.6rem;
+  }
+
   .newsletter-signup-button--disabled:hover {
     background: #ff9b0b;
     opacity: 0.7;
@@ -2016,7 +2191,8 @@ html {
     background-repeat: no-repeat;
   }
 
-  .vote_form_select {
+  .vote_form_select,
+  .vote_form_select--error {
     display: none;
   }
 
@@ -2125,21 +2301,6 @@ html {
   .booking_information_forms {
     padding: 2rem;
     width: 50%;
-  }
-
-  .booking_information-form_contact {
-    width: unset;
-    margin: 0;
-  }
-
-  .booking_information-form-date {
-    text-align: unset;
-  }
-
-  .booking_information-form-date_inputs {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
   }
 
   .getInTouch {

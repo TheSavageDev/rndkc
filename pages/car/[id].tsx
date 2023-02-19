@@ -123,7 +123,9 @@ const Car = () => {
                 />
               )}
               <h2 className="booking_information_header">
-                Buckle up and get ready to cruise Kansas City!
+                {vehicle.rentalStatus === "D"
+                  ? "Buckle up and get ready to cruise Kansas City!"
+                  : `We'll let you know when it's ready to cruise`}
               </h2>
               <section className="booking_information_status">
                 {vehicle.rentalStatus === "D" ? (

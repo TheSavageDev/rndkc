@@ -35,6 +35,7 @@ export const AvailabilitySignUp = ({ vin }) => {
         setButtonText("Sign Up");
         return;
       }
+      setSuccess(true);
       setButtonText("We'll Keep You Updated!");
     } else {
       setFormError(true);

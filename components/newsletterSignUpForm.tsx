@@ -7,11 +7,12 @@ export const NewsLetterSignUpForm = ({
   justify?: string;
   text?: string;
 }) => {
-  const [email, setEmail] = useState("");
+  const [data, setData] = useState({
+    email: "",
+  });
   const [errors, setErrors] = useState<{ email?: string }>({ email: "" });
   const [buttonText, setButtonText] = useState(text ? text : "Sign Up");
   const [subscribed, setSubscribed] = useState(false);
-  const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
@@ -19,7 +20,7 @@ export const NewsLetterSignUpForm = ({
     let tempErrors = {};
     let isValid = true;
 
-    if (email.length <= 0) {
+    if (data.email.length <= 0) {
       tempErrors["email"] = true;
       isValid = false;
     }
@@ -39,7 +40,7 @@ export const NewsLetterSignUpForm = ({
       setButtonText("Signing Up...");
       const res = await fetch("/api/subscribeUser", {
         body: JSON.stringify({
-          email,
+          email: data.email,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -53,16 +54,14 @@ export const NewsLetterSignUpForm = ({
         console.error(error);
         setSuccess(false);
         setError(true);
-        setButtonText("Notify Me");
-        setMessage("That's not a valid email");
+        setButtonText("That's not a valid email");
         return;
       }
       setSuccess(true);
       setError(false);
       setSubscribed(true);
       setButtonText("We'll Keep You Updated!");
-      setMessage("Thanks!");
-      setEmail("");
+      setData({ email: "" });
 
       setTimeout(() => {
         setSuccess(false);
@@ -70,17 +69,28 @@ export const NewsLetterSignUpForm = ({
     }
   };
 
+  const handleChange = (e) => {
+    setError(false);
+    setSuccess(false);
+    setSubscribed(false);
+    setButtonText("Notify Me");
+    setData({
+      ...data,
+      [e.target.id]: e.target.value,
+    });
+  };
+
   return (
     <>
       <form onSubmit={subscribe} className="newsletter-signup">
         <input
           type="email"
-          id="email-input"
           name="email"
           placeholder="Enter Your Email"
-          value={success || error ? message : email}
+          id="email"
+          value={data.email}
           onChange={(e) => {
-            setEmail(e.target.value);
+            handleChange(e);
             setErrors({ ...errors, email: "" });
           }}
           required
@@ -97,8 +107,8 @@ export const NewsLetterSignUpForm = ({
           type="submit"
           onClick={subscribe}
           disabled={subscribed}
-          className={`newsletter-signup-button ${
-            subscribed ? "newsletter-signup-button--disabled" : ""
+          className={`newsletter-signup-button${error ? "--error" : ""}${
+            subscribed ? "--success" : ""
           }`}
         >
           {buttonText}
