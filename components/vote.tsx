@@ -13,6 +13,7 @@ export const Vote = ({}) => {
 
   const handleSubmit = async () => {
     if (data.email && data.vehicle) {
+      setButtonText("Voting...");
       const res = await fetch("/api/vote", {
         body: JSON.stringify(data),
         headers: {

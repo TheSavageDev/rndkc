@@ -23,7 +23,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       Authorization: `api-key ${API_KEY}`,
     },
   };
-  await axios.post(url, data, options);
+  try {
+    await axios.post(url, data, options);
+  } catch (error) {
+    console.error(error);
+  }
   const vehicleDoc = doc(db, "marketing", "voting", "nextVehicle", vehicle);
   const vehicleSnap = await getDoc(vehicleDoc);
   const msg = {
@@ -84,6 +88,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(200).json({ vehicle: addRes });
     }
   } catch (error) {
-    res.status(error.statusCode || 500).json({ error: error.message });
+    res.status(error.statusCode || 500).json({ error });
   }
 };
