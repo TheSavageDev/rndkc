@@ -10,9 +10,11 @@ import { Vote } from "../components/vote";
 import { ComingSoon } from "../components/comingSoon";
 import { AvailableRentals } from "../components/availableRentals";
 import { usePageTracking } from "../hooks/usePageTracking";
+import { useRouter } from "next/router";
 
 export default function Home() {
-  usePageTracking();
+  const router = useRouter();
+  usePageTracking(router);
   return (
     <div className="main">
       <NavBar />

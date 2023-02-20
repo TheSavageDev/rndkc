@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Footer } from "../components/footer";
 import { NavBar } from "../components/navBar";
 import { NavSubheader } from "../components/navSubheader";
@@ -6,7 +7,8 @@ import { Subscribe } from "../components/subscribe";
 import { usePageTracking } from "../hooks/usePageTracking";
 
 export default function OurStory() {
-  usePageTracking();
+  const router = useRouter();
+  usePageTracking(router);
   return (
     <section className="our-story-page_container">
       <NavBar />

@@ -1,10 +1,12 @@
+import { useRouter } from "next/router";
 import { FAQListItem } from "../components/faqListItem";
 import { NavBar } from "../components/navBar";
 import { NavSubheader } from "../components/navSubheader";
 import { usePageTracking } from "../hooks/usePageTracking";
 
 export default function FAQ() {
-  usePageTracking();
+  const router = useRouter();
+  usePageTracking(router);
   return (
     <section className="faq-container">
       <>
