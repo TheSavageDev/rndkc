@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-export const usePageTracking = ({ id }: { id?: string }) => {
+export const usePageTracking = (id?: string | string[]) => {
   const router = useRouter();
 
   useEffect(() => {

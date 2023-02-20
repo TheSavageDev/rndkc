@@ -43,10 +43,9 @@ const Car = () => {
       if (typeof driveShare === "string") {
         setDriveShare(driveShare);
       }
+      usePageTracking(id);
     }
   }, [router.isReady]);
-
-  usePageTracking(id);
 
   return (
     <section className="booking">
