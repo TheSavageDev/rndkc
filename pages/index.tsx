@@ -9,8 +9,10 @@ import { RentalStatus } from "../components/rentalStatus";
 import { Vote } from "../components/vote";
 import { ComingSoon } from "../components/comingSoon";
 import { AvailableRentals } from "../components/availableRentals";
+import { usePageTracking } from "../hooks/usePageTracking";
 
 export default function Home() {
+  usePageTracking();
   return (
     <div className="main">
       <NavBar />

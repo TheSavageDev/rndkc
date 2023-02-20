@@ -1,8 +1,10 @@
 import { FAQListItem } from "../components/faqListItem";
 import { NavBar } from "../components/navBar";
 import { NavSubheader } from "../components/navSubheader";
+import { usePageTracking } from "../hooks/usePageTracking";
 
 export default function FAQ() {
+  usePageTracking();
   return (
     <section className="faq-container">
       <>

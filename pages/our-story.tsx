@@ -3,8 +3,10 @@ import { Footer } from "../components/footer";
 import { NavBar } from "../components/navBar";
 import { NavSubheader } from "../components/navSubheader";
 import { Subscribe } from "../components/subscribe";
+import { usePageTracking } from "../hooks/usePageTracking";
 
 export default function OurStory() {
+  usePageTracking();
   return (
     <section className="our-story-page_container">
       <NavBar />

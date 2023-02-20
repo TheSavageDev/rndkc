@@ -16,6 +16,7 @@ import { SocialIcon } from "react-social-icons";
 import { ShareModal } from "../../components/shareModal";
 import { BookingForm } from "../../components/bookingForm";
 import { AvailabilitySignUp } from "../../components/availabilitySignUp";
+import { usePageTracking } from "../../hooks/usePageTracking";
 
 const Car = () => {
   const router = useRouter();
@@ -45,7 +46,7 @@ const Car = () => {
     }
   }, [router.isReady]);
 
-  console.log(vehicle);
+  usePageTracking(id);
 
   return (
     <section className="booking">
