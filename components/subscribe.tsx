@@ -1,5 +1,4 @@
 import { NewsLetterSignUpForm } from "./newsletterSignUpForm";
-import { Social } from "./social";
 
 export const Subscribe = () => {
   return (

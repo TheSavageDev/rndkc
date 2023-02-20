@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEventTracking } from "../hooks/useEventTracking";
 import options from "../lib/vote-options";
 
 export const Vote = ({}) => {
@@ -28,6 +29,9 @@ export const Vote = ({}) => {
         setButtonText("Vote Now");
         return;
       }
+      useEventTracking("vote", {
+        vehicle: data.vehicle,
+      });
       setSuccess(true);
       setButtonText("We'll Keep You Posted!");
       setTimeout(() => {

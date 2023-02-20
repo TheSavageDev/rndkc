@@ -1,4 +1,5 @@
 import { SyntheticEvent, useState } from "react";
+import { useEventTracking } from "../hooks/useEventTracking";
 
 export const NewsLetterSignUpForm = ({
   justify,
@@ -57,6 +58,7 @@ export const NewsLetterSignUpForm = ({
         setButtonText("That's not a valid email");
         return;
       }
+      useEventTracking("newsletter_sign_up");
       setSuccess(true);
       setError(false);
       setSubscribed(true);

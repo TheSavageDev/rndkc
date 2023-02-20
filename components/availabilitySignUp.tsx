@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEventTracking } from "../hooks/useEventTracking";
 
 export const AvailabilitySignUp = ({ vin }) => {
   const [success, setSuccess] = useState(false);
@@ -35,6 +36,9 @@ export const AvailabilitySignUp = ({ vin }) => {
         setButtonText("Sign Up");
         return;
       }
+      useEventTracking("availabilitySignUp", {
+        vehicle: vin,
+      });
       setSuccess(true);
       setButtonText("We'll Keep You Updated!");
     } else {

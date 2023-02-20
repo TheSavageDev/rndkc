@@ -1,4 +1,5 @@
 import { SyntheticEvent, useState } from "react";
+import { useEventTracking } from "../hooks/useEventTracking";
 
 export const ContactForm = () => {
   const [name, setName] = useState("");
@@ -63,6 +64,7 @@ export const ContactForm = () => {
         setButtonText("Send");
         return;
       }
+      useEventTracking("contact");
       setSuccess(true);
       setError(false);
       setButtonText("We'll Be In Touch Shortly!");

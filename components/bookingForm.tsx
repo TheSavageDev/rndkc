@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEventTracking } from "../hooks/useEventTracking";
 
 export const BookingForm = ({ vehicle, driveShare }) => {
   const initialButtonText =
@@ -81,6 +82,9 @@ export const BookingForm = ({ vehicle, driveShare }) => {
         setButtonText("Sign Up");
         return;
       }
+      useEventTracking("booking", {
+        vehicle,
+      });
       window.open(`${driveShare}`, "_blank");
     } else {
       setFormError(true);
