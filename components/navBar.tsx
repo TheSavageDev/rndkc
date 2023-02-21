@@ -32,7 +32,9 @@ export const NavBar = () => {
           <span></span>
           <span></span>
         </article>
+        <Link href="/">
         <img src="/img/RNDWhite2.svg" alt="RNDKC" className="navBar-logo" />
+        </Link>
       </section>
       <article className="navBar-text">
         <Link href="/">
