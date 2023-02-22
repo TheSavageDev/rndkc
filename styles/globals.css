@@ -1765,6 +1765,20 @@ html {
   padding: 0.75rem;
 }
 
+.booking_information-form-button--submitting {
+  background: #858585;
+  border: 1px solid #ff9d0b;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #ffffff;
+  padding: 0.75rem;
+}
+
 .booking_questions_header {
   font-family: "Akshar";
   font-style: normal;
@@ -2384,6 +2398,97 @@ html {
   .main {
     max-width: 1280px;
     margin: 0 auto;
+  }
+
+  .our-story-page_hero {
+    background-color: #000;
+    background-image: url("/img/Corvette.jpg");
+    height: 40.7rem;
+    background-position: left;
+    background-size: 45%;
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: 0;
+    padding: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+  }
+
+  .our-story-page_hero_text {
+    font-size: 3.2rem;
+    line-height: 5rem;
+    color: #ffffff;
+    width: 74rem;
+  }
+
+  .our-story-page_content {
+    display: flex;
+    flex-direction: row;
+    flex-direction: row-reverse;
+  }
+
+  .our-story_home-grown {
+    border: 2px solid red;
+    width: 30%;
+  }
+
+  .our-story-page_content_header {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .our-story_owning {
+    width: 70%;
+    background-image: url("/img/ContactBkgd.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-color: #657170;
+  }
+
+  .our-story-page_content_header-text,
+  .our-story-page_content_header-text--bold,
+  .our-story-page_content_paragraph {
+    color: #fff;
+    padding: 0 4rem;
+  }
+
+  .our-story-page_content_paragraph {
+    padding: 0 6rem;
+    margin-bottom: 2rem;
+  }
+
+  .our-story-page_content_paragraph-extra {
+    display: block;
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 3.5rem;
+    color: #1e1e1e;
+    margin-bottom: 2rem;
+    color: #fff;
+    padding: 0 6rem;
+  }
+  .our-story-page_content_paragraph-contact {
+    padding: 0 6rem;
+    display: block;
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 3.5rem;
+    color: #1e1e1e;
+    /* padding: 0 2rem 20rem 2rem; */
+    color: #fff;
+  }
+
+  .our-story-page_content_kc {
+    position: unset;
+    height: 13.6rem;
   }
 
   .available-rentals {

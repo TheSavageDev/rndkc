@@ -8,6 +8,7 @@ export const BookingForm = ({ vehicle, driveShare }) => {
       : "Email Me When It's Available";
   const [success, setSuccess] = useState(false);
   const [formError, setFormError] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [buttonText, setButtonText] = useState(initialButtonText);
   const [data, setData] = useState({
     name: "",
@@ -59,6 +60,7 @@ export const BookingForm = ({ vehicle, driveShare }) => {
   };
 
   const handleSubmit = async () => {
+    setSubmitting(true);
     if (
       data.email &&
       data.name &&
@@ -192,9 +194,11 @@ export const BookingForm = ({ vehicle, driveShare }) => {
       <button
         className={`booking_information-form-button${
           formError ? "--form-error" : ""
+        }${
+          submitting ? "--submitting" : ""
         }`}
         onClick={handleSubmit}
-        disabled={success}
+        disabled={submitting || success}
       >
         {buttonText}
       </button>
