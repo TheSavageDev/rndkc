@@ -82,13 +82,16 @@ export const BookingForm = ({ vehicle, driveShare }) => {
       if (error) {
         console.error(error);
         setButtonText("Sign Up");
+        setSubmitting(false);
         return;
       }
       useEventTracking("booking", {
         vehicle,
       });
       window.open(`${driveShare}`, "_blank");
+      setSubmitting(false);
     } else {
+      setSubmitting(false);
       setFormError(true);
       setButtonText("Please Fill out All Fields");
     }
