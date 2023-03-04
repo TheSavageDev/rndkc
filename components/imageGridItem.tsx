@@ -7,14 +7,12 @@ export const ImageGridItem = ({
   dayPrice,
   go,
   href,
-  driveShare,
 }: {
   src: string;
   alt: string;
   title: string;
   dayPrice: number | string;
   go?: boolean;
-  driveShare?: string;
   href?: string;
 }) => {
   const router = useRouter();
@@ -23,9 +21,6 @@ export const ImageGridItem = ({
     e.preventDefault();
     router.push({
       pathname: href,
-      query: {
-        driveShare,
-      },
     });
   };
   return (

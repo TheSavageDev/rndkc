@@ -25,7 +25,6 @@ const Car = () => {
   const [routerReady, setRouterReady] = useState(false);
   const [bigImageUrl, setBigImageUrl] = useState("");
   const [showShareModal, setShowShareModal] = useState(false);
-  const [driveShare, setDriveShare] = useState("");
 
   const getVehicle = (id) => {
     const q = query(collection(db, "vehicles"), where("vin", "==", id));
@@ -41,11 +40,8 @@ const Car = () => {
   useEffect(() => {
     if (router.isReady) {
       setRouterReady(true);
-      const { id, driveShare } = router.query;
+      const { id } = router.query;
       getVehicle(id);
-      if (typeof driveShare === "string") {
-        setDriveShare(driveShare);
-      }
     }
   }, [router.isReady]);
 
@@ -247,7 +243,7 @@ const Car = () => {
               </section>
               <section className="booking_information_forms">
                 {vehicle.rentalStatus === "D" && (
-                  <BookingForm vehicle={vehicle} driveShare={driveShare} />
+                  <BookingForm vehicle={vehicle} />
                 )}
                 {vehicle.rentalStatus === "R" && (
                   <AvailabilitySignUp vin={vehicle.vin} />

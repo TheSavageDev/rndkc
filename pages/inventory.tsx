@@ -67,7 +67,6 @@ export default function Inventory() {
                     dayPrice={vehicle?.rentalCost?.day ?? "Coming Soon"}
                     go={vehicle.type === "GO"}
                     href={`/car/${vehicle.vin}`}
-                    driveShare={vehicle?.turoLink ?? ""}
                   />
                 ))}
             </section>

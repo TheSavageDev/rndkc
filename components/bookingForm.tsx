@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEventTracking } from "../hooks/useEventTracking";
 
-export const BookingForm = ({ vehicle, driveShare }) => {
+export const BookingForm = ({ vehicle }) => {
   const initialButtonText =
     vehicle.rentalStatus === "D"
       ? "Begin Booking"
@@ -59,6 +59,17 @@ export const BookingForm = ({ vehicle, driveShare }) => {
     }
   };
 
+  const encodedDate = (date) =>
+    encodeURIComponent(
+      new Date(`${date}T00:00:00`).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      })
+    );
+
+  const encodedTime = (time) => encodeURIComponent(time);
+
   const handleSubmit = async () => {
     setSubmitting(true);
     if (
@@ -88,7 +99,15 @@ export const BookingForm = ({ vehicle, driveShare }) => {
       useEventTracking("booking", {
         vehicle,
       });
-      window.open(`${driveShare}`, "_blank");
+
+      window.open(
+        `${vehicle.turoLink}?endDate=${encodedDate(
+          data.endDate
+        )}&endTime=${encodedTime(data.endTime)}&startDate=${encodedDate(
+          data.startDate
+        )}&startTime=${encodedTime(data.startTime)}`,
+        "_blank"
+      );
       setSubmitting(false);
     } else {
       setSubmitting(false);
@@ -96,6 +115,7 @@ export const BookingForm = ({ vehicle, driveShare }) => {
       setButtonText("Please Fill out All Fields");
     }
   };
+
   return (
     <section className="booking_information-form">
       <section className="booking_information-form_contact">
@@ -197,9 +217,7 @@ export const BookingForm = ({ vehicle, driveShare }) => {
       <button
         className={`booking_information-form-button${
           formError ? "--form-error" : ""
-        }${
-          submitting ? "--submitting" : ""
-        }`}
+        }${submitting ? "--submitting" : ""}`}
         onClick={handleSubmit}
         disabled={submitting || success}
       >
