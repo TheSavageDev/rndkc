@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { Footer } from "../components/footer";
 import { GetInTouch } from "../components/getInTouch";
 import { NavBar } from "../components/navBar";
 import { usePageTracking } from "../hooks/usePageTracking";
@@ -9,7 +10,10 @@ export default function ContactUs() {
   return (
     <main>
       <NavBar />
-      <GetInTouch />
+      <section className="main">
+        <GetInTouch />
+      </section>
+      <Footer />
     </main>
   );
 }

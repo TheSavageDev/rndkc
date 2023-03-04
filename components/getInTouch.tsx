@@ -9,11 +9,11 @@ export const GetInTouch = () => {
     <section className="getInTouch-container">
       <NavSubheader title="Contact Us" />
       <section className="getInTouch">
-        <h2 id="get-in-touch" className="getInTouch-title">
-          Get In Touch
-        </h2>
-        <section className="flex flex-col md:flex-row md:justify-between">
-          <article className="flex flex-col md:w-3/4">
+        <section className="getInTouch-box">
+          <article className="">
+            <h2 id="get-in-touch" className="getInTouch-title">
+              Get In Touch
+            </h2>
             <h3 className="getInTouch-subtitle">We'd Love to Hear From You!</h3>
             <article className="getInTouch-paragraph">
               <p className="getInTouch-paragraph-questions">
@@ -35,15 +35,13 @@ export const GetInTouch = () => {
               </p>
             </article>
           </article>
-          <article className="getInTouch-contactForm md:w-3/5">
+          <article className="getInTouch-contactForm">
             <ContactForm />
             <article className="getInTouch-social">
-              <p
-                className={`getInTouch-social_text font-gemunuLibre text-xl md:text-2xl font-normal text-white`}
-              >
+              <p className="getInTouch-social_text">
                 Follow Us for Updates and Special Offers
               </p>
-              <article className="flex space-x-5 pt-2">
+              <article className="getInTouch-social_icons">
                 <SocialIcon
                   fgColor={fgColor}
                   bgColor={bgColor}

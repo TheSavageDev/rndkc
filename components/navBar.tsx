@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export const NavBar = () => {
@@ -6,6 +7,8 @@ export const NavBar = () => {
   const handleToggleNav = () => {
     setOpen(!open);
   };
+  const router = useRouter();
+
   return (
     <nav className="navBar">
       {open && (
@@ -18,7 +21,7 @@ export const NavBar = () => {
               Our Story
             </Link>
             <Link href="/faq" className="" onClick={handleToggleNav}>
-              FAQ
+              F.A.Q
             </Link>
             <Link href="/contact-us" className="" onClick={handleToggleNav}>
               Contact Us
@@ -33,7 +36,7 @@ export const NavBar = () => {
           <span></span>
         </article>
         <Link href="/">
-        <img src="/img/RNDWhite2.svg" alt="RNDKC" className="navBar-logo" />
+          <img src="/img/RNDWhite2.svg" alt="RNDKC" className="navBar-logo" />
         </Link>
       </section>
       <article className="navBar-text">
@@ -42,13 +45,37 @@ export const NavBar = () => {
         </Link>
       </article>
       <article className="navBar-wideMenu">
-        <Link href="/">Home</Link>
+        <Link
+          href="/"
+          className={`${router.pathname === "/" ? "current-link" : ""}`}
+        >
+          Home
+        </Link>
         <span>|</span>
-        <Link href="/our-story">Our Story</Link>
+        <Link
+          href="/our-story"
+          className={`${
+            router.pathname === "/our-story" ? "current-link" : ""
+          }`}
+        >
+          Our Story
+        </Link>
         <span>|</span>
-        <Link href="/faq">FAQ</Link>
+        <Link
+          href="/faq"
+          className={`${router.pathname === "/faq" ? "current-link" : ""}`}
+        >
+          F.A.Q
+        </Link>
         <span>|</span>
-        <Link href="contact-us">Contact Us</Link>
+        <Link
+          href="contact-us"
+          className={`${
+            router.pathname === "/contact-us" ? "current-link" : ""
+          }`}
+        >
+          Contact Us
+        </Link>
       </article>
     </nav>
   );

@@ -64,7 +64,8 @@ html {
 }
 
 .navBar-pane a:hover,
-.navBar-pane a:active {
+.navBar-pane a:active,
+.current-link {
   color: #ff9d0b;
 }
 
@@ -539,6 +540,10 @@ html {
   color: #ffffff;
 }
 
+.rental-status_card-container_header-text {
+  display: none;
+}
+
 .rental-status_subheader {
   font-size: 2.4rem;
   font-weight: 100;
@@ -909,6 +914,10 @@ html {
   align-items: center;
 }
 
+.footer-nav {
+  display: none;
+}
+
 .footer-logo {
   width: 9.895rem;
   height: 3rem;
@@ -1208,6 +1217,10 @@ html {
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.35);
 }
 
+.nav-subheader-social-container {
+  display: none;
+}
+
 .getInTouch {
   padding: 0.4rem 2rem 10.6rem 2rem;
   background-image: url("/img/ContactBkgd.png");
@@ -1273,6 +1286,12 @@ html {
   font-size: 2.4rem;
   line-height: 2.6rem;
   padding-bottom: 2rem;
+}
+
+.getInTouch-social_icons {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
 .getInTouch-contactForm {
@@ -2025,6 +2044,12 @@ html {
     color: #fff;
   }
 
+  article.navBar-wideMenu a:hover,
+  article.navBar-wideMenu a:active,
+  article.navBar-wideMenu a.current-link {
+    color: #ff9b0b;
+  }
+
   .hero-container {
     width: 100%;
     height: 60.1rem;
@@ -2283,6 +2308,7 @@ html {
     letter-spacing: 0.03rem;
     color: #ffffff;
     opacity: 0.5;
+    display: block;
   }
 
   .our-story-container {
@@ -2400,6 +2426,40 @@ html {
     margin: 0 auto;
   }
 
+  .nav-subheader {
+    height: 4rem;
+    width: 100%;
+    background: #ff9d0b;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.5rem 2rem;
+  }
+
+  .nav-subheader--text {
+    font-family: "Akshar";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.6rem;
+    line-height: 3.6rem;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.35);
+  }
+
+  .nav-subheader-social-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    color: #fff;
+    font-family: Akshar;
+    font-weight: 300;
+    font-size: 2.4rem;
+    line-height: 3.3rem;
+    text-transform: uppercase;
+  }
+
   .our-story-page_hero {
     background-color: #000;
     background-image: url("/img/Corvette.jpg");
@@ -2430,8 +2490,7 @@ html {
   }
 
   .our-story_home-grown {
-    border: 2px solid red;
-    width: 30%;
+    width: 40%;
   }
 
   .our-story-page_content_header {
@@ -2489,6 +2548,10 @@ html {
   .our-story-page_content_kc {
     position: unset;
     height: 13.6rem;
+  }
+
+  .our-story-subscribe {
+    display: none;
   }
 
   .available-rentals {
@@ -2556,5 +2619,57 @@ html {
 
   .rental-ready_paragraph {
     width: 65%;
+  }
+
+  /** FAQ PAGE **/
+  .faq_header {
+    height: 22rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .faq_header-img-box {
+    position: absolute;
+    background: linear-gradient(
+      180deg,
+      rgba(217, 217, 217, 0) 20.31%,
+      #d9d9d9 100%
+    );
+    height: 12.5rem;
+    width: 100%;
+    bottom: 0;
+  }
+
+  .faq_header article {
+  }
+
+  .faq_header-image {
+    height: 10.8rem;
+    align-self: flex-end;
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  /** Contact Us Page **/
+  .getInTouch {
+    background-size: auto;
+  }
+
+  .getInTouch-box {
+    display: flex;
+    padding: 4rem;
+    height: 100rem;
+  }
+  .getInTouch-social {
+    display: none;
+  }
+
+  .footer-nav {
+    display: block;
   }
 }
