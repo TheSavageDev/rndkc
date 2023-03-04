@@ -1,9 +1,34 @@
-import Image from "next/image";
-import { CarCarousel } from "./carousel";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import {
+  collection,
+  query,
+  onSnapshot,
+  DocumentData,
+} from "firebase/firestore";
+import { db } from "../firebase/clientApp";
 import { RentalReadyImageGrid } from "./imageGrid";
-import { Social } from "./social";
 
 export const Gallery = () => {
+  const router = useRouter();
+  const [vehiclesCount, setVehiclesCount] = useState<number>();
+  const [routerReady, setRouterReady] = useState(false);
+
+  const getVehicles = () => {
+    const q = query(collection(db, "vehicles"));
+    onSnapshot(q, (snap) => {
+      setVehiclesCount(snap.docs.length);
+    });
+  };
+
+  useEffect(() => {
+    if (router.isReady) {
+      setRouterReady(true);
+      getVehicles();
+    }
+  }, [router.isReady]);
   return (
     <section className="rental-ready_container">
       <section className="rental-ready">
@@ -31,6 +56,12 @@ export const Gallery = () => {
           </p>
         </section>
         <RentalReadyImageGrid />
+        <Link href="/inventory" className="rental-ready_view-all-button">
+          View All Inventory{" "}
+          <span className="rental-ready_view-all-button--count">
+            ({vehiclesCount})
+          </span>
+        </Link>
       </section>
     </section>
   );

@@ -4,6 +4,7 @@ export const TimeSelect = ({ id, handleChange, formError, isFilled }) => {
       id={id}
       onChange={handleChange}
       required
+      defaultValue="10:00"
       className={`booking_information-form-input--time ${
         formError && isFilled ? "--error" : ""
       }`}

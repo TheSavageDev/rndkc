@@ -249,6 +249,13 @@ html {
   color: #000;
 }
 
+.rental-ready {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .available-rentals {
   display: none;
 }
@@ -356,6 +363,31 @@ html {
   padding: 0 1rem 0 2rem;
   clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
   background-color: #ff9d0b;
+}
+
+.rental-ready_view-all-button {
+  background-color: #ff9d0b;
+  color: #fff;
+  border: 1px solid #a9a9a9;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.6rem;
+  line-height: 3.6rem;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 1.5rem;
+}
+
+.rental-ready_view-all-button--count {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.6rem;
+  line-height: 3.6rem;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .vote_container {

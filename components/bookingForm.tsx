@@ -16,8 +16,8 @@ export const BookingForm = ({ vehicle }) => {
     email: "",
     startDate: "",
     startTime: "",
-    endDate: "",
-    endTime: "",
+    endDate: "10:00",
+    endTime: "10:00",
     totalDays: 0,
     vin: vehicle.vin,
   });
