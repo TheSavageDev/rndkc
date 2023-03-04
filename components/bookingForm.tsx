@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEventTracking } from "../hooks/useEventTracking";
+import { TimeSelect } from "./timeSelect";
 
 export const BookingForm = ({ vehicle }) => {
   const initialButtonText =
@@ -162,15 +163,11 @@ export const BookingForm = ({ vehicle }) => {
               id="startDate"
               required
             />
-            <input
-              className={`booking_information-form-input--time${
-                formError && data.startTime.length === 0 ? "--error" : ""
-              }`}
-              type="time"
-              onChange={handleChange}
-              value={data.startTime}
+            <TimeSelect
               id="startTime"
-              required
+              handleChange={handleChange}
+              formError={formError}
+              isFilled={data.startTime.length === 0}
             />
           </section>
         </section>
@@ -189,16 +186,11 @@ export const BookingForm = ({ vehicle }) => {
               id="endDate"
               required
             />
-            <input
-              className={`booking_information-form-input--time${
-                formError && data.endTime.length === 0 ? "--error" : ""
-              }`}
-              type="time"
-              onChange={handleChange}
-              value={data.endTime}
+            <TimeSelect
               id="endTime"
-              step={1800}
-              required
+              handleChange={handleChange}
+              formError={formError}
+              isFilled={data.endTime.length === 0}
             />
           </section>
         </section>
