@@ -8,6 +8,7 @@ import Head from "next/head";
 import * as gtag from "../lib/gtag";
 import * as fbq from "../lib/fpixel";
 import "../styles/globals.css";
+import "../styles/carPay.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();

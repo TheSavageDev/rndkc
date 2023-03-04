@@ -1,0 +1,355 @@
+.car-pay_container {
+}
+
+.car-pay_header {
+  padding: 2rem;
+  height: 59.9rem;
+  background-image: url("/img/slices/CarPay.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: 35%;
+  background-position-y: 15%;
+}
+
+.car-pay_header_text {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 3.5rem;
+  line-height: 4.8rem;
+}
+
+.car-pay_header-carpay {
+  font-family: "Khand";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 5.5rem;
+  line-height: 8.4rem;
+  color: #282828;
+  margin-left: 1rem;
+}
+.car-pay_header-carpay--car {
+  font-family: "Khand";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 5.5rem;
+  line-height: 8.4rem;
+  color: #282828;
+}
+.car-pay_header-carpay--pay {
+  font-family: "Khand";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 5.5rem;
+  line-height: 8.4rem;
+  color: #3cb339;
+}
+
+.car-pay_content {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.car-pay_content_heading {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.6rem;
+  line-height: 3.6rem;
+  text-align: center;
+  color: #282828;
+  margin: 2rem 0;
+}
+
+.car-pay_content_paragraph {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #282828;
+  margin: 2rem 0;
+}
+
+.car-pay_content_footer-text {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2.8rem;
+  line-height: 3.9rem;
+  color: #000;
+  margin: 2rem 0;
+}
+
+.car-pay_explainer-cards {
+  padding: 2rem;
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.car-pay_explainer-card {
+  background: #f2f2f2;
+  border: 1px solid #cacaca;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.car-pay_explainer-card_header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.car-pay_explainer-card_header_text {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2.5rem;
+  line-height: 3.4rem;
+  text-transform: uppercase;
+  color: #282828;
+}
+
+.car-pay_explainer-card_paragraph {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 3rem;
+  text-align: center;
+  color: #282828;
+  opacity: 0.8;
+}
+
+.car-pay_signup {
+  background-color: #282828;
+  padding: 2rem;
+}
+
+.car-pay_signup_heading {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 45px;
+  line-height: 62px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.car-pay_signup_paragraph {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+  line-height: 34px;
+  color: #ffffff;
+}
+
+.car-pay_signup_form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.car-pay_signup_form-label {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  color: #ffffff;
+  margin-top: 2rem;
+}
+
+.car-pay_signup_form-input {
+  border-radius: 5px;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 33px;
+  padding: 1rem;
+  color: #000000;
+}
+
+.car-pay_signup_form_checkboxes {
+  display: flex;
+}
+
+.car-pay_signup_form_checkbox-container {
+  position: relative;
+  width: 7.1rem;
+  height: 5rem;
+}
+
+.car-pay_signup_form_checkbox-container span {
+  position: absolute;
+  top: 50;
+  left: 50;
+}
+
+.car-pay_signup_form_checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 7.1rem;
+  height: 5rem;
+}
+
+.car-pay_signup_form_textarea {
+  height: 33.2rem;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 33px;
+  color: #000000;
+  padding: 1.5rem;
+}
+
+.car-pay_signup_form_button {
+  background: #ff9d0b;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #ffffff;
+  padding: 0.75rem;
+  margin: 2rem 0;
+}
+
+.car-pay_contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 14rem;
+}
+
+.car-pay_contact h4 {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 35px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.car-pay_contact li {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+  line-height: 35px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.car-pay_contact li a {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+  line-height: 35px;
+  text-align: center;
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.onoff {
+  margin-left: -27px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  position: relative;
+  cursor: pointer;
+  width: 55px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.onoff label {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: #cd3c3c;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #fff;
+  -webkit-transition: background 0.3s, text-indent 0.3s;
+  -moz-transition: background 0.3s, text-indent 0.3s;
+  -o-transition: background 0.3s, text-indent 0.3s;
+  transition: background 0.3s, text-indent 0.3s;
+  text-indent: 27px;
+  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4) inset;
+  -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4) inset;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4) inset;
+}
+.onoff label:after {
+  content: "NO";
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  font-size: 12px;
+  color: #591717;
+  text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.35);
+  z-index: 1;
+}
+.onoff label:before {
+  content: "";
+  width: 15px;
+  height: 24px;
+  border-radius: 3px;
+  background: #fff;
+  position: absolute;
+  z-index: 2;
+  top: 3px;
+  left: 3px;
+  display: block;
+  -webkit-transition: left 0.3s;
+  -moz-transition: left 0.3s;
+  -o-transition: left 0.3s;
+  transition: left 0.3s;
+  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+}
+.onoff input:checked + label {
+  background: #378b2c;
+  text-indent: 8px;
+}
+.onoff input:checked + label:after {
+  content: "YES";
+  color: #091707;
+}
+.onoff input:checked + label:before {
+  left: 37px;
+}
