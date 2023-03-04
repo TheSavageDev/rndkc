@@ -19,6 +19,15 @@ export const Footer = () => {
           </Link>
           <span>|</span>
           <Link
+            href="/inventory"
+            className={`${
+              router.pathname === "/inventory" ? "current-link" : ""
+            }`}
+          >
+            Rental Inventory
+          </Link>
+          <span>|</span>
+          <Link
             href="/our-story"
             className={`${
               router.pathname === "/our-story" ? "current-link" : ""

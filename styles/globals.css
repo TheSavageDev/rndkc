@@ -1999,6 +1999,46 @@ html {
   width: 100%;
 }
 
+/* Inventory Page */
+.inventory-container {
+}
+.inventory_header {
+  display: flex;
+  padding: 2rem;
+  justify-content: center;
+}
+
+.inventory_header img {
+  height: 3.8rem;
+  width: 3.8rem;
+  margin-right: 1.1rem;
+}
+.inventory_header_text {
+  font-family: Akshar;
+  font-weight: 500;
+  font-size: 4.2rem;
+  line-height: 4rem;
+  text-transform: uppercase;
+}
+
+.inventory_header_text span {
+  font-family: Akshar;
+  font-weight: 300;
+  font-size: 4.2rem;
+  line-height: 4rem;
+  text-transform: uppercase;
+}
+
+.inventory_cars {
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
 /* ***** Medium Breakpoint ***** */
 @media (min-width: 768px) {
   .vote_container {

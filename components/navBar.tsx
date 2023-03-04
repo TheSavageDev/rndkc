@@ -17,6 +17,9 @@ export const NavBar = () => {
             <Link href="/" className="" onClick={handleToggleNav}>
               Home
             </Link>
+            <Link href="/inventory" className="" onClick={handleToggleNav}>
+              Rental Inventory
+            </Link>
             <Link href="/our-story" className="" onClick={handleToggleNav}>
               Our Story
             </Link>
@@ -50,6 +53,15 @@ export const NavBar = () => {
           className={`${router.pathname === "/" ? "current-link" : ""}`}
         >
           Home
+        </Link>
+        <span>|</span>
+        <Link
+          href="/inventory"
+          className={`${
+            router.pathname === "/inventory" ? "current-link" : ""
+          }`}
+        >
+          Rental Inventory
         </Link>
         <span>|</span>
         <Link
