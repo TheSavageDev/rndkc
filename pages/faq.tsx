@@ -12,7 +12,7 @@ export default function FAQ() {
   return (
     <>
       <Head>
-        <title>RNDKC - FAQ</title>
+        <title>RND - FAQ</title>
       </Head>
       <section className="faq-container">
         <>

@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>RND KC</title>
+        <title>RND</title>
         <link rel="shortcut icon" href="/img/RNDBlack2.svg" />
         <link rel="icon" href="/img/RNDBlack2.svg" />
         <meta

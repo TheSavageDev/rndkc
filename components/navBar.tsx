@@ -69,7 +69,7 @@ export const NavBar = () => {
         </Link>
         <span>|</span>
         <Link
-          href="contact-us"
+          href="/contact-us"
           className={`${
             router.pathname === "/contact-us" ? "current-link" : ""
           }`}

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Footer } from "../components/footer";
@@ -11,6 +12,9 @@ export default function OurStory() {
   usePageTracking(router);
   return (
     <>
+      <Head>
+        <title>RND - Our Story</title>
+      </Head>
       <NavBar />
       <section className="main">
         <NavSubheader title="Our Story" />

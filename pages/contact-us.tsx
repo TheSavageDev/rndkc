@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { Footer } from "../components/footer";
 import { GetInTouch } from "../components/getInTouch";
@@ -8,12 +9,17 @@ export default function ContactUs() {
   const router = useRouter();
   usePageTracking(router);
   return (
-    <main>
-      <NavBar />
-      <section className="main">
-        <GetInTouch />
-      </section>
-      <Footer />
-    </main>
+    <>
+      <Head>
+        <title>RND - Contact Us</title>
+      </Head>
+      <main>
+        <NavBar />
+        <section className="main">
+          <GetInTouch />
+        </section>
+        <Footer />
+      </main>
+    </>
   );
 }
