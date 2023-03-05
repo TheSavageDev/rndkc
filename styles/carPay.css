@@ -24,7 +24,6 @@
   font-style: normal;
   font-weight: 600;
   font-size: 5.5rem;
-  line-height: 8.4rem;
   color: #282828;
   margin-left: 1rem;
 }
@@ -33,7 +32,6 @@
   font-style: normal;
   font-weight: 600;
   font-size: 5.5rem;
-  line-height: 8.4rem;
   color: #282828;
 }
 .car-pay_header-carpay--pay {
@@ -41,7 +39,6 @@
   font-style: normal;
   font-weight: 600;
   font-size: 5.5rem;
-  line-height: 8.4rem;
   color: #3cb339;
 }
 
@@ -89,7 +86,7 @@
   padding: 2rem;
   background-color: #fff;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 2rem;
 }
 
@@ -132,6 +129,13 @@
   opacity: 0.8;
 }
 
+.car-pay_kc {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+}
+
 .car-pay_signup {
   background-color: #282828;
   padding: 2rem;
@@ -141,8 +145,8 @@
   font-family: "Akshar";
   font-style: normal;
   font-weight: 500;
-  font-size: 45px;
-  line-height: 62px;
+  font-size: 4.5rem;
+  line-height: 6.2rem;
   text-align: center;
   text-transform: uppercase;
   color: #ffffff;
@@ -152,8 +156,8 @@
   font-family: "Akshar";
   font-style: normal;
   font-weight: 300;
-  font-size: 25px;
-  line-height: 34px;
+  font-size: 2.5rem;
+  line-height: 3.4rem;
   color: #ffffff;
 }
 
@@ -168,37 +172,26 @@
   font-family: "Akshar";
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 2rem;
+  line-height: 2.8rem;
   color: #ffffff;
   margin-top: 2rem;
 }
 
 .car-pay_signup_form-input {
-  border-radius: 5px;
+  border-radius: 0.5rem;
   font-family: "Akshar";
   font-style: normal;
   font-weight: 300;
-  font-size: 24px;
-  line-height: 33px;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
   padding: 1rem;
   color: #000000;
 }
 
 .car-pay_signup_form_checkboxes {
   display: flex;
-}
-
-.car-pay_signup_form_checkbox-container {
-  position: relative;
-  width: 7.1rem;
-  height: 5rem;
-}
-
-.car-pay_signup_form_checkbox-container span {
-  position: absolute;
-  top: 50;
-  left: 50;
+  margin: 2rem 0;
 }
 
 .car-pay_signup_form_checkbox {
@@ -215,10 +208,49 @@
   font-family: "Akshar";
   font-style: normal;
   font-weight: 300;
-  font-size: 24px;
-  line-height: 33px;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
   color: #000000;
   padding: 1.5rem;
+}
+
+.car-pay_signup_form_file-upload {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+  margin: 3rem 0;
+}
+
+.car-pay_signup_form_file-upload input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.car-pay_signup_form_file-upload-button {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 30px;
+  text-transform: uppercase;
+  color: #282828;
+  background: linear-gradient(180deg, #ffffff 0%, #dfdfdf 100%);
+  border: 1px solid #a9a9a9;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.car-pay_signup_form_file-upload-button img {
+  height: 2.3rem;
 }
 
 .car-pay_signup_form_button {
@@ -232,7 +264,7 @@
   text-align: center;
   color: #ffffff;
   padding: 0.75rem;
-  margin: 2rem 0;
+  margin-bottom: 3rem;
 }
 
 .car-pay_contact {
@@ -248,8 +280,8 @@
   font-family: "Akshar";
   font-style: normal;
   font-weight: 700;
-  font-size: 25px;
-  line-height: 35px;
+  font-size: 2.5rem;
+  line-height: 3.5rem;
   text-align: center;
   color: #ffffff;
 }
@@ -258,8 +290,8 @@
   font-family: "Akshar";
   font-style: normal;
   font-weight: 300;
-  font-size: 25px;
-  line-height: 35px;
+  font-size: 2.5rem;
+  line-height: 3.5rem;
   text-align: center;
   color: #ffffff;
 }
@@ -268,88 +300,134 @@
   font-family: "Akshar";
   font-style: normal;
   font-weight: 300;
-  font-size: 25px;
-  line-height: 35px;
+  font-size: 2.5rem;
+  line-height: 3.5rem;
   text-align: center;
   color: #ffffff;
   text-decoration: underline;
 }
 
-.onoff {
-  margin-left: -27px;
-  display: -moz-inline-stack;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
-  zoom: 1;
-  *display: inline;
+.car-pay_signup_form_checkbox--yes {
   position: relative;
   cursor: pointer;
-  width: 55px;
-  height: 30px;
-  line-height: 30px;
-  font-size: 14px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 7.1rem;
+  height: 5rem;
 }
-.onoff label {
+.car-pay_signup_form_checkbox--yes label {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 0px;
   left: 0px;
   width: 100%;
   height: 100%;
   cursor: pointer;
-  background: #cd3c3c;
-  border-radius: 5px;
-  font-weight: bold;
-  color: #fff;
-  -webkit-transition: background 0.3s, text-indent 0.3s;
-  -moz-transition: background 0.3s, text-indent 0.3s;
-  -o-transition: background 0.3s, text-indent 0.3s;
-  transition: background 0.3s, text-indent 0.3s;
-  text-indent: 27px;
-  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4) inset;
-  -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4) inset;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4) inset;
+  background: linear-gradient(180deg, #ffffff 0%, #dfdfdf 100%);
+  border: 1px solid #a9a9a9;
+  border-radius: 0.5rem 0 0 0.5rem;
+  transition: background 0.3s;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
 }
-.onoff label:after {
-  content: "NO";
-  display: block;
+
+.car-pay_signup_form_checkbox--yes input:checked + label {
+  background: #3cb239;
+  color: #fff;
+}
+
+.car-pay_signup_form_checkbox--no {
+  position: relative;
+  cursor: pointer;
+  width: 7.1rem;
+  height: 5rem;
+}
+
+.car-pay_signup_form_checkbox--no label {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 0px;
   left: 0px;
   width: 100%;
-  font-size: 12px;
-  color: #591717;
-  text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.35);
-  z-index: 1;
+  height: 100%;
+  cursor: pointer;
+  background: linear-gradient(180deg, #ffffff 0%, #dfdfdf 100%);
+  border: 1px solid #a9a9a9;
+  border-radius: 0 0.5rem 0.5rem 0;
+  transition: background 0.3s;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
 }
-.onoff label:before {
-  content: "";
-  width: 15px;
-  height: 24px;
-  border-radius: 3px;
-  background: #fff;
-  position: absolute;
-  z-index: 2;
-  top: 3px;
-  left: 3px;
-  display: block;
-  -webkit-transition: left 0.3s;
-  -moz-transition: left 0.3s;
-  -o-transition: left 0.3s;
-  transition: left 0.3s;
-  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+
+.car-pay_signup_form_checkbox--no input:checked + label {
+  background: #fe0000;
+  color: #fff;
 }
-.onoff input:checked + label {
-  background: #378b2c;
-  text-indent: 8px;
-}
-.onoff input:checked + label:after {
-  content: "YES";
-  color: #091707;
-}
-.onoff input:checked + label:before {
-  left: 37px;
+
+@media (min-width: 1024px) {
+  .car-pay_explainer-cards {
+    padding: 2rem;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .car-pay_explainer-card {
+    background: #f2f2f2;
+    border: 1px solid #cacaca;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    max-width: 24.6rem;
+  }
+
+  .car-pay_explainer-card_header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #00000033;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .car-pay_explainer-card_header_text {
+    font-family: "Akshar";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 3.4rem;
+    text-transform: uppercase;
+    color: #282828;
+  }
+
+  .car-pay_explainer-card_paragraph {
+    font-family: "Akshar";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 2.2rem;
+    line-height: 3rem;
+    text-align: center;
+    color: #282828;
+    opacity: 0.8;
+  }
+
+  .car-pay_signup_form {
+    max-width: 62rem;
+    margin: 0 auto;
+  }
 }

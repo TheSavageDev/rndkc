@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { useRouter } from "next/router";
 import { Footer } from "../components/footer";
 import { NavBar } from "../components/navBar";
-import { NavSubheader } from "../components/navSubheader";
 import { usePageTracking } from "../hooks/usePageTracking";
+import { useEventTracking } from "../hooks/useEventTracking";
+import { storage } from "../firebase/clientApp";
 
 export default function CarPay() {
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState(false);
+  const [buttonText, setButtonText] = useState("Send Message");
+  const [photos, setPhotos] = useState(null);
   const [data, setData] = useState({
     name: "",
     email: "",
     phone: "",
     year: "",
     makeModel: "",
-    roadWorthy: false,
+    roadWorthy: undefined,
     currentCondition: "",
     notes: "",
   });
@@ -22,12 +28,91 @@ export default function CarPay() {
 
   usePageTracking(router, router.query.id);
 
-  const handleChange = (e) => {
-    setData({
-      ...data,
-      [e.target.id]: e.target.value,
+  const handleFileChange = (e) => {
+    if (e.target.files) {
+      setPhotos(Array.from(e.target.files));
+    } else {
+      console.log("No files found");
+    }
+  };
+
+  const handleFirebaseUpload = () => {
+    photos.forEach(async (photo) => {
+      const path = `/car-pay/${data.name}-${data.year}-${data.makeModel}/${photo.name}`;
+      const photosRef = ref(storage, path);
+
+      uploadBytes(photosRef, photo).then((snapshot) => {
+        console.log(snapshot);
+      });
     });
   };
+
+  const handleCheckChange = (roadWorthy) => {
+    setData({
+      ...data,
+      roadWorthy,
+    });
+  };
+
+  const handleChange = (e) => {
+    setButtonText("Send Message");
+    if (e.target.id === "roadWorthyYes") {
+      handleCheckChange(true);
+    } else if (e.target.id === "roadWorthyNo") {
+      handleCheckChange(false);
+    } else {
+      setData({
+        ...data,
+        [e.target.id]: e.target.value,
+      });
+    }
+  };
+
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    setButtonText("Submitting...");
+    if (photos.length !== 0) {
+      console.log(photos);
+      handleFirebaseUpload();
+    }
+    if (
+      data.email &&
+      data.name &&
+      data.year &&
+      data.makeModel &&
+      (data.roadWorthy || !data.roadWorthy) &&
+      data.currentCondition &&
+      data.notes
+    ) {
+      const res = await fetch("/api/car-pay", {
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
+
+      const { error } = await res.json();
+
+      if (error) {
+        console.error(error);
+        setButtonText("Send Message");
+        setSubmitting(false);
+        return;
+      }
+      useEventTracking("CarPay", {
+        email: data.email,
+      });
+
+      setSubmitting(false);
+      setButtonText("Send Message");
+    } else {
+      setSubmitting(false);
+      setFormError(true);
+      setButtonText("Please Fill out All Required Fields");
+    }
+  };
+
   return (
     <>
       <Head>
@@ -75,6 +160,19 @@ export default function CarPay() {
                 <p className="car-pay_explainer-card_paragraph">
                   RND provides up to $1 million in liability coverage for any
                   losses.
+                </p>
+              </article>
+
+              <article className="car-pay_explainer-card">
+                <header className="car-pay_explainer-card_header">
+                  <img src="/img/slices/icon_engine_green.svg" />
+                  <h3 className="car-pay_explainer-card_header_text">
+                    Roadside Assistance
+                  </h3>
+                </header>
+                <p className="car-pay_explainer-card_paragraph">
+                  All rental vehicles come with access to 24/7 emergency
+                  roadside assistance.
                 </p>
               </article>
 
@@ -196,9 +294,25 @@ export default function CarPay() {
                   Is your vehicle currently roadworthy?
                 </label>
                 <article className="car-pay_signup_form_checkboxes">
-                  <article className="onoff">
-                    <input type="checkbox" value="1" id="checkboxID" />
-                    <label htmlFor="checkboxID"></label>
+                  <article className="car-pay_signup_form_checkbox--yes">
+                    <input
+                      type="radio"
+                      name="roadWorthy"
+                      value="yes"
+                      id="roadWorthyYes"
+                      onChange={handleChange}
+                    />
+                    <label htmlFor="roadWorthyYes">YES</label>
+                  </article>
+                  <article className="car-pay_signup_form_checkbox--no">
+                    <input
+                      type="radio"
+                      name="roadWorthy"
+                      value="no"
+                      id="roadWorthyNo"
+                      onChange={handleChange}
+                    />
+                    <label htmlFor="roadWorthyNo">NO</label>
                   </article>
                 </article>
                 <label className="car-pay_signup_form-label">
@@ -207,6 +321,9 @@ export default function CarPay() {
                 <textarea
                   className="car-pay_signup_form_textarea"
                   placeholder="Enter Vehicle Description..."
+                  name="currentCondition"
+                  id="currentCondition"
+                  onChange={handleChange}
                 ></textarea>
                 <label className="car-pay_signup_form-label">
                   Additional Notes, Questions, or Comments
@@ -214,10 +331,28 @@ export default function CarPay() {
                 <textarea
                   className="car-pay_signup_form_textarea"
                   placeholder="Enter Notes, Questions, or Comments..."
+                  id="notes"
+                  name="notes"
+                  onChange={handleChange}
                 ></textarea>
-                <input type="file" />
-                <button className="car-pay_signup_form_button">
-                  Send Message
+                <article className="car-pay_signup_form_file-upload">
+                  <button className="car-pay_signup_form_file-upload-button">
+                    <img src="/img/slices/icon_camera.svg" />
+                    Select Images To Upload
+                  </button>
+                  <input
+                    type="file"
+                    name="photos"
+                    multiple
+                    onChange={handleFileChange}
+                  />
+                </article>
+                <button
+                  className="car-pay_signup_form_button"
+                  disabled={submitting}
+                  onClick={handleSubmit}
+                >
+                  {buttonText}
                 </button>
               </section>
               <section className="car-pay_contact">
