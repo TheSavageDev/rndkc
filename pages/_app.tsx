@@ -9,6 +9,7 @@ import * as gtag from "../lib/gtag";
 import * as fbq from "../lib/fpixel";
 import "../styles/globals.css";
 import "../styles/carPay.css";
+import "../styles/admin.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();

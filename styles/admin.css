@@ -1,0 +1,210 @@
+.admin_add-vehicle {
+  background-color: #282828;
+  padding: 2rem;
+}
+
+.admin_add-vehicle_form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.input,
+.radio,
+.select {
+  display: flex;
+  flex-direction: column;
+  width: 40rem;
+}
+
+.select select {
+  width: 40rem;
+}
+
+.select select {
+  flex-shrink: 0;
+}
+
+.admin_add-vehicle_meta,
+.admin_add-vehicle_booleans,
+.admin_add-vehicle_internals,
+.admin_add-vehicle_status {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.admin_add-vehicle_selects {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.admin_add-vehicle_form-label {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  color: #ffffff;
+  margin-top: 2rem;
+}
+
+.admin_add-vehicle_form-input {
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  padding: 1rem;
+  color: #000000;
+}
+
+.admin_add-vehicle_form_checkboxes {
+  display: flex;
+  margin: 2rem 0;
+}
+
+.admin_add-vehicle_form_checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 7.1rem;
+  height: 5rem;
+}
+
+.admin_add-vehicle_form_textarea {
+  height: 33.2rem;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  padding: 1.5rem;
+}
+
+.admin_add-vehicle_form_file-upload {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+  margin: 3rem 0;
+}
+
+.admin_add-vehicle_form_file-upload input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.admin_add-vehicle_form_file-upload-button {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 30px;
+  text-transform: uppercase;
+  color: #282828;
+  background: linear-gradient(180deg, #ffffff 0%, #dfdfdf 100%);
+  border: 1px solid #a9a9a9;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.admin_add-vehicle_form_file-upload-button img {
+  height: 2.3rem;
+}
+
+.admin_add-vehicle_form_button {
+  background: #ff9d0b;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #ffffff;
+  padding: 0.75rem;
+  margin-bottom: 3rem;
+}
+
+.admin_add-vehicle_form_checkbox--yes {
+  position: relative;
+  cursor: pointer;
+  width: 7.1rem;
+  height: 5rem;
+}
+.admin_add-vehicle_form_checkbox--yes label {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: linear-gradient(180deg, #ffffff 0%, #dfdfdf 100%);
+  border: 1px solid #a9a9a9;
+  border-radius: 0.5rem 0 0 0.5rem;
+  transition: background 0.3s;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+}
+
+.admin_add-vehicle_form_checkbox--yes input:checked + label {
+  background: #3cb239;
+  color: #fff;
+}
+
+.admin_add-vehicle_form_checkbox--no {
+  position: relative;
+  cursor: pointer;
+  width: 7.1rem;
+  height: 5rem;
+}
+
+.admin_add-vehicle_form_checkbox--no label {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: linear-gradient(180deg, #ffffff 0%, #dfdfdf 100%);
+  border: 1px solid #a9a9a9;
+  border-radius: 0 0.5rem 0.5rem 0;
+  transition: background 0.3s;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+}
+
+.admin_add-vehicle_form_checkbox--no input:checked + label {
+  background: #fe0000;
+  color: #fff;
+}
