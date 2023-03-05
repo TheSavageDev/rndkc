@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Head from "next/head";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes } from "firebase/storage";
 import { useRouter } from "next/router";
 import { Footer } from "../components/footer";
 import { NavBar } from "../components/navBar";

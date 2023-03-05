@@ -1,7 +1,5 @@
 import sgMail from "@sendgrid/mail";
 import { NextApiRequest, NextApiResponse } from "next";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "../../firebase/clientApp";
 
 sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_API_KEY);
 
@@ -18,8 +16,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   } = req.body;
   try {
     const msg = {
-      to: `jason@thesavage.dev`,
-      // to: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
+      to: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
       from: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
       subject: `New CarPay Application for ${year} ${makeModel}`,
       text: `New CarPay Application for ${year} ${makeModel}. check Firestore for the booking information`,
