@@ -17,6 +17,9 @@ export const NavBar = () => {
             <Link href="/" className="" onClick={handleToggleNav}>
               Home
             </Link>
+            <Link href="/car-pay" className="" onClick={handleToggleNav}>
+              CarPay
+            </Link>
             <Link href="/inventory" className="" onClick={handleToggleNav}>
               Rental Inventory
             </Link>
