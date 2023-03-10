@@ -16,7 +16,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   } = req.body;
   try {
     const msg = {
-      to: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
+      to: `jason@thesavage.dev`,
       from: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
       subject: `New CarPay Application for ${year} ${makeModel}`,
       text: `New CarPay Application for ${year} ${makeModel}. check Firestore for the booking information`,
