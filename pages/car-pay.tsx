@@ -9,6 +9,7 @@ import { useEventTracking } from "../hooks/useEventTracking";
 import { storage } from "../firebase/clientApp";
 
 export default function CarPay() {
+  const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState(false);
   const [buttonText, setButtonText] = useState("Send Message");
@@ -56,6 +57,7 @@ export default function CarPay() {
 
   const handleChange = (e) => {
     setButtonText("Send Message");
+    setSuccess(false);
     if (e.target.id === "roadWorthyYes") {
       handleCheckChange(true);
     } else if (e.target.id === "roadWorthyNo") {
@@ -98,6 +100,7 @@ export default function CarPay() {
         console.error(error);
         setButtonText("Send Message");
         setSubmitting(false);
+        setSuccess(false)
         return;
       }
       useEventTracking("CarPay", {
@@ -105,8 +108,10 @@ export default function CarPay() {
       });
 
       setSubmitting(false);
-      setButtonText("Send Message");
+      setSuccess(true);
+      setButtonText("We'll Be In Touch Shortly");
     } else {
+      setSuccess(false);
       setSubmitting(false);
       setFormError(true);
       setButtonText("Please Fill out All Required Fields");
@@ -348,8 +353,8 @@ export default function CarPay() {
                   />
                 </article>
                 <button
-                  className="car-pay_signup_form_button"
-                  disabled={submitting}
+                  className={`${success ? 'car-pay_signup_form_button--success' : "car-pay_signup_form_button"}`}
+                  disabled={submitting || success}
                   onClick={handleSubmit}
                 >
                   {buttonText}
