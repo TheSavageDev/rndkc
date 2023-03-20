@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useEventTracking } from "../hooks/useEventTracking";
 import { TimeSelect } from "./timeSelect";
+import { fetchPostJSON } from "../utils/api-helpers";
 
-export const BookingForm = ({ vehicle }) => {
+export const BookingForm = ({ vehicle, setPaymentIntent }) => {
   const initialButtonText =
     vehicle.rentalStatus === "D"
       ? "Begin Booking"
@@ -19,9 +20,21 @@ export const BookingForm = ({ vehicle }) => {
     endDate: "",
     endTime: "10:00",
     totalDays: 0,
+    phoneNumber: "",
     vin: vehicle.vin,
     vehicle,
   });
+  const [tab, setTab] = useState<"self" | "chauffeured" | "commercial">("self");
+  const [booking, setBooking] = useState(false);
+
+  const handleTabChange = (tabName) => {
+    setTab(tabName);
+  };
+
+  const handleBeginBooking = () => {
+    setButtonText("Continue to Payment");
+    setBooking(true);
+  };
 
   const handleChange = (e) => {
     setFormError(false);
@@ -73,6 +86,19 @@ export const BookingForm = ({ vehicle }) => {
   const encodedTime = (time) => encodeURIComponent(time);
 
   const handleSubmit = async () => {
+    fetchPostJSON("/api/paymentIntent", {
+      amount: vehicle?.rentalCost?.day * data.totalDays,
+    }).then((data) => {
+      setPaymentIntent(data);
+    });
+    // fetch('/api/paymentIntent', {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json"},
+    //   body: JSON.stringify({ booking: {
+    //     vehicle,
+    //     cost: vehicle?.rentalCost?.day * data.totalDays,
+    //   }})
+    // }).then((res) => res.json()).then((data) => setClientSecret(data.clientSecret))
     setSubmitting(true);
     if (
       data.email &&
@@ -82,34 +108,34 @@ export const BookingForm = ({ vehicle }) => {
       data.endDate &&
       data.endTime
     ) {
-      const res = await fetch("/api/booking", {
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-      });
+      // const res = await fetch("/api/booking", {
+      //   body: JSON.stringify(data),
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   method: "POST",
+      // });
 
-      const { error } = await res.json();
+      // const { error } = await res.json();
 
-      if (error) {
-        console.error(error);
-        setButtonText("Sign Up");
-        setSubmitting(false);
-        return;
-      }
-      useEventTracking("booking", {
-        vehicle,
-      });
+      // if (error) {
+      //   console.error(error);
+      //   setButtonText("Sign Up");
+      //   setSubmitting(false);
+      //   return;
+      // }
+      // useEventTracking("booking", {
+      //   vehicle,
+      // });
 
-      window.open(
-        `${vehicle.turoLink}?endDate=${encodedDate(
-          data.endDate
-        )}&endTime=${encodedTime(data.endTime)}&startDate=${encodedDate(
-          data.startDate
-        )}&startTime=${encodedTime(data.startTime)}`,
-        "_blank"
-      );
+      // window.open(
+      //   `${vehicle.turoLink}?endDate=${encodedDate(
+      //     data.endDate
+      //   )}&endTime=${encodedTime(data.endTime)}&startDate=${encodedDate(
+      //     data.startDate
+      //   )}&startTime=${encodedTime(data.startTime)}`,
+      //   "_blank"
+      // );
       setSubmitting(false);
     } else {
       setSubmitting(false);
@@ -120,33 +146,52 @@ export const BookingForm = ({ vehicle }) => {
 
   return (
     <section className="booking_information-form">
-      <section className="booking_information-form_contact">
-        <label className="booking_information-form-input-label">Name</label>
-        <input
-          className={`booking_information-form-input${
-            formError && data.name.length === 0 ? "--error" : ""
+      <section className="booking_information-form-tabs">
+        <article
+          className={`booking_information-form-tab${
+            tab === "self" ? "--active" : ""
           }`}
-          placeholder="Enter Full Name"
-          onChange={handleChange}
-          value={data.name}
-          id="name"
-          required
-          type="text"
-        />
-        <label className="booking_information-form-input-label">
-          Email Address
-        </label>
-        <input
-          className={`booking_information-form-input${
-            formError && data.email.length === 0 ? "--error" : ""
+          onClick={() => handleTabChange("self")}
+        >
+          <img
+            src={
+              tab === "self"
+                ? "/img/gear_icon_dark.svg"
+                : "/img/gear_icon_big.svg"
+            }
+          />
+          <p>Self Drive</p>
+        </article>
+        <article
+          className={`booking_information-form-tab${
+            tab === "chauffeured" ? "--active" : ""
           }`}
-          placeholder="Enter Email Address"
-          onChange={handleChange}
-          value={data.email}
-          id="email"
-          required
-          type="email"
-        />
+          onClick={() => handleTabChange("chauffeured")}
+        >
+          <img
+            src={
+              tab === "chauffeured"
+                ? "/img/chauffeured_icon_dark.svg"
+                : "/img/chauffeured_icon.svg"
+            }
+          />
+          <p>Chauffeured</p>
+        </article>
+        <article
+          className={`booking_information-form-tab${
+            tab === "commercial" ? "--active" : ""
+          }`}
+          onClick={() => handleTabChange("commercial")}
+        >
+          <img
+            src={
+              tab === "commercial"
+                ? "/img/camera_icon_dark.svg"
+                : "/img/camera_icon.svg"
+            }
+          />
+          <p>Commercial</p>
+        </article>
       </section>
       <section className="booking_information-form-dates_container">
         <section className="booking_information-form-date">
@@ -196,6 +241,7 @@ export const BookingForm = ({ vehicle }) => {
           </section>
         </section>
       </section>
+
       <article className="booking_information-form_pricing">
         <h2 className="booking_information-form_pricing-text">
           ${vehicle?.rentalCost?.day} Day
@@ -207,15 +253,63 @@ export const BookingForm = ({ vehicle }) => {
             } Total`}
         </h2>
       </article>
-      <button
-        className={`booking_information-form-button${
-          formError ? "--form-error" : ""
-        }${submitting ? "--submitting" : ""}`}
-        onClick={handleSubmit}
-        disabled={submitting || success}
-      >
-        {buttonText}
-      </button>
+
+      {booking && (
+        <section className="booking_information-form_contact">
+          <label className="booking_information-form-input-label">Name</label>
+          <input
+            className={`booking_information-form-input${
+              formError && data.name.length === 0 ? "--error" : ""
+            }`}
+            placeholder="Enter Full Name"
+            onChange={handleChange}
+            value={data.name}
+            id="name"
+            required
+            type="text"
+          />
+          <label className="booking_information-form-input-label">
+            Email Address
+          </label>
+          <input
+            className={`booking_information-form-input${
+              formError && data.email.length === 0 ? "--error" : ""
+            }`}
+            placeholder="Enter Email Address"
+            onChange={handleChange}
+            value={data.email}
+            id="email"
+            required
+            type="email"
+          />
+          <label className="booking_information-form-input-label">
+            Phone Number
+          </label>
+          <input
+            className={`booking_information-form-input${
+              formError && data.email.length === 0 ? "--error" : ""
+            }`}
+            placeholder="Enter Phone Number"
+            onChange={handleChange}
+            value={data.phoneNumber}
+            id="phoneNumber"
+            required
+            type="tel"
+          />
+        </section>
+      )}
+
+      <section className="booking_information-form-button_container">
+        <button
+          className={`booking_information-form-button${
+            formError ? "--form-error" : ""
+          }${submitting ? "--submitting" : ""}`}
+          onClick={booking ? handleSubmit : handleBeginBooking}
+          disabled={submitting || success}
+        >
+          {buttonText}
+        </button>
+      </section>
     </section>
   );
 };

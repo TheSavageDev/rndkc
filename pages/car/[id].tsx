@@ -7,17 +7,23 @@ import {
   onSnapshot,
   DocumentData,
 } from "firebase/firestore";
+import { SocialIcon } from "react-social-icons";
+import Head from "next/head";
+import { PaymentIntent } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import { NavBar } from "../../components/navBar";
 import { RentalStatus } from "../../components/rentalStatus";
 import { db } from "../../firebase/clientApp";
 import { Footer } from "../../components/footer";
 import { ContactForm } from "../../components/contactForm";
-import { SocialIcon } from "react-social-icons";
 import { ShareModal } from "../../components/shareModal";
 import { BookingForm } from "../../components/bookingForm";
 import { AvailabilitySignUp } from "../../components/availabilitySignUp";
 import { usePageTracking } from "../../hooks/usePageTracking";
-import Head from "next/head";
+import { CheckoutForm } from "../../components/checkoutForm";
+import getStripe from "../../utils/get-stripejs";
+import { fetchPostJSON } from "../../utils/api-helpers";
+import * as config from "../../config";
 
 const Car = () => {
   const router = useRouter();
@@ -25,6 +31,18 @@ const Car = () => {
   const [routerReady, setRouterReady] = useState(false);
   const [bigImageUrl, setBigImageUrl] = useState("");
   const [showShareModal, setShowShareModal] = useState(false);
+  const [paymentIntent, setPaymentIntent] = useState<PaymentIntent | null>(
+    null
+  );
+  const [showDetails, setShowDetails] = useState(false);
+
+  // useEffect(() => {
+  //   fetchPostJSON("/api/paymentIntent", {
+  //     amount: Math.round(config.MAX_AMOUNT / config.AMOUNT_STEP),
+  //   }).then((data) => {
+  //     setPaymentIntent(data);
+  //   });
+  // }, [setPaymentIntent]);
 
   const getVehicle = (id) => {
     const q = query(collection(db, "vehicles"), where("vin", "==", id));
@@ -45,7 +63,7 @@ const Car = () => {
     }
   }, [router.isReady]);
 
-  usePageTracking(router, router.query.id);
+  // usePageTracking(router, router.query.id);
 
   return (
     <>
@@ -63,7 +81,7 @@ const Car = () => {
         {showShareModal && (
           <ShareModal setShowShareModal={setShowShareModal} car={vehicle.vin} />
         )}
-        {vehicle && (
+        {vehicle && !paymentIntent && (
           <>
             <section className="booking_sub-nav-header">
               <h2 className="booking_sub-nav_header-text">
@@ -120,130 +138,184 @@ const Car = () => {
             )}
             <section className="booking_container">
               <section className="booking_information">
-                {vehicle.type === "SHOW" && (
-                  <img
-                    className="booking_information-car-type"
-                    src="/img/slices/show_car.svg"
-                  />
-                )}
-                {vehicle.type === "GO" && (
-                  <img
-                    className="booking_information-car-type"
-                    src="/img/slices/go_car.svg"
-                  />
-                )}
                 <h2 className="booking_information_header">
-                  {vehicle.rentalStatus === "D"
-                    ? "Buckle up and get ready to cruise Kansas City!"
-                    : `We'll let you know when it's ready to cruise`}
-                </h2>
-                <section className="booking_information_status">
                   {vehicle.rentalStatus === "D" ? (
-                    <section className="booking_information_status-icon">
-                      <img
-                        src="/img/slices/drive_status.svg"
-                        className="booking_information_status-icon-svg"
-                      />
-                    </section>
-                  ) : vehicle.rentalStatus === "R" ? (
-                    <section className="booking_information_status-icon">
-                      <img
-                        src="/img/slices/icon_reverse.svg"
-                        className="booking_information_status-icon-svg"
-                      />
-                    </section>
-                  ) : (
-                    ""
-                  )}
-                  {vehicle.convertible ? (
                     <>
-                      <section className="booking_information_status_divider"></section>
-                      <section className="booking_information_status-icon">
-                        <img
-                          src="/img/slices/icon_convertible.svg"
-                          className="booking_information_status-icon-svg"
-                        />
-                      </section>
+                      Driving a{" "}
+                      <span>
+                        {vehicle.year} {vehicle.model}
+                      </span>{" "}
+                      is an experience like no other.
                     </>
                   ) : (
-                    ""
+                    `We'll let you know when it's ready to cruise`
                   )}
-                  <section className="booking_information_status_divider"></section>
-                  {vehicle.transmission === "M" ? (
-                    <section className="booking_information_status-icon">
-                      <img
-                        src="/img/slices/icon_manual.svg"
-                        className="booking_information_status-icon-svg"
-                      />
-                      <p className="booking_information_status-text">Manual</p>
-                    </section>
-                  ) : (
-                    <section className="booking_information_status-icon">
-                      <img
-                        src="/img/slices/icon_auto.svg"
-                        className="booking_information_status-icon-svg"
-                      />
-                      <p className="booking_information_status-text">Auto</p>
-                    </section>
-                  )}
-                  <section className="booking_information_status_divider"></section>
-                  {vehicle.cylinders === "V8" ? (
-                    <section className="booking_information_status-icon">
-                      <img
-                        src="/img/slices/icon_v8.svg"
-                        className="booking_information_status-icon-svg"
-                      />
-                    </section>
-                  ) : (
-                    <section className="booking_information_status-icon">
-                      <img
-                        src="/img/slices/icon_v6.svg"
-                        className="booking_information_status-icon-svg"
-                      />
-                      <p className="booking_information_status-text">V6</p>
-                    </section>
-                  )}
+                </h2>
+                <section className="booking_information_details-button_container">
+                  <article className="booking_information_details-button_container-dividers" />
+                  <button
+                    className="booking_information_details-button"
+                    onClick={() => setShowDetails(!showDetails)}
+                  >
+                    {showDetails ? "hide details " : "view details "}
+                    <img
+                      src="/img/arrow.svg"
+                      className={showDetails ? "up-arrow" : "down-arrow"}
+                    />
+                  </button>
+                  <article className="booking_information_details-button_container-dividers" />
                 </section>
-                <section className="booking_information-paragraphs">
-                  {vehicle.rentalStatus === "D" && (
-                    <p className="booking_information-paragraphs-text">
-                      Drive your dream with this beautifully restored{" "}
-                      {vehicle.year} {vehicle.model}. It’s available and ready
-                      to cruise Kansas City! This is a show car so treat it like
-                      you own it. Show Cars require enclosed storage for
-                      overnight rentals. Enter your contact info and select the
-                      dates to begin booking.
-                    </p>
-                  )}
-                  {vehicle.rentalStatus === "R" && (
-                    <p className="booking_information-paragraphs-text">
-                      This {vehicle.year} {vehicle.model} is currently
-                      unavailable but will be back soon. Enter your email and
-                      we'll let you know as soon as it's ready to go.
-                    </p>
-                  )}
-
-                  <p className="booking_information-paragraphs-text--bottom">
-                    For questions about this rental visit our{" "}
-                    <a
-                      href="/faq"
-                      className="booking_information-paragraphs-text--link"
-                    >
-                      F.A.Q. page
-                    </a>{" "}
-                    or contact us at{" "}
-                    <a
-                      href="mailto:hello@rndkc.com"
-                      className="booking_information-paragraphs-text--link"
-                    >
-                      hello@rndkc.com
-                    </a>
-                  </p>
+                <section
+                  className={
+                    showDetails
+                      ? "booking_information_details_paragraph_container--down"
+                      : "booking_information_details_paragraph_container--up"
+                  }
+                >
+                  <article className="booking_information_details_paragraph">
+                    With its powerful V8 engine and classic styling, the car
+                    feels powerful and responsive on the road. The interior is
+                    luxurious and comfortable, with leather seats and chrome
+                    accents that give the car an air of sophistication. The
+                    exterior is timeless and iconic, with its sharp lines and
+                    classic curves. Driving a 1965 Plymouth Satellite is an
+                    exhilarating experience that will make you want to keep
+                    coming back for more.
+                  </article>
+                  <section className="booking_information_details_specs">
+                    <article>
+                      <h3 className="booking_information_details_heading">
+                        Included with every rental
+                      </h3>
+                      <ul className="booking_information_details_specs_list">
+                        <li className="booking_information_details_specs_text">
+                          200 miles per day
+                        </li>
+                        <li className="booking_information_details_specs_text">
+                          Comprehensive Insurance
+                        </li>
+                        <li className="booking_information_details_specs_text">
+                          24/7 Roadside Assistance
+                        </li>
+                      </ul>
+                    </article>
+                    <article>
+                      <h3 className="booking_information_details_heading">
+                        Vehicle Specs
+                      </h3>
+                      <article className="booking_information_details_specs_container">
+                        <article className="booking_information_details_specs_item">
+                          <img src="/img/convertible_icon.svg" />
+                          <p className="booking_information_details_specs_text">
+                            Convertible
+                          </p>
+                        </article>
+                        <article className="booking_information_details_specs_item">
+                          <img src="/img/v8_icon.svg" />
+                          <p className="booking_information_details_specs_text">
+                            {vehicle.engine} {vehicle.cylinders}
+                          </p>
+                        </article>
+                        <article className="booking_information_details_specs_item">
+                          <img src="/img/gear_icon.svg" />
+                          <p className="booking_information_details_specs_text">
+                            {vehicle.transmission === "M"
+                              ? "Manual"
+                              : "Automatic"}
+                          </p>
+                        </article>
+                        <article className="booking_information_details_specs_item">
+                          <img src="/img/people_icon.svg" />
+                          <p className="booking_information_details_specs_text">
+                            {vehicle.seats} Passenger
+                          </p>
+                        </article>
+                      </article>
+                    </article>
+                    <article>
+                      <h3 className="booking_information_details_heading">
+                        Vehicle Type
+                      </h3>
+                      <ul>
+                        <li
+                          className={`booking_information_details_specs_type${
+                            vehicle.type === "SHOW" ? "" : "--translucent"
+                          }`}
+                        >
+                          <img src="/img/show_icon.svg" />
+                          Show Car - treat it like you own it.
+                        </li>
+                        <li
+                          className={`booking_information_details_specs_type${
+                            vehicle.type === "GO" ? "" : "--translucent"
+                          }`}
+                        >
+                          <img src="/img/go_icon.svg" />
+                          Go Car - drive it like you stole it.
+                        </li>
+                      </ul>
+                    </article>
+                    <article>
+                      <h3 className="booking_information_details_heading">
+                        Vehicle Status
+                      </h3>
+                      <article className="booking_information_details_specs_rental-status">
+                        <img
+                          src={
+                            vehicle.rentalStatus === "D"
+                              ? "/img/drive_icon.svg"
+                              : vehicle.rentalStatus === "N"
+                              ? "/img/neutral_icon.svg"
+                              : "/img/reverse_icon.svg"
+                          }
+                          className="booking_information_details_specs_rental-status_icon"
+                        />
+                        {vehicle.rentalStatus === "D" ? (
+                          <p className="booking_information_details_specs_text">
+                            Drive - vehicle is in stock, gassed up, inspected
+                            for reliability, and is ready to cruise Kansas City.
+                          </p>
+                        ) : (
+                          <p className="booking_information_details_specs_text"></p>
+                        )}
+                      </article>
+                    </article>
+                    <section className="booking_information_details-button_container">
+                      <article className="booking_information_details-button_container-dividers" />
+                      <button
+                        className="booking_information_details-button"
+                        onClick={() => setShowDetails(!showDetails)}
+                      >
+                        {showDetails ? "hide details " : "view details "}
+                        <img
+                          src="/img/arrow.svg"
+                          className={showDetails ? "up-arrow" : "down-arrow"}
+                        />
+                      </button>
+                      <article className="booking_information_details-button_container-dividers" />
+                    </section>
+                  </section>
                 </section>
               </section>
               <section className="booking_information_forms">
+                {paymentIntent && paymentIntent.client_secret && (
+                  <Elements
+                    options={{
+                      clientSecret: paymentIntent.client_secret,
+                      appearance: {
+                        theme: "flat",
+                      },
+                    }}
+                    stripe={getStripe()}
+                  >
+                    <CheckoutForm paymentIntent={paymentIntent} />
+                  </Elements>
+                )}
                 {vehicle.rentalStatus === "D" && (
-                  <BookingForm vehicle={vehicle} />
+                  <BookingForm
+                    vehicle={vehicle}
+                    setPaymentIntent={setPaymentIntent}
+                  />
                 )}
                 {vehicle.rentalStatus === "R" && (
                   <AvailabilitySignUp vin={vehicle.vin} />
@@ -252,63 +324,110 @@ const Car = () => {
             </section>
           </>
         )}
-        <RentalStatus />
-        <section className="getInTouch">
-          <section className="flex flex-col getInTouch_container">
-            <article className="flex flex-col">
-              <h3 className="booking_questions_header">Have Questions?</h3>
-              <article className="">
-                <p className="booking_questions_header-text">
-                  At RND we strive to make your classic car rental experience as
-                  simple and enjoyable as possible. We offer delivery to your
-                  home or work. We can also pick you up from the airport if you
-                  are in town visiting. If you have questions visit our{" "}
-                  <a
-                    href="/faq"
-                    className="booking_questions_header-text--bold"
-                  >
-                    FAQ Page
-                  </a>
-                  , use the contact form below, or call us at{" "}
-                  <a
-                    href="tel:8162001163"
-                    className="booking_questions_header-text--bold"
-                  >
-                    816-200-1163
-                  </a>
-                </p>
-              </article>
-            </article>
-            <article className="booking_questions_contact-form">
-              <ContactForm />
-              <article className="getInTouch-social">
-                <p className="booking_questions_social">
-                  Follow Us for Updates and Special Offers
-                </p>
-                <article className="flex space-x-5 pt-2">
-                  <SocialIcon
-                    fgColor="transparent"
-                    bgColor="#fff"
-                    style={{ height: 45, width: 45 }}
-                    url="https://facebook.com/RNDKansasCity"
-                  />
-                  <SocialIcon
-                    fgColor="transparent"
-                    bgColor="#fff"
-                    style={{ height: 45, width: 45 }}
-                    url="https://instagram.com/rnd_kc"
-                  />
-                  <SocialIcon
-                    fgColor="transparent"
-                    bgColor="#fff"
-                    style={{ height: 45, width: 45 }}
-                    url="https://twitter.com/RND_KC"
-                  />
+        {!paymentIntent && (
+          <section className="getInTouch">
+            <section className="delivery">
+              <header>
+                <h2 className="delivery_header">We Offer Delivery</h2>
+                <img src="/img/tow_truck_icon.svg" />
+              </header>
+              <p className="delivery_subheader">
+                Imagine your friends and neighbors reaction when a 1956 Cabover
+                pulls up to deliver your ride!{" "}
+              </p>
+              <article className="delivery_divider" />
+            </section>
+            <section className="flex flex-col getInTouch_container">
+              <article className="flex flex-col">
+                <h3 className="booking_questions_header">Have Questions?</h3>
+                <article className="">
+                  <p className="booking_questions_header-text">
+                    At RND we strive to make your classic car rental experience
+                    as simple and enjoyable as possible. We offer delivery to
+                    your home or work. We can also pick you up from the airport
+                    if you are in town visiting. If you have questions visit our{" "}
+                    <a
+                      href="/faq"
+                      className="booking_questions_header-text--bold"
+                    >
+                      FAQ Page
+                    </a>
+                    , use the contact form below, or call us at{" "}
+                    <a
+                      href="tel:8162001163"
+                      className="booking_questions_header-text--bold"
+                    >
+                      816-200-1163
+                    </a>
+                  </p>
                 </article>
               </article>
-            </article>
+              <article className="booking_questions_contact-form">
+                <ContactForm />
+              </article>
+            </section>
           </section>
-        </section>
+        )}
+
+        {paymentIntent && paymentIntent.client_secret && (
+          <Elements
+            options={{
+              clientSecret: paymentIntent.client_secret,
+              appearance: {
+                theme: "flat",
+              },
+            }}
+            stripe={getStripe()}
+          >
+            <header>
+              <h2>Payment Method</h2>
+              <article />
+              <h3>Debit cards are not accepted.</h3>
+              <p>
+                A temporary hold of $50 will be placed on your credit card to
+                hold your reservation. Final payment will be made day of pickup
+                or delivery.{" "}
+              </p>
+            </header>
+            <section>
+              <CheckoutForm paymentIntent={paymentIntent} />
+              <h3>Delivery</h3>
+              <input type="checkbox" />
+              <label>Include Delivery ?</label>
+            </section>
+            <section>
+              <h3>Summary</h3>
+              <h4>
+                {vehicle.year} {vehicle.make} {vehicle.model} Rental
+              </h4>
+              <article>
+                <p>Daily Rate</p>
+                <p>Price</p>
+              </article>
+              <article>
+                <p>Daily Rate</p>
+                <p>Price</p>
+              </article>
+              <article>
+                <p>Duration</p>
+                <p>{}</p>
+              </article>
+              <article>
+                <p>Booking Total</p>
+                <p>Price</p>
+              </article>
+              <article>
+                <p>Reservation Deposit</p>
+                <p>Price</p>
+              </article>
+              <article>
+                <p>Total Due Today</p>
+                <p>Price</p>
+              </article>
+              <button>Submit Payment</button>
+            </section>
+          </Elements>
+        )}
         <Footer />
       </section>
     </>

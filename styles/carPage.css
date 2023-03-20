@@ -1,0 +1,143 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
+.swiper {
+  width: 100%;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-slide {
+  background-size: cover;
+  background-position: center;
+}
+
+.main-image-swiper {
+  height: 80%;
+  width: 100%;
+}
+
+.thumb-swiper {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.thumb-swiper .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
+}
+
+.thumb-swiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stripe-button {
+  background-color: #ff9d0b;
+  color: #fff;
+  border: 1px solid #a9a9a9;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 1.5rem;
+}
+
+.delivery header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.delivery_header {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 4.2rem;
+  line-height: 5.8rem;
+  text-align: center;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+}
+
+.delivery_subheader {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  /* or 133% */
+
+  text-align: center;
+  letter-spacing: 0.03em;
+
+  color: #ffffff;
+}
+
+.delivery_divider {
+  height: 1px;
+  width: 90%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  margin: 4rem auto;
+}
+
+@media (min-width: 700px) {
+  .swiper {
+    width: 100%;
+    height: 30rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .swiper-slide {
+    height: 35rem;
+  }
+
+  .swiper-slide-active {
+    height: 35rem;
+  }
+
+  .main-image-swiper {
+    height: 80%;
+    width: 100%;
+  }
+
+  .thumb-swiper {
+    height: 10%;
+    box-sizing: border-box;
+    padding: 10px 0;
+  }
+
+  .thumb-swiper .swiper-wrapper {
+    height: 15rem;
+  }
+
+  .thumb-swiper .swiper-slide {
+    width: 25%;
+    height: 100%;
+    opacity: 0.4;
+  }
+
+  .thumb-swiper .swiper-slide-thumb-active {
+    opacity: 1;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}

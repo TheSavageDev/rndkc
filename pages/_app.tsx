@@ -7,9 +7,11 @@ import Head from "next/head";
 
 import * as gtag from "../lib/gtag";
 import * as fbq from "../lib/fpixel";
+import "swiper/css";
 import "../styles/globals.css";
 import "../styles/carPay.css";
 import "../styles/admin.css";
+import "../styles/carPage.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();

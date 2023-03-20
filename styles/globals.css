@@ -1430,7 +1430,6 @@ html {
 
 .booking {
   position: relative;
-  background-color: #282828;
 }
 
 .booking_sub-nav-header {
@@ -1566,11 +1565,180 @@ html {
   font-family: "Akshar";
   font-style: normal;
   font-weight: 500;
-  font-size: 4rem;
-  line-height: 5rem;
+  font-size: 2.8rem;
+  line-height: 3.9rem;
   letter-spacing: 0.03rem;
   color: #ffffff;
   text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.booking_information_header span {
+  color: #ff9d0b;
+}
+
+.booking_information_details-button_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 3rem;
+  margin: 2rem 0;
+}
+
+.booking_information_details-button_container-dividers {
+  height: 1px;
+  width: 9.7rem;
+  background-color: #fff;
+  border: 1px solid #919191;
+}
+
+.booking_information_details-button {
+  display: flex;
+  font-family: "Akshar";
+  font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 3.5rem;
+  text-align: center;
+  color: #fff;
+  letter-spacing: 0.03rem;
+  border: 1px solid #919191;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  min-width: 14rem;
+}
+
+.down-arrow,
+.up-arrow {
+  margin-left: 0.5rem;
+}
+
+.down-arrow {
+  transform: rotate(0deg);
+  transition: all 0.5s ease-in-out;
+}
+
+.up-arrow {
+  transform: rotate(180deg);
+  transition: all 0.5s ease-in-out;
+}
+
+.booking_information_details_paragraph_container--down,
+.booking_information_details_paragraph_container--up {
+  overflow: hidden;
+}
+
+.booking_information_details_paragraph_container--down > article {
+  margin-top: 0;
+  transition: margin-top 0.5s ease-out;
+}
+
+.booking_information_details_paragraph_container--up > article {
+  margin-top: -1000%;
+  transition: margin-top 0.5s ease-out;
+}
+
+.booking_information_details_paragraph {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 3.5rem;
+  letter-spacing: 0.03rem;
+  padding: 0 2rem;
+  color: #ffffff;
+}
+
+.booking_information_details_specs {
+  padding: 0 2rem;
+  margin-top: 3rem;
+}
+
+.booking_information_details_heading {
+  font-family: "Akshar";
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  color: #ff9d0b;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 2rem 0 1rem 0;
+}
+
+.booking_information_details_specs_list {
+  list-style-type: disc;
+  margin-left: 2rem;
+  list-style-position: inside;
+}
+
+/* .booking_information_details_specs_list li::before {
+  content: "·";
+  font-size: 40px;
+  vertical-align: middle;
+} */
+
+.booking_information_details_specs_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.booking_information_details_specs_item {
+  display: flex;
+  width: 50%;
+}
+
+.booking_information_details_specs_item img {
+  margin-right: 1rem;
+  max-width: 2.5rem;
+}
+
+.booking_information_details_specs_text {
+  font-family: "Gemunu Libre";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 3rem;
+  color: #ffffff;
+}
+
+.booking_information_details_specs_type {
+  font-family: "Gemunu Libre";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 3rem;
+  color: #ffffff;
+  display: flex;
+}
+
+.booking_information_details_specs_type img {
+  margin-right: 1rem;
+}
+
+.booking_information_details_specs_type--translucent {
+  font-family: "Gemunu Libre";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 3rem;
+  color: rgba(255, 255, 255, 0.3);
+  display: flex;
+}
+
+.booking_information_details_specs_type--translucent img {
+  margin-right: 1rem;
+  opacity: 0.3;
+}
+
+.booking_information_details_specs_rental-status_icon {
+  align-self: flex-start;
+  margin-top: 0.75rem;
+  margin-right: 1rem;
+}
+
+.booking_information_details_specs_rental-status {
+  display: flex;
+  justify-content: space-between;
 }
 
 .booking_information_status {
@@ -1653,12 +1821,62 @@ html {
   display: flex;
   flex-direction: column;
   margin-bottom: 8rem;
+}
+
+.booking_information-form-tabs {
+  display: flex;
+  width: 100%;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  text-transform: uppercase;
+}
+
+.booking_information-form-tabs article {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.booking_information-form-tab {
+  color: rgba(255, 255, 255, 1);
+}
+
+.booking_information-form-tab {
+  opacity: 0.7;
+}
+
+.booking_information-form-tab--active {
+  color: #282828;
+  background-color: #eaeaea;
+}
+
+.booking_information-form-tab--active img {
+  color: #282828;
+}
+
+.booking_information-form-dates_container {
+  background-color: #eaeaea;
   padding: 2rem;
 }
 
 .booking_information-form_contact {
   display: flex;
   flex-direction: column;
+  background-color: #eaeaea;
+  padding: 2rem;
+}
+
+.booking_information-form-button_container {
+  display: flex;
+  flex-direction: column;
+  background-color: #eaeaea;
+  padding: 2rem;
 }
 
 .booking_information-form-input-label {
@@ -1667,7 +1885,7 @@ html {
   font-weight: 400;
   font-size: 2rem;
   line-height: 2.8rem;
-  color: #ffffff;
+  color: #111;
   margin: 1rem 0 0 0;
 }
 
@@ -1767,7 +1985,8 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 2rem 0;
+  padding: 2rem 0;
+  background-color: #eaeaea;
 }
 
 .booking_information-form_pricing-text {
@@ -1777,7 +1996,7 @@ html {
   font-size: 3.5rem;
   line-height: 4.8rem;
   letter-spacing: 0.03em;
-  color: #ff9d0b;
+  color: #368e34;
 }
 .booking_information-form_pricing-text--sub {
   font-family: "Akshar";
@@ -1786,8 +2005,7 @@ html {
   font-size: 2.4rem;
   line-height: 3.3rem;
   letter-spacing: 0.03rem;
-
-  color: #ffffff;
+  color: #111;
 }
 
 .booking_information-form-button {
@@ -2411,7 +2629,6 @@ html {
     width: 50%;
   }
   .booking_information_forms {
-    padding: 2rem;
     width: 50%;
   }
 
