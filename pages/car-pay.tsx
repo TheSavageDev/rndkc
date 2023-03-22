@@ -7,23 +7,11 @@ import { NavBar } from "../components/navBar";
 import { usePageTracking } from "../hooks/usePageTracking";
 import { useEventTracking } from "../hooks/useEventTracking";
 import { storage } from "../firebase/clientApp";
+import { CarPayForm } from "../components/carPayForm";
 
 export default function CarPay() {
   const [success, setSuccess] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [formError, setFormError] = useState(false);
-  const [buttonText, setButtonText] = useState("Send Message");
-  const [photos, setPhotos] = useState(null);
-  const [data, setData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    year: "",
-    makeModel: "",
-    roadWorthy: undefined,
-    currentCondition: "",
-    notes: "",
-  });
+  const [photos, setPhotos] = useState([]);
   const router = useRouter();
   usePageTracking(router);
 
@@ -37,85 +25,38 @@ export default function CarPay() {
     }
   };
 
-  const handleFirebaseUpload = () => {
+  const handleFirebaseUpload = (values) => {
     photos.forEach(async (photo) => {
-      const path = `/car-pay/${data.name}-${data.year}-${data.makeModel}/${photo.name}`;
+      const path = `/car-pay/${values.name}-${values.year}-${values.makeModel}/${photo.name}`;
       const photosRef = ref(storage, path);
 
-      uploadBytes(photosRef, photo).then((snapshot) => {
-        console.log(snapshot);
-      });
+      uploadBytes(photosRef, photo);
     });
   };
 
-  const handleCheckChange = (roadWorthy) => {
-    setData({
-      ...data,
-      roadWorthy,
+  const handleSubmit = async (values) => {
+    if (photos?.length !== 0) {
+      handleFirebaseUpload(values);
+    }
+    const res = await fetch("/api/car-pay", {
+      body: JSON.stringify({ ...values, photos: photos.length !== 0 }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
     });
-  };
 
-  const handleChange = (e) => {
-    setButtonText("Send Message");
-    setSuccess(false);
-    if (e.target.id === "roadWorthyYes") {
-      handleCheckChange(true);
-    } else if (e.target.id === "roadWorthyNo") {
-      handleCheckChange(false);
-    } else {
-      setData({
-        ...data,
-        [e.target.id]: e.target.value,
-      });
-    }
-  };
+    const { error } = await res.json();
 
-  const handleSubmit = async () => {
-    setSubmitting(true);
-    setButtonText("Submitting...");
-    if (photos.length !== 0) {
-      console.log(photos);
-      handleFirebaseUpload();
-    }
-    if (
-      data.email &&
-      data.name &&
-      data.year &&
-      data.makeModel &&
-      (data.roadWorthy || !data.roadWorthy) &&
-      data.currentCondition &&
-      data.notes
-    ) {
-      const res = await fetch("/api/car-pay", {
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-      });
-
-      const { error } = await res.json();
-
-      if (error) {
-        console.error(error);
-        setButtonText("Send Message");
-        setSubmitting(false);
-        setSuccess(false)
-        return;
-      }
-      useEventTracking("CarPay", {
-        email: data.email,
-      });
-
-      setSubmitting(false);
-      setSuccess(true);
-      setButtonText("We'll Be In Touch Shortly");
-    } else {
+    if (error) {
+      console.error(error);
       setSuccess(false);
-      setSubmitting(false);
-      setFormError(true);
-      setButtonText("Please Fill out All Required Fields");
+      return;
     }
+    useEventTracking("CarPay", {
+      email: values.email,
+    });
+    setSuccess(true);
   };
 
   return (
@@ -232,134 +173,11 @@ export default function CarPay() {
                 rent well, we’ll have you in to inspect the vehicle and
                 approve/deny it’s entry into our CarPay system.{" "}
               </p>
-              <section className="car-pay_signup_form">
-                <label className="car-pay_signup_form-label">Name</label>
-                <input
-                  className="car-pay_signup_form-input"
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Enter Full Name"
-                  value={data.name}
-                  onChange={handleChange}
-                  required
-                />
-                <label className="car-pay_signup_form-label">
-                  Email Address
-                </label>
-                <input
-                  className="car-pay_signup_form-input"
-                  type="text"
-                  id="email"
-                  name="email"
-                  placeholder="Enter Email Address"
-                  value={data.email}
-                  onChange={handleChange}
-                  required
-                />
-                <label className="car-pay_signup_form-label">
-                  Phone Number (optional)
-                </label>
-                <input
-                  className="car-pay_signup_form-input"
-                  type="text"
-                  id="phone"
-                  name="phone"
-                  placeholder="Enter Phone Number"
-                  value={data.phone}
-                  onChange={handleChange}
-                />
-                <label className="car-pay_signup_form-label">
-                  Vehicle Year
-                </label>
-                <input
-                  className="car-pay_signup_form-input"
-                  type="text"
-                  id="year"
-                  name="year"
-                  placeholder="Enter Vehicle Year"
-                  value={data.year}
-                  onChange={handleChange}
-                  required
-                />
-                <label className="car-pay_signup_form-label">
-                  Vehicle Make & Model
-                </label>
-                <input
-                  className="car-pay_signup_form-input"
-                  type="text"
-                  id="makeModel"
-                  name="makeModel"
-                  placeholder="Enter Vehicle Make & Model"
-                  value={data.makeModel}
-                  onChange={handleChange}
-                  required
-                />
-                <label className="car-pay_signup_form-label">
-                  Is your vehicle currently roadworthy?
-                </label>
-                <article className="car-pay_signup_form_checkboxes">
-                  <article className="car-pay_signup_form_checkbox--yes">
-                    <input
-                      type="radio"
-                      name="roadWorthy"
-                      value="yes"
-                      id="roadWorthyYes"
-                      onChange={handleChange}
-                    />
-                    <label htmlFor="roadWorthyYes">YES</label>
-                  </article>
-                  <article className="car-pay_signup_form_checkbox--no">
-                    <input
-                      type="radio"
-                      name="roadWorthy"
-                      value="no"
-                      id="roadWorthyNo"
-                      onChange={handleChange}
-                    />
-                    <label htmlFor="roadWorthyNo">NO</label>
-                  </article>
-                </article>
-                <label className="car-pay_signup_form-label">
-                  Describe Your Vehicles Current Condition
-                </label>
-                <textarea
-                  className="car-pay_signup_form_textarea"
-                  placeholder="Enter Vehicle Description..."
-                  name="currentCondition"
-                  id="currentCondition"
-                  onChange={handleChange}
-                ></textarea>
-                <label className="car-pay_signup_form-label">
-                  Additional Notes, Questions, or Comments
-                </label>
-                <textarea
-                  className="car-pay_signup_form_textarea"
-                  placeholder="Enter Notes, Questions, or Comments..."
-                  id="notes"
-                  name="notes"
-                  onChange={handleChange}
-                ></textarea>
-                <article className="car-pay_signup_form_file-upload">
-                  <button className="car-pay_signup_form_file-upload-button">
-                    <img src="/img/slices/icon_camera.svg" />
-                    Select Images To Upload
-                  </button>
-                  <input
-                    type="file"
-                    name="photos"
-                    multiple
-                    onChange={handleFileChange}
-                  />
-                </article>
-                <button
-                  className={`${success ? 'car-pay_signup_form_button--success' : "car-pay_signup_form_button"}`}
-                  disabled={submitting || success}
-                  onClick={handleSubmit}
-                >
-                  {buttonText}
-                </button>
-              </section>
+              <CarPayForm
+                handleFileChange={handleFileChange}
+                handleSubmit={handleSubmit}
+                success={success}
+              />
               <section className="car-pay_contact">
                 <h4>Have Questions?</h4>
                 <ul>

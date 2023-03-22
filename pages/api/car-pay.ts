@@ -13,6 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     roadWorthy,
     currentCondition,
     notes,
+    photos,
   } = req.body;
   try {
     const msg = {
@@ -43,11 +44,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 <li>Roadworthy: ${roadWorthy ? "Yes" : "No"}</li>
                 <li>Current Condition: ${currentCondition}</li>
                 <li>Additional Notes: ${notes}</li>
-                <li>Images are <a href="https://console.firebase.google.com/u/1/project/rndkc-95667/storage/rndkc-95667.appspot.com/files/~2Fcar-pay/${encodeURIComponent(
-                  name
-                )}-${encodeURIComponent(year)}-${encodeURIComponent(
-        makeModel
-      )}">Here</a></li>
+                ${
+                  photos
+                    ? `<li>Images are <a href="https://console.firebase.google.com/u/1/project/rndkc-95667/storage/rndkc-95667.appspot.com/files/~2Fcar-pay/${encodeURIComponent(
+                        name
+                      )}-${encodeURIComponent(year)}-${encodeURIComponent(
+                        makeModel
+                      )}">Here</a></li>`
+                    : ``
+                }
               </ul>
               <br>
               </div>
