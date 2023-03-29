@@ -4,12 +4,22 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Script from "next/script";
 import Head from "next/head";
+import { Akshar, Khand, Manrope, Gemunu_Libre } from "next/font/google";
+
+const akshar = Akshar({ subsets: ["latin"] });
+const khand = Khand({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+});
+const manrope = Manrope({ subsets: ["latin"], preload: false });
+const gemunuLibre = Gemunu_Libre({ subsets: ["latin"], preload: false });
 
 import * as gtag from "../lib/gtag";
 import * as fbq from "../lib/fpixel";
 import "../styles/globals.css";
 import "../styles/carPay.css";
 import "../styles/admin.css";
+import "../styles/calendar.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -28,7 +38,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     };
   }, [router.events]);
   return (
-    <>
+    <div
+      className={`${akshar.className} ${khand.className} ${manrope.className} ${gemunuLibre.className}`}
+    >
       <Head>
         <title>RND</title>
         <link rel="shortcut icon" href="/img/RNDBlack2.svg" />
@@ -37,16 +49,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="facebook-domain-verification"
           content="5yr3moibq3quc8mlhc65p4ore1426a"
         />
-        <style>
-          @import
-          url("https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500;600;700&display=swap");
-          @import
-          url("https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap");
-          @import
-          url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
-          @import
-          url("https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@200;300;400;500;600;700;800&display=swap");
-        </style>
       </Head>
       <Script
         strategy="afterInteractive"
@@ -62,6 +64,30 @@ function MyApp({ Component, pageProps }: AppProps) {
               send_page_view: false
             });
           `}
+      </Script>
+      {/* Pendo */}
+      <Script>
+        {`
+          (function(apiKey){
+            (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
+
+        v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){
+
+        o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
+
+        y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/'+apiKey+'/pendo.js';
+
+        z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
+
+            pendo.initialize({
+                visitor: {id: 'VISITOR-UNIQUE-ID'},
+
+                account: {
+                  id: 'ACCOUNT-UNIQUE-ID'
+                }
+            });
+        })(${process.env.NEXT_PUBLIC_PENDO_KEY});
+        `}
       </Script>
       {/* Global Site Code Pixel - Facebook Pixel */}
       <Script
@@ -84,7 +110,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       <Component {...pageProps} />
       <Analytics />
-    </>
+    </div>
   );
 }
 
