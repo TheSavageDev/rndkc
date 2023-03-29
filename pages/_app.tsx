@@ -19,7 +19,7 @@ import * as fbq from "../lib/fpixel";
 import "../styles/globals.css";
 import "../styles/carPay.css";
 import "../styles/admin.css";
-import "../styles/calendar.css";
+// import "../styles/calendar.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
