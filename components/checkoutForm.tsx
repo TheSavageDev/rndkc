@@ -78,7 +78,6 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
     } catch (err) {
       console.log(err);
     }
-    console.log(response);
     if (response.statusCode === 500) {
       setPayment({ status: "error" });
       setErrorMessage(response.message);
@@ -101,11 +100,12 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
       },
     });
 
+    setSuccess(true);
+
     if (error) {
       setPayment({ status: "error" });
       setErrorMessage(error.message ?? "An unknown error occurred");
     } else if (paymentIntent) {
-      setSuccess(true);
       setPayment(paymentIntent);
     }
   };
