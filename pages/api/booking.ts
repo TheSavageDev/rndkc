@@ -39,8 +39,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     const msg = {
-      to: `savage@revlogical.com`,
-      // to: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
+      to: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
       from: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
       subject: `New Booking for ${vehicle.year} ${vehicle.make} ${vehicle.model}`,
       text: `New Booking for ${vehicle.year} ${vehicle.make} ${vehicle.model} check Firestore for the booking information`,
