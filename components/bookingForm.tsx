@@ -151,9 +151,9 @@ export const BookingForm = ({ vehicle, setPaymentIntent, paymentIntent }) => {
   });
 
   const initialValues = {
-    name: "Jason",
-    phoneNumber: "8162177008",
-    email: "jason@thesavage.dev",
+    name: "",
+    phoneNumber: "",
+    email: "",
     startDate: "",
     startTime: "10:00",
     endDate: "",
@@ -202,10 +202,10 @@ export const BookingForm = ({ vehicle, setPaymentIntent, paymentIntent }) => {
         .set("minute", parseInt(endTime.split(":")[1]))
     ).add(vehicle.refitHours, "h");
 
-    let startDateConflict;
-    let endDateConflict;
-    let startDateRefitConflict;
-    let endDateRefitConflict;
+    let startDateConflict: boolean;
+    let endDateConflict: boolean;
+    let startDateRefitConflict: boolean;
+    let endDateRefitConflict: boolean;
     if (currentBookings.length !== 0) {
       currentBookings.forEach((booking) => {
         startDateConflict =
@@ -265,7 +265,7 @@ export const BookingForm = ({ vehicle, setPaymentIntent, paymentIntent }) => {
     }
     if (startDT && endDT && endRT) {
       fetchPostJSON("/api/paymentIntent", {
-        amount: vehicle?.rentalCost?.day * totalDays,
+        amount: 50,
       }).then((data) => {
         setPaymentIntent(data);
       });

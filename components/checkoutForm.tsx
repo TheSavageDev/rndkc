@@ -13,6 +13,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { PaymentIntent } from "@stripe/stripe-js";
 import { CustomerData, FieldError, SubmissionData } from "./bookingForm";
+import { useEventTracking } from "../hooks/useEventTracking";
 
 type CheckoutFormProps = {
   paymentIntent?: PaymentIntent | null;
@@ -71,9 +72,9 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
         setSubmitting(false);
         return;
       }
-      // useEventTracking("booking", {
-      //   vehicle,
-      // });
+      useEventTracking("booking", {
+        vehicle: customerData.vehicle,
+      });
       setSubmitting(false);
     } catch (err) {
       console.log(err);
@@ -115,6 +116,7 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
       <form onSubmit={handleSubmit} className="flex flex-col pl-4 pr-4">
         <fieldset className="elements-style mb-5">
           <div className="FormRow elements-style">
+            <h2>formatAmountForDisplay(amount)</h2>
             <PaymentElement
               options={{
                 layout: "accordion",
