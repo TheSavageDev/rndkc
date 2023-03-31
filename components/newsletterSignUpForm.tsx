@@ -97,7 +97,7 @@ export const NewsLetterSignUpForm = ({
           }}
           required
           disabled={subscribed}
-          autoCapitalize="off"
+          autoCapitalize="none"
           autoCorrect="off"
           className={`newsletter-signup-email ${
             subscribed ? "newsletter-signup-email--disabled" : ""

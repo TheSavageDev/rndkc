@@ -1,36 +1,45 @@
 import sgMail from "@sendgrid/mail";
 import { NextApiRequest, NextApiResponse } from "next";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/clientApp";
 
 sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_API_KEY);
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const { name, email, startDate, startTime, endDate, endTime, vin, vehicle } =
-    req.body;
+  const {
+    name,
+    email,
+    vin,
+    startDateTime,
+    endDateTime,
+    endRefitTime,
+    vehicle,
+    startDate,
+    startTime,
+    endDate,
+    endTime,
+  } = req.body;
+
+  console.log(req.body);
   const vehicleDoc = doc(db, "vehicles", vin);
-  const vehicleSnap = await getDoc(vehicleDoc);
   try {
-    console.log(vehicleSnap.data());
-    await setDoc(
+    await updateDoc(
       vehicleDoc,
       {
-        bookings: [
-          {
-            name,
-            email,
-            startDate,
-            startTime,
-            endDate,
-            endTime,
-          },
-        ],
+        bookings: arrayUnion({
+          name,
+          email,
+          startDate: startDateTime,
+          endDate: endDateTime,
+          endRefitTime: endRefitTime,
+        }),
       },
       { merge: true }
     );
 
     const msg = {
-      to: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
+      to: `savage@revlogical.com`,
+      // to: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
       from: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
       subject: `New Booking for ${vehicle.year} ${vehicle.make} ${vehicle.model}`,
       text: `New Booking for ${vehicle.year} ${vehicle.make} ${vehicle.model} check Firestore for the booking information`,
@@ -65,5 +74,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(error.statusCode || 500).json({ error: error.message });
   }
 
-  return res.status(200).json({ vehicle: vehicleSnap.data() });
+  // return res.status(200).json({});
+  return res.status(200).json({ success: "Booking completed" });
 };

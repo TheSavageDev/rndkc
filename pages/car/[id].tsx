@@ -7,6 +7,8 @@ import {
   onSnapshot,
   DocumentData,
 } from "firebase/firestore";
+import { PaymentIntent } from "@stripe/stripe-js";
+import Head from "next/head";
 import { NavBar } from "../../components/navBar";
 import { RentalStatus } from "../../components/rentalStatus";
 import { db } from "../../firebase/clientApp";
@@ -17,7 +19,6 @@ import { ShareModal } from "../../components/shareModal";
 import { BookingForm } from "../../components/bookingForm";
 import { AvailabilitySignUp } from "../../components/availabilitySignUp";
 import { usePageTracking } from "../../hooks/usePageTracking";
-import Head from "next/head";
 
 const Car = () => {
   const router = useRouter();
@@ -25,6 +26,9 @@ const Car = () => {
   const [routerReady, setRouterReady] = useState(false);
   const [bigImageUrl, setBigImageUrl] = useState("");
   const [showShareModal, setShowShareModal] = useState(false);
+  const [paymentIntent, setPaymentIntent] = useState<PaymentIntent | null>(
+    null
+  );
 
   const getVehicle = (id) => {
     const q = query(collection(db, "vehicles"), where("vin", "==", id));
@@ -114,7 +118,11 @@ const Car = () => {
             {vehicle.imageUrls && vehicle.imageUrls.length !== 0 && (
               <section className="booking_images-previews">
                 {vehicle.imageUrls.map((url) => (
-                  <img src={url} onClick={() => setBigImageUrl(url)} />
+                  <img
+                    key={url}
+                    src={url}
+                    onClick={() => setBigImageUrl(url)}
+                  />
                 ))}
               </section>
             )}
@@ -243,7 +251,11 @@ const Car = () => {
               </section>
               <section className="booking_information_forms">
                 {vehicle.rentalStatus === "D" && (
-                  <BookingForm vehicle={vehicle} />
+                  <BookingForm
+                    vehicle={vehicle}
+                    setPaymentIntent={setPaymentIntent}
+                    paymentIntent={paymentIntent}
+                  />
                 )}
                 {vehicle.rentalStatus === "R" && (
                   <AvailabilitySignUp vin={vehicle.vin} />
