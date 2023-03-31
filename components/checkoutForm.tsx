@@ -131,6 +131,7 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
       >
         <fieldset className="elements-style mb-5">
           <div className="FormRow elements-style">
+            <h2>formatAmountForDisplay(amount)</h2>
             <PaymentElement
               options={{
                 layout: "accordion",
