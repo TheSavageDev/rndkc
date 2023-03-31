@@ -1,6 +1,12 @@
 import sgMail from "@sendgrid/mail";
 import { NextApiRequest, NextApiResponse } from "next";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  arrayUnion,
+  collection,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../../firebase/clientApp";
 
 sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_API_KEY);
@@ -21,24 +27,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   } = req.body;
 
   console.log(req.body);
-  const vehicleDoc = doc(db, "vehicles", vin);
+  const vehicleDoc = collection(db, "vehicles", vin, "bookings");
   try {
-    await updateDoc(
-      vehicleDoc,
-      {
-        bookings: arrayUnion({
-          name,
-          email,
-          startDate: startDateTime,
-          endDate: endDateTime,
-          endRefitTime: endRefitTime,
-        }),
-      },
-      { merge: true }
-    );
+    await addDoc(vehicleDoc, {
+      name,
+      email,
+      startDate: startDateTime,
+      endDate: endDateTime,
+      endRefitTime: endRefitTime,
+    });
 
     const msg = {
-      to: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
+      to: `savage@revlogical.com`,
+      // to: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
       from: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
       subject: `New Booking for ${vehicle.year} ${vehicle.make} ${vehicle.model}`,
       text: `New Booking for ${vehicle.year} ${vehicle.make} ${vehicle.model} check Firestore for the booking information`,

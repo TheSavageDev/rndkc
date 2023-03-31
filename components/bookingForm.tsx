@@ -10,7 +10,13 @@ import getStripe from "../utils/get-stripejs";
 import { TextField } from "./TextField";
 import { DatePicker } from "./datePicker";
 import { TimePicker } from "./TimePicker";
-import { DocumentData, doc, getDoc } from "firebase/firestore";
+import {
+  DocumentData,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
 import { db } from "../firebase/clientApp";
 
 export type FieldError = {
@@ -97,10 +103,13 @@ export const BookingForm = ({ vehicle, setPaymentIntent, paymentIntent }) => {
   }, []);
 
   const getCurrentBookings = async () => {
-    const vehicleDoc = doc(db, "vehicles", vehicle.vin);
-    const vehicleSnap = await getDoc(vehicleDoc);
-    const currentBookingsSnap = vehicleSnap.data().bookings;
-    setCurrentBookings(currentBookingsSnap);
+    let bookings = [];
+    const vehicleDoc = collection(db, "vehicles", vehicle.vin, "bookings");
+    const vehicleSnap = await getDocs(vehicleDoc);
+    vehicleSnap.forEach((doc) => {
+      bookings.push(doc.data());
+    });
+    setCurrentBookings(bookings);
   };
 
   useEffect(() => {

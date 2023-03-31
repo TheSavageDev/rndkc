@@ -127,7 +127,10 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
         </fieldset>
         <button
           className={`booking_information-form-button${
-            payment.status === "error" ? "--form-error" : ""
+            !["initial", "succeeded", "error"].includes(payment.status) ||
+            !stripe
+              ? "--form-error"
+              : ""
           }`}
           type="submit"
           disabled={
