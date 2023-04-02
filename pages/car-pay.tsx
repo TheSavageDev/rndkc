@@ -1,45 +1,22 @@
 import { useState } from "react";
 import Head from "next/head";
-import { ref, uploadBytes } from "firebase/storage";
 import { useRouter } from "next/router";
 import { Footer } from "../components/footer";
 import { NavBar } from "../components/navBar";
 import { usePageTracking } from "../hooks/usePageTracking";
 import { useEventTracking } from "../hooks/useEventTracking";
-import { storage } from "../firebase/clientApp";
 import { CarPayForm } from "../components/carPayForm";
 
 export default function CarPay() {
   const [success, setSuccess] = useState(false);
-  const [photos, setPhotos] = useState([]);
   const router = useRouter();
   usePageTracking(router);
 
   usePageTracking(router, router.query.id);
 
-  const handleFileChange = (e) => {
-    if (e.target.files) {
-      setPhotos(Array.from(e.target.files));
-    } else {
-      console.log("No files found");
-    }
-  };
-
-  const handleFirebaseUpload = (values) => {
-    photos.forEach(async (photo) => {
-      const path = `/car-pay/${values.name}-${values.year}-${values.makeModel}/${photo.name}`;
-      const photosRef = ref(storage, path);
-
-      uploadBytes(photosRef, photo);
-    });
-  };
-
   const handleSubmit = async (values) => {
-    if (photos?.length !== 0) {
-      handleFirebaseUpload(values);
-    }
     const res = await fetch("/api/car-pay", {
-      body: JSON.stringify({ ...values, photos: photos.length !== 0 }),
+      body: JSON.stringify({ ...values }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -173,11 +150,7 @@ export default function CarPay() {
                 rent well, we’ll have you in to inspect the vehicle and
                 approve/deny it’s entry into our CarPay system.{" "}
               </p>
-              <CarPayForm
-                handleFileChange={handleFileChange}
-                handleSubmit={handleSubmit}
-                success={success}
-              />
+              <CarPayForm handleSubmit={handleSubmit} success={success} />
               <section className="car-pay_contact">
                 <h4>Have Questions?</h4>
                 <ul>

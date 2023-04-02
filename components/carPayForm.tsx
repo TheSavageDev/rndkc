@@ -1,10 +1,9 @@
-import { ErrorMessage, Field, Form, Formik, useFormikContext } from "formik";
+import { Form, Formik, useFormikContext } from "formik";
 import { useEffect } from "react";
 import * as Yup from "yup";
 import { TextField } from "./TextField";
-import { TextArea } from "./TextArea";
 
-export const CarPayForm = ({ handleFileChange, handleSubmit, success }) => {
+export const CarPayForm = ({ handleSubmit, success }) => {
   const ScrollToFieldError = () => {
     const { errors, isSubmitting, isValidating } = useFormikContext();
 
@@ -30,31 +29,17 @@ export const CarPayForm = ({ handleFileChange, handleSubmit, success }) => {
       .email("Invalid Email Address")
       .required("Please enter your email address."),
     phoneNumber: Yup.string().min(10).max(11),
-    year: Yup.string()
+    yearMakeModel: Yup.string()
       .min(2)
-      .max(4)
-      .required("Please enter your vehicle's model year."),
-    makeModel: Yup.string()
       .max(50)
-      .required("Please enter your vehicle's make and model."),
-    roadWorthy: Yup.string().required(
-      "Please indicate if your vehicle is road worthy or not."
-    ),
-    currentCondition: Yup.string()
-      .max(1000)
-      .required("Please briefly describe your vehicle's current condition"),
-    notes: Yup.string().max(1000),
+      .required("Please enter your vehicle's model year, make, and model."),
   });
 
   const initialValues = {
     name: "",
     email: "",
     phone: "",
-    year: "",
-    makeModel: "",
-    roadWorthy: undefined,
-    currentCondition: "",
-    notes: "",
+    yearMakeModel: "",
   };
 
   return (
@@ -80,67 +65,10 @@ export const CarPayForm = ({ handleFileChange, handleSubmit, success }) => {
               type="tel"
             />
             <TextField
-              label="Year"
-              name="year"
-              placeholder="Enter Vehicle Year"
+              label="Vehicle Year, Make, and Model"
+              name="yearMakeModel"
+              placeholder="Enter Vehicle Year, Make & Model"
             />
-            <TextField
-              label="Vehicle Make & Model"
-              name="makeModel"
-              placeholder="Enter Vehicle Make & Model"
-            />
-
-            <label htmlFor="roadWorthy" className={`car-pay_signup_form-label`}>
-              Is your vehicle currently roadworthy?
-            </label>
-            <article className="car-pay_signup_form_checkboxes">
-              <article className="car-pay_signup_form_checkbox--yes">
-                <Field
-                  type="radio"
-                  name="roadWorthy"
-                  value="yes"
-                  id="roadWorthyYes"
-                />
-                <label htmlFor="roadWorthyYes">YES</label>
-              </article>
-              <article className="car-pay_signup_form_checkbox--no">
-                <Field
-                  type="radio"
-                  name={"roadWorthy"}
-                  value="no"
-                  id="roadWorthyNo"
-                />
-                <label htmlFor="roadWorthyNo">NO</label>
-              </article>
-            </article>
-            <ErrorMessage
-              component="article"
-              className="car-pay_signup_form_error-message"
-              name="roadWorthy"
-            />
-            <TextArea
-              label="Describe Your Vehicles Current Condition"
-              name="currentCondition"
-              placeholder="Enter Your Vehicles Current Condition..."
-            />
-            <TextArea
-              label="Additional Notes, Questions, or Comments"
-              name="notes"
-              placeholder="Enter Additional Notes, Questions, or Comments..."
-            />
-
-            <article className="car-pay_signup_form_file-upload">
-              <button className="car-pay_signup_form_file-upload-button">
-                <img src="/img/slices/icon_camera.svg" />
-                Select Images To Upload
-              </button>
-              <Field
-                type="file"
-                name="photos"
-                multiple
-                onChange={handleFileChange}
-              />
-            </article>
 
             <button
               className={
