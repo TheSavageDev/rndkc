@@ -60,7 +60,12 @@ export type Values = {
   endTime: string;
 };
 
-export const BookingForm = ({ vehicle, setPaymentIntent, paymentIntent }) => {
+export const BookingForm = ({
+  vehicle,
+  setPaymentIntent,
+  paymentIntent,
+  tab,
+}) => {
   const initialButtonText =
     vehicle.rentalStatus === "D"
       ? "Begin Booking"
@@ -71,6 +76,7 @@ export const BookingForm = ({ vehicle, setPaymentIntent, paymentIntent }) => {
   const [fieldError, setFieldError] = useState<FieldError>({});
   const [submitting, setSubmitting] = useState(false);
   const [buttonText, setButtonText] = useState(initialButtonText);
+  const [bookingBegun, setBookingBegun] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [currentBookings, setCurrentBookings] = useState([]);
   const [startDT, setStartDT] = useState<Moment.Moment>();
@@ -258,7 +264,12 @@ export const BookingForm = ({ vehicle, setPaymentIntent, paymentIntent }) => {
     }
   };
 
+  const handleBeginBooking = () => {
+    setBookingBegun(true);
+  };
+
   const handleSubmit = async (values) => {
+    console.log("handleSumit");
     const isValid = bookingValidCheck(values);
     if (!isValid) {
       return;
@@ -325,25 +336,6 @@ export const BookingForm = ({ vehicle, setPaymentIntent, paymentIntent }) => {
             ) : (
               <Form className="booking_information-form">
                 <ScrollToFieldError />
-                <section className="booking_information-form_contact">
-                  <TextField
-                    label="Name"
-                    name="name"
-                    placeholder="Enter Full Name"
-                  />
-                  <TextField
-                    label="Email Address"
-                    name="email"
-                    placeholder="Enter Email Address"
-                    type="email"
-                  />
-                  <TextField
-                    label="Phone Number"
-                    name="phoneNumber"
-                    placeholder="(816) 555-1234"
-                    type="tel"
-                  />
-                </section>
                 <section className="booking_information-form-dates_container">
                   <section className="booking_information-form-date">
                     <section className="booking_information-form-date_inputs">
@@ -371,25 +363,76 @@ export const BookingForm = ({ vehicle, setPaymentIntent, paymentIntent }) => {
                     ${vehicle?.rentalCost?.day} Day
                   </h2>
                   <h2 className="booking_information-form_pricing-text--sub">
-                    {totalDays >= 0
+                    {totalDays > 0
                       ? `${totalDays} Days for $${
                           vehicle?.rentalCost?.day * totalDays
                         } Total`
-                      : `Your start date and time must be before your end date and time`}
+                      : totalDays < 0
+                      ? `Your start date and time must be before your end date and time`
+                      : ""}
                   </h2>
                 </article>
-                <button
-                  className={`booking_information-form-button${
-                    Object.keys(formError).length !== 0 ? "--form-error" : ""
-                  }${
-                    submitting || success || totalDays < 0 ? "--submitting" : ""
-                  }`}
-                  // onClick={handleSubmit}
-                  type="submit"
-                  disabled={submitting || success || totalDays < 0}
-                >
-                  {buttonText}
-                </button>
+                {bookingBegun && (
+                  <section>
+                    <section className="booking_information-form_contact">
+                      <TextField
+                        label="First Name"
+                        name="firstName"
+                        placeholder="Enter First Name"
+                        booking
+                      />
+                      <TextField
+                        label="Last Name"
+                        name="lastName"
+                        placeholder="Enter Last Name"
+                        booking
+                      />
+                      <TextField
+                        label="Email Address"
+                        name="email"
+                        placeholder="Enter Email Address"
+                        type="email"
+                        booking
+                      />
+                      <TextField
+                        label="Phone Number"
+                        name="phoneNumber"
+                        placeholder="(816) 555-1234"
+                        type="tel"
+                        booking
+                      />
+                    </section>
+                  </section>
+                )}
+                {bookingBegun ? (
+                  <button
+                    className={`booking_information-form-button${
+                      Object.keys(formError).length !== 0 ? "--form-error" : ""
+                    }${
+                      submitting || success || totalDays <= 0
+                        ? "--submitting"
+                        : ""
+                    }`}
+                    type="submit"
+                    disabled={submitting || success || totalDays <= 0}
+                  >
+                    Continue To Payment
+                  </button>
+                ) : (
+                  <button
+                    className={`booking_information-form-button${
+                      Object.keys(formError).length !== 0 ? "--form-error" : ""
+                    }${
+                      submitting || success || totalDays <= 0
+                        ? "--submitting"
+                        : ""
+                    }`}
+                    onClick={handleBeginBooking}
+                    disabled={submitting || success || totalDays <= 0}
+                  >
+                    Begin Booking
+                  </button>
+                )}
                 {Object.values(fieldError).length !== 0 && (
                   <>
                     <article className="booking_date-conflict-message">

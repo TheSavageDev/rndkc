@@ -5,7 +5,14 @@ export const TimePicker = ({ label, name }) => {
 
   return (
     <section className="form-time-picker">
-      <label className="booking_information-form-input-label">{label}</label>
+      <label className="booking_information-form-input-label">
+        {label}
+        <ErrorMessage
+          name={name}
+          component="article"
+          className="car-pay_signup_form_error-message"
+        />
+      </label>
       <Field
         as="select"
         name={name}
@@ -62,11 +69,6 @@ export const TimePicker = ({ label, name }) => {
         <option value="23:00">11:00 PM</option>
         <option value="23:30">11:30 PM</option> */}
       </Field>
-      <ErrorMessage
-        name={name}
-        component="article"
-        className="car-pay_signup_form_error-message"
-      />
     </section>
   );
 };

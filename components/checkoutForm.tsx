@@ -131,7 +131,9 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
       >
         <fieldset className="elements-style mb-5">
           <div className="FormRow elements-style">
-            <h2>formatAmountForDisplay(amount)</h2>
+            <h2 className="checkout-form_amount">
+              {formatAmountForDisplay(50, "USD")}
+            </h2>
             <PaymentElement
               options={{
                 layout: "accordion",
@@ -242,7 +244,7 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
             !stripe
           }
         >
-          Submit Payment
+          Submit Deposit {formatAmountForDisplay(50, "USD")}
         </button>
       </form>
     </>
