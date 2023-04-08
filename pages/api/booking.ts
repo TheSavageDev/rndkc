@@ -39,8 +39,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     const msg = {
-      // to: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
-      to: 'jasavage42@gmail.com',
+      to: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
       from: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
       subject: `New Booking for ${vehicle.year} ${vehicle.make} ${vehicle.model}`,
       text: `New Booking for ${vehicle.year} ${vehicle.make} ${vehicle.model} check Firestore for the booking information`,
@@ -54,7 +53,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         <div class="img-container" style="display: flex;justify-content: center;align-items: center;border-radius: 5px;overflow: hidden; font-family: 'helvetica', 'ui-sans';">
               </div>
               <div class="container" style="margin-left: 20px;margin-right: 20px;">
-              <h3>New booking on ${vehicle.year} ${vehicle.make} ${vehicle.model} from ✉️<a href="mailto:${email}">${email}</a> </h3>
+              <h3>New booking on ${vehicle.year} ${vehicle.make} ${
+        vehicle.model
+      } from ✉️<a href="mailto:${email}">${email}</a> </h3>
               <div style="font-size: 16px;">
               <p>Booking:</p>
               <ul>
@@ -62,7 +63,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 <li>Email Address: <a href="mailto:${email}">${email}</a></li>
                 <li>Start Date and Time: ${startDate} at ${startTime}</li>
                 <li>End Date and Time: ${endDate} at ${endTime}</li>
-                <li>Delivery?: ${includeDelivery ? 'Yes' : 'No'}</li>
+                <li>Delivery?: ${includeDelivery ? "Yes" : "No"}</li>
               </ul>
               <br>
               </div>
