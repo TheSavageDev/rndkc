@@ -1,13 +1,22 @@
 @tailwind base;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@200;300;400;500;600;700;800&display=swap");
 
 html {
   font-size: 10px;
   background-color: #657170;
+}
+
+.form-date-picker,
+.form-time-picker {
+  display: flex;
+  flex-direction: column;
+}
+.form-date-picker {
+  width: 65%;
+}
+
+.form-time-picker {
+  width: 30%;
 }
 
 .coming-soon {
@@ -1703,6 +1712,19 @@ html {
   justify-content: space-between;
   border-radius: 0.5rem;
 }
+.booking_information-form-input--date-container {
+  width: 65%;
+}
+
+.booking_information-form-input--date_error-text {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  color: #fe0000;
+  margin-left: 1rem;
+}
 
 .booking_information-form-input--date {
   font-family: "Akshar";
@@ -1715,7 +1737,6 @@ html {
   padding: 1rem;
   margin: 0 0 1rem 0;
   border-radius: 0.5rem;
-  width: 65%;
 }
 
 .booking_information-form-input--time {
@@ -1729,7 +1750,6 @@ html {
   padding: 1rem;
   margin: 0 0 1rem 0;
   border-radius: 0.5rem;
-  width: 30%;
 }
 
 .booking_information-form-input--date--error {
@@ -1879,6 +1899,16 @@ html {
   font-size: 2.4rem;
   line-height: 2.6rem;
   color: #ffffff;
+}
+
+.booking_date-conflict-message {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #fe0000;
 }
 
 .share-modal {

@@ -88,7 +88,7 @@ export const ContactForm = () => {
           setErrors({ ...errors, name: "" });
         }}
         required
-        autoCapitalize="off"
+        autoCapitalize="none"
         autoCorrect="off"
         className={`contactForm-name ${
           (error || errors?.name) && "contactForm-input--error"
@@ -108,7 +108,7 @@ export const ContactForm = () => {
           setErrors({ ...errors, email: "" });
         }}
         required
-        autoCapitalize="off"
+        autoCapitalize="none"
         autoCorrect="off"
         className={`contactForm-email ${
           errors?.email && "contactForm-input--error"

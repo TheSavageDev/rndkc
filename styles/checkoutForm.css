@@ -1,0 +1,191 @@
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  background-color: #eaeaea;
+}
+.checkout-form_delivery {
+  font-family: "Akshar";
+  font-weight: 500;
+  font-size: 3rem;
+  line-height: 4.1rem;
+  letter-spacing: 0.03rem;
+  text-transform: uppercase;
+  color: #d68800;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  margin-top: 2rem;
+}
+
+.checkout-form_delivery-checkbox {
+  margin-right: 1rem;
+}
+
+.checkout-form_delivery-label {
+  font-family: "Akshar";
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  letter-spacing: 0.03rem;
+  color: #282828;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.checkout-form_delivery-icon {
+  height: 2rem;
+  width: 2rem;
+  margin-left: 1rem;
+}
+
+.checkout-form_delivery_info {
+  font-family: "Akshar";
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3rem;
+  letter-spacing: 0.03rem;
+  color: #282828;
+}
+
+.checkout-form_summary_header {
+  font-family: "Akshar";
+  font-weight: 500;
+  font-size: 3rem;
+  line-height: 4.1rem;
+  letter-spacing: 0.03rem;
+  text-transform: uppercase;
+  color: #d68800;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  margin-top: 2rem;
+}
+
+.checkout-form_summary_vehicle {
+  font-family: "Akshar";
+  font-weight: 500;
+  font-size: 2.6rem;
+  line-height: 3.4rem;
+  letter-spacing: 0.03rem;
+  color: #282828;
+  padding: 1rem 0 0 0;
+}
+
+.checkout-form_summary_vehicle--small {
+  font-family: "Akshar";
+  font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 3.4rem;
+  letter-spacing: 0.03rem;
+  color: #282828;
+  padding: 0 0 1rem 0;
+}
+
+.checkout-form_summary_line-item {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid black;
+}
+
+.checkout-form_summary_line-item_title {
+  font-family: "Akshar";
+  font-weight: 400;
+  font-size: 2.2rem;
+  line-height: 4.5rem;
+  letter-spacing: 0.03rem;
+  color: #282828;
+}
+
+.checkout-form_summary_line-item_value {
+  font-family: "Akshar";
+  font-weight: 500;
+  font-size: 2.2rem;
+  line-height: 4.5rem;
+  letter-spacing: 0.03rem;
+  color: #282828;
+}
+
+.checkout-form_summary_subtotal {
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid black;
+  padding: 1rem 0;
+}
+
+.checkout-form_summary_total {
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid black;
+  padding: 1rem 0;
+}
+
+.checkout-form_summary_total_title {
+  font-family: "Akshar";
+  font-weight: 600;
+  font-size: 3rem;
+  line-height: 4.1rem;
+  letter-spacing: 0.03rem;
+  color: #282828;
+}
+
+.checkout-form_summary_total_value {
+  font-family: "Akshar";
+  font-weight: 600;
+  font-size: 3rem;
+  line-height: 4.1rem;
+  letter-spacing: 0.03rem;
+  color: #282828;
+}
+
+.checkout-form_button {
+  background: #368e34;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #ffffff;
+  padding: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.checkout-form_button--disabled {
+  background: #ababab;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #ffffff;
+  padding: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.checkout-form_button--form-error {
+  background: red;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #ffffff;
+  padding: 0.75rem;
+}
+
+.checkout-form_button--submitting {
+  background: #858585;
+  border: 1px solid #ff9d0b;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #ffffff;
+  padding: 0.75rem;
+}
