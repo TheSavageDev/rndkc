@@ -24,6 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     startTime,
     endDate,
     endTime,
+    includeDelivery,
   } = req.body;
 
   console.log(req.body);
@@ -38,7 +39,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     const msg = {
-      to: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
+      // to: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
+      to: 'jasavage42@gmail.com',
       from: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
       subject: `New Booking for ${vehicle.year} ${vehicle.make} ${vehicle.model}`,
       text: `New Booking for ${vehicle.year} ${vehicle.make} ${vehicle.model} check Firestore for the booking information`,
@@ -60,6 +62,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 <li>Email Address: <a href="mailto:${email}">${email}</a></li>
                 <li>Start Date and Time: ${startDate} at ${startTime}</li>
                 <li>End Date and Time: ${endDate} at ${endTime}</li>
+                <li>Delivery?: ${includeDelivery ? 'Yes' : 'No'}</li>
               </ul>
               <br>
               </div>

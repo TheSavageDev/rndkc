@@ -319,6 +319,7 @@ export const BookingForm = ({ vehicle, setPaymentIntent, paymentIntent }) => {
                   setButtonText={setButtonText}
                   fieldError={fieldError}
                   setSuccess={setSuccess}
+                  success={success}
                 />
               </Elements>
             ) : (
