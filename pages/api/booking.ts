@@ -13,7 +13,7 @@ sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_API_KEY);
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const {
-    name,
+    fullName,
     email,
     vin,
     startDateTime,
@@ -25,8 +25,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     endDate,
     endTime,
     includeDelivery,
+    type,
+    values,
   } = req.body;
-
   console.log(req.body);
   const vehicleDoc = collection(db, "vehicles", vin, "bookings");
   try {
@@ -59,11 +60,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               <div style="font-size: 16px;">
               <p>Booking:</p>
               <ul>
-                <li>Name: ${name}</li>
+                <li>Name: ${fullName}</li>
                 <li>Email Address: <a href="mailto:${email}">${email}</a></li>
                 <li>Start Date and Time: ${startDate} at ${startTime}</li>
                 <li>End Date and Time: ${endDate} at ${endTime}</li>
                 <li>Delivery?: ${includeDelivery ? "Yes" : "No"}</li>
+                <li>Type: ${type}</li>
+                <li>Notes?: ${values?.notes}
               </ul>
               <br>
               </div>

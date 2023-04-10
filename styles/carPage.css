@@ -1,0 +1,839 @@
+/* Booking Page */
+.booking {
+  position: relative;
+  background-color: #282828;
+}
+
+.booking_sub-nav-header {
+  background-color: #657170;
+  height: 4rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Akshar";
+  font-weight: 300;
+  font-size: 2rem;
+  line-height: 3.2rem;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+}
+
+.booking_sub-nav_header-text {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 3.5rem;
+  line-height: 4.8rem;
+  text-transform: uppercase;
+}
+
+.booking_sub-nav_buttons {
+  padding: 0 2rem;
+  display: flex;
+}
+
+.booking_sub-nav_header-button {
+  display: flex;
+  align-items: center;
+}
+
+.booking_sub-nav_header-button--question {
+  border-right: 1px solid #fff;
+  border-left: 1px solid #fff;
+}
+
+.booking_images {
+  height: auto;
+  background-color: black;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.4rem;
+  min-height: 25.5rem;
+}
+
+.booking_images_main-image {
+  position: relative;
+  height: 25.6rem;
+  width: 52.7rem;
+  overflow: hidden;
+  display: block;
+}
+
+.booking_images_main-image_img {
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.booking_images_main-image_icon {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid #797979;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  bottom: 0;
+  right: 0;
+  margin: 0.5rem;
+  display: flex;
+  height: 2.5rem;
+  justify-content: center;
+}
+
+.booking_images_main-image_icon-svg {
+  color: #0e0e0e;
+}
+
+.booking_images_main-image_icon-text {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  text-transform: uppercase;
+  color: #000000;
+  opacity: 0.7;
+  margin: 0 0 0 0.5rem;
+  align-self: flex-start;
+}
+
+.booking_images_main-image_img--placeholder {
+  height: 25.5rem;
+}
+
+.booking_images_main-image_icon--placeholder {
+  position: absolute;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  right: 0;
+  left: 0;
+  top: 50%;
+  margin: 2.5rem;
+  display: flex;
+  height: 2.5rem;
+  justify-content: center;
+}
+
+.booking_images_main-image_icon-text--placeholder {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.6rem;
+  line-height: 2.2rem;
+  text-transform: uppercase;
+  color: #ffffff;
+  align-self: flex-start;
+}
+
+.booking_images-previews {
+  height: 8.5rem;
+  background-color: #fff;
+  display: flex;
+  gap: 0.5rem;
+  font-size: 2.4rem;
+  overflow-x: scroll;
+}
+
+.booking_images-previews img {
+  height: 8.5rem;
+  padding: 0.5rem 0;
+}
+
+.booking_information {
+  background-color: #282828;
+  padding: 1rem;
+}
+
+.booking_information-car-type {
+  height: 3rem;
+}
+
+.booking_information_header {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2.8rem;
+  line-height: 3.9rem;
+  letter-spacing: 0.03rem;
+  color: #ffffff;
+  text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.booking_information_header span {
+  color: #ff9d0b;
+}
+
+.view-details_container {
+  display: flex;
+  flex-direction: "row";
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.view-details_divider {
+  height: 1px;
+  border: 1px solid #919191;
+  flex-shrink: 0;
+  flex-grow: 2;
+}
+.view-details_box {
+  border: 1px solid #919191;
+  padding: 0.5rem 1rem;
+  font-size: 2.2rem;
+  line-height: 3.5rem;
+  font-family: "Akshar";
+  font-weight: 300;
+  text-align: center;
+  letter-spacing: 0.03rem;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.view-details_box_img {
+  height: 0.9rem;
+  margin-left: 1rem;
+  transition: all ease-in-out 500ms;
+}
+
+.view-details_box_img--up {
+  height: 0.9rem;
+  margin-left: 1rem;
+  transform: rotate(180deg);
+  transition: all ease-in-out 500ms;
+}
+
+.booking_information-paragraphs {
+  margin: 2rem 0;
+  padding: 0 1rem;
+}
+
+.booking_information-paragraphs-text {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 3.5rem;
+  letter-spacing: 0.03rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+.vehicle-details_section_header {
+  font-family: "Akshar";
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  color: #ff9d0b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.vehicle-details_section_list {
+  list-style-type: disc;
+  margin-left: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.vehicle-details_section_text {
+  font-family: "Gemunu Libra";
+  font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 3rem;
+  color: #fff;
+}
+
+.vehicle-details_section_content {
+  margin: 1rem 0 2rem 2rem;
+}
+
+.vehicle-details_rental-status,
+.vehicle-details_rental-type {
+  padding: 2rem 2rem 2rem 0;
+}
+
+.vehicle-details_rental-status_section,
+.vehicle-details_rental-type_section {
+  display: flex;
+  align-items: flex-start;
+}
+
+.vehicle-details_rental-status_section img,
+.vehicle-details_rental-type_section img {
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+}
+
+.vehicle-details_rental_specs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking_information_forms {
+  background-color: #282828;
+}
+
+.booking_information_forms_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking_information_forms_header_tab,
+.booking_information_forms_header_tab-chauffeured,
+.booking_information_forms_header_tab-commercial {
+  font-family: "Akshar";
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.booking_information_forms_header_tab--active {
+  font-family: "Akshar";
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  text-transform: uppercase;
+  color: #222;
+  background-color: #eaeaea;
+  border-radius: 0 0.5rem 0 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.booking_information_forms_header_tab-chauffeured--active {
+  font-family: "Akshar";
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  text-transform: uppercase;
+  color: #222;
+  background-color: #eaeaea;
+  border-radius: 0.5rem 0.5rem 0 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.booking_information_forms_header_tab-commercial--active {
+  font-family: "Akshar";
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  text-transform: uppercase;
+  color: #222;
+  background-color: #eaeaea;
+  border-radius: 0.5rem 0 0 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.booking_information_forms_header_tab_img {
+  height: 3.5rem;
+}
+
+.booking_information-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8rem;
+  padding: 2rem;
+  background: #eaeaea;
+}
+
+.booking_information-form_contact {
+  display: flex;
+  flex-direction: column;
+}
+
+.booking_information-form-input-label {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  color: #111;
+  margin: 1rem 0 0 0;
+}
+
+.booking_signup_form-label {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  color: #111;
+  margin-top: 2rem;
+}
+
+.booking_signup_form-label--error {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  color: #fe0000;
+  margin-top: 2rem;
+}
+
+.booking_signup_form-input {
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  padding: 1rem;
+  color: #000000;
+}
+
+.booking_signup_form-input--error {
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  padding: 1rem;
+  color: #000000;
+  border: 2px solid #fe0000;
+}
+
+.booking_information-form-input {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  background-color: #ffffff;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  border-radius: 0.5rem;
+}
+
+.booking_signup_form_error-message {
+  color: #fe0000;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 2.3rem;
+  margin-top: 0.5rem;
+}
+
+.booking_information-form-input--error {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  background-color: #fff;
+  border: 2px solid #fe0000;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  border-radius: 0.5rem;
+}
+
+.booking_information-form-date_inputs {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+}
+.booking_information-form-input--date-container {
+  width: 50%;
+}
+
+.form-date-picker,
+.form-time-picker {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.booking_information_signup_form_textarea {
+  height: 33.2rem;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  padding: 1.5rem;
+}
+
+.booking_information_signup_form_textarea--error {
+  height: 33.2rem;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  padding: 1.5rem;
+  border: 2px solid #fe0000;
+}
+
+.booking_information-form-input--date_error-text {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  color: #fe0000;
+  margin-left: 1rem;
+}
+
+.booking_information-form-input--date {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #282828;
+  background-color: #ffffff;
+  border: 1px solid #9b9b9b;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  border-radius: 0.5rem;
+}
+
+.booking_information-form-input--time {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #282828;
+  background-color: #ffffff;
+  border: 1px solid #9b9b9b;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  border-radius: 0.5rem;
+}
+
+.booking_information-form-input--date--error {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  border: 2px solid #fe0000;
+  background-color: #ffffff;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  border-radius: 0.5rem;
+  width: 65%;
+}
+
+.booking_information-form-input--time--error {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  border: 2px solid #fe0000;
+  background-color: #ffffff;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  border-radius: 0.5rem;
+  width: 30%;
+}
+
+.booking_information-form_pricing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.booking_information-form_pricing-text {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 3.5rem;
+  line-height: 4.8rem;
+  letter-spacing: 0.03em;
+  color: #368b34;
+}
+.booking_information-form_pricing-text--sub {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  letter-spacing: 0.03rem;
+  color: #111;
+}
+
+.booking_information-form-button {
+  background: #ff9d0b;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #ffffff;
+  padding: 0.75rem;
+  text-transform: uppercase;
+  margin-top: 2rem;
+}
+
+.booking_information-form-button--form-error {
+  background: red;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #ffffff;
+  padding: 0.75rem;
+}
+
+.booking_information-form-button--submitting {
+  background: #858585;
+  border: 1px solid #ff9d0b;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #ffffff;
+  padding: 0.75rem;
+}
+
+.booking_questions_header {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 3.5rem;
+  line-height: 4.8rem;
+  letter-spacing: 0.03rem;
+  color: #ffffff;
+  text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+.booking_questions_header-text {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 3.5rem;
+  letter-spacing: 0.03rem;
+  color: #ffffff;
+}
+
+.booking_questions_header-text--bold {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 3.5rem;
+  letter-spacing: 0.03rem;
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.booking_questions_contact-form button {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #fff;
+}
+
+.booking_questions_social {
+  font-family: "Gemunu Libre";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 2.6rem;
+  color: #ffffff;
+}
+
+.booking_date-conflict-message {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #fe0000;
+}
+
+.share-modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: 2rem;
+  background-color: #fff;
+  z-index: 10;
+  border-radius: 0.5rem;
+}
+
+.share-modal_header {
+  background-color: #ff9d0b;
+  color: #fff;
+  height: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.share-modal_header_text {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.6rem;
+  line-height: 3.6rem;
+  text-transform: uppercase;
+}
+
+.share-modal_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+}
+
+.share-modal_form_label {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+}
+
+.share-modal_form_input {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  background: #ffffff;
+  border: 1px solid #9b9b9b;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
+}
+
+.share-modal_form_textarea {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  background: #ffffff;
+  border: 1px solid #9b9b9b;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  height: 19.7rem;
+  width: 100%;
+}
+
+.share-modal_form_button {
+  background: #30a23b;
+  border-radius: 5px;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #ffffff;
+  padding: 0.5rem;
+  display: block;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.share-modal_submission-success {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #30a13b;
+  border-radius: 5px;
+  margin: 1rem;
+  padding: 0.5rem;
+}
+
+.share-modal_submission-success_text {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #30a13b;
+  margin: 1rem 0;
+}
+
+.share-modal_form--success-paragraph {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 3rem;
+  letter-spacing: 0.03rem;
+  color: #282828;
+  padding: 0 2rem;
+  margin-bottom: 2rem;
+}
+
+.share-modal_form_button--success {
+  background: #ff9d0b;
+  border-radius: 5px;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  text-align: center;
+  color: #ffffff;
+  padding: 0.5rem;
+  display: block;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.share-modal_social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

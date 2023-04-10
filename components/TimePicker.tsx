@@ -1,11 +1,47 @@
-import { ErrorMessage, Field, useField } from "formik";
+import { ErrorMessage, Field, useField, useFormikContext } from "formik";
+import moment, { Moment } from "moment";
+import { Values } from "./bookingForm";
+import { useEffect, useState } from "react";
 
-export const TimePicker = ({ label, name }) => {
+export const TimePicker = ({
+  label,
+  name,
+  handleTimeChange,
+}: {
+  label: string;
+  name: string;
+  handleTimeChange?: (startTime: Moment, endTime: Moment) => void;
+}) => {
+  const { values }: { values: Values } = useFormikContext();
   const [field, meta, helpers] = useField(name);
+
+  useEffect(() => {
+    if (
+      values.startDate &&
+      values.startTime &&
+      values.endTime &&
+      handleTimeChange
+    ) {
+      let startTimestamp = moment(values.startDate).hour(10);
+      let endTimestamp = moment(values.startDate).hour(10);
+      startTimestamp.hour(parseInt(values.startTime.split(":")[0]));
+      startTimestamp.minute(parseInt(values.startTime.split(":")[1]));
+      endTimestamp.hour(parseInt(values.endTime.split(":")[0]));
+      endTimestamp.minute(parseInt(values.endTime.split(":")[1]));
+      handleTimeChange(startTimestamp, endTimestamp);
+    }
+  }, [values.startDate, values.startTime, values.endTime]);
 
   return (
     <section className="form-time-picker">
-      <label className="booking_information-form-input-label">{label}</label>
+      <label className="booking_information-form-input-label">
+        {label}
+        <ErrorMessage
+          name={name}
+          component="article"
+          className="car-pay_signup_form_error-message"
+        />
+      </label>
       <Field
         as="select"
         name={name}
@@ -62,11 +98,6 @@ export const TimePicker = ({ label, name }) => {
         <option value="23:00">11:00 PM</option>
         <option value="23:30">11:30 PM</option> */}
       </Field>
-      <ErrorMessage
-        name={name}
-        component="article"
-        className="car-pay_signup_form_error-message"
-      />
     </section>
   );
 };

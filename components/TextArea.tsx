@@ -13,13 +13,13 @@ export const TextArea = ({
 }) => {
   return (
     <>
-      <label htmlFor={name} className="car-pay_signup_form-label">
+      <label htmlFor={name} className="booking_information-form-input-label">
         {label}
       </label>
       <Field
         name={name}
         placeholder={placeholder}
-        className="car-pay_signup_form_textarea"
+        className="booking_information_signup_form_textarea"
         as="textarea"
       />
       <ErrorMessage

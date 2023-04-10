@@ -32,17 +32,19 @@ export const DatePicker = ({ label, name, handleDateChange }) => {
 
   return (
     <section className="form-date-picker">
-      <label className="booking_information-form-input-label">{label}</label>
+      <label className="booking_information-form-input-label">
+        {label}
+        <ErrorMessage
+          name={name}
+          component="article"
+          className="car-pay_signup_form_error-message"
+        />
+      </label>
       <input
         {...field}
         value={meta.value}
         type="date"
         className="booking_information-form-input--date"
-      />
-      <ErrorMessage
-        name={name}
-        component="article"
-        className="car-pay_signup_form_error-message"
       />
     </section>
   );
