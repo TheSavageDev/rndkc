@@ -278,11 +278,13 @@ export const BookingForm = ({
                       type="tel"
                       booking
                     />
-                    <TextArea
-                      label="Notes or Special Requests"
-                      name="notes"
-                      placeholder="Enter Event Details"
-                    />
+                    {tab !== "self" && (
+                      <TextArea
+                        label="Notes or Special Requests"
+                        name="notes"
+                        placeholder="Enter Event Details"
+                      />
+                    )}
                   </section>
                 </section>
               )}
