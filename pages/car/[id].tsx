@@ -377,18 +377,7 @@ const Car = () => {
             <section className="booking_container">
               <section className="booking_information">
                 <h2 className="booking_information_header">
-                  {vehicle.rentalStatus === "D" ? (
-                    <>
-                      {" "}
-                      {`Driving a `}
-                      <span>
-                        {vehicle.year} {vehicle.model}
-                      </span>
-                      {` is an experience like no other.`}
-                    </>
-                  ) : (
-                    `We'll let you know when it's ready to cruise`
-                  )}
+                  {vehicle?.blurbs?.title}
                 </h2>
 
                 <section
@@ -421,14 +410,7 @@ const Car = () => {
                 {viewDetailsOpen && (
                   <section className="booking_information-paragraphs">
                     <p className="booking_information-paragraphs-text">
-                      With its powerful V8 engine and classic styling, the car
-                      feels powerful and responsive on the road. The interior is
-                      luxurious and comfortable, with leather seats and chrome
-                      accents that give the car an air of sophistication. The
-                      exterior is timeless and iconic, with its sharp lines and
-                      classic curves. Driving a 1965 Plymouth Satellite is an
-                      exhilarating experience that will make you want to keep
-                      coming back for more.
+                      {vehicle.blurbs.description}
                     </p>
                     <section>
                       <header>
