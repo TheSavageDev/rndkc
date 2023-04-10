@@ -463,7 +463,31 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 45%;
+}
+
+.booking_information_signup_form_textarea {
+  height: 33.2rem;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  padding: 1.5rem;
+}
+
+.booking_information_signup_form_textarea--error {
+  height: 33.2rem;
+  border-radius: 0.5rem;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #000000;
+  padding: 1.5rem;
+  border: 2px solid #fe0000;
 }
 
 .booking_information-form-input--date_error-text {
@@ -573,6 +597,7 @@
   color: #ffffff;
   padding: 0.75rem;
   text-transform: uppercase;
+  margin-top: 2rem;
 }
 
 .booking_information-form-button--form-error {

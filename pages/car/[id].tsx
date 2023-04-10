@@ -23,13 +23,7 @@ import { usePageTracking } from "../../hooks/usePageTracking";
 import Image from "next/image";
 import { fetchPostJSON } from "../../utils/api-helpers";
 import { extendMoment } from "moment-range";
-import { Form, Formik, useFormikContext } from "formik";
-import { Elements } from "@stripe/react-stripe-js";
-import getStripe from "../../utils/get-stripejs";
-import { CheckoutForm } from "../../components/checkoutForm";
-import { DatePicker } from "../../components/datePicker";
-import { TimePicker } from "../../components/TimePicker";
-import { TextField } from "../../components/TextField";
+import { useFormikContext } from "formik";
 
 export type FieldError = {
   name?: string;
@@ -37,19 +31,6 @@ export type FieldError = {
   startTime?: string;
   endDate?: string;
   endTime?: string;
-};
-
-export type CustomerData = {
-  name: string;
-  email: string;
-  phoneNumber: string;
-  startDate: string;
-  startTime: string;
-  endDate: string;
-  endTime: string;
-  totalDays: number;
-  vin: string;
-  vehicle: DocumentData;
 };
 
 export type SubmissionData = {
@@ -90,11 +71,11 @@ const Car = () => {
   const [success, setSuccess] = useState(false);
   const [formError, setFormError] = useState(false);
   const [totalDays, setTotalDays] = useState(0);
+  const [totalHours, setTotalHours] = useState(0);
   const [fieldError, setFieldError] = useState<FieldError>({});
   const [submitting, setSubmitting] = useState(false);
   const [buttonText, setButtonText] = useState(initialButtonText);
   const [bookingBegun, setBookingBegun] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const [currentBookings, setCurrentBookings] = useState([]);
   const [startDT, setStartDT] = useState<Moment.Moment>();
   const [endDT, setEndDT] = useState<Moment.Moment>();
@@ -127,39 +108,22 @@ const Car = () => {
 
   const getCurrentBookings = async () => {
     let bookings = [];
-    const vehicleDoc = collection(db, "vehicles", vehicle?.vin, "bookings");
-    const vehicleSnap = await getDocs(vehicleDoc);
-    vehicleSnap.forEach((doc) => {
-      bookings.push(doc.data());
-    });
-    setCurrentBookings(bookings);
+    if (vehicle.vin) {
+      const vehicleDoc = collection(db, "vehicles", vehicle.vin, "bookings");
+      const vehicleSnap = await getDocs(vehicleDoc);
+      vehicleSnap.forEach((doc) => {
+        bookings.push(doc.data());
+      });
+      setCurrentBookings(bookings);
+    }
   };
 
   useEffect(() => {
     getCurrentBookings();
   }, [vehicle]);
 
-  const ScrollToFieldError = () => {
-    const { errors, isSubmitting, isValidating } = useFormikContext();
-
-    useEffect(() => {
-      if (isSubmitting && !isValidating) {
-        let keys = Object.keys(errors);
-        if (keys.length > 0) {
-          const selector = `[name=${keys[0]}]`;
-          const errorElement = document.querySelector(selector) as HTMLElement;
-          if (errorElement) {
-            errorElement.focus();
-          }
-        }
-      }
-    }, [errors, isSubmitting, isValidating]);
-
-    return null;
-  };
-
   const validationSchema = Yup.object({
-    name: Yup.string().required("Please enter your full name."),
+    fullName: Yup.string().required("Please enter your full name."),
     email: Yup.string()
       .email("Invalid Email Address")
       .required("Please enter your email address."),
@@ -174,7 +138,7 @@ const Car = () => {
   });
 
   const initialValues = {
-    name: "",
+    fullName: "",
     phoneNumber: "",
     email: "",
     startDate: "",
@@ -203,6 +167,14 @@ const Car = () => {
       const differenceInTime = endDate.getTime() - startDate.getTime();
       newTotalDays = differenceInTime / (1000 * 3600 * 24);
       setTotalDays(Math.round(newTotalDays));
+    }
+  };
+
+  const handleTimeChange = (startTime, endTime) => {
+    setSubmitting(false);
+    if (startTime && endTime) {
+      const newTotalHours = (endTime - startTime) / (1000 * 3600);
+      setTotalHours(newTotalHours);
     }
   };
 
@@ -286,7 +258,7 @@ const Car = () => {
   };
 
   const handleSubmit = async (values) => {
-    console.log("handleSumit");
+    console.log("handleSubmit");
     const isValid = bookingValidCheck(values);
     if (!isValid) {
       return;
@@ -306,7 +278,7 @@ const Car = () => {
         endDateTime: endDT,
         endRefitTime: endRT,
         vehicle,
-        values,
+        type: tab,
       });
     }
   };
@@ -386,17 +358,6 @@ const Car = () => {
                       className="booking_images_main-image_img"
                       priority
                     />
-                    <section className="booking_images_main-image_icon">
-                      <img
-                        src="/img/slices/icon_camera.svg"
-                        className="booking_images_main-image_icon-svg"
-                      />
-                      <p className="booking_images_main-image_icon-text">
-                        {`${vehicle.imageUrls.indexOf(bigImageUrl) + 1}/${
-                          vehicle.imageUrls.length
-                        }`}
-                      </p>
-                    </section>
                   </>
                 ) : (
                   <>
@@ -673,175 +634,29 @@ const Car = () => {
                   </article>
                 </section>
                 {vehicle.rentalStatus === "D" && (
-                  <Formik
+                  <BookingForm
+                    vehicle={vehicle}
+                    paymentIntent={paymentIntent}
+                    tab={tab}
                     initialValues={initialValues}
-                    onSubmit={handleSubmit}
+                    handleSubmit={handleSubmit}
                     validationSchema={validationSchema}
-                  >
-                    {({ values }) => {
-                      return (
-                        <>
-                          {!success &&
-                          paymentIntent &&
-                          paymentIntent.client_secret ? (
-                            <Elements
-                              options={{
-                                clientSecret: paymentIntent.client_secret,
-                                appearance: {
-                                  theme: "flat",
-                                  labels: "floating",
-                                  variables: {
-                                    fontFamily: "Akshar",
-                                    fontSizeBase: "1.1rem",
-                                  },
-                                },
-                              }}
-                              stripe={getStripe()}
-                            >
-                              <CheckoutForm
-                                customerData={{
-                                  ...values,
-                                  vehicle,
-                                  totalDays,
-                                }}
-                                submissionData={submissionData}
-                                setSubmitting={setSubmitting}
-                                setFieldError={setFieldError}
-                                setButtonText={setButtonText}
-                                fieldError={fieldError}
-                                setSuccess={setSuccess}
-                              />
-                            </Elements>
-                          ) : (
-                            <Form className="booking_information-form">
-                              <ScrollToFieldError />
-                              <section className="booking_information-form-dates_container">
-                                <section className="booking_information-form-date">
-                                  <section className="booking_information-form-date_inputs">
-                                    <DatePicker
-                                      name="startDate"
-                                      label="Start Date"
-                                      handleDateChange={handleDateChange}
-                                    />
-                                    <TimePicker
-                                      name="startTime"
-                                      label="Start Time"
-                                    />
-                                  </section>
-                                </section>
-                                <section className="booking_information-form-date">
-                                  <section className="booking_information-form-date_inputs">
-                                    <DatePicker
-                                      name="endDate"
-                                      label="End Date"
-                                      handleDateChange={handleDateChange}
-                                    />
-                                    <TimePicker
-                                      name="endTime"
-                                      label="End Time"
-                                    />
-                                  </section>
-                                </section>
-                              </section>
-                              <article className="booking_information-form_pricing">
-                                <h2 className="booking_information-form_pricing-text">
-                                  ${vehicle?.rentalCost?.day} Day
-                                </h2>
-                                <h2 className="booking_information-form_pricing-text--sub">
-                                  {totalDays > 0
-                                    ? `${totalDays} Days for $${
-                                        vehicle?.rentalCost?.day * totalDays
-                                      } Total`
-                                    : totalDays < 0
-                                    ? `Your start date and time must be before your end date and time`
-                                    : ""}
-                                </h2>
-                              </article>
-                              {bookingBegun && (
-                                <section>
-                                  <section className="booking_information-form_contact">
-                                    <TextField
-                                      label="First Name"
-                                      name="firstName"
-                                      placeholder="Enter First Name"
-                                      booking
-                                    />
-                                    <TextField
-                                      label="Last Name"
-                                      name="lastName"
-                                      placeholder="Enter Last Name"
-                                      booking
-                                    />
-                                    <TextField
-                                      label="Email Address"
-                                      name="email"
-                                      placeholder="Enter Email Address"
-                                      type="email"
-                                      booking
-                                    />
-                                    <TextField
-                                      label="Phone Number"
-                                      name="phoneNumber"
-                                      placeholder="(816) 555-1234"
-                                      type="tel"
-                                      booking
-                                    />
-                                  </section>
-                                </section>
-                              )}
-                              {bookingBegun ? (
-                                <button
-                                  className={`booking_information-form-button${
-                                    Object.keys(formError).length !== 0
-                                      ? "--form-error"
-                                      : ""
-                                  }${
-                                    submitting || success || totalDays <= 0
-                                      ? "--submitting"
-                                      : ""
-                                  }`}
-                                  type="submit"
-                                  disabled={
-                                    submitting || success || totalDays <= 0
-                                  }
-                                >
-                                  Continue To Payment
-                                </button>
-                              ) : (
-                                <button
-                                  className={`booking_information-form-button${
-                                    Object.keys(formError).length !== 0
-                                      ? "--form-error"
-                                      : ""
-                                  }${
-                                    submitting || success || totalDays <= 0
-                                      ? "--submitting"
-                                      : ""
-                                  }`}
-                                  onClick={handleBeginBooking}
-                                  disabled={
-                                    submitting || success || totalDays <= 0
-                                  }
-                                >
-                                  Begin Booking
-                                </button>
-                              )}
-                              {Object.values(fieldError).length !== 0 && (
-                                <>
-                                  <article className="booking_date-conflict-message">
-                                    {fieldError.startDate}
-                                  </article>
-                                  <article className="booking_date-conflict-message">
-                                    {fieldError.endDate}
-                                  </article>
-                                </>
-                              )}
-                            </Form>
-                          )}
-                        </>
-                      );
-                    }}
-                  </Formik>
+                    success={success}
+                    totalDays={totalDays}
+                    totalHours={totalHours}
+                    submissionData={submissionData}
+                    setSubmitting={setSubmitting}
+                    setFieldError={setFieldError}
+                    setButtonText={setButtonText}
+                    fieldError={fieldError}
+                    setSuccess={setSuccess}
+                    handleDateChange={handleDateChange}
+                    bookingBegun={bookingBegun}
+                    formError={formError}
+                    submitting={submitting}
+                    handleBeginBooking={handleBeginBooking}
+                    handleTimeChange={handleTimeChange}
+                  />
                 )}
                 {vehicle.rentalStatus === "R" && (
                   <AvailabilitySignUp vin={vehicle.vin} />

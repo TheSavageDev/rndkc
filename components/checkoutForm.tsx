@@ -45,9 +45,6 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    if (payment.status === "initial") {
-      return;
-    }
     // Abort if form isn't valid
     if (!e.currentTarget.reportValidity()) return;
     if (!elements) return;
@@ -85,7 +82,8 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
         setPayment(paymentIntent);
       }
 
-      if (success) {
+      if (!error) {
+        console.log("booking");
         const res = await fetch("/api/booking", {
           body: JSON.stringify({ ...submissionData, includeDelivery }),
           headers: {
@@ -125,80 +123,110 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit}
-        className="checkout-form flex flex-col pl-4 pr-4"
-      >
+      <form onSubmit={handleSubmit} className="checkout-form">
         <fieldset className="elements-style mb-5">
-          <div className="FormRow elements-style">
-            <h2 className="checkout-form_amount">
-              {formatAmountForDisplay(50, "USD")}
-            </h2>
-            <PaymentElement
-              options={{
-                layout: "accordion",
-              }}
-              onChange={(e) => {
-                setPaymentType(e.value.type);
-              }}
-            />
-          </div>
-          <h4 className="checkout-form_delivery">Delivery</h4>
-          <label className="checkout-form_delivery-label">
-            <input
-              type="checkbox"
-              name="delivery"
-              id="delivery"
-              className="checkout-form_delivery-checkbox"
-              onClick={(e) => {
-                const { target } = e;
-                setIncludeDelivery((target as HTMLInputElement).checked);
-              }}
-            />
-            Include Delivery
-            <img
-              src="/img/question-icon.svg"
-              className="checkout-form_delivery-icon"
-            />
-          </label>
-          {includeDelivery && (
-            <p className="checkout-form_delivery_info">
-              Delivery cost $2.00 per mile with a $100 minimum. Maximum of 25
-              miles from downtown Kansas City. Delivery fee wil be separate from
-              rental booking. A representative will contact you to arrange
-              delivery.
-            </p>
+          {customerData.type === "self" && (
+            <>
+              <h4 className="checkout-form_delivery">Delivery</h4>
+              <label className="checkout-form_delivery-label">
+                <input
+                  type="checkbox"
+                  name="delivery"
+                  id="delivery"
+                  className="checkout-form_delivery-checkbox"
+                  onClick={(e) => {
+                    const { target } = e;
+                    setIncludeDelivery((target as HTMLInputElement).checked);
+                  }}
+                />
+                Include Delivery
+                <img
+                  src="/img/question-icon.svg"
+                  className="checkout-form_delivery-icon"
+                />
+              </label>
+              {includeDelivery && (
+                <p className="checkout-form_delivery_info">
+                  Delivery cost $2.00 per mile with a $100 minimum. Maximum of
+                  25 miles from downtown Kansas City. Delivery fee wil be
+                  separate from rental booking. A representative will contact
+                  you to arrange delivery.
+                </p>
+              )}
+            </>
           )}
           <h4 className="checkout-form_summary_header">Summary</h4>
           <section>
             <h5 className="checkout-form_summary_vehicle">{`${customerData.vehicle.year} ${customerData.vehicle.make} ${customerData.vehicle.model} Rental`}</h5>
-            <small className="checkout-form_summary_vehicle--small">{`${new Date(
-              customerData.startDate
-            ).toLocaleDateString("en-us")} ${getTwelveHourTime(
-              customerData.startTime
-            )} - ${new Date(customerData.endDate).toLocaleDateString(
-              "en-us"
-            )} ${getTwelveHourTime(customerData.endTime)}`}</small>
+            {customerData.type === "self" ? (
+              <small className="checkout-form_summary_vehicle--small">{`${new Date(
+                customerData.startDate
+              ).toLocaleDateString("en-us")} ${getTwelveHourTime(
+                customerData.startTime
+              )} - ${new Date(customerData.endDate).toLocaleDateString(
+                "en-us"
+              )} ${getTwelveHourTime(customerData.endTime)}`}</small>
+            ) : (
+              <small className="checkout-form_summary_vehicle--small">{`${new Date(
+                customerData.startDate
+              ).toLocaleDateString("en-us")} ${getTwelveHourTime(
+                customerData.startTime
+              )} - ${getTwelveHourTime(customerData.endTime)}`}</small>
+            )}
             <article className="checkout-form_summary_line-item">
               <p className="checkout-form_summary_line-item_title">
                 Daily Rate
               </p>
-              <p className="checkout-form_summary_line-item_value">
-                ${customerData.vehicle.rentalCost.day}
-              </p>
+              {customerData.type === "self" ? (
+                <p className="checkout-form_summary_line-item_value">
+                  ${customerData.vehicle.rentalCost.day}
+                </p>
+              ) : customerData.type === "chauffeured" ? (
+                <p className="checkout-form_summary_line-item_value">
+                  ${customerData.vehicle.rentalCost.chauffeured}
+                </p>
+              ) : (
+                <p className="checkout-form_summary_line-item_value">
+                  ${customerData.vehicle.rentalCost.commercial}
+                </p>
+              )}
             </article>
             <article className="checkout-form_summary_line-item">
               <p className="checkout-form_summary_line-item_title">Duration</p>
-              <p className="checkout-form_summary_line-item_value">
-                {customerData.totalDays}
-              </p>
+              {customerData.type === "self" ? (
+                <p className="checkout-form_summary_line-item_value">
+                  {customerData.totalDays}
+                </p>
+              ) : (
+                <p className="checkout-form_summary_line-item_value">
+                  {customerData.totalHours}
+                </p>
+              )}
             </article>
             <article className="checkout-form_summary_line-item">
               <p className="checkout-form_summary_line-item_title">
                 Booking Total
               </p>
               <p className="checkout-form_summary_line-item_value">
-                ${customerData.totalDays * customerData.vehicle.rentalCost.day}
+                {customerData.type === "self" ? (
+                  <>
+                    $
+                    {customerData.totalDays *
+                      customerData.vehicle.rentalCost.day}
+                  </>
+                ) : customerData.type === "chauffeured" ? (
+                  <>
+                    $
+                    {customerData.totalHours *
+                      customerData.vehicle.rentalCost.chauffeured}
+                  </>
+                ) : (
+                  <>
+                    $
+                    {customerData.totalHours *
+                      customerData.vehicle.rentalCost.commercial}
+                  </>
+                )}
               </p>
             </article>
             <article className="checkout-form_summary_line-item">
@@ -215,9 +243,28 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
                 Total Due Upon Pickup or Deliver
               </p>
               <p className="checkout-form_summary_line-item_value">
-                $
-                {customerData.totalDays * customerData.vehicle.rentalCost.day -
-                  50}
+                {customerData.type === "self" ? (
+                  <>
+                    $
+                    {customerData.totalDays *
+                      customerData.vehicle.rentalCost.day -
+                      50}
+                  </>
+                ) : customerData.type === "chauffeured" ? (
+                  <>
+                    $
+                    {customerData.totalHours *
+                      customerData.vehicle.rentalCost.chauffeured -
+                      50}
+                  </>
+                ) : (
+                  <>
+                    $
+                    {customerData.totalHours *
+                      customerData.vehicle.rentalCost.commercial -
+                      50}
+                  </>
+                )}
               </p>
             </article>
             <article className="checkout-form_summary_total">
@@ -229,6 +276,16 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
               </p>
             </article>
           </section>
+          <div className="FormRow elements-style">
+            <PaymentElement
+              options={{
+                layout: "accordion",
+              }}
+              onChange={(e) => {
+                setPaymentType(e.value.type);
+              }}
+            />
+          </div>
         </fieldset>
         <button
           className={`checkout-form_button${

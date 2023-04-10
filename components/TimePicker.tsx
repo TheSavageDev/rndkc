@@ -1,7 +1,36 @@
-import { ErrorMessage, Field, useField } from "formik";
+import { ErrorMessage, Field, useField, useFormikContext } from "formik";
+import moment, { Moment } from "moment";
+import { Values } from "./bookingForm";
+import { useEffect, useState } from "react";
 
-export const TimePicker = ({ label, name }) => {
+export const TimePicker = ({
+  label,
+  name,
+  handleTimeChange,
+}: {
+  label: string;
+  name: string;
+  handleTimeChange?: (startTime: Moment, endTime: Moment) => void;
+}) => {
+  const { values }: { values: Values } = useFormikContext();
   const [field, meta, helpers] = useField(name);
+
+  useEffect(() => {
+    if (
+      values.startDate &&
+      values.startTime &&
+      values.endTime &&
+      handleTimeChange
+    ) {
+      let startTimestamp = moment(values.startDate).hour(10);
+      let endTimestamp = moment(values.startDate).hour(10);
+      startTimestamp.hour(parseInt(values.startTime.split(":")[0]));
+      startTimestamp.minute(parseInt(values.startTime.split(":")[1]));
+      endTimestamp.hour(parseInt(values.endTime.split(":")[0]));
+      endTimestamp.minute(parseInt(values.endTime.split(":")[1]));
+      handleTimeChange(startTimestamp, endTimestamp);
+    }
+  }, [values.startDate, values.startTime, values.endTime]);
 
   return (
     <section className="form-time-picker">
