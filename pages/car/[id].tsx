@@ -587,6 +587,29 @@ const Car = () => {
                         )}
                       </section>
                     </section>
+                    <section>
+                      <header>
+                        <h4 className="vehicle-details_section_header">
+                          Requirements
+                        </h4>
+                      </header>
+                      <section className="vehicle-details_rental-status">
+                        <section className="vehicle-details_rental-status_section">
+                          <img src="/img/license.svg" />
+                          <article className="vehicle-details_section_text">
+                            All self-drive renters must be 30+ years old and
+                            have a relatively clean driving record.
+                          </article>
+                        </section>
+                        <section className="vehicle-details_rental-status_section">
+                          <img src="/img/creditcard.svg" />
+                          <article className="vehicle-details_section_text">
+                            All bookings must be made with a valid Credit Card.
+                            Debit Cards are not accepted.
+                          </article>
+                        </section>
+                      </section>
+                    </section>
                   </section>
                 )}
               </section>
