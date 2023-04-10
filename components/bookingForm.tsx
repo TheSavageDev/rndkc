@@ -159,6 +159,12 @@ export const BookingForm = ({
               <section className="booking_information-form-dates_container">
                 {tab === "self" && (
                   <>
+                    <section className="booking_information-description-container">
+                      <p className="booking_information-description-text">
+                        Get behind the wheel for an adrenaline pumping
+                        adventure!
+                      </p>
+                    </section>
                     <section className="booking_information-form-date">
                       <section className="booking_information-form-date_inputs">
                         <DatePicker
@@ -183,6 +189,12 @@ export const BookingForm = ({
                 )}
                 {tab === "chauffeured" && (
                   <>
+                    <section className="booking_information-description-container">
+                      <p className="booking_information-description-text">
+                        We’ll take care of the driving, you just sit back and
+                        enjoy the ride
+                      </p>
+                    </section>
                     <section className="booking_information-form-date">
                       <DatePicker
                         name="startDate"
@@ -208,6 +220,12 @@ export const BookingForm = ({
                 )}
                 {tab === "commercial" && (
                   <>
+                    <section className="booking_information-description-container">
+                      <p className="booking_information-description-text">
+                        We’ll bring the car to you for photoshoots, events, or
+                        commercials.
+                      </p>
+                    </section>
                     <section className="booking_information-form-date">
                       <DatePicker
                         name="startDate"

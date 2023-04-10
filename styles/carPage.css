@@ -273,6 +273,21 @@
   justify-content: space-between;
 }
 
+.booking_information-description-container {
+  display: flex;
+  justify-content: center;
+}
+
+.booking_information-description-text {
+  font-family: "Akshar";
+  font-weight: 400;
+  font-size: 2.2rem;
+  line-height: 2.8rem;
+  letter-spacing: 0.03rem;
+  color: #262626;
+  text-align: center;
+}
+
 .booking_information_forms {
   background-color: #282828;
 }
