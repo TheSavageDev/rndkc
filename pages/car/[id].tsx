@@ -249,17 +249,21 @@ const Car = () => {
       setStartDT(startDateTime);
       setEndDT(endDateTime);
       setEndRT(endRefitTime);
-      return true;
+      return { startDateTime, endDateTime, endRefitTime };
     }
   };
 
   const handleSubmit = async (values) => {
     console.log("handleSubmit");
-    const isValid = bookingValidCheck(values);
-    if (!isValid) {
+    const data = bookingValidCheck(values);
+    if (!data) {
+      setFormError(true);
       return;
     }
-    if (startDT && endDT && endRT) {
+    if (
+      (data.startDateTime && data.endDateTime && data.endRefitTime) ||
+      (["chauffeured", "commercial"].includes(tab) && data.startDateTime)
+    ) {
       fetchPostJSON("/api/paymentIntent", {
         amount: 50,
       }).then((data) => {
@@ -683,6 +687,7 @@ const Car = () => {
                     submitting={submitting}
                     setBookingBegun={setBookingBegun}
                     handleTimeChange={handleTimeChange}
+                    setPaymentIntent={setPaymentIntent}
                   />
                 )}
                 {vehicle.rentalStatus === "R" && (

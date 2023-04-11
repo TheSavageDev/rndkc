@@ -76,6 +76,7 @@ export const BookingForm = ({
   submitting,
   handleTimeChange,
   setBookingBegun,
+  setPaymentIntent,
 }) => {
   const ScrollToFieldError = () => {
     const { errors, isSubmitting, isValidating } = useFormikContext();
@@ -120,39 +121,43 @@ export const BookingForm = ({
         return (
           <>
             {!success && paymentIntent && paymentIntent.client_secret && (
-              <section className="checkout-modal">
-                <Elements
-                  options={{
-                    clientSecret: paymentIntent.client_secret,
-                    appearance: {
-                      theme: "flat",
-                      labels: "floating",
-                      variables: {
-                        fontFamily: "Akshar",
-                        fontSizeBase: "1.1rem",
+              <>
+                <section className="checkout-modal">
+                  <Elements
+                    options={{
+                      clientSecret: paymentIntent.client_secret,
+                      appearance: {
+                        theme: "flat",
+                        labels: "floating",
+                        variables: {
+                          fontFamily: "Akshar",
+                          fontSizeBase: "1.1rem",
+                        },
                       },
-                    },
-                  }}
-                  stripe={getStripe()}
-                >
-                  <CheckoutForm
-                    customerData={{
-                      ...values,
-                      vehicle,
-                      totalDays,
-                      totalHours,
-                      type: tab,
                     }}
-                    submissionData={submissionData}
-                    setSubmitting={setSubmitting}
-                    setFieldError={setFieldError}
-                    setButtonText={setButtonText}
-                    fieldError={fieldError}
-                    setSuccess={setSuccess}
-                    success={success}
-                  />
-                </Elements>
-              </section>
+                    stripe={getStripe()}
+                  >
+                    <CheckoutForm
+                      customerData={{
+                        ...values,
+                        vehicle,
+                        totalDays,
+                        totalHours,
+                        type: tab,
+                      }}
+                      submissionData={submissionData}
+                      setSubmitting={setSubmitting}
+                      setFieldError={setFieldError}
+                      setButtonText={setButtonText}
+                      fieldError={fieldError}
+                      setSuccess={setSuccess}
+                      success={success}
+                      paymentIntent={paymentIntent}
+                      setPaymentIntent={setPaymentIntent}
+                    />
+                  </Elements>
+                </section>
+              </>
             )}
             <Form className="booking_information-form">
               <ScrollToFieldError />
@@ -310,15 +315,10 @@ export const BookingForm = ({
                 <button
                   className={`booking_information-form-button${
                     Object.keys(formError).length !== 0 ? "--form-error" : ""
-                  }${
-                    submitting || success || (totalDays <= 0 && totalHours <= 0)
-                      ? "--submitting"
-                      : ""
-                  }`}
+                  }${totalDays <= 0 && totalHours <= 0 ? "--submitting" : ""}`}
                   onClick={() => handleSubmit(values)}
-                  disabled={
-                    submitting || success || (totalDays <= 0 && totalHours <= 0)
-                  }
+                  disabled={totalDays <= 0 && totalHours <= 0}
+                  type="button"
                 >
                   Continue To Payment
                 </button>
@@ -335,6 +335,7 @@ export const BookingForm = ({
                   disabled={
                     submitting || success || (totalDays <= 0 && totalHours <= 0)
                   }
+                  type="button"
                 >
                   Begin Booking
                 </button>
