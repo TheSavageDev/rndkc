@@ -453,7 +453,7 @@ const Car = () => {
                               <section className="vehicle-details_rental-status_section">
                                 <img src="/img/show-icon-grey.svg" />
                                 <article className="vehicle-details_section_text">
-                                  Manual Transmission
+                                  Manual
                                 </article>
                               </section>
                             </>
@@ -462,7 +462,7 @@ const Car = () => {
                               <section className="vehicle-details_rental-status_section">
                                 <img src="/img/auto-icon.svg" />
                                 <article className="vehicle-details_section_text">
-                                  Automatic Transmission
+                                  Automatic
                                 </article>
                               </section>
                             </>

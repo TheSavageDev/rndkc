@@ -1,32 +1,55 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import {
+  collection,
+  where,
+  query,
+  onSnapshot,
+  DocumentData,
+} from "firebase/firestore";
 import { ImageGridItem } from "./imageGridItem";
+import { usePageTracking } from "../hooks/usePageTracking";
+import { db } from "../firebase/clientApp";
 
 export const ComingSoonImageGrid = () => {
+  const router = useRouter();
+  const [vehicles, setVehicles] = useState<DocumentData>([]);
+  const [routerReady, setRouterReady] = useState(false);
+  usePageTracking(router);
+
+  const getVehicles = () => {
+    const q = query(
+      collection(db, "vehicles"),
+      where("rentalStatus", "==", "N"),
+      where("rentalStatus", "==", "R")
+    );
+    onSnapshot(q, (snap) => {
+      const cars = snap.docs.map((doc) => doc.data());
+      setVehicles(cars);
+    });
+  };
+
+  useEffect(() => {
+    if (router.isReady) {
+      setRouterReady(true);
+      getVehicles();
+    }
+  }, [router.isReady]);
   return (
     <section className="rental-ready_image-grid">
-      <ImageGridItem
-        src="https://firebasestorage.googleapis.com/v0/b/rndkc-95667.appspot.com/o/inventory%2F158S100419%2F4.JPG?alt=media&token=b9f87524-35d9-4b43-bf2a-a0fd260839f2"
-        alt="1958 Chevy Corvette"
-        title="1958 Chevy Corvette"
-        go
-        dayPrice={350}
-        href="/car/158S100419"
-      />
-      <ImageGridItem
-        src="https://firebasestorage.googleapis.com/v0/b/rndkc-95667.appspot.com/o/inventory%2FAN5L11026%2F1.jpg?alt=media&token=c9cae438-e198-4265-961a-9438ebd1f5f9"
-        alt="1959 Austin Healy"
-        title="1959 Austin Healy"
-        dayPrice={195}
-        go
-        href="/car/AN5L11026"
-      />
-      <ImageGridItem
-        src="https://firebasestorage.googleapis.com/v0/b/rndkc-95667.appspot.com/o/inventory%2F1G1YY23P2P5108593%2F1.jpg?alt=media&token=d52e8b1a-1fb4-4642-ad3e-6fdf3742465e"
-        alt="1993 Chevrolet Corvette"
-        title="1993 Chevrolet Corvette"
-        dayPrice={125}
-        go
-        href="/car/1G1YY23P2P5108593"
-      />
+      {vehicles &&
+        vehicles.length !== 0 &&
+        vehicles.map((vehicle) => (
+          <ImageGridItem
+            key={vehicle.vin}
+            src={vehicle.imageUrls[0] ?? "/img/car.svg"}
+            alt={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
+            title={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
+            dayPrice={vehicle?.rentalCost?.day ?? "Coming Soon"}
+            go={vehicle.type === "GO"}
+            href={`/car/${vehicle.vin}`}
+          />
+        ))}
     </section>
   );
 };

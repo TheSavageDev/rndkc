@@ -38,7 +38,7 @@ export default function FAQ() {
             <section className="faq-list">
               <FAQListItem
                 title="Is there an age requirement for renting?"
-                content="Drivers and renters must be at least 25 years old."
+                content="Drivers and renters must be at least 30 years old."
               />
               <FAQListItem
                 title="What are the cleaning and safety policies?"
