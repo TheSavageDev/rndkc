@@ -28,11 +28,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     type,
     values,
   } = req.body;
-  console.log(req.body);
   const vehicleDoc = collection(db, "vehicles", vin, "bookings");
   try {
     await addDoc(vehicleDoc, {
-      name,
+      name: fullName,
       email,
       startDate: startDateTime,
       endDate: endDateTime,
