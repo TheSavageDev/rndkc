@@ -20,8 +20,7 @@ export const ComingSoonImageGrid = () => {
   const getVehicles = () => {
     const q = query(
       collection(db, "vehicles"),
-      where("rentalStatus", "==", "N"),
-      where("rentalStatus", "==", "R")
+      where("rentalStatus", "==", "N")
     );
     onSnapshot(q, (snap) => {
       const cars = snap.docs.map((doc) => doc.data());
@@ -45,7 +44,7 @@ export const ComingSoonImageGrid = () => {
             src={vehicle.imageUrls[0] ?? "/img/car.svg"}
             alt={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
             title={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
-            dayPrice={vehicle?.rentalCost?.day ?? "Coming Soon"}
+            dayPrice={"Coming Soon"}
             go={vehicle.type === "GO"}
             href={`/car/${vehicle.vin}`}
           />
