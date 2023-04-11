@@ -253,10 +253,6 @@ const Car = () => {
     }
   };
 
-  const handleBeginBooking = () => {
-    setBookingBegun(true);
-  };
-
   const handleSubmit = async (values) => {
     console.log("handleSubmit");
     const isValid = bookingValidCheck(values);
@@ -685,7 +681,7 @@ const Car = () => {
                     bookingBegun={bookingBegun}
                     formError={formError}
                     submitting={submitting}
-                    handleBeginBooking={handleBeginBooking}
+                    setBookingBegun={setBookingBegun}
                     handleTimeChange={handleTimeChange}
                   />
                 )}

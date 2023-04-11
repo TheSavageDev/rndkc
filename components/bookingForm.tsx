@@ -74,8 +74,8 @@ export const BookingForm = ({
   bookingBegun,
   formError,
   submitting,
-  handleBeginBooking,
   handleTimeChange,
+  setBookingBegun,
 }) => {
   const ScrollToFieldError = () => {
     const { errors, isSubmitting, isValidating } = useFormikContext();
@@ -331,7 +331,7 @@ export const BookingForm = ({
                       ? "--submitting"
                       : ""
                   }`}
-                  onClick={handleBeginBooking}
+                  onClick={() => setBookingBegun(true)}
                   disabled={
                     submitting || success || (totalDays <= 0 && totalHours <= 0)
                   }
