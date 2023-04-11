@@ -592,6 +592,32 @@ const Car = () => {
                         </section>
                       </section>
                     </section>
+                    <section
+                      className="view-details_container"
+                      onClick={() => setViewDetailsOpen(!viewDetailsOpen)}
+                    >
+                      <article className="view-details_divider" />
+                      <article className="view-details_box">
+                        {viewDetailsOpen ? (
+                          <>
+                            hide details
+                            <img
+                              src="/img/arrow-icon.svg"
+                              className="view-details_box_img--up"
+                            />
+                          </>
+                        ) : (
+                          <>
+                            view details
+                            <img
+                              src="/img/arrow-icon.svg"
+                              className="view-details_box_img"
+                            />
+                          </>
+                        )}
+                      </article>
+                      <article className="view-details_divider" />
+                    </section>
                   </section>
                 )}
               </section>
