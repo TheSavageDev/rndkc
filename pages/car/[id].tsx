@@ -700,35 +700,35 @@ const Car = () => {
                     Commercial
                   </article>
                 </section>
-                {vehicle.rentalStatus === "D" && (
-                  <BookingForm
-                    vehicle={vehicle}
-                    paymentIntent={paymentIntent}
-                    tab={tab}
-                    initialValues={initialValues}
-                    handleSubmit={handleSubmit}
-                    validationSchema={validationSchema}
-                    success={success}
-                    totalDays={totalDays}
-                    totalHours={totalHours}
-                    submissionData={submissionData}
-                    setSubmitting={setSubmitting}
-                    setFieldError={setFieldError}
-                    setButtonText={setButtonText}
-                    fieldError={fieldError}
-                    setSuccess={setSuccess}
-                    handleDateChange={handleDateChange}
-                    bookingBegun={bookingBegun}
-                    formError={formError}
-                    submitting={submitting}
-                    setBookingBegun={setBookingBegun}
-                    handleTimeChange={handleTimeChange}
-                    setPaymentIntent={setPaymentIntent}
-                  />
-                )}
-                {vehicle.rentalStatus === "R" && (
-                  <AvailabilitySignUp vin={vehicle.vin} />
-                )}
+                {vehicle.rentalStatus === "D" ||
+                  (["commercial", "chauffeured"].includes(tab) ? (
+                    <BookingForm
+                      vehicle={vehicle}
+                      paymentIntent={paymentIntent}
+                      tab={tab}
+                      initialValues={initialValues}
+                      handleSubmit={handleSubmit}
+                      validationSchema={validationSchema}
+                      success={success}
+                      totalDays={totalDays}
+                      totalHours={totalHours}
+                      submissionData={submissionData}
+                      setSubmitting={setSubmitting}
+                      setFieldError={setFieldError}
+                      setButtonText={setButtonText}
+                      fieldError={fieldError}
+                      setSuccess={setSuccess}
+                      handleDateChange={handleDateChange}
+                      bookingBegun={bookingBegun}
+                      formError={formError}
+                      submitting={submitting}
+                      setBookingBegun={setBookingBegun}
+                      handleTimeChange={handleTimeChange}
+                      setPaymentIntent={setPaymentIntent}
+                    />
+                  ) : (
+                    <AvailabilitySignUp vin={vehicle.vin} />
+                  ))}
               </section>
             </section>
           </>
