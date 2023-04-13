@@ -301,7 +301,7 @@ const Car = () => {
   usePageTracking(router, router.query.id);
 
   return (
-    <>
+    <section className="main">
       <Head>
         {vehicle.year ? (
           <title>
@@ -747,7 +747,7 @@ const Car = () => {
         </section> */}
         <Footer />
       </section>
-    </>
+    </section>
   );
 };
 
