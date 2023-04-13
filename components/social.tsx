@@ -26,18 +26,21 @@ export const Social = ({
           bgColor={bgColor}
           style={{ height: 30, width: 30 }}
           url="https://facebook.com/RNDKansasCity"
+          className="social-icon"
         />
         <SocialIcon
           fgColor={fgColor}
           bgColor={bgColor}
           style={{ height: 30, width: 30 }}
           url="https://instagram.com/rnd_kc"
+          className="social-icon"
         />
         <SocialIcon
           fgColor={fgColor}
           bgColor={bgColor}
           style={{ height: 30, width: 30 }}
           url="https://twitter.com/RND_KC"
+          className="social-icon"
         />
       </article>
     </article>

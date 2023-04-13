@@ -1,0 +1,95 @@
+.reservation-complete {
+  background-color: #eaeaea;
+  padding: 2rem;
+}
+
+.reservation-complete_success-message {
+  display: flex;
+  justify-content: center;
+}
+
+.reservation-complete_success-header {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.reservation-complete_success-header img {
+  height: 5rem;
+  width: 5rem;
+  align-self: center;
+}
+
+.reservation-complete_header {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2.78rem;
+  line-height: 3.1rem;
+  color: #358e32;
+  text-align: center;
+}
+
+.reservation-complete_subheader {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.2rem;
+  line-height: 2.4rem;
+  text-align: center;
+  color: #282828;
+}
+
+.reservation-complete_vehicle-details {
+  display: flex;
+  justify-content: center;
+}
+
+.reservation-complete_vehicle-details-title {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2.6rem;
+  line-height: 3.4rem;
+  text-align: center;
+  letter-spacing: 0.03rem;
+  text-transform: uppercase;
+  color: #282828;
+}
+
+.reservation-complete_rental-details-title {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.2rem;
+  line-height: 3.4rem;
+  text-align: center;
+  letter-spacing: 0.03rem;
+  color: #282828;
+}
+
+.confirmation_pickup {
+  background-color: #657170;
+  padding: 2rem;
+}
+
+.confirmation_pickup h2 {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.6rem;
+  line-height: 2.9rem;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+.confirmation_pickup p {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.2rem;
+  line-height: 2.4rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}

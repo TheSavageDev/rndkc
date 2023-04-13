@@ -120,7 +120,7 @@ export const BookingForm = ({
       {({ values }) => {
         return (
           <>
-            {!success && paymentIntent && paymentIntent.client_secret && (
+            {paymentIntent && paymentIntent.client_secret && (
               <>
                 <section className="checkout-modal">
                   <Elements
@@ -327,14 +327,12 @@ export const BookingForm = ({
                   className={`booking_information-form-button${
                     Object.keys(formError).length !== 0 ? "--form-error" : ""
                   }${
-                    submitting || success || (totalDays <= 0 && totalHours <= 0)
+                    submitting || (totalDays <= 0 && totalHours <= 0)
                       ? "--submitting"
                       : ""
                   }`}
                   onClick={() => setBookingBegun(true)}
-                  disabled={
-                    submitting || success || (totalDays <= 0 && totalHours <= 0)
-                  }
+                  disabled={submitting || (totalDays <= 0 && totalHours <= 0)}
                   type="button"
                 >
                   Begin Booking

@@ -10,7 +10,7 @@ import {
 import { PaymentIntent } from "@stripe/stripe-js";
 import { CustomerData, FieldError, SubmissionData } from "./bookingForm";
 import { useEventTracking } from "../hooks/useEventTracking";
-import { useRouter } from "next/router";
+import { Footer } from "./footer";
 
 type CheckoutFormProps = {
   paymentIntent?: PaymentIntent | null;
@@ -34,6 +34,7 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
   setFieldError,
   setSuccess,
   setPaymentIntent,
+  success,
 }) => {
   const goBack = () => {
     fetchPostJSON("/api/paymentIntent", {
@@ -68,7 +69,6 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
         elements,
         redirect: "if_required",
         confirmParams: {
-          // return_url: `http://localhost:3000/car/${customerData.vin}`,
           payment_method_data: {
             billing_details: {
               name: customerData.name,
@@ -131,66 +131,84 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
       <form onSubmit={handleSubmit} className="checkout-form">
         <fieldset className="elements-style mb-5">
           {" "}
-          <section className="booking_sub-nav-header">
+          <section className="booking_sub-nav-header--back">
             <button
               className="booking_sub-nav_header-button"
               onClick={goBack}
               type="button"
             >
-              <article className="booking_sub-nav_buttons">
-                <img
-                  src="/img/back-icon.svg"
-                  className="checkout-back-button"
-                />{" "}
-                Back
-              </article>
+              <img src="/img/back-icon.svg" className="checkout-back-button" />{" "}
+              Back
             </button>
           </section>
           <section className="checkout-form_fields">
-            <h4 className="checkout-form_payment-method_header">
-              Payment Method
-            </h4>
-            <section>
-              <h5 className="checkout-form_payment-method_subheading">
-                Debit cards are not accepted.{" "}
-              </h5>
-              <p className="checkout-form_payment-method_text">
-                A temporary hold of $50 will be placed on your credit card to
-                hold your reservation. Final payment will be made day of pickup
-                or delivery.
-              </p>
-            </section>
-            {customerData.type === "self" && (
+            {success ? (
+              <section className="reservation-complete">
+                <section className="reservation-complete_success-message">
+                  <header className="reservation-complete_success-header">
+                    <img src="/img/green-check.svg" />
+                    <h2 className="reservation-complete_header">
+                      Reservation Complete
+                    </h2>
+                    <p className="reservation-complete_subheader">
+                      A receipt for this transaction has been sent via email for
+                      your records
+                    </p>
+                  </header>
+                </section>
+              </section>
+            ) : (
               <>
-                <h4 className="checkout-form_delivery">Delivery</h4>
-                <label className="checkout-form_delivery-label">
-                  <input
-                    type="checkbox"
-                    name="delivery"
-                    id="delivery"
-                    className="checkout-form_delivery-checkbox"
-                    onClick={(e) => {
-                      const { target } = e;
-                      setIncludeDelivery((target as HTMLInputElement).checked);
-                    }}
-                  />
-                  Include Delivery
-                  <img
-                    src="/img/question-icon.svg"
-                    className="checkout-form_delivery-icon"
-                  />
-                </label>
-                {includeDelivery && (
-                  <p className="checkout-form_delivery_info">
-                    Delivery cost $2.00 per mile with a $100 minimum. Maximum of
-                    25 miles from downtown Kansas City. Delivery fee wil be
-                    separate from rental booking. A representative will contact
-                    you to arrange delivery.
+                <h4 className="checkout-form_payment-method_header">
+                  Payment Method
+                </h4>
+                <section>
+                  <h5 className="checkout-form_payment-method_subheading">
+                    Debit cards are not accepted.{" "}
+                  </h5>
+                  <p className="checkout-form_payment-method_text">
+                    A temporary hold of $50 will be placed on your credit card
+                    to hold your reservation. Final payment will be made day of
+                    pickup or delivery.
                   </p>
-                )}
+                </section>
+                <>
+                  {customerData.type === "self" && (
+                    <>
+                      <h4 className="checkout-form_delivery">Delivery</h4>
+                      <label className="checkout-form_delivery-label">
+                        <input
+                          type="checkbox"
+                          name="delivery"
+                          id="delivery"
+                          className="checkout-form_delivery-checkbox"
+                          onClick={(e) => {
+                            const { target } = e;
+                            setIncludeDelivery(
+                              (target as HTMLInputElement).checked
+                            );
+                          }}
+                        />
+                        Include Delivery
+                        <img
+                          src="/img/question-icon.svg"
+                          className="checkout-form_delivery-icon"
+                        />
+                      </label>
+                      {includeDelivery && (
+                        <p className="checkout-form_delivery_info">
+                          Delivery cost $2.00 per mile with a $100 minimum.
+                          Maximum of 25 miles from downtown Kansas City.
+                          Delivery fee wil be separate from rental booking. A
+                          representative will contact you to arrange delivery.
+                        </p>
+                      )}
+                    </>
+                  )}
+                </>
+                <h4 className="checkout-form_summary_header">Summary</h4>
               </>
             )}
-            <h4 className="checkout-form_summary_header">Summary</h4>
             <section>
               <h5 className="checkout-form_summary_vehicle">{`${customerData.vehicle.year} ${customerData.vehicle.make} ${customerData.vehicle.model} Rental`}</h5>
               {customerData.type === "self" ? (
@@ -313,34 +331,100 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
                 </p>
               </article>
             </section>
-            <div className="FormRow elements-style">
-              <PaymentElement
-                options={{
-                  layout: "accordion",
-                }}
-                onChange={(e) => {
-                  setPaymentType(e.value.type);
-                }}
-              />
-            </div>
+            {!success && (
+              <div className="FormRow elements-style">
+                <PaymentElement
+                  options={{
+                    layout: "accordion",
+                  }}
+                  onChange={(e) => {
+                    setPaymentType(e.value.type);
+                  }}
+                />
+              </div>
+            )}
           </section>
         </fieldset>
-        <button
-          className={`checkout-form_button${
-            payment.status === "error"
-              ? "--form-error"
-              : payment.status === "initial"
-              ? "--disabled"
-              : ""
-          }`}
-          type="submit"
-          disabled={
-            !["initial", "succeeded", "error"].includes(payment.status) ||
-            !stripe
-          }
-        >
-          Submit Deposit {formatAmountForDisplay(50, "USD")}
-        </button>
+        {!success ? (
+          <button
+            className={`checkout-form_button${
+              payment.status === "error"
+                ? "--form-error"
+                : payment.status === "initial"
+                ? "--disabled"
+                : ""
+            }`}
+            type="submit"
+            disabled={
+              !["initial", "succeeded", "error"].includes(payment.status) ||
+              !stripe
+            }
+          >
+            Submit Deposit {formatAmountForDisplay(50, "USD")}
+          </button>
+        ) : (
+          <section className="confirmation_pickup">
+            <h2>Pickup Instructions</h2>
+            <p>
+              On the day of your reservation, you'll need to complete some
+              additional paperwork and payment when you arrive to pick up your
+              rental vehicle.
+            </p>
+            <p>
+              The pickup address is:
+              <br />
+              1331 Saline Street
+              <br />
+              North Kansas City, MO 64116
+            </p>
+            <p>
+              When you arrive pull into the first driveway and continue straight
+              back until you reach the loading docks and ramp on the left. The
+              office is located just to the right of the garage door and ramp,
+              and you can park in front of it.
+              <br />
+              <br />
+              Please remember to bring the following documents with you:
+              <br />
+              <br />
+              <ul>
+                <li>A valid driver's license</li>
+                <li>A valid credit card (not debit)</li>
+                <li>Proof of insurance</li>
+              </ul>
+            </p>
+            <p>
+              When you arrive, we'll do a quick walk-around of the vehicle to
+              note any current flaws with both the interior and exterior. If
+              your rental vehicle has a manual transmission, we may ask you to
+              perform a small driving test to ensure you're comfortable driving
+              a stick shift.
+            </p>
+            <h2>Return Instructions</h2>
+            <p>
+              To return your rental vehicle, simply bring it back to the same
+              location where you picked it up at the agreed upon date and time.
+              We'll conduct a final walk-around inspection to ensure that the
+              vehicle is in the same condition as when you first received it.
+              Additionally, please ensure that the vehicle has the same amount
+              of gas in the tank as it did when you picked it up. This will help
+              us ensure that the next renter receives the vehicle in the same
+              condition as you did.
+            </p>
+            <h2>Delivery</h2>
+            <p>
+              We offer delivery services within a 25 mile radius of downtown
+              Kansas City. Delivery cost $2.00 per mile with a $100 minimum.
+              Payment will be made upon delivery.
+              <br />
+              <br />
+              To schedule delivery call: 816-200-1163
+            </p>
+            <h2>Have Questions?</h2>
+            <p>Give us a call at 816-200-1163 or email us at hello@rndkc.com</p>
+          </section>
+        )}
+        <Footer />
       </form>
     </>
   );

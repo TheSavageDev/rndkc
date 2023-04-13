@@ -19,7 +19,9 @@ html {
   font-size: 5.5rem;
   color: #fff;
 }
-
+.social-icon {
+  z-index: 0;
+}
 .navBar {
   width: 100%;
   background-color: #282828;

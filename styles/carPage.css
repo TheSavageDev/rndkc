@@ -7,15 +7,50 @@
 .booking_sub-nav-header {
   background-color: #657170;
   height: 4rem;
-  padding: 0.5rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  border-top: 1px solid #a5a5a5;
+  border-bottom: 1px solid #a5a5a5;
+}
+
+.booking_sub-nav-header--back {
+  background-color: #657170;
+  height: 4rem;
+  display: flex;
+  justify-content: flex-start;
+  border-top: 1px solid #a5a5a5;
+  border-bottom: 1px solid #a5a5a5;
+}
+
+.booking_sub-nav-header--back button {
+  display: flex;
+  align-items: center;
   font-family: "Akshar";
+  font-style: normal;
   font-weight: 300;
   font-size: 2rem;
   line-height: 3.2rem;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.03rem;
   color: #ffffff;
+  padding: 0 2rem;
+}
+
+.booking_sub-nav-header button {
+  display: flex;
+  align-items: center;
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2rem;
+  line-height: 3.2rem;
+  letter-spacing: 0.03rem;
+  color: #ffffff;
+  padding: 0 2rem;
+}
+
+.booking_sub-nav-header button img {
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 .booking_sub-nav_header-text {
@@ -27,19 +62,12 @@
   text-transform: uppercase;
 }
 
-.booking_sub-nav_buttons {
-  padding: 0 2rem;
-  display: flex;
+.booking_sub-nav_header-button--all-inventory {
+  border-right: 1px solid #a5a5a5;
 }
 
-.booking_sub-nav_header-button {
-  display: flex;
-  align-items: center;
-}
-
-.booking_sub-nav_header-button--question {
-  border-right: 1px solid #fff;
-  border-left: 1px solid #fff;
+.booking_sub-nav_header-button--share {
+  border-left: 1px solid #a5a5a5;
 }
 
 .booking_images {
