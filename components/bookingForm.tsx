@@ -327,12 +327,12 @@ export const BookingForm = ({
                   className={`booking_information-form-button${
                     Object.keys(formError).length !== 0 ? "--form-error" : ""
                   }${
-                    submitting || (totalDays <= 0 && totalHours <= 0)
+                    submitting || (totalDays <= 0 && totalHours < 2)
                       ? "--submitting"
                       : ""
                   }`}
                   onClick={() => setBookingBegun(true)}
-                  disabled={submitting || (totalDays <= 0 && totalHours <= 0)}
+                  disabled={submitting || (totalDays <= 0 && totalHours < 2)}
                   type="button"
                 >
                   Begin Booking
