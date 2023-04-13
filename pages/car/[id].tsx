@@ -403,7 +403,7 @@ const Car = () => {
                 {(viewDetailsOpen || matches) && (
                   <section className="booking_information-paragraphs">
                     <p className="booking_information-paragraphs-text">
-                      {vehicle.blurbs.description}
+                      {vehicle?.blurbs?.description}
                     </p>
                     <section>
                       <header>
