@@ -80,7 +80,7 @@ export const Vote = ({}) => {
         >
           <option>Select Vehicle</option>
           {options.map((vehicle) => (
-            <option>{vehicle}</option>
+            <option key={vehicle}>{vehicle}</option>
           ))}
         </select>
         <section className="vote_form_select--alt">

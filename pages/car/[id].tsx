@@ -446,12 +446,24 @@ const Car = () => {
                       </header>
                       <section className="vehicle-details_rental_specs">
                         <section className="vehicle-details_rental-type">
-                          {vehicle.convertible && (
+                          {["Convertible", "Dune Buggy"].includes(
+                            vehicle.vehicleType
+                          ) && (
                             <>
                               <section className="vehicle-details_rental-type_section">
                                 <img src="/img/convertible-icon.svg" />
                                 <article className="vehicle-details_section_text">
-                                  Convertible
+                                  {vehicle.vehicleType}
+                                </article>
+                              </section>
+                            </>
+                          )}
+                          {["Coupe", "SUV"].includes(vehicle.vehicleType) && (
+                            <>
+                              <section className="vehicle-details_rental-type_section">
+                                <img src="/img/coupe-icon.svg" />
+                                <article className="vehicle-details_section_text">
+                                  {vehicle.vehicleType}
                                 </article>
                               </section>
                             </>
@@ -459,7 +471,7 @@ const Car = () => {
                           {vehicle.transmission === "M" ? (
                             <>
                               <section className="vehicle-details_rental-status_section">
-                                <img src="/img/show-icon-grey.svg" />
+                                <img src="/img/slices/icon_manual.svg" />
                                 <article className="vehicle-details_section_text">
                                   Manual
                                 </article>
@@ -493,11 +505,18 @@ const Car = () => {
                                 {vehicle.engine} 6 Cyl
                               </article>
                             </section>
-                          ) : (
+                          ) : vehicle.cylinders === "4" ? (
                             <section className="vehicle-details_rental-type_section">
                               <img src="/img/4-cyl-icon.svg" />
                               <article className="vehicle-details_section_text">
                                 {vehicle.engine} 4 Cyl
+                              </article>
+                            </section>
+                          ) : (
+                            <section className="vehicle-details_rental-type_section">
+                              <img src="/img/engine-icon.svg" />
+                              <article className="vehicle-details_section_text">
+                                {vehicle.engine}
                               </article>
                             </section>
                           )}
@@ -578,7 +597,7 @@ const Car = () => {
                           <article className="vehicle-details_section_text">
                             Neutral - vehicle is in stock and is available for
                             rent but unable to be driven. These vehicles are
-                            primarily rented as props for photoshoots,
+                            primarily rented as props for photo shoots,
                             commercials, and special events.
                           </article>
                         )}
