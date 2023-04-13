@@ -701,7 +701,7 @@ const Car = () => {
                   </article>
                 </section>
                 {vehicle.rentalStatus === "D" ||
-                  (["commercial", "chauffeured"].includes(tab) ? (
+                  (["commercial"].includes(tab) && (
                     <BookingForm
                       vehicle={vehicle}
                       paymentIntent={paymentIntent}
@@ -726,9 +726,11 @@ const Car = () => {
                       handleTimeChange={handleTimeChange}
                       setPaymentIntent={setPaymentIntent}
                     />
-                  ) : (
-                    <AvailabilitySignUp vin={vehicle.vin} />
                   ))}
+                {vehicle.rentalStatus === "N" &&
+                  ["self", "chauffeured"].includes(tab) && (
+                    <AvailabilitySignUp vin={vehicle.vin} />
+                  )}
               </section>
             </section>
           </>
