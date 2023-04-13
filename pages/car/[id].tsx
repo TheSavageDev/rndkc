@@ -475,7 +475,7 @@ const Car = () => {
                             <section className="vehicle-details_rental-type_section">
                               <img src="/img/6-cyl-icon.svg" />
                               <article className="vehicle-details_section_text">
-                                {vehicle.engine} V6
+                                {vehicle.engine} 6 Cyl
                               </article>
                             </section>
                           ) : (
