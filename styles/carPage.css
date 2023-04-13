@@ -63,11 +63,11 @@
 }
 
 .booking_sub-nav_header-button--all-inventory {
-  border-right: 1px solid #a5a5a5;
+  /* border-right: 1px solid #a5a5a5; */
 }
 
 .booking_sub-nav_header-button--share {
-  border-left: 1px solid #a5a5a5;
+  /* border-left: 1px solid #a5a5a5; */
 }
 
 .booking_images {

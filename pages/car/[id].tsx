@@ -323,7 +323,7 @@ const Car = () => {
                 className="booking_sub-nav_header-button--all-inventory"
                 onClick={() => router.push("/inventory")}
               >
-                <img src="/img/back-icon.svg" /> All Inventory
+                <img src="/img/back-icon.svg" /> Inventory
               </button>
               <button
                 className="booking_sub-nav_header-button--question"
