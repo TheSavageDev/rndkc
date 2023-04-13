@@ -57,7 +57,6 @@ export type Values = {
 const Car = () => {
   const router = useRouter();
   const matches = useMediaQuery("(min-width: 1024px)");
-  console.log(matches);
   const [vehicle, setVehicle] = useState<DocumentData>({});
   const [routerReady, setRouterReady] = useState(false);
   const [bigImageUrl, setBigImageUrl] = useState("");
