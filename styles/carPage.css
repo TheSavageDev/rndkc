@@ -83,15 +83,12 @@
 
 .booking_images_main-image {
   position: relative;
-  height: 25.6rem;
-  width: 52.7rem;
   overflow: hidden;
   display: block;
 }
 
 .booking_images_main-image_img {
-  object-fit: cover;
-  object-position: bottom;
+  max-height: 46rem;
 }
 
 .booking_images_main-image_icon {
