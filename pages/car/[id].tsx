@@ -343,13 +343,21 @@ const Car = () => {
               <section className="booking_images_main-image">
                 {vehicle.imageUrls && vehicle.imageUrls.length !== 0 ? (
                   <>
-                    <Image
+                    <img
                       src={bigImageUrl}
-                      fill
-                      alt={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
                       className="booking_images_main-image_img"
-                      priority
                     />
+                    <section className="booking_images_main-image_icon">
+                      <img
+                        src="/img/slices/icon_camera.svg"
+                        className="booking_images_main-image_icon-svg"
+                      />
+                      <p className="booking_images_main-image_icon-text">
+                        {`${vehicle.imageUrls.indexOf(bigImageUrl) + 1}/${
+                          vehicle.imageUrls.length
+                        }`}
+                      </p>
+                    </section>
                   </>
                 ) : (
                   <>
@@ -366,6 +374,13 @@ const Car = () => {
                 )}
               </section>
             </section>
+            {vehicle.imageUrls && vehicle.imageUrls.length !== 0 && (
+              <section className="booking_images-previews">
+                {vehicle.imageUrls.map((url) => (
+                  <img src={url} onClick={() => setBigImageUrl(url)} />
+                ))}
+              </section>
+            )}
             <section className="booking_container">
               <section className="booking_information">
                 <h2 className="booking_information_header">
