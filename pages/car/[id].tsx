@@ -471,11 +471,18 @@ const Car = () => {
                                 </article>
                               </section>
                             </>
-                          ) : (
+                          ) : vehicle.cylinders === "V6" ? (
                             <section className="vehicle-details_rental-type_section">
-                              <img src="/img/v6-icon.svg" />
+                              <img src="/img/6-cyl-icon.svg" />
                               <article className="vehicle-details_section_text">
                                 {vehicle.engine} V6
+                              </article>
+                            </section>
+                          ) : (
+                            <section className="vehicle-details_rental-type_section">
+                              <img src="/img/4-cyl-icon.svg" />
+                              <article className="vehicle-details_section_text">
+                                {vehicle.engine} 4 Cyl
                               </article>
                             </section>
                           )}
