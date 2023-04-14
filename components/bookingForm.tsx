@@ -250,7 +250,11 @@ export const BookingForm = ({
                           label="Start Date"
                           handleDateChange={handleDateChange}
                         />
-                        <TimePicker name="startTime" label="Start Time" />
+                        <TimePicker
+                          name="startTime"
+                          label="Start Time"
+                          tab={tab}
+                        />
                       </section>
                     </section>
                     <section className="booking_information-form-date">
@@ -260,7 +264,7 @@ export const BookingForm = ({
                           label="End Date"
                           handleDateChange={handleDateChange}
                         />
-                        <TimePicker name="endTime" label="End Time" />
+                        <TimePicker name="endTime" label="End Time" tab={tab} />
                       </section>
                     </section>
                   </>
@@ -286,11 +290,13 @@ export const BookingForm = ({
                           name="startTime"
                           label="Start Time"
                           handleTimeChange={handleTimeChange}
+                          tab={tab}
                         />
                         <TimePicker
                           name="endTime"
                           label="End Time"
                           handleTimeChange={handleTimeChange}
+                          tab={tab}
                         />
                       </section>
                     </section>
@@ -317,11 +323,13 @@ export const BookingForm = ({
                           name="startTime"
                           label="Start Time"
                           handleTimeChange={handleTimeChange}
+                          tab={tab}
                         />
                         <TimePicker
                           name="endTime"
                           label="End Time"
                           handleTimeChange={handleTimeChange}
+                          tab={tab}
                         />
                       </section>
                     </section>
