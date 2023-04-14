@@ -37,9 +37,7 @@ export const ImageGridItem = ({
           </article>
           <article className="rental-ready_image-grid_image-banner_cost itemHeaderPrice">
             <span>{`${
-              typeof dayPrice === "string"
-                ? `$${dayPrice} Day`
-                : "$" + dayPrice + " Day"
+              typeof dayPrice === "string" ? dayPrice : "$" + dayPrice + " Day"
             }`}</span>
           </article>
         </section>
