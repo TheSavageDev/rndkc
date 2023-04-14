@@ -241,33 +241,26 @@ const Car = () => {
             <section className="booking_container">
               <VehicleDetails vehicle={vehicle} />
               <section className="booking_information_forms">
-                {(vehicle.rentalStatus === "D" ||
-                  ["commercial"].includes(tab)) && (
-                  <BookingForm
-                    vehicle={vehicle}
-                    paymentIntent={paymentIntent}
-                    tab={tab}
-                    setTab={setTab}
-                    initialValues={initialValues}
-                    handleSubmit={handleSubmit}
-                    success={success}
-                    submissionData={submissionData}
-                    setSubmitting={setSubmitting}
-                    setFieldError={setFieldError}
-                    setButtonText={setButtonText}
-                    fieldError={fieldError}
-                    setSuccess={setSuccess}
-                    bookingBegun={bookingBegun}
-                    formError={formError}
-                    submitting={submitting}
-                    setBookingBegun={setBookingBegun}
-                    setPaymentIntent={setPaymentIntent}
-                  />
-                )}
-                {vehicle.rentalStatus === "N" &&
-                  ["self", "chauffeured"].includes(tab) && (
-                    <AvailabilitySignUp vin={vehicle.vin} />
-                  )}
+                <BookingForm
+                  vehicle={vehicle}
+                  paymentIntent={paymentIntent}
+                  tab={tab}
+                  setTab={setTab}
+                  initialValues={initialValues}
+                  handleSubmit={handleSubmit}
+                  success={success}
+                  submissionData={submissionData}
+                  setSubmitting={setSubmitting}
+                  setFieldError={setFieldError}
+                  setButtonText={setButtonText}
+                  fieldError={fieldError}
+                  setSuccess={setSuccess}
+                  bookingBegun={bookingBegun}
+                  formError={formError}
+                  submitting={submitting}
+                  setBookingBegun={setBookingBegun}
+                  setPaymentIntent={setPaymentIntent}
+                />
               </section>
             </section>
           </>

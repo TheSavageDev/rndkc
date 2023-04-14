@@ -10,6 +10,7 @@ import { TimePicker } from "./TimePicker";
 import { DocumentData } from "firebase/firestore";
 import { TextArea } from "./TextArea";
 import { validationSchema } from "../utils/bookingValidationSchema";
+import { AvailabilitySignUp } from "./availabilitySignUp";
 
 export type FieldError = {
   name?: string;
@@ -234,236 +235,253 @@ export const BookingForm = ({
             <Form className="booking_information-form">
               <ScrollToFieldError />
               <Tabs />
-              <section className="booking_information-form-dates_container">
-                {tab === "self" && (
-                  <>
-                    <section className="booking_information-description-container">
-                      <p className="booking_information-description-text">
-                        Get behind the wheel for an adrenaline pumping
-                        adventure!
-                      </p>
-                    </section>
-                    <section className="booking_information-form-date">
-                      <section className="booking_information-form-date_inputs">
-                        <DatePicker
-                          name="startDate"
-                          label="Start Date"
-                          handleDateChange={handleDateChange}
-                        />
-                        <TimePicker
-                          name="startTime"
-                          label="Start Time"
-                          tab={tab}
-                        />
-                      </section>
-                    </section>
-                    <section className="booking_information-form-date">
-                      <section className="booking_information-form-date_inputs">
-                        <DatePicker
-                          name="endDate"
-                          label="End Date"
-                          handleDateChange={handleDateChange}
-                        />
-                        <TimePicker name="endTime" label="End Time" tab={tab} />
-                      </section>
-                    </section>
-                  </>
-                )}
-                {tab === "chauffeured" && (
-                  <>
-                    <section className="booking_information-description-container">
-                      <p className="booking_information-description-text">
-                        We’ll take care of the driving, you just sit back and
-                        enjoy the ride
-                      </p>
-                    </section>
-                    <section className="booking_information-form-date">
-                      <DatePicker
-                        name="startDate"
-                        label="Date"
-                        handleDateChange={handleDateChange}
-                      />
-                    </section>
-                    <section className="booking_information-form-date">
-                      <section className="booking_information-form-date_inputs">
-                        <TimePicker
-                          name="startTime"
-                          label="Start Time"
-                          handleTimeChange={handleTimeChange}
-                          tab={tab}
-                        />
-                        <TimePicker
-                          name="endTime"
-                          label="End Time"
-                          handleTimeChange={handleTimeChange}
-                          tab={tab}
-                        />
-                      </section>
-                    </section>
-                  </>
-                )}
-                {tab === "commercial" && (
-                  <>
-                    <section className="booking_information-description-container">
-                      <p className="booking_information-description-text">
-                        We’ll bring the car to you for photoshoots, events, or
-                        commercials.
-                      </p>
-                    </section>
-                    <section className="booking_information-form-date">
-                      <DatePicker
-                        name="startDate"
-                        label="Date"
-                        handleDateChange={handleDateChange}
-                      />
-                    </section>
-                    <section className="booking_information-form-date">
-                      <section className="booking_information-form-date_inputs">
-                        <TimePicker
-                          name="startTime"
-                          label="Start Time"
-                          handleTimeChange={handleTimeChange}
-                          tab={tab}
-                        />
-                        <TimePicker
-                          name="endTime"
-                          label="End Time"
-                          handleTimeChange={handleTimeChange}
-                          tab={tab}
-                        />
-                      </section>
-                    </section>
-                  </>
-                )}
-              </section>
-              <article className="booking_information-form_pricing">
-                <h2 className="booking_information-form_pricing-text">
-                  {tab === "self" && `$${vehicle?.rentalCost?.day} Day`}
-                  {["chauffeured", "commercial"].includes(tab) &&
-                    `$${vehicle?.rentalCost?.chauffeured} hr`}
-                </h2>
-                <h2
-                  className={
-                    (["chauffeured", "commercial"].includes(tab) &&
-                      totalHours < 2 &&
-                      totalHours > 0) ||
-                    totalHours < 0 ||
-                    (tab === "self" && totalDays < 0)
-                      ? "booking_information-form_pricing-text--sub--issue"
-                      : "booking_information-form_pricing-text--sub"
-                  }
-                >
-                  {tab === "self" && totalDays > 0
-                    ? `${totalDays} Days for $${
-                        vehicle?.rentalCost?.day * totalDays
-                      } Total`
-                    : totalDays < 0
-                    ? `Your start date and time must be before your end date and time`
-                    : ""}
-                  {["chauffeured", "commercial"].includes(tab) &&
-                  totalHours >= 2
-                    ? `${totalHours} hrs for $${
-                        vehicle?.rentalCost?.chauffeured * totalHours
-                      } Total`
-                    : ["chauffeured", "commercial"].includes(tab) &&
-                      totalHours < 2 &&
-                      totalHours > 0
-                    ? `You must rent the vehicle for at least 2 hours.`
-                    : totalHours < 0
-                    ? "Your end time must be after your start time."
-                    : ""}
-                </h2>
-              </article>
-              {bookingBegun && (
-                <section>
-                  <section className="booking_information-form_contact">
-                    <TextField
-                      label="Full Name"
-                      name="fullName"
-                      placeholder="Enter Name"
-                      booking
-                    />
-                    <TextField
-                      label="Email Address"
-                      name="email"
-                      placeholder="Enter Email Address"
-                      type="email"
-                      booking
-                    />
-                    <TextField
-                      label="Phone Number"
-                      name="phoneNumber"
-                      placeholder="(816) 555-1234"
-                      type="tel"
-                      booking
-                    />
-                    {tab !== "self" && (
-                      <TextArea
-                        label="Notes or Special Requests"
-                        name="notes"
-                        placeholder="Enter Event Details"
-                      />
+              {(vehicle.rentalStatus === "D" ||
+                ["commercial"].includes(tab)) && (
+                <>
+                  <section className="booking_information-form-dates_container">
+                    {tab === "self" && (
+                      <>
+                        <section className="booking_information-description-container">
+                          <p className="booking_information-description-text">
+                            Get behind the wheel for an adrenaline pumping
+                            adventure!
+                          </p>
+                        </section>
+                        <section className="booking_information-form-date">
+                          <section className="booking_information-form-date_inputs">
+                            <DatePicker
+                              name="startDate"
+                              label="Start Date"
+                              handleDateChange={handleDateChange}
+                            />
+                            <TimePicker
+                              name="startTime"
+                              label="Start Time"
+                              tab={tab}
+                            />
+                          </section>
+                        </section>
+                        <section className="booking_information-form-date">
+                          <section className="booking_information-form-date_inputs">
+                            <DatePicker
+                              name="endDate"
+                              label="End Date"
+                              handleDateChange={handleDateChange}
+                            />
+                            <TimePicker
+                              name="endTime"
+                              label="End Time"
+                              tab={tab}
+                            />
+                          </section>
+                        </section>
+                      </>
+                    )}
+                    {tab === "chauffeured" && (
+                      <>
+                        <section className="booking_information-description-container">
+                          <p className="booking_information-description-text">
+                            We’ll take care of the driving, you just sit back
+                            and enjoy the ride
+                          </p>
+                        </section>
+                        <section className="booking_information-form-date">
+                          <DatePicker
+                            name="startDate"
+                            label="Date"
+                            handleDateChange={handleDateChange}
+                          />
+                        </section>
+                        <section className="booking_information-form-date">
+                          <section className="booking_information-form-date_inputs">
+                            <TimePicker
+                              name="startTime"
+                              label="Start Time"
+                              handleTimeChange={handleTimeChange}
+                              tab={tab}
+                            />
+                            <TimePicker
+                              name="endTime"
+                              label="End Time"
+                              handleTimeChange={handleTimeChange}
+                              tab={tab}
+                            />
+                          </section>
+                        </section>
+                      </>
+                    )}
+                    {tab === "commercial" && (
+                      <>
+                        <section className="booking_information-description-container">
+                          <p className="booking_information-description-text">
+                            We’ll bring the car to you for photoshoots, events,
+                            or commercials.
+                          </p>
+                        </section>
+                        <section className="booking_information-form-date">
+                          <DatePicker
+                            name="startDate"
+                            label="Date"
+                            handleDateChange={handleDateChange}
+                          />
+                        </section>
+                        <section className="booking_information-form-date">
+                          <section className="booking_information-form-date_inputs">
+                            <TimePicker
+                              name="startTime"
+                              label="Start Time"
+                              handleTimeChange={handleTimeChange}
+                              tab={tab}
+                            />
+                            <TimePicker
+                              name="endTime"
+                              label="End Time"
+                              handleTimeChange={handleTimeChange}
+                              tab={tab}
+                            />
+                          </section>
+                        </section>
+                      </>
                     )}
                   </section>
-                </section>
-              )}
-              <section className="booking_information-form-button-container">
-                {bookingBegun ? (
-                  <button
-                    className={`booking_information-form-button${
-                      Object.keys(formError).length !== 0 ? "--form-error" : ""
-                    }${
-                      (tab === "self" && totalDays <= 0) ||
-                      (["chauffeured", "commercial"].includes(tab) &&
-                        totalHours < 2)
-                        ? "--submitting"
-                        : ""
-                    }`}
-                    onClick={() => handleSubmit(values)}
-                    disabled={
-                      (tab === "self" && totalDays <= 0) ||
-                      (["chauffeured", "commercial"].includes(tab) &&
-                        totalHours < 2)
-                    }
-                    type="button"
-                  >
-                    Continue To Payment
-                  </button>
-                ) : (
-                  <button
-                    className={`booking_information-form-button${
-                      Object.keys(formError).length !== 0 ? "--form-error" : ""
-                    }${
-                      submitting ||
-                      (tab === "self" && totalDays <= 0) ||
-                      (["chauffeured", "commercial"].includes(tab) &&
-                        totalHours < 2)
-                        ? "--submitting"
-                        : ""
-                    }`}
-                    onClick={() => setBookingBegun(true)}
-                    disabled={
-                      submitting ||
-                      (tab === "self" && totalDays <= 0) ||
-                      (["chauffeured", "commercial"].includes(tab) &&
-                        totalHours < 2)
-                    }
-                    type="button"
-                  >
-                    Begin Booking
-                  </button>
-                )}
-              </section>
-              {Object.values(fieldError).length !== 0 && (
-                <>
-                  <article className="booking_date-conflict-message">
-                    {fieldError.startDate}
+                  <article className="booking_information-form_pricing">
+                    <h2 className="booking_information-form_pricing-text">
+                      {tab === "self" && `$${vehicle?.rentalCost?.day} Day`}
+                      {["chauffeured", "commercial"].includes(tab) &&
+                        `$${vehicle?.rentalCost?.chauffeured} hr`}
+                    </h2>
+                    <h2
+                      className={
+                        (["chauffeured", "commercial"].includes(tab) &&
+                          totalHours < 2 &&
+                          totalHours > 0) ||
+                        totalHours < 0 ||
+                        (tab === "self" && totalDays < 0)
+                          ? "booking_information-form_pricing-text--sub--issue"
+                          : "booking_information-form_pricing-text--sub"
+                      }
+                    >
+                      {tab === "self" && totalDays > 0
+                        ? `${totalDays} Days for $${
+                            vehicle?.rentalCost?.day * totalDays
+                          } Total`
+                        : totalDays < 0
+                        ? `Your start date and time must be before your end date and time`
+                        : ""}
+                      {["chauffeured", "commercial"].includes(tab) &&
+                      totalHours >= 2
+                        ? `${totalHours} hrs for $${
+                            vehicle?.rentalCost?.chauffeured * totalHours
+                          } Total`
+                        : ["chauffeured", "commercial"].includes(tab) &&
+                          totalHours < 2 &&
+                          totalHours > 0
+                        ? `You must rent the vehicle for at least 2 hours.`
+                        : totalHours < 0
+                        ? "Your end time must be after your start time."
+                        : ""}
+                    </h2>
                   </article>
-                  <article className="booking_date-conflict-message">
-                    {fieldError.endDate}
-                  </article>
+                  {bookingBegun && (
+                    <section>
+                      <section className="booking_information-form_contact">
+                        <TextField
+                          label="Full Name"
+                          name="fullName"
+                          placeholder="Enter Name"
+                          booking
+                        />
+                        <TextField
+                          label="Email Address"
+                          name="email"
+                          placeholder="Enter Email Address"
+                          type="email"
+                          booking
+                        />
+                        <TextField
+                          label="Phone Number"
+                          name="phoneNumber"
+                          placeholder="(816) 555-1234"
+                          type="tel"
+                          booking
+                        />
+                        {tab !== "self" && (
+                          <TextArea
+                            label="Notes or Special Requests"
+                            name="notes"
+                            placeholder="Enter Event Details"
+                          />
+                        )}
+                      </section>
+                    </section>
+                  )}
+                  <section className="booking_information-form-button-container">
+                    {bookingBegun ? (
+                      <button
+                        className={`booking_information-form-button${
+                          Object.keys(formError).length !== 0
+                            ? "--form-error"
+                            : ""
+                        }${
+                          (tab === "self" && totalDays <= 0) ||
+                          (["chauffeured", "commercial"].includes(tab) &&
+                            totalHours < 2)
+                            ? "--submitting"
+                            : ""
+                        }`}
+                        onClick={() => handleSubmit(values)}
+                        disabled={
+                          (tab === "self" && totalDays <= 0) ||
+                          (["chauffeured", "commercial"].includes(tab) &&
+                            totalHours < 2)
+                        }
+                        type="button"
+                      >
+                        Continue To Payment
+                      </button>
+                    ) : (
+                      <button
+                        className={`booking_information-form-button${
+                          Object.keys(formError).length !== 0
+                            ? "--form-error"
+                            : ""
+                        }${
+                          submitting ||
+                          (tab === "self" && totalDays <= 0) ||
+                          (["chauffeured", "commercial"].includes(tab) &&
+                            totalHours < 2)
+                            ? "--submitting"
+                            : ""
+                        }`}
+                        onClick={() => setBookingBegun(true)}
+                        disabled={
+                          submitting ||
+                          (tab === "self" && totalDays <= 0) ||
+                          (["chauffeured", "commercial"].includes(tab) &&
+                            totalHours < 2)
+                        }
+                        type="button"
+                      >
+                        Begin Booking
+                      </button>
+                    )}
+                  </section>
+                  {Object.values(fieldError).length !== 0 && (
+                    <>
+                      <article className="booking_date-conflict-message">
+                        {fieldError.startDate}
+                      </article>
+                      <article className="booking_date-conflict-message">
+                        {fieldError.endDate}
+                      </article>
+                    </>
+                  )}
                 </>
               )}
+              {vehicle.rentalStatus === "N" &&
+                ["self", "chauffeured"].includes(tab) && (
+                  <AvailabilitySignUp vin={vehicle.vin} />
+                )}
             </Form>
           </>
         );

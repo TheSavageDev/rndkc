@@ -6,6 +6,7 @@ export const AvailabilitySignUp = ({ vin }) => {
   const [formError, setFormError] = useState(false);
   const [buttonText, setButtonText] = useState("Email Me When It's Available");
   const [data, setData] = useState({
+    fullName: "",
     email: "",
     vin,
   });
@@ -43,26 +44,30 @@ export const AvailabilitySignUp = ({ vin }) => {
       setButtonText("We'll Keep You Updated!");
     } else {
       setFormError(true);
-      setButtonText("Enter a Valid Email");
+      setButtonText("Check that all forms are filled correctly");
     }
   };
 
   return (
-    <section className="booking_information-form">
-      <label className="booking_information-form-input-label">
-        Email Address
-      </label>
+    <section className="availability-form">
+      <label className="availability-form-input-label">Name</label>
       <input
-        className="booking_information-form-input"
+        className="availability-form-input"
+        placeholder="Enter Full Name"
+        id="fullName"
+        value={data.fullName}
+        onChange={handleChange}
+      />
+      <label className="availability-form-input-label">Email Address</label>
+      <input
+        className="availability-form-input"
         placeholder="Enter Email Address"
         id="email"
         value={data.email}
         onChange={handleChange}
       />
       <button
-        className={`booking_information-form-button${
-          formError ? "--form-error" : ""
-        }`}
+        className={`availability-form-button${formError ? "--form-error" : ""}`}
         onClick={handleSubmit}
         disabled={success}
       >

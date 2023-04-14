@@ -3,7 +3,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/clientApp";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const { email, vin } = req.body;
+  const { fullName, email, vin } = req.body;
   const vehicleDoc = doc(db, "marketing", "updates", "rentalStatus", vin);
   const vehicleSnap = await getDoc(vehicleDoc);
   try {
