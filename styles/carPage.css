@@ -399,6 +399,8 @@
 .booking_information-form_contact {
   display: flex;
   flex-direction: column;
+  background: #eaeaea;
+  padding: 0 2rem;
 }
 
 .booking_information-form-input-label {

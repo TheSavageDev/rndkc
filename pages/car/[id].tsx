@@ -17,7 +17,6 @@ import { Footer } from "../../components/footer";
 import { ContactForm } from "../../components/contactForm";
 import { ShareModal } from "../../components/shareModal";
 import { BookingForm } from "../../components/bookingForm";
-import { AvailabilitySignUp } from "../../components/availabilitySignUp";
 import { usePageTracking } from "../../hooks/usePageTracking";
 import { fetchPostJSON } from "../../utils/api-helpers";
 import { extendMoment } from "moment-range";
