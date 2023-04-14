@@ -79,8 +79,6 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
         },
       });
 
-      setSuccess(true);
-
       if (error) {
         setPayment({ status: "error" });
         setErrorMessage(error.message ?? "An unknown error occurred");
@@ -96,10 +94,10 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
           },
           method: "POST",
         });
-        const { bokingError } = await res.json();
+        const { bookingError } = await res.json();
 
-        if (bokingError) {
-          console.error(bokingError);
+        if (bookingError) {
+          console.error(bookingError);
           setFieldError(fieldError);
           setSubmitting(false);
           return;
@@ -107,6 +105,7 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
         useEventTracking("booking", {
           vehicle: customerData.vehicle,
         });
+        setSuccess(true);
         setSubmitting(false);
       }
     } catch (err) {
