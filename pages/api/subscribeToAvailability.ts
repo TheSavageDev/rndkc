@@ -8,7 +8,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const vehicleSnap = await getDoc(vehicleDoc);
   try {
     if (vehicleSnap.exists()) {
-      console.log(vehicleSnap.data());
       if (vehicleSnap.data().emails.includes(email)) {
         return res.status(500).json({ message: "Already Subscribed" });
       } else {

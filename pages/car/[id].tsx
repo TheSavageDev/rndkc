@@ -10,7 +10,6 @@ import {
 } from "firebase/firestore";
 import { PaymentIntent } from "@stripe/stripe-js";
 import Head from "next/head";
-import * as Yup from "yup";
 import * as Moment from "moment";
 import { NavBar } from "../../components/navBar";
 import { db } from "../../firebase/clientApp";
@@ -20,11 +19,12 @@ import { ShareModal } from "../../components/shareModal";
 import { BookingForm } from "../../components/bookingForm";
 import { AvailabilitySignUp } from "../../components/availabilitySignUp";
 import { usePageTracking } from "../../hooks/usePageTracking";
-import Image from "next/image";
 import { fetchPostJSON } from "../../utils/api-helpers";
 import { extendMoment } from "moment-range";
-import { useFormikContext } from "formik";
-import useMediaQuery from "../../hooks/useMediaQuery";
+import { VehicleDetails } from "../../components/vehicleDetails";
+import { VehicleHeader } from "../../components/vehicleHeader";
+import { VehicleImages } from "../../components/vehicleImages";
+import { bookingValidCheck } from "../../utils/bookingDateValidCheck";
 
 export type FieldError = {
   name?: string;
@@ -56,15 +56,22 @@ export type Values = {
 
 const Car = () => {
   const router = useRouter();
-  const matches = useMediaQuery("(min-width: 1024px)");
   const [vehicle, setVehicle] = useState<DocumentData>({});
+  const [initialValues, setInitialValues] = useState({
+    fullName: "",
+    phoneNumber: "",
+    email: "",
+    startDate: "",
+    startTime: "10:00",
+    endDate: "",
+    endTime: "10:00",
+  });
   const [routerReady, setRouterReady] = useState(false);
   const [bigImageUrl, setBigImageUrl] = useState("");
   const [showShareModal, setShowShareModal] = useState(false);
   const [paymentIntent, setPaymentIntent] = useState<PaymentIntent | null>(
     null
   );
-  const [viewDetailsOpen, setViewDetailsOpen] = useState(false);
   const [tab, setTab] = useState("self");
   const initialButtonText =
     vehicle.rentalStatus === "D"
@@ -72,8 +79,6 @@ const Car = () => {
       : "Email Me When It's Available";
   const [success, setSuccess] = useState(false);
   const [formError, setFormError] = useState(false);
-  const [totalDays, setTotalDays] = useState(0);
-  const [totalHours, setTotalHours] = useState(0);
   const [fieldError, setFieldError] = useState<FieldError>({});
   const [submitting, setSubmitting] = useState(false);
   const [buttonText, setButtonText] = useState(initialButtonText);
@@ -121,31 +126,6 @@ const Car = () => {
     getCurrentBookings();
   }, [vehicle]);
 
-  const validationSchema = Yup.object({
-    fullName: Yup.string().required("Please enter your full name."),
-    email: Yup.string()
-      .email("Invalid Email Address")
-      .required("Please enter your email address."),
-    phoneNumber: Yup.string()
-      .min(10)
-      .max(11)
-      .required("Please enter your phone number."),
-    startDate: Yup.string().required("Please choose a pickup date."),
-    startTime: Yup.string().required("Please choose a pickup time."),
-    endDate: Yup.string().required("Please choose a drop off date."),
-    endTime: Yup.string().required("Please choose a drop off time."),
-  });
-
-  const initialValues = {
-    fullName: "",
-    phoneNumber: "",
-    email: "",
-    startDate: "",
-    startTime: "10:00",
-    endDate: "",
-    endTime: "10:00",
-  };
-
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
     if (query.get("success")) {
@@ -159,99 +139,30 @@ const Car = () => {
     }
   }, []);
 
-  const handleDateChange = (startDate, endDate) => {
-    setSubmitting(false);
-    if (startDate && endDate) {
-      let newTotalDays: number;
-      const differenceInTime = endDate.getTime() - startDate.getTime();
-      newTotalDays = differenceInTime / (1000 * 3600 * 24);
-      setTotalDays(Math.round(newTotalDays));
-    }
-  };
-
-  const handleTimeChange = (startTime, endTime) => {
-    setSubmitting(false);
-    if (startTime && endTime) {
-      const newTotalHours = (endTime - startTime) / (1000 * 3600);
-      setTotalHours(newTotalHours);
-    }
-  };
-
-  const bookingValidCheck = ({
-    startDate,
-    startTime,
-    endDate,
-    endTime,
-    ...rest
-  }) => {
-    const startDateTime = moment(startDate)
-      .set("hour", parseInt(startTime.split(":")[0]))
-      .set("minute", parseInt(startTime.split(":")[1]));
-    const endDateTime = moment(endDate)
-      .set("hour", parseInt(endTime.split(":")[0]))
-      .set("minute", parseInt(endTime.split(":")[1]));
-    const endRefitTime = moment(
-      moment(endDate)
-        .set("hour", parseInt(endTime.split(":")[0]))
-        .set("minute", parseInt(endTime.split(":")[1]))
-    ).add(vehicle.refitHours, "h");
-
-    let startDateConflict: boolean;
-    let endDateConflict: boolean;
-    let startDateRefitConflict: boolean;
-    let endDateRefitConflict: boolean;
-    if (currentBookings.length !== 0) {
-      currentBookings.forEach((booking) => {
-        startDateConflict =
-          startDateTime.isBetween(
-            moment(booking.startDate),
-            moment(booking.endRefitDate)
-          ) || startDateTime.isSame(booking.startDate);
-        endDateConflict =
-          endDateTime.isBetween(
-            moment(booking.startDate),
-            moment(booking.endRefitDate)
-          ) || endDateTime.isSame(booking.endDate);
-        startDateRefitConflict =
-          !startDateConflict &&
-          !endDateConflict &&
-          startDateTime.isAfter(booking.endDate) &&
-          startDateTime.isSameOrBefore(booking.endRefitTime);
-        endDateRefitConflict =
-          !startDateConflict &&
-          !endDateConflict &&
-          !startDateRefitConflict &&
-          endRefitTime.isSameOrAfter(moment(booking.startDate)) &&
-          startDateTime.isBefore(moment(booking.startDate));
+  const handleSetTab = (newTab) => {
+    setTab(newTab);
+    if (["chauffeured", "commercial"].includes(newTab)) {
+      setInitialValues({
+        fullName: "",
+        phoneNumber: "",
+        email: "",
+        startDate: "",
+        startTime: "10:00",
+        endDate: "",
+        endTime: "12:00",
       });
-    }
-    if (
-      startDateConflict ||
-      endDateConflict ||
-      startDateRefitConflict ||
-      endDateRefitConflict
-    ) {
-      setFieldError({
-        startDate: startDateConflict
-          ? "There is a conflict with your start date"
-          : startDateRefitConflict
-          ? "The vehicle will not be ready for another rental by this date and time"
-          : null,
-        endDate: endDateConflict
-          ? "There is a conflict with your end date"
-          : endDateRefitConflict
-          ? "The vehicle won't be able to be prepared for the next rental."
-          : null,
-      });
-      return false;
-    } else {
-      return { startDateTime, endDateTime, endRefitTime };
     }
   };
 
   const handleSubmit = async (values) => {
-    console.log("handleSubmit");
-    const data = bookingValidCheck(values);
+    const validCheckProps = {
+      ...values,
+      currentBookings,
+      refitHours: vehicle.refitHours,
+      setFieldError,
+    };
+
+    const data = bookingValidCheck(validCheckProps);
     if (!data) {
       setFormError(true);
       return;
@@ -318,412 +229,38 @@ const Car = () => {
         )}
         {vehicle && (
           <>
-            <section className="booking_sub-nav-header">
-              <button
-                className="booking_sub-nav_header-button--all-inventory"
-                onClick={() => router.push("/inventory")}
-              >
-                <img src="/img/back-icon.svg" /> Inventory
-              </button>
-              <button
-                className="booking_sub-nav_header-button--question"
-                onClick={() => router.push("/contact-us")}
-              >
-                Questions?
-                <img src="/img/mail-icon.svg" />
-              </button>
-              <button
-                className="booking_sub-nav_header-button--share"
-                onClick={() => setShowShareModal(true)}
-              >
-                Share <img src="/img/share-icon.svg" />
-              </button>
-            </section>
-            <section className="booking_images">
-              <section className="booking_images_main-image">
-                {vehicle.imageUrls && vehicle.imageUrls.length !== 0 ? (
-                  <>
-                    <img
-                      src={bigImageUrl}
-                      className="booking_images_main-image_img"
-                    />
-                    <section className="booking_images_main-image_icon">
-                      <img
-                        src="/img/slices/icon_camera.svg"
-                        className="booking_images_main-image_icon-svg"
-                      />
-                      <p className="booking_images_main-image_icon-text">
-                        {`${vehicle.imageUrls.indexOf(bigImageUrl) + 1}/${
-                          vehicle.imageUrls.length
-                        }`}
-                      </p>
-                    </section>
-                  </>
-                ) : (
-                  <>
-                    <img
-                      src="/img/car.svg"
-                      className="booking_images_main-image_img--placeholder"
-                    />
-                    <section className="booking_images_main-image_icon--placeholder">
-                      <p className="booking_images_main-image_icon-text--placeholder">
-                        Pictures Coming Soon...
-                      </p>
-                    </section>
-                  </>
-                )}
-              </section>
-            </section>
-            {vehicle.imageUrls && vehicle.imageUrls.length !== 0 && (
-              <section className="booking_images-previews">
-                {vehicle.imageUrls.map((url) => (
-                  <img src={url} onClick={() => setBigImageUrl(url)} />
-                ))}
-              </section>
-            )}
+            <VehicleHeader
+              setShowShareModal={setShowShareModal}
+              router={router}
+            />
+            <VehicleImages
+              vehicle={vehicle}
+              bigImageUrl={bigImageUrl}
+              setBigImageUrl={setBigImageUrl}
+            />
             <section className="booking_container">
-              <section className="booking_information">
-                <h2 className="booking_information_header">
-                  {vehicle?.blurbs?.title}
-                </h2>
-                {!matches && (
-                  <section
-                    className="view-details_container"
-                    onClick={() => setViewDetailsOpen(!viewDetailsOpen)}
-                  >
-                    <article className="view-details_divider" />
-                    <article className="view-details_box">
-                      {viewDetailsOpen ? (
-                        <>
-                          hide details
-                          <img
-                            src="/img/arrow-icon.svg"
-                            className="view-details_box_img--up"
-                          />
-                        </>
-                      ) : (
-                        <>
-                          view details
-                          <img
-                            src="/img/arrow-icon.svg"
-                            className="view-details_box_img"
-                          />
-                        </>
-                      )}
-                    </article>
-                    <article className="view-details_divider" />
-                  </section>
-                )}
-
-                {(viewDetailsOpen || matches) && (
-                  <section className="booking_information-paragraphs">
-                    <p className="booking_information-paragraphs-text">
-                      {vehicle?.blurbs?.description}
-                    </p>
-                    <section>
-                      <header>
-                        <h4 className="vehicle-details_section_header">
-                          Included with every rental
-                        </h4>
-                      </header>
-                      <ul className="vehicle-details_section_list">
-                        <li className="vehicle-details_section_text">
-                          200 miles per day
-                        </li>
-                        <li className="vehicle-details_section_text">
-                          Comprehensive Insurance
-                        </li>
-                        <li className="vehicle-details_section_text">
-                          24/7 Roadside Assistance
-                        </li>
-                      </ul>
-                    </section>
-                    <section>
-                      <header>
-                        <h4 className="vehicle-details_section_header">
-                          Vehicle Specs
-                        </h4>
-                      </header>
-                      <section className="vehicle-details_rental_specs">
-                        <section className="vehicle-details_rental-type">
-                          {["Convertible", "Dune Buggy"].includes(
-                            vehicle.vehicleType
-                          ) && (
-                            <>
-                              <section className="vehicle-details_rental-type_section">
-                                <img src="/img/convertible-icon.svg" />
-                                <article className="vehicle-details_section_text">
-                                  {vehicle.vehicleType}
-                                </article>
-                              </section>
-                            </>
-                          )}
-                          {["Coupe", "SUV"].includes(vehicle.vehicleType) && (
-                            <>
-                              <section className="vehicle-details_rental-type_section">
-                                <img src="/img/coupe-icon.svg" />
-                                <article className="vehicle-details_section_text">
-                                  {vehicle.vehicleType}
-                                </article>
-                              </section>
-                            </>
-                          )}
-                          {vehicle.transmission === "M" ? (
-                            <>
-                              <section className="vehicle-details_rental-status_section">
-                                <img src="/img/slices/icon_manual.svg" />
-                                <article className="vehicle-details_section_text">
-                                  Manual
-                                </article>
-                              </section>
-                            </>
-                          ) : (
-                            <>
-                              <section className="vehicle-details_rental-status_section">
-                                <img src="/img/auto-icon.svg" />
-                                <article className="vehicle-details_section_text">
-                                  Automatic
-                                </article>
-                              </section>
-                            </>
-                          )}
-                        </section>
-                        <section className="vehicle-details_rental-type">
-                          {vehicle.cylinders === "V8" ? (
-                            <>
-                              <section className="vehicle-details_rental-type_section">
-                                <img src="/img/v8-icon.svg" />
-                                <article className="vehicle-details_section_text">
-                                  {vehicle.engine} V8
-                                </article>
-                              </section>
-                            </>
-                          ) : vehicle.cylinders === "V6" ? (
-                            <section className="vehicle-details_rental-type_section">
-                              <img src="/img/6-cyl-icon.svg" />
-                              <article className="vehicle-details_section_text">
-                                {vehicle.engine} 6 Cyl
-                              </article>
-                            </section>
-                          ) : vehicle.cylinders === "4" ? (
-                            <section className="vehicle-details_rental-type_section">
-                              <img src="/img/4-cyl-icon.svg" />
-                              <article className="vehicle-details_section_text">
-                                {vehicle.engine} 4 Cyl
-                              </article>
-                            </section>
-                          ) : (
-                            <section className="vehicle-details_rental-type_section">
-                              <img src="/img/engine-icon.svg" />
-                              <article className="vehicle-details_section_text">
-                                {vehicle.engine}
-                              </article>
-                            </section>
-                          )}
-
-                          <section className="vehicle-details_rental-status_section">
-                            <img src="/img/pax-icon.svg" />
-                            <article className="vehicle-details_section_text">
-                              {`${vehicle.seats} Passenger`}
-                            </article>
-                          </section>
-                        </section>
-                      </section>
-                    </section>
-                    <section>
-                      <header>
-                        <h4 className="vehicle-details_section_header">
-                          Vehicle Type
-                        </h4>
-                      </header>
-                      <section className="vehicle-details_rental-type">
-                        {vehicle.type === "SHOW" ? (
-                          <>
-                            <section className="vehicle-details_rental-type_section">
-                              <img src="/img/show-icon.svg" />
-                              <article className="vehicle-details_section_text">
-                                Show Car - treat it like you own it.
-                              </article>
-                            </section>
-                            <section className="vehicle-details_rental-type_section">
-                              <img src="/img/go-icon-grey.svg" />
-                              <article className="vehicle-details_section_text">
-                                Go Car - drive it like you stole it.
-                              </article>
-                            </section>
-                          </>
-                        ) : (
-                          <>
-                            <section className="vehicle-details_rental-status_section">
-                              <img src="/img/show-icon-grey.svg" />
-                              <article className="vehicle-details_section_text">
-                                Show Car - treat it like you own it.
-                              </article>
-                            </section>
-                            <section className="vehicle-details_rental-status_section">
-                              <img src="/img/go-icon.svg" />
-                              <article className="vehicle-details_section_text">
-                                Go Car - drive it like you stole it.
-                              </article>
-                            </section>
-                          </>
-                        )}
-                      </section>
-                    </section>
-                    <section>
-                      <header>
-                        <h4 className="vehicle-details_section_header">
-                          Vehicle Status
-                        </h4>
-                      </header>
-                      <section className="vehicle-details_rental-status">
-                        {vehicle.rentalStatus === "D" ? (
-                          <section className="vehicle-details_rental-status_section">
-                            <img src="/img/d-icon.svg" />
-                            <article className="vehicle-details_section_text">
-                              Drive - vehicle is in stock, gassed up, inspected
-                              for reliability, and is ready to cruise Kansas
-                              City.
-                            </article>
-                          </section>
-                        ) : vehicle.rentalStatus === "R" ? (
-                          <article className="vehicle-details_section_text">
-                            Reverse - vehicle is in stock but not currently
-                            available for rent. These vehicles are undergoing
-                            maintenance, repairs are being made, or the vehicle
-                            is currently rented or otherwise unavailable.
-                          </article>
-                        ) : (
-                          <article className="vehicle-details_section_text">
-                            Neutral - vehicle is in stock and is available for
-                            rent but unable to be driven. These vehicles are
-                            primarily rented as props for photo shoots,
-                            commercials, and special events.
-                          </article>
-                        )}
-                      </section>
-                    </section>
-                    <section>
-                      <header>
-                        <h4 className="vehicle-details_section_header">
-                          Requirements
-                        </h4>
-                      </header>
-                      <section className="vehicle-details_rental-status">
-                        <section className="vehicle-details_rental-status_section">
-                          <img src="/img/license.svg" />
-                          <article className="vehicle-details_section_text">
-                            All self-drive renters must be 30+ years old and
-                            have a relatively clean driving record.
-                          </article>
-                        </section>
-                        <section className="vehicle-details_rental-status_section">
-                          <img src="/img/creditcard.svg" />
-                          <article className="vehicle-details_section_text">
-                            All bookings must be made with a valid Credit Card.
-                            Debit Cards are not accepted.
-                          </article>
-                        </section>
-                      </section>
-                    </section>
-                    {!matches && (
-                      <section
-                        className="view-details_container"
-                        onClick={() => setViewDetailsOpen(!viewDetailsOpen)}
-                      >
-                        <article className="view-details_divider" />
-                        <article className="view-details_box">
-                          {viewDetailsOpen ? (
-                            <>
-                              hide details
-                              <img
-                                src="/img/arrow-icon.svg"
-                                className="view-details_box_img--up"
-                              />
-                            </>
-                          ) : (
-                            <>
-                              view details
-                              <img
-                                src="/img/arrow-icon.svg"
-                                className="view-details_box_img"
-                              />
-                            </>
-                          )}
-                        </article>
-                        <article className="view-details_divider" />
-                      </section>
-                    )}
-                  </section>
-                )}
-              </section>
+              <VehicleDetails vehicle={vehicle} />
               <section className="booking_information_forms">
-                <section className="booking_information_forms_header">
-                  <article
-                    className={`booking_information_forms_header_tab${
-                      tab === "self" ? "--active" : ""
-                    }`}
-                    onClick={() => setTab("self")}
-                  >
-                    <img
-                      src={`/img/gear-icon${tab === "self" ? "-grey" : ""}.svg`}
-                      className="booking_information_forms_header_tab_img"
-                    />
-                    Self Drive
-                  </article>
-                  <article
-                    className={`booking_information_forms_header_tab-chauffeured${
-                      tab === "chauffeured" ? "--active" : ""
-                    }`}
-                    onClick={() => setTab("chauffeured")}
-                  >
-                    <img
-                      src={`/img/chauffeured-icon${
-                        tab === "chauffeured" ? "-grey" : ""
-                      }.svg`}
-                      className="booking_information_forms_header_tab_img"
-                    />
-                    Chauffeured
-                  </article>
-                  <article
-                    className={`booking_information_forms_header_tab-commercial${
-                      tab === "commercial" ? "--active" : ""
-                    }`}
-                    onClick={() => setTab("commercial")}
-                  >
-                    <img
-                      src={`/img/camera-icon${
-                        tab === "commercial" ? "-grey" : ""
-                      }.svg`}
-                      className="booking_information_forms_header_tab_img"
-                    />
-                    Commercial
-                  </article>
-                </section>
                 {(vehicle.rentalStatus === "D" ||
                   ["commercial"].includes(tab)) && (
                   <BookingForm
                     vehicle={vehicle}
                     paymentIntent={paymentIntent}
                     tab={tab}
+                    setTab={setTab}
                     initialValues={initialValues}
                     handleSubmit={handleSubmit}
-                    validationSchema={validationSchema}
                     success={success}
-                    totalDays={totalDays}
-                    totalHours={totalHours}
                     submissionData={submissionData}
                     setSubmitting={setSubmitting}
                     setFieldError={setFieldError}
                     setButtonText={setButtonText}
                     fieldError={fieldError}
                     setSuccess={setSuccess}
-                    handleDateChange={handleDateChange}
                     bookingBegun={bookingBegun}
                     formError={formError}
                     submitting={submitting}
                     setBookingBegun={setBookingBegun}
-                    handleTimeChange={handleTimeChange}
                     setPaymentIntent={setPaymentIntent}
                   />
                 )}

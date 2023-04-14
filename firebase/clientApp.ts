@@ -18,6 +18,4 @@ const storage = getStorage(app);
 const inventoryRef = ref(storage, "inventory");
 const satRef = ref(inventoryRef, "R451158693/65satellite_01.jpg");
 
-console.log(satRef.bucket);
-
 export { db, storage, inventoryRef };

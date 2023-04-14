@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { Form, Formik, useFormikContext } from "formik";
-import * as Moment from "moment";
+import moment, { Moment } from "moment";
 import { CheckoutForm } from "./checkoutForm";
 import getStripe from "../utils/get-stripejs";
 import { TextField } from "./TextField";
@@ -9,6 +9,7 @@ import { DatePicker } from "./datePicker";
 import { TimePicker } from "./TimePicker";
 import { DocumentData } from "firebase/firestore";
 import { TextArea } from "./TextArea";
+import { validationSchema } from "../utils/bookingValidationSchema";
 
 export type FieldError = {
   name?: string;
@@ -35,9 +36,9 @@ export type CustomerData = {
 
 export type SubmissionData = {
   vin: string;
-  startDateTime: Moment.Moment;
-  endDateTime: Moment.Moment;
-  endRefitTime: Moment.Moment;
+  startDateTime: Moment;
+  endDateTime: Moment;
+  endRefitTime: Moment;
   vehicle: DocumentData;
   notes: string;
   type: "self" | "chauffeured" | "commercial";
@@ -58,26 +59,25 @@ export const BookingForm = ({
   vehicle,
   paymentIntent,
   tab,
+  setTab,
   initialValues,
   handleSubmit,
-  validationSchema,
   success,
-  totalDays,
-  totalHours,
   submissionData,
   setSubmitting,
   setFieldError,
   setButtonText,
   fieldError,
   setSuccess,
-  handleDateChange,
   bookingBegun,
   formError,
   submitting,
-  handleTimeChange,
   setBookingBegun,
   setPaymentIntent,
 }) => {
+  const [totalDays, setTotalDays] = useState(0);
+  const [totalHours, setTotalHours] = useState(0);
+
   const ScrollToFieldError = () => {
     const { errors, isSubmitting, isValidating } = useFormikContext();
 
@@ -95,6 +95,78 @@ export const BookingForm = ({
     }, [errors, isSubmitting, isValidating]);
 
     return null;
+  };
+  const Tabs = () => {
+    const { errors, isSubmitting, values, setFieldValue } = useFormikContext();
+
+    const handleSetTab = (newTab) => {
+      setTab(newTab);
+      if (["chauffeured", "commercial"].includes(newTab)) {
+        setFieldValue("endTime", "12:00");
+        setFieldValue("endDate", (values as Values).startDate);
+      }
+    };
+
+    return (
+      <section className="booking_information_forms_header">
+        <article
+          className={`booking_information_forms_header_tab${
+            tab === "self" ? "--active" : ""
+          }`}
+          onClick={() => handleSetTab("self")}
+        >
+          <img
+            src={`/img/gear-icon${tab === "self" ? "-grey" : ""}.svg`}
+            className="booking_information_forms_header_tab_img"
+          />
+          Self Drive
+        </article>
+        <article
+          className={`booking_information_forms_header_tab-chauffeured${
+            tab === "chauffeured" ? "--active" : ""
+          }`}
+          onClick={() => handleSetTab("chauffeured")}
+        >
+          <img
+            src={`/img/chauffeured-icon${
+              tab === "chauffeured" ? "-grey" : ""
+            }.svg`}
+            className="booking_information_forms_header_tab_img"
+          />
+          Chauffeured
+        </article>
+        <article
+          className={`booking_information_forms_header_tab-commercial${
+            tab === "commercial" ? "--active" : ""
+          }`}
+          onClick={() => handleSetTab("commercial")}
+        >
+          <img
+            src={`/img/camera-icon${tab === "commercial" ? "-grey" : ""}.svg`}
+            className="booking_information_forms_header_tab_img"
+          />
+          Commercial
+        </article>
+      </section>
+    );
+  };
+
+  const handleDateChange = (startDate, endDate) => {
+    setSubmitting(false);
+    if (startDate && endDate) {
+      let newTotalDays: number;
+      const differenceInTime = endDate.getTime() - startDate.getTime();
+      newTotalDays = differenceInTime / (1000 * 3600 * 24);
+      setTotalDays(Math.round(newTotalDays));
+    }
+  };
+
+  const handleTimeChange = (startTime, endTime) => {
+    setSubmitting(false);
+    if (startTime && endTime) {
+      const newTotalHours = (endTime - startTime) / (1000 * 3600);
+      setTotalHours(newTotalHours);
+    }
   };
 
   useEffect(() => {
@@ -161,6 +233,7 @@ export const BookingForm = ({
             )}
             <Form className="booking_information-form">
               <ScrollToFieldError />
+              <Tabs />
               <section className="booking_information-form-dates_container">
                 {tab === "self" && (
                   <>
@@ -261,7 +334,17 @@ export const BookingForm = ({
                   {["chauffeured", "commercial"].includes(tab) &&
                     `$${vehicle?.rentalCost?.chauffeured} hr`}
                 </h2>
-                <h2 className="booking_information-form_pricing-text--sub">
+                <h2
+                  className={
+                    (["chauffeured", "commercial"].includes(tab) &&
+                      totalHours < 2 &&
+                      totalHours > 0) ||
+                    totalHours < 0 ||
+                    (tab === "self" && totalDays < 0)
+                      ? "booking_information-form_pricing-text--sub--issue"
+                      : "booking_information-form_pricing-text--sub"
+                  }
+                >
                   {tab === "self" && totalDays > 0
                     ? `${totalDays} Days for $${
                         vehicle?.rentalCost?.day * totalDays
@@ -269,12 +352,17 @@ export const BookingForm = ({
                     : totalDays < 0
                     ? `Your start date and time must be before your end date and time`
                     : ""}
-                  {["chauffeured", "commercial"].includes(tab) && totalHours > 2
+                  {["chauffeured", "commercial"].includes(tab) &&
+                  totalHours >= 2
                     ? `${totalHours} hrs for $${
                         vehicle?.rentalCost?.chauffeured * totalHours
                       } Total`
-                    : totalHours < 2
+                    : ["chauffeured", "commercial"].includes(tab) &&
+                      totalHours < 2 &&
+                      totalHours > 0
                     ? `You must rent the vehicle for at least 2 hours.`
+                    : totalHours < 0
+                    ? "Your end time must be after your start time."
                     : ""}
                 </h2>
               </article>
@@ -311,51 +399,53 @@ export const BookingForm = ({
                   </section>
                 </section>
               )}
-              {bookingBegun ? (
-                <button
-                  className={`booking_information-form-button${
-                    Object.keys(formError).length !== 0 ? "--form-error" : ""
-                  }${
-                    (tab === "self" && totalDays <= 0) ||
-                    (["chauffeured", "commercial"].includes(tab) &&
-                      totalHours < 2)
-                      ? "--submitting"
-                      : ""
-                  }`}
-                  onClick={() => handleSubmit(values)}
-                  disabled={
-                    (tab === "self" && totalDays <= 0) ||
-                    (["chauffeured", "commercial"].includes(tab) &&
-                      totalHours < 2)
-                  }
-                  type="button"
-                >
-                  Continue To Payment
-                </button>
-              ) : (
-                <button
-                  className={`booking_information-form-button${
-                    Object.keys(formError).length !== 0 ? "--form-error" : ""
-                  }${
-                    submitting ||
-                    (tab === "self" && totalDays <= 0) ||
-                    (["chauffeured", "commercial"].includes(tab) &&
-                      totalHours < 2)
-                      ? "--submitting"
-                      : ""
-                  }`}
-                  onClick={() => setBookingBegun(true)}
-                  disabled={
-                    submitting ||
-                    (tab === "self" && totalDays <= 0) ||
-                    (["chauffeured", "commercial"].includes(tab) &&
-                      totalHours < 2)
-                  }
-                  type="button"
-                >
-                  Begin Booking
-                </button>
-              )}
+              <section className="booking_information-form-button-container">
+                {bookingBegun ? (
+                  <button
+                    className={`booking_information-form-button${
+                      Object.keys(formError).length !== 0 ? "--form-error" : ""
+                    }${
+                      (tab === "self" && totalDays <= 0) ||
+                      (["chauffeured", "commercial"].includes(tab) &&
+                        totalHours < 2)
+                        ? "--submitting"
+                        : ""
+                    }`}
+                    onClick={() => handleSubmit(values)}
+                    disabled={
+                      (tab === "self" && totalDays <= 0) ||
+                      (["chauffeured", "commercial"].includes(tab) &&
+                        totalHours < 2)
+                    }
+                    type="button"
+                  >
+                    Continue To Payment
+                  </button>
+                ) : (
+                  <button
+                    className={`booking_information-form-button${
+                      Object.keys(formError).length !== 0 ? "--form-error" : ""
+                    }${
+                      submitting ||
+                      (tab === "self" && totalDays <= 0) ||
+                      (["chauffeured", "commercial"].includes(tab) &&
+                        totalHours < 2)
+                        ? "--submitting"
+                        : ""
+                    }`}
+                    onClick={() => setBookingBegun(true)}
+                    disabled={
+                      submitting ||
+                      (tab === "self" && totalDays <= 0) ||
+                      (["chauffeured", "commercial"].includes(tab) &&
+                        totalHours < 2)
+                    }
+                    type="button"
+                  >
+                    Begin Booking
+                  </button>
+                )}
+              </section>
               {Object.values(fieldError).length !== 0 && (
                 <>
                   <article className="booking_date-conflict-message">

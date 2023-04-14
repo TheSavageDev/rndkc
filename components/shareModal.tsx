@@ -71,8 +71,6 @@ export const ShareModal = ({ setShowShareModal, car }) => {
     }
   };
 
-  console.log(data);
-
   return (
     <section className="share-modal">
       <header className="share-modal_header">

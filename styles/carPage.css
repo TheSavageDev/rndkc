@@ -389,7 +389,9 @@
 .booking_information-form {
   display: flex;
   flex-direction: column;
-  margin-bottom: 8rem;
+}
+
+.booking_information-form-dates_container {
   padding: 2rem;
   background: #eaeaea;
 }
@@ -603,7 +605,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 2rem 0;
+  padding: 2rem 0;
+  background-color: #eee;
 }
 
 .booking_information-form_pricing-text {
@@ -623,6 +626,26 @@
   line-height: 3.3rem;
   letter-spacing: 0.03rem;
   color: #111;
+  text-align: center;
+}
+
+.booking_information-form_pricing-text--sub--issue {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  letter-spacing: 0.03rem;
+  color: #aa0000;
+  text-align: center;
+}
+
+.booking_information-form-button-container {
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 2rem;
 }
 
 .booking_information-form-button {
@@ -635,9 +658,8 @@
   line-height: 3.3rem;
   text-align: center;
   color: #ffffff;
-  padding: 0.75rem;
+  padding: 0.75rem 4rem;
   text-transform: uppercase;
-  margin-top: 2rem;
 }
 
 .booking_information-form-button--form-error {
@@ -651,6 +673,7 @@
   text-align: center;
   color: #ffffff;
   padding: 0.75rem;
+  margin: 0 2rem;
 }
 
 .booking_information-form-button--submitting {
@@ -665,6 +688,7 @@
   text-align: center;
   color: #ffffff;
   padding: 0.75rem;
+  margin: 0 2rem;
 }
 
 .booking_questions_header {

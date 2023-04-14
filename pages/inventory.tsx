@@ -36,8 +36,6 @@ export default function Inventory() {
     }
   }, [router.isReady]);
 
-  console.log(vehicles);
-
   usePageTracking(router, router.query.id);
   return (
     <>
