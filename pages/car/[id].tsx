@@ -700,33 +700,33 @@ const Car = () => {
                     Commercial
                   </article>
                 </section>
-                {vehicle.rentalStatus === "D" ||
-                  (["commercial"].includes(tab) && (
-                    <BookingForm
-                      vehicle={vehicle}
-                      paymentIntent={paymentIntent}
-                      tab={tab}
-                      initialValues={initialValues}
-                      handleSubmit={handleSubmit}
-                      validationSchema={validationSchema}
-                      success={success}
-                      totalDays={totalDays}
-                      totalHours={totalHours}
-                      submissionData={submissionData}
-                      setSubmitting={setSubmitting}
-                      setFieldError={setFieldError}
-                      setButtonText={setButtonText}
-                      fieldError={fieldError}
-                      setSuccess={setSuccess}
-                      handleDateChange={handleDateChange}
-                      bookingBegun={bookingBegun}
-                      formError={formError}
-                      submitting={submitting}
-                      setBookingBegun={setBookingBegun}
-                      handleTimeChange={handleTimeChange}
-                      setPaymentIntent={setPaymentIntent}
-                    />
-                  ))}
+                {(vehicle.rentalStatus === "D" ||
+                  ["commercial"].includes(tab)) && (
+                  <BookingForm
+                    vehicle={vehicle}
+                    paymentIntent={paymentIntent}
+                    tab={tab}
+                    initialValues={initialValues}
+                    handleSubmit={handleSubmit}
+                    validationSchema={validationSchema}
+                    success={success}
+                    totalDays={totalDays}
+                    totalHours={totalHours}
+                    submissionData={submissionData}
+                    setSubmitting={setSubmitting}
+                    setFieldError={setFieldError}
+                    setButtonText={setButtonText}
+                    fieldError={fieldError}
+                    setSuccess={setSuccess}
+                    handleDateChange={handleDateChange}
+                    bookingBegun={bookingBegun}
+                    formError={formError}
+                    submitting={submitting}
+                    setBookingBegun={setBookingBegun}
+                    handleTimeChange={handleTimeChange}
+                    setPaymentIntent={setPaymentIntent}
+                  />
+                )}
                 {vehicle.rentalStatus === "N" &&
                   ["self", "chauffeured"].includes(tab) && (
                     <AvailabilitySignUp vin={vehicle.vin} />
