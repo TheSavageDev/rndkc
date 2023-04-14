@@ -269,12 +269,12 @@ export const BookingForm = ({
                     : totalDays < 0
                     ? `Your start date and time must be before your end date and time`
                     : ""}
-                  {["chauffeured", "commercial"].includes(tab) && totalHours > 0
+                  {["chauffeured", "commercial"].includes(tab) && totalHours > 2
                     ? `${totalHours} hrs for $${
                         vehicle?.rentalCost?.chauffeured * totalHours
                       } Total`
-                    : totalDays < 0
-                    ? `Your start date and time must be before your end date and time`
+                    : totalHours < 2
+                    ? `You must rent the vehicle for at least 2 hours.`
                     : ""}
                 </h2>
               </article>
@@ -315,9 +315,19 @@ export const BookingForm = ({
                 <button
                   className={`booking_information-form-button${
                     Object.keys(formError).length !== 0 ? "--form-error" : ""
-                  }${totalDays <= 0 && totalHours <= 0 ? "--submitting" : ""}`}
+                  }${
+                    (tab === "self" && totalDays <= 0) ||
+                    (["chauffeured", "commercial"].includes(tab) &&
+                      totalHours < 2)
+                      ? "--submitting"
+                      : ""
+                  }`}
                   onClick={() => handleSubmit(values)}
-                  disabled={totalDays <= 0 && totalHours <= 0}
+                  disabled={
+                    (tab === "self" && totalDays <= 0) ||
+                    (["chauffeured", "commercial"].includes(tab) &&
+                      totalHours < 2)
+                  }
                   type="button"
                 >
                   Continue To Payment
@@ -327,12 +337,20 @@ export const BookingForm = ({
                   className={`booking_information-form-button${
                     Object.keys(formError).length !== 0 ? "--form-error" : ""
                   }${
-                    submitting || (totalDays <= 0 && totalHours < 2)
+                    submitting ||
+                    (tab === "self" && totalDays <= 0) ||
+                    (["chauffeured", "commercial"].includes(tab) &&
+                      totalHours < 2)
                       ? "--submitting"
                       : ""
                   }`}
                   onClick={() => setBookingBegun(true)}
-                  disabled={submitting || (totalDays <= 0 && totalHours < 2)}
+                  disabled={
+                    submitting ||
+                    (tab === "self" && totalDays <= 0) ||
+                    (["chauffeured", "commercial"].includes(tab) &&
+                      totalHours < 2)
+                  }
                   type="button"
                 >
                   Begin Booking
