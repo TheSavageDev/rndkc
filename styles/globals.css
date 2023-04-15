@@ -1041,21 +1041,19 @@ html {
   width: 100%;
 }
 
-.our-story-page_content_paragraph {
+.our-story-page_content_paragraph,
+.our-story-page_content_paragraph-extra {
   font-family: "Manrope";
   font-style: normal;
   font-weight: 400;
   font-size: 2rem;
   line-height: 3.5rem;
   color: #1e1e1e;
-  padding: 0 2rem 20rem 2rem;
+  padding: 0 2rem 2rem 2rem;
 }
 
 .our-story-page_content_kc {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  display: block;
 }
 
 .our-story-page_content_ryan {
@@ -1064,7 +1062,6 @@ html {
 }
 
 .our-story-page_content_ryan_header {
-  padding: 0.4rem 1rem;
   background: #ff9d0b;
 }
 
@@ -1074,6 +1071,7 @@ html {
   font-weight: 600;
   font-size: 3.2rem;
   line-height: 4.9rem;
+  padding: 0 2rem;
   text-transform: uppercase;
   color: #ffffff;
 }

@@ -79,11 +79,15 @@ export default function OurStory() {
             <section className="our-story_home-grown">
               <section className="our-story-page_content_ryan">
                 <section className="our-story-home-grown_header_container">
-                  <img
+                  {/* <img
                     src="/img/slices/img_kcsilhouette.png"
-                    className="our-story-page_content_kc"
-                  />
+                    className="our-story-page_content_kc--big"
+                  /> */}
                   <header className="our-story-page_content_ryan_header">
+                    <img
+                      src="/img/slices/img_kcsilhouette.png"
+                      className="our-story-page_content_kc"
+                    />
                     <h2 className="our-story-page_content_ryan_header-text">
                       Home Grown in Kansas City
                     </h2>
