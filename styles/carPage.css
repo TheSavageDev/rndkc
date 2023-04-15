@@ -995,6 +995,16 @@
   height: auto;
 }
 
+.image-credit {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.8rem;
+  line-height: 2rem;
+  letter-spacing: 0.03rem;
+  color: #ffffff;
+}
+
 .car-page_tow-truck_blurb {
   font-family: "Akshar";
   font-weight: 500;
@@ -1091,6 +1101,7 @@
     flex-direction: column;
     max-width: 38.9rem;
   }
+
   .ugh {
     display: flex;
     flex-direction: row;

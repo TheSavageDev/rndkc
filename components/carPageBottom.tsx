@@ -1,23 +1,57 @@
 import { ContactForm } from "./contactForm";
 
-export const CarPageBottom = () => {
+export const CarPageBottom = ({ tab }) => {
   return (
     <section className="car-page_bottom-container">
       <article className="ugh">
         <article className="car-page_delivery">
           <h2 className="car-page_bottom_header">
-            We Offer Delivery <img src="/img/tow-truck-icon.svg" />
+            {["self", "commercial"].includes(tab) ? (
+              <>
+                We Offer Delivery <img src="/img/tow-truck-icon.svg" />
+              </>
+            ) : (
+              <>
+                Make your event even more special <img src="/img/rings.svg" />
+              </>
+            )}
           </h2>
           <article className="car-page_tow-truck-img">
-            <img src="/img/tow-truck.png" />
+            <img
+              src={
+                ["self", "commercial"].includes(tab)
+                  ? "/img/tow-truck.png"
+                  : "/img/chaff-bottom.png"
+              }
+            />
+            {tab === "chauffeured" && (
+              <small className="image-credit">
+                photography by lbensonphotography.com
+              </small>
+            )}
           </article>
           <p className="car-page_tow-truck_blurb">
-            Imagine your friends and neighbors reaction when a 1956 Cabover
-            pulls up to deliver your ride!
+            {["self", "commercial"].includes(tab) ? (
+              <>
+                Imagine your friends and neighbors reaction when a 1956 Cabover
+                pulls up to deliver your ride!
+              </>
+            ) : (
+              <>
+                Weddings, anniversaries, date nights, or birthdays. You just
+                relax and enjoy your special day, we’ll do all the driving.
+              </>
+            )}
           </p>
         </article>
         <article className="car-page_tow-truck-img-wide">
-          <img src="/img/tow-truck.png" />
+          <img
+            src={
+              ["self", "commercial"].includes(tab)
+                ? "/img/tow-truck.png"
+                : "/img/chaff-bottom.png"
+            }
+          />
         </article>
       </article>
       <article className="car-page_tow-truck_divider"></article>

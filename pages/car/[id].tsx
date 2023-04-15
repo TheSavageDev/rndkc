@@ -265,7 +265,7 @@ const Car = () => {
             </section>
           </>
         )}
-        <CarPageBottom />
+        <CarPageBottom tab={tab} />
         <Footer />
       </section>
     </section>
