@@ -423,7 +423,6 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
             <p>Give us a call at 816-200-1163 or email us at hello@rndkc.com</p>
           </section>
         )}
-        <Footer />
       </form>
     </>
   );

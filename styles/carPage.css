@@ -958,3 +958,153 @@
   padding: 0.75rem;
   margin: 0 2rem;
 }
+
+.car-page_bottom-container {
+  background-color: #657170;
+  padding: 6rem 2rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.car-page_bottom_header {
+  font-family: "Akshar";
+  font-weight: 400;
+  font-size: 4.2rem;
+  line-height: 4.6rem;
+  text-align: center;
+  letter-spacing: 0.03rem;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.car-page_bottom_header img {
+  margin-left: 1rem;
+}
+
+.car-page_tow-truck-img-wide {
+  display: none;
+}
+
+.car-page_tow-truck-img {
+  margin-bottom: 2rem;
+  max-width: 64.1rem;
+  height: auto;
+}
+
+.car-page_tow-truck_blurb {
+  font-family: "Akshar";
+  font-weight: 500;
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+  text-align: center;
+  color: #fff;
+}
+
+.car-page_tow-truck_divider {
+  height: 1px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  width: 100%;
+  margin: 4rem 0;
+}
+
+.car-page_questions_header {
+  font-family: "Akshar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 3.5rem;
+  line-height: 3.8rem;
+  letter-spacing: 0.03rem;
+  color: #fff;
+  text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.25);
+  margin-bottom: 2rem;
+}
+
+.car-page_questions_header-text {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 3.5rem;
+  letter-spacing: 0.03rem;
+  color: #ffffff;
+}
+
+.car-page_questions_header-text--bold {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 3.5rem;
+  letter-spacing: 0.03rem;
+  color: #ffffff;
+}
+
+.car-page_questions_header-text--bold--underlined {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 3.5rem;
+  letter-spacing: 0.03rem;
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.car-page_questions-container {
+}
+
+.car-page_contact-form {
+  max-width: 61rem;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.contactForm-input {
+  border-radius: 0.5rem;
+  font-family: Akshar;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 2.6rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  color: #2b2b2b;
+  border: 1px solid #636363;
+}
+
+@media (min-width: 1024px) {
+  .car-page_bottom-container {
+    background-color: #657170;
+    padding: 6rem 2rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .car-page_delivery {
+    display: flex;
+    flex-direction: column;
+    max-width: 38.9rem;
+  }
+  .ugh {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .car-page_tow-truck-img-wide {
+    display: block;
+    max-width: 64.1rem;
+    margin: 2rem;
+  }
+
+  .car-page_tow-truck-img {
+    display: none;
+  }
+}

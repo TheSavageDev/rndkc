@@ -1338,11 +1338,11 @@ html {
   border-radius: 0.5rem;
   font-family: Akshar;
   font-weight: 300;
-  font-size: 1.8rem;
-  line-height: 2.484rem;
+  font-size: 2.4rem;
+  line-height: 2.6rem;
   margin: 1rem 0;
   padding: 1rem;
-  color: #000;
+  color: #2b2b2b;
   border: 1px solid #636363;
 }
 
@@ -1350,11 +1350,11 @@ html {
   border-radius: 0.5rem;
   font-family: Akshar;
   font-weight: 300;
-  font-size: 1.8rem;
-  line-height: 2.484rem;
+  font-size: 2.4rem;
+  line-height: 2.6rem;
   margin: 1rem 0;
   padding: 1rem;
-  color: #000;
+  color: #2b2b2b;
   border: 1px solid #636363;
 }
 
@@ -1362,13 +1362,13 @@ html {
   border-radius: 0.5rem;
   font-family: Akshar;
   font-weight: 300;
-  font-size: 1.8rem;
-  line-height: 2.484rem;
+  font-size: 2.4rem;
+  line-height: 2.6rem;
   margin: 1rem 0;
   padding: 1rem;
-  height: 24.3rem;
-  color: #000;
+  color: #2b2b2b;
   border: 1px solid #636363;
+  height: 24.3rem;
 }
 
 .contactForm-message--success {
@@ -1378,11 +1378,12 @@ html {
 .contactForm-button--success {
   border-radius: 0.5rem;
   font-family: Akshar;
-  font-weight: 400;
-  font-size: 1.8rem;
-  line-height: 2.5rem;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 2.6rem;
   text-align: center;
   padding: 1rem;
+  text-transform: uppercase;
   background-color: #767676;
   border: 1px solid #282828;
   color: #fff;
@@ -1391,12 +1392,13 @@ html {
 .contactForm-button {
   border-radius: 0.5rem;
   font-family: Akshar;
-  font-weight: 400;
-  font-size: 1.8rem;
-  line-height: 2.5rem;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 2.6rem;
   text-align: center;
-  background-color: #ff9d0b;
   padding: 1rem;
+  text-transform: uppercase;
+  background-color: #ff9d0b;
 }
 
 .contactForm-successMessage {

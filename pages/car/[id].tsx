@@ -24,6 +24,7 @@ import { VehicleDetails } from "../../components/vehicleDetails";
 import { VehicleHeader } from "../../components/vehicleHeader";
 import { VehicleImages } from "../../components/vehicleImages";
 import { bookingValidCheck } from "../../utils/bookingDateValidCheck";
+import { CarPageBottom } from "../../components/carPageBottom";
 
 export type FieldError = {
   name?: string;
@@ -264,37 +265,7 @@ const Car = () => {
             </section>
           </>
         )}
-        {/* <section className="getInTouch">
-          <section className="flex flex-col getInTouch_container">
-            <article className="flex flex-col">
-              <h3 className="booking_questions_header">Have Questions?</h3>
-              <article className="">
-                <p className="booking_questions_header-text">
-                  At RND we strive to make your classic car rental experience as
-                  simple and enjoyable as possible. We offer delivery to your
-                  home or work. We can also pick you up from the airport if you
-                  are in town visiting. If you have questions visit our{" "}
-                  <a
-                    href="/faq"
-                    className="booking_questions_header-text--bold"
-                  >
-                    FAQ Page
-                  </a>
-                  , use the contact form below, or call us at{" "}
-                  <a
-                    href="tel:8162001163"
-                    className="booking_questions_header-text--bold"
-                  >
-                    816-200-1163
-                  </a>
-                </p>
-              </article>
-            </article>
-            <article className="booking_questions_contact-form">
-              <ContactForm />
-            </article>
-          </section>
-        </section> */}
+        <CarPageBottom />
         <Footer />
       </section>
     </section>

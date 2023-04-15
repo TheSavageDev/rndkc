@@ -4,9 +4,11 @@ import { useEventTracking } from "../hooks/useEventTracking";
 export const ContactForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<{
     name?: string;
+    phone?: string;
     email?: string;
     message?: string;
   }>({ name: "", email: "", message: "" });
@@ -48,6 +50,7 @@ export const ContactForm = () => {
         body: JSON.stringify({
           email,
           name,
+          phone,
           message,
         }),
         headers: {
@@ -117,6 +120,20 @@ export const ContactForm = () => {
       {errors?.email && (
         <p className="contactForm-errorText">Email cannot be empty.</p>
       )}
+      <input
+        type="tel"
+        id="phone-input"
+        name="phone"
+        placeholder="Phone (optional)"
+        value={phone}
+        onChange={(e) => {
+          setPhone(e.target.value);
+        }}
+        required
+        autoCapitalize="none"
+        autoCorrect="off"
+        className="contactForm-email"
+      />
       <textarea
         placeholder="Message"
         className={`contactForm-message ${
