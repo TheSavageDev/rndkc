@@ -347,11 +347,7 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
         {!success ? (
           <button
             className={`checkout-form_button${
-              payment.status === "error"
-                ? "--form-error"
-                : payment.status === "initial"
-                ? "--disabled"
-                : ""
+              payment.status === "error" ? "--form-error" : ""
             }`}
             type="submit"
             disabled={
