@@ -41,7 +41,10 @@ export const ComingSoonImageGrid = () => {
         vehicles.map((vehicle) => (
           <ImageGridItem
             key={vehicle.vin}
-            src={vehicle.imageUrls[0] ?? "/img/car.svg"}
+            src={
+              `https://firebasestorage.googleapis.com/v0/b/rndkc-95667.appspot.com/o/inventory%2F${vehicle.vin}%2F${vehicle.imageUrls[0]}.jpg?alt=media&token=c6aa8b3e-97bb-4c8d-a3c9-7c5114459cd7` ??
+              "/img/car.svg"
+            }
             alt={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
             title={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
             dayPrice={"Coming Soon"}

@@ -6,7 +6,7 @@ export const VehicleImages = ({ vehicle, bigImageUrl, setBigImageUrl }) => {
           {vehicle.imageUrls && vehicle.imageUrls.length !== 0 ? (
             <>
               <img
-                src={bigImageUrl}
+                src={`https://firebasestorage.googleapis.com/v0/b/rndkc-95667.appspot.com/o/inventory%2F${vehicle.vin}%2F${bigImageUrl}.jpg?alt=media&token=c6aa8b3e-97bb-4c8d-a3c9-7c5114459cd7`}
                 className="booking_images_main-image_img"
               />
               <section className="booking_images_main-image_icon">
@@ -39,7 +39,10 @@ export const VehicleImages = ({ vehicle, bigImageUrl, setBigImageUrl }) => {
       {vehicle.imageUrls && vehicle.imageUrls.length !== 0 && (
         <section className="booking_images-previews">
           {vehicle.imageUrls.map((url) => (
-            <img src={url} onClick={() => setBigImageUrl(url)} />
+            <img
+              src={`https://firebasestorage.googleapis.com/v0/b/rndkc-95667.appspot.com/o/inventory%2F${vehicle.vin}%2F${url}.jpg?alt=media&token=c6aa8b3e-97bb-4c8d-a3c9-7c5114459cd7`}
+              onClick={() => setBigImageUrl(url)}
+            />
           ))}
         </section>
       )}

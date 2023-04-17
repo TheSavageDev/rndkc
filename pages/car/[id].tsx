@@ -139,21 +139,6 @@ const Car = () => {
     }
   }, []);
 
-  const handleSetTab = (newTab) => {
-    setTab(newTab);
-    if (["chauffeured", "commercial"].includes(newTab)) {
-      setInitialValues({
-        fullName: "",
-        phoneNumber: "",
-        email: "",
-        startDate: "",
-        startTime: "10:00",
-        endDate: "",
-        endTime: "12:00",
-      });
-    }
-  };
-
   const handleSubmit = async (values) => {
     const validCheckProps = {
       ...values,

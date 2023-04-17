@@ -22,6 +22,7 @@ import "../styles/admin.css";
 import "../styles/checkoutForm.css";
 import "../styles/carPage.css";
 import "../styles/confirmationPage.css";
+import "../styles/admin/update.css";
 // import "../styles/calendar.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
