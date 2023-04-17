@@ -6,7 +6,7 @@ export const VehicleImages = ({ vehicle, bigImageUrl, setBigImageUrl }) => {
           {vehicle.imageUrls && vehicle.imageUrls.length !== 0 ? (
             <>
               <img
-                src={`https://firebasestorage.googleapis.com/v0/b/rndkc-95667.appspot.com/o/inventory%2F${vehicle.vin}%2F${bigImageUrl}.jpg?alt=media&token=c6aa8b3e-97bb-4c8d-a3c9-7c5114459cd7`}
+                src={`https://firebasestorage.googleapis.com/v0/b/rndkc-95667.appspot.com/o/inventory%2F${vehicle.vin}%2F${bigImageUrl}.${vehicle.imgExt}?alt=media&token=${vehicle.imgToken}`}
                 className="booking_images_main-image_img"
               />
               <section className="booking_images_main-image_icon">
@@ -40,7 +40,7 @@ export const VehicleImages = ({ vehicle, bigImageUrl, setBigImageUrl }) => {
         <section className="booking_images-previews">
           {vehicle.imageUrls.map((url) => (
             <img
-              src={`https://firebasestorage.googleapis.com/v0/b/rndkc-95667.appspot.com/o/inventory%2F${vehicle.vin}%2F${url}.jpg?alt=media&token=c6aa8b3e-97bb-4c8d-a3c9-7c5114459cd7`}
+              src={`https://firebasestorage.googleapis.com/v0/b/rndkc-95667.appspot.com/o/inventory%2F${vehicle.vin}%2F${url}.${vehicle.imgExt}?alt=media&token=${vehicle.imgToken}`}
               onClick={() => setBigImageUrl(url)}
             />
           ))}

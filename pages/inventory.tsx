@@ -60,7 +60,7 @@ export default function Inventory() {
                   <ImageGridItem
                     key={vehicle.vin}
                     src={
-                      `https://firebasestorage.googleapis.com/v0/b/rndkc-95667.appspot.com/o/inventory%2F${vehicle.vin}%2F${vehicle.imageUrls[0]}.jpg?alt=media&token=c6aa8b3e-97bb-4c8d-a3c9-7c5114459cd7` ??
+                      `https://firebasestorage.googleapis.com/v0/b/rndkc-95667.appspot.com/o/inventory%2F${vehicle.vin}%2F${vehicle.imageUrls[0]}.${vehicle.imgExt}?alt=media&token=${vehicle.imgToken}` ??
                       "/img/car.svg"
                     }
                     alt={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
