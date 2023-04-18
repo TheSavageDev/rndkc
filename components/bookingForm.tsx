@@ -232,7 +232,7 @@ export const BookingForm = ({
                 </section>
               </>
             )}
-            <Form className="booking_information-form">
+            <Form className="booking_information-form" autoComplete="on">
               <ScrollToFieldError />
               <Tabs />
               {(vehicle.rentalStatus === "D" ||
@@ -387,8 +387,8 @@ export const BookingForm = ({
                       <section className="booking_information-form_contact">
                         <TextField
                           label="Full Name"
-                          name="fullName"
-                          placeholder="Enter Name"
+                          name="name"
+                          placeholder="Enter Full Name"
                           booking
                         />
                         <TextField
