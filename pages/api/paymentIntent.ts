@@ -2,8 +2,17 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 import { CURRENCY, MIN_AMOUNT, MAX_AMOUNT } from "../../config";
 import { formatAmountForStripe } from "../../utils/stripe-helpers";
+import { db } from "../../firebase/clientApp";
 
 import Stripe from "stripe";
+import {
+  DocumentData,
+  addDoc,
+  collection,
+  doc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2022-11-15",
 });
@@ -20,8 +29,20 @@ export default async function handler(
     amount,
     payment_intent_id,
     cancel,
-  }: { amount: number; payment_intent_id?: string; cancel?: boolean } =
-    req.body;
+    contact,
+  }: {
+    amount: number;
+    payment_intent_id?: string;
+    cancel?: boolean;
+    contact?: {
+      name: string;
+      email: string;
+      phone: string;
+      vehicle: DocumentData;
+    };
+  } = req.body;
+
+  console.log(req.body);
   // Validate the amount that was passed from the client.
   if (!(amount >= MIN_AMOUNT && amount <= MAX_AMOUNT)) {
     return res
@@ -34,6 +55,19 @@ export default async function handler(
         const cancelled_intent = await stripe.paymentIntents.cancel(
           payment_intent_id
         );
+        const leadDoc = doc(
+          db,
+          "leads",
+          `${contact.email}:${contact.vehicle.year}:${contact.vehicle.model}`
+        );
+
+        try {
+          await updateDoc(leadDoc, {
+            status: "cancelled",
+          });
+        } catch (e) {
+          console.error(e);
+        }
         return res.status(200).json({ cancelled: cancelled_intent });
       } catch (e) {
         if ((e as any).code !== "resource_missing") {
@@ -82,6 +116,21 @@ export default async function handler(
       };
       const payment_intent: Stripe.PaymentIntent =
         await stripe.paymentIntents.create(params);
+
+      const leadDoc = doc(
+        db,
+        "leads",
+        `${contact.email}:${contact.vehicle.year}:${contact.vehicle.model}`
+      );
+
+      try {
+        await setDoc(leadDoc, {
+          ...contact,
+          status: "incomplete",
+        });
+      } catch (e) {
+        console.error(e);
+      }
       return res.status(200).json(payment_intent);
     } catch (err) {
       const errorMessage =

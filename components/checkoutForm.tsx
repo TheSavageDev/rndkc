@@ -11,6 +11,8 @@ import { PaymentIntent } from "@stripe/stripe-js";
 import { CustomerData, FieldError, SubmissionData } from "./bookingForm";
 import { useEventTracking } from "../hooks/useEventTracking";
 import { Footer } from "./footer";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase/clientApp";
 
 type CheckoutFormProps = {
   paymentIntent?: PaymentIntent | null;
@@ -41,6 +43,12 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
       amount: 50,
       payment_intent_id: paymentIntent.id,
       cancel: true,
+      contact: {
+        name: customerData.name,
+        email: customerData.email,
+        phone: customerData.phoneNumber,
+        vehicle: submissionData.vehicle,
+      },
     }).then(() => setPaymentIntent(null));
   };
   const [paymentType, setPaymentType] = useState("");
@@ -61,6 +69,12 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
     const response = await fetchPostJSON("/api/paymentIntent", {
       amount: 50,
       payment_intent_id: paymentIntent?.id,
+      contact: {
+        name: customerData.name,
+        email: customerData.email,
+        phone: customerData.phoneNumber,
+        vehicle: submissionData.vehicle,
+      },
     });
     setPayment(response);
     try {
@@ -107,6 +121,19 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
         });
         setSuccess(true);
         setSubmitting(false);
+      }
+      const leadDoc = doc(
+        db,
+        "leads",
+        `${customerData.email}:${customerData.vehicle.year}:${customerData.vehicle.model}`
+      );
+
+      try {
+        await updateDoc(leadDoc, {
+          status: "completed",
+        });
+      } catch (e) {
+        console.error(e);
       }
     } catch (err) {
       console.log(err);

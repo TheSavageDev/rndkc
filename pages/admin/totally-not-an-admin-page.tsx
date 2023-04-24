@@ -1,17 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import { ref, uploadBytes } from "firebase/storage";
 import { Footer } from "../../components/footer";
 import { NavBar } from "../../components/navBar";
-import { storage } from "../../firebase/clientApp";
+import { db, storage } from "../../firebase/clientApp";
 import { Input } from "../../components/input";
 import { Radio } from "../../components/radio";
 import { Select } from "../../components/select";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 
 export default function TotallyNotAnAdminPage() {
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState(false);
   const [buttonText, setButtonText] = useState("Add Vehicle");
+  const [leads, setLeads] = useState([]);
+  const [incompleteLeads, setIncompleteLeads] = useState([]);
+  const [completeLeads, setCompleteLeads] = useState([]);
+  const [cancelledLeads, setCancelledLeads] = useState([]);
   const [photos, setPhotos] = useState(null);
   const [data, setData] = useState({
     year: "",
@@ -33,6 +38,57 @@ export default function TotallyNotAnAdminPage() {
     type: "",
     vin: "",
   });
+
+  useEffect(() => {
+    const completeQ = query(
+      collection(db, "leads"),
+      where("status", "==", "completed")
+    );
+    let tempLeads = [];
+    const unsub = onSnapshot(completeQ, (snap) => {
+      snap.docs.forEach((lead) => {
+        tempLeads.push(lead.data());
+      });
+      setCompleteLeads(tempLeads);
+    });
+
+    return () => unsub();
+  }, []);
+
+  useEffect(() => {
+    const cancelledQ = query(
+      collection(db, "leads"),
+      where("status", "==", "cancelled")
+    );
+    let tempLeads = [];
+    const unsub = onSnapshot(cancelledQ, (snap) => {
+      snap.docs.forEach((lead) => {
+        tempLeads.push(lead.data());
+      });
+      setCancelledLeads(tempLeads);
+    });
+
+    return () => unsub();
+  }, []);
+
+  useEffect(() => {
+    const incompleteQ = query(
+      collection(db, "leads"),
+      where("status", "==", "incomplete")
+    );
+    let tempLeads = [];
+    const unsub = onSnapshot(incompleteQ, (snap) => {
+      snap.docs.forEach((lead) => {
+        tempLeads.push(lead.data());
+      });
+      setIncompleteLeads(tempLeads);
+    });
+
+    return () => unsub();
+  }, []);
+
+  console.log(leads);
+
   const handleFileChange = (e) => {
     if (e.target.files) {
       setPhotos(Array.from(e.target.files));
@@ -129,7 +185,55 @@ export default function TotallyNotAnAdminPage() {
         <>
           <NavBar />
           <section className="main">
-            <section className="admin_add-vehicle">
+            <section>
+              <h2 className="leads-header">Leads</h2>
+              <h3 className="leads-subheader">Cancelled Payment</h3>
+              <ul className="lead-list">
+                {cancelledLeads.map((lead) => {
+                  return (
+                    <li className="lead-list-item">
+                      <ul>
+                        <li>{lead.name}</li>
+                        <li>{lead.phone}</li>
+                        <li>{lead.email}</li>
+                        <li>{`${lead.vehicle.year} ${lead.vehicle.make} ${lead.vehicle.model}`}</li>
+                      </ul>
+                    </li>
+                  );
+                })}
+              </ul>
+              <h3 className="leads-subheader">Incomplete Payment</h3>
+              <ul className="lead-list">
+                {incompleteLeads.map((lead) => {
+                  return (
+                    <li className="lead-list-item">
+                      <ul>
+                        <li>{lead.name}</li>
+                        <li>{lead.phone}</li>
+                        <li>{lead.email}</li>
+                        <li>{`${lead.vehicle.year} ${lead.vehicle.make} ${lead.vehicle.model}`}</li>
+                      </ul>
+                    </li>
+                  );
+                })}
+              </ul>
+              <h3 className="leads-subheader">Complete Payment</h3>
+              <ul className="lead-list">
+                {completeLeads.map((lead) => {
+                  return (
+                    <li className="lead-list-item">
+                      <ul>
+                        <li>{lead.name}</li>
+                        <li>{lead.phone}</li>
+                        <li>{lead.email}</li>
+                        <li>{`${lead.vehicle.year} ${lead.vehicle.make} ${lead.vehicle.model}`}</li>
+                      </ul>
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
+            {/* <section className="admin_add-vehicle">
               <section className="admin_add-vehicle_form">
                 <article className="admin_add-vehicle_meta">
                   <Input
@@ -351,7 +455,7 @@ export default function TotallyNotAnAdminPage() {
                   {buttonText}
                 </button>
               </section>
-            </section>
+            </section> */}
           </section>
         </>
       </section>

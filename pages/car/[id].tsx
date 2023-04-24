@@ -158,6 +158,12 @@ const Car = () => {
     ) {
       fetchPostJSON("/api/paymentIntent", {
         amount: 50,
+        contact: {
+          name: values.name,
+          email: values.email,
+          phone: values.phoneNumber,
+          vehicle,
+        },
       }).then((data) => {
         setPaymentIntent(data);
       });
