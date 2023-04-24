@@ -8,31 +8,17 @@ export const VehicleDetails = ({ vehicle }) => {
     <section className="booking_information">
       <h2 className="booking_information_header">{vehicle?.blurbs?.title}</h2>
       {!matches && (
-        <section
-          className="view-details_container"
-          onClick={() => setViewDetailsOpen(!viewDetailsOpen)}
-        >
-          <article className="view-details_divider" />
-          <article className="view-details_box">
+        <section className="view-details_container">
+          <button
+            className="view-details_box"
+            onClick={() => setViewDetailsOpen(!viewDetailsOpen)}
+          >
             {viewDetailsOpen ? (
-              <>
-                hide details
-                <img
-                  src="/img/arrow-icon.svg"
-                  className="view-details_box_img--up"
-                />
-              </>
+              <>Hide Specs & Details</>
             ) : (
-              <>
-                view details
-                <img
-                  src="/img/arrow-icon.svg"
-                  className="view-details_box_img"
-                />
-              </>
+              <>View Specs & Details</>
             )}
-          </article>
-          <article className="view-details_divider" />
+          </button>
         </section>
       )}
 
@@ -238,31 +224,17 @@ export const VehicleDetails = ({ vehicle }) => {
             </section>
           </section>
           {!matches && (
-            <section
-              className="view-details_container"
-              onClick={() => setViewDetailsOpen(!viewDetailsOpen)}
-            >
-              <article className="view-details_divider" />
-              <article className="view-details_box">
+            <section className="view-details_container">
+              <button
+                className="view-details_box"
+                onClick={() => setViewDetailsOpen(!viewDetailsOpen)}
+              >
                 {viewDetailsOpen ? (
-                  <>
-                    hide details
-                    <img
-                      src="/img/arrow-icon.svg"
-                      className="view-details_box_img--up"
-                    />
-                  </>
+                  <>Hide Specs & Details</>
                 ) : (
-                  <>
-                    view details
-                    <img
-                      src="/img/arrow-icon.svg"
-                      className="view-details_box_img"
-                    />
-                  </>
+                  <>View Specs & Details</>
                 )}
-              </article>
-              <article className="view-details_divider" />
+              </button>
             </section>
           )}
         </section>
