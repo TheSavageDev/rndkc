@@ -193,9 +193,9 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
                     Debit cards are not accepted.{" "}
                   </h5>
                   <p className="checkout-form_payment-method_text">
-                    A temporary hold of $50 will be placed on your credit card
-                    to hold your reservation. Final payment will be made day of
-                    pickup or delivery.
+                    A $50 deposit will be placed on your credit card to hold
+                    your reservation. Final payment will be made day of pickup
+                    or delivery
                   </p>
                 </section>
                 <>
