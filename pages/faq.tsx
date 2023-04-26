@@ -12,7 +12,7 @@ export default function FAQ() {
   return (
     <>
       <Head>
-        <title>RND - FAQ</title>
+        <title>FAQ - RND Kansas City Classic Car Rental</title>
       </Head>
       <section className="faq-container">
         <>

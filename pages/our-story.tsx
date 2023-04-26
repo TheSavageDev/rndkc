@@ -13,7 +13,7 @@ export default function OurStory() {
   return (
     <>
       <Head>
-        <title>RND - Our Story</title>
+        <title>Our Story - RND Kansas City Classic Car Rental</title>
       </Head>
       <NavBar />
       <section className="main">

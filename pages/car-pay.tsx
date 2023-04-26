@@ -39,7 +39,7 @@ export default function CarPay() {
   return (
     <>
       <Head>
-        <title>RND - CarPay</title>
+        <title>CarPay - RND Kansas City Classic Car Rental</title>
       </Head>
       <section className="car-pay_container">
         <>

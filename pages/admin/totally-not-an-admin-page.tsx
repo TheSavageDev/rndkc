@@ -179,7 +179,7 @@ export default function TotallyNotAnAdminPage() {
   return (
     <>
       <Head>
-        <title>RND - CarPay</title>
+        <title>Admin - RND Kansas City Classic Car Rental</title>
       </Head>
       <section className="admin_container">
         <>

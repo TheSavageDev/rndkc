@@ -123,7 +123,9 @@ export default function TotallyNotAnEditVehiclePage() {
   return (
     <>
       <Head>
-        <title>RND - CarPay</title>
+        <title>
+          Admin Page Edit Vehicle - RND Kansas City Classic Car Rental
+        </title>
       </Head>
       <section className="admin_container">
         <>

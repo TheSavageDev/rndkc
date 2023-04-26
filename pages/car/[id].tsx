@@ -207,10 +207,11 @@ const Car = () => {
       <Head>
         {vehicle.year ? (
           <title>
-            RND - {`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
+            {`${vehicle.year} ${vehicle.make} ${vehicle.model}`} - RND Kansas
+            City Classic Car Rental
           </title>
         ) : (
-          <title>RND</title>
+          <title>RND Kansas City Classic Car Rental</title>
         )}
       </Head>
       <section className="booking">

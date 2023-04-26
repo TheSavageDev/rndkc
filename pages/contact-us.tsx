@@ -11,7 +11,7 @@ export default function ContactUs() {
   return (
     <>
       <Head>
-        <title>RND - Contact Us</title>
+        <title>Contact Us - RND Kansas City Classic Car Rental</title>
       </Head>
       <main>
         <NavBar />

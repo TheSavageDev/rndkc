@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       className={`${akshar.className} ${khand.className} ${manrope.className} ${gemunuLibre.className}`}
     >
       <Head>
-        <title>RND</title>
+        <title>RND Kansas City Classic Car Rental</title>
         <link rel="shortcut icon" href="/img/RNDBlack2.svg" />
         <link rel="icon" href="/img/RNDBlack2.svg" />
         <meta

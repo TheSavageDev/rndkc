@@ -40,7 +40,7 @@ export default function Inventory() {
   return (
     <>
       <Head>
-        <title>RND - Rental Inventory</title>
+        <title>Rental Inventory - RND Kansas City Classic Car Rental</title>
       </Head>
       <section className="inventory-container">
         <>
