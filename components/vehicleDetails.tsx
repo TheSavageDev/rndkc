@@ -210,7 +210,7 @@ export const VehicleDetails = ({ vehicle }) => {
               <section className="vehicle-details_rental-status_section">
                 <img src="/img/license.svg" />
                 <article className="vehicle-details_section_text">
-                  All self-drive renters must be 30+ years old and have a
+                  All self-drive renters must be 25+ years old and have a
                   relatively clean driving record.
                 </article>
               </section>
