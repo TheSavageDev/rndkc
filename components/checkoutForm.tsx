@@ -7,6 +7,7 @@ import {
   useElements,
   PaymentElement,
 } from "@stripe/react-stripe-js";
+import moment from "moment";
 import { PaymentIntent } from "@stripe/stripe-js";
 import { CustomerData, FieldError, SubmissionData } from "./bookingForm";
 import { useEventTracking } from "../hooks/useEventTracking";
@@ -238,12 +239,12 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
             <section>
               <h5 className="checkout-form_summary_vehicle">{`${customerData.vehicle.year} ${customerData.vehicle.make} ${customerData.vehicle.model} Rental`}</h5>
               {customerData.type === "self" ? (
-                <small className="checkout-form_summary_vehicle--small">{`${new Date(
+                <small className="checkout-form_summary_vehicle--small">{`${moment(
                   customerData.startDate
-                ).toLocaleDateString("en-us")} ${getTwelveHourTime(
+                ).format("M/D/YYYY")} ${getTwelveHourTime(
                   customerData.startTime
-                )} - ${new Date(customerData.endDate).toLocaleDateString(
-                  "en-us"
+                )} - ${moment(customerData.endDate).format(
+                  "M/D/YYYY"
                 )} ${getTwelveHourTime(customerData.endTime)}`}</small>
               ) : (
                 <small className="checkout-form_summary_vehicle--small">{`${new Date(
