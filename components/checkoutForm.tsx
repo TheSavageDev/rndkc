@@ -11,7 +11,6 @@ import moment from "moment";
 import { PaymentIntent } from "@stripe/stripe-js";
 import { CustomerData, FieldError, SubmissionData } from "./bookingForm";
 import { useEventTracking } from "../hooks/useEventTracking";
-import { Footer } from "./footer";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/clientApp";
 
@@ -26,6 +25,7 @@ type CheckoutFormProps = {
   setSuccess: Dispatch<SetStateAction<boolean>>;
   success: boolean;
   setPaymentIntent: (paymentIntent: PaymentIntent | null) => void;
+  includeDelivery: boolean;
 };
 
 export const CheckoutForm: FC<CheckoutFormProps> = ({
@@ -38,6 +38,7 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
   setSuccess,
   setPaymentIntent,
   success,
+  includeDelivery,
 }) => {
   const goBack = () => {
     fetchPostJSON("/api/paymentIntent", {
@@ -49,13 +50,16 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
         email: customerData.email,
         phone: customerData.phoneNumber,
         vehicle: submissionData.vehicle,
+        type: customerData.type,
+        startDate: submissionData.startDateTime,
+        endDate: submissionData.endDateTime,
+        delivery: customerData.includeDelivery,
       },
     }).then(() => setPaymentIntent(null));
   };
   const [paymentType, setPaymentType] = useState("");
   const [payment, setPayment] = useState({ status: "initial" });
   const [errorMessage, setErrorMessage] = useState("");
-  const [includeDelivery, setIncludeDelivery] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
 
@@ -75,6 +79,13 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
         email: customerData.email,
         phone: customerData.phoneNumber,
         vehicle: submissionData.vehicle,
+        type: customerData.type,
+        startDate: submissionData.startDateTime,
+        endDate: submissionData.endDateTime,
+        delivery: customerData.includeDelivery,
+        address: customerData.address,
+        city: customerData.city,
+        zipCode: customerData.zipCode,
       },
     });
     setPayment(response);
@@ -103,7 +114,11 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
 
       if (!error) {
         const res = await fetch("/api/booking", {
-          body: JSON.stringify({ ...submissionData, includeDelivery }),
+          body: JSON.stringify({
+            ...submissionData,
+            includeDelivery,
+            ...customerData,
+          }),
           headers: {
             "Content-Type": "application/json",
           },
@@ -185,56 +200,7 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
                 </section>
               </section>
             ) : (
-              <>
-                <h4 className="checkout-form_payment-method_header">
-                  Payment Method
-                </h4>
-                <section>
-                  <h5 className="checkout-form_payment-method_subheading">
-                    Debit cards are not accepted.{" "}
-                  </h5>
-                  <p className="checkout-form_payment-method_text">
-                    A $50 deposit will be placed on your credit card to hold
-                    your reservation. Final payment will be made day of pickup
-                    or delivery
-                  </p>
-                </section>
-                <>
-                  {customerData.type === "self" && (
-                    <>
-                      <h4 className="checkout-form_delivery">Delivery</h4>
-                      <label className="checkout-form_delivery-label">
-                        <input
-                          type="checkbox"
-                          name="delivery"
-                          id="delivery"
-                          className="checkout-form_delivery-checkbox"
-                          onClick={(e) => {
-                            const { target } = e;
-                            setIncludeDelivery(
-                              (target as HTMLInputElement).checked
-                            );
-                          }}
-                        />
-                        Include Delivery
-                        <img
-                          src="/img/question-icon.svg"
-                          className="checkout-form_delivery-icon"
-                        />
-                      </label>
-                      {includeDelivery && (
-                        <p className="checkout-form_delivery_info">
-                          Delivery cost $2.00 per mile with a $100 minimum.
-                          Maximum of 25 miles from downtown Kansas City.
-                          Delivery fee wil be separate from rental booking. A
-                          representative will contact you to arrange delivery.
-                        </p>
-                      )}
-                    </>
-                  )}
-                </>
-                <h4 className="checkout-form_summary_header">Summary</h4>
-              </>
+              <></>
             )}
             <section>
               <h5 className="checkout-form_summary_vehicle">{`${customerData.vehicle.year} ${customerData.vehicle.make} ${customerData.vehicle.model} Rental`}</h5>

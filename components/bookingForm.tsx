@@ -18,6 +18,9 @@ export type FieldError = {
   startTime?: string;
   endDate?: string;
   endTime?: string;
+  address?: string;
+  city?: string;
+  zipCode?: string;
 };
 
 export type CustomerData = {
@@ -33,6 +36,10 @@ export type CustomerData = {
   vehicle: DocumentData;
   totalHours: number;
   type: "self" | "chauffeured" | "commercial";
+  includeDelivery: boolean;
+  address?: string;
+  city?: string;
+  zipCode?: string;
 };
 
 export type SubmissionData = {
@@ -41,6 +48,10 @@ export type SubmissionData = {
   endDateTime: Moment;
   endRefitTime: Moment;
   vehicle: DocumentData;
+  includeDelivery: boolean;
+  address?: string;
+  city?: string;
+  zipCode?: string;
   notes: string;
   type: "self" | "chauffeured" | "commercial";
 };
@@ -53,6 +64,10 @@ export type Values = {
   startTime: string;
   endDate: string;
   endTime: string;
+  includeDelivery: boolean;
+  address?: string;
+  city?: string;
+  zipCode: string;
   notes?: string;
 };
 
@@ -72,12 +87,11 @@ export const BookingForm = ({
   setSuccess,
   bookingBegun,
   formError,
-  submitting,
-  setBookingBegun,
   setPaymentIntent,
 }) => {
   const [totalDays, setTotalDays] = useState(0);
   const [totalHours, setTotalHours] = useState(0);
+  const [includeDelivery, setIncludeDelivery] = useState(false);
 
   const ScrollToFieldError = () => {
     const { errors, isSubmitting, isValidating } = useFormikContext();
@@ -98,7 +112,7 @@ export const BookingForm = ({
     return null;
   };
   const Tabs = () => {
-    const { errors, isSubmitting, values, setFieldValue } = useFormikContext();
+    const { values, setFieldValue } = useFormikContext();
 
     const handleSetTab = (newTab) => {
       setTab(newTab);
@@ -227,6 +241,7 @@ export const BookingForm = ({
                       success={success}
                       paymentIntent={paymentIntent}
                       setPaymentIntent={setPaymentIntent}
+                      includeDelivery={includeDelivery}
                     />
                   </Elements>
                 </section>
@@ -307,6 +322,32 @@ export const BookingForm = ({
                               tab={tab}
                             />
                           </section>
+                          <label className="checkout-form_delivery-label">
+                            <input
+                              type="checkbox"
+                              name="delivery"
+                              id="delivery"
+                              className="checkout-form_delivery-checkbox"
+                              onClick={(e) => {
+                                const { target } = e;
+                                setIncludeDelivery(
+                                  (target as HTMLInputElement).checked
+                                );
+                              }}
+                            />
+                            Include Delivery
+                            {/* <img
+                              src="/img/question-icon.svg"
+                              className="checkout-form_delivery-icon"
+                            /> */}
+                          </label>
+                          {includeDelivery && (
+                            <p className="checkout-form_delivery_info">
+                              Delivery fee is $100 and includes drop-off and
+                              pickup. Maximum of 20 miles from downtown Kansas
+                              City
+                            </p>
+                          )}
                         </section>
                       </>
                     )}
@@ -340,6 +381,32 @@ export const BookingForm = ({
                               tab={tab}
                             />
                           </section>
+                          <label className="checkout-form_delivery-label">
+                            <input
+                              type="checkbox"
+                              name="delivery"
+                              id="delivery"
+                              className="checkout-form_delivery-checkbox"
+                              onClick={(e) => {
+                                const { target } = e;
+                                setIncludeDelivery(
+                                  (target as HTMLInputElement).checked
+                                );
+                              }}
+                            />
+                            Include Delivery
+                            {/* <img
+                              src="/img/question-icon.svg"
+                              className="checkout-form_delivery-icon"
+                            /> */}
+                          </label>
+                          {includeDelivery && (
+                            <p className="checkout-form_delivery_info">
+                              Delivery fee is $100 and includes drop-off and
+                              pickup. Maximum of 20 miles from downtown Kansas
+                              City
+                            </p>
+                          )}
                         </section>
                       </>
                     )}
@@ -381,6 +448,13 @@ export const BookingForm = ({
                         ? "Your end time must be after your start time."
                         : ""}
                     </h2>
+                    <img
+                      src="/img/cards.png"
+                      className="booking_information_card_image"
+                    />
+                    <p className="booking_information_small">
+                      (debit cards are not accepted)
+                    </p>
                   </article>
                   {bookingBegun && (
                     <section>
@@ -405,6 +479,29 @@ export const BookingForm = ({
                           type="tel"
                           booking
                         />
+                        {includeDelivery && (
+                          <>
+                            <TextField
+                              label="Delivery Address"
+                              name="address"
+                              placeholder="Enter Street Address"
+                              booking
+                            />
+                            <TextField
+                              label="City"
+                              name="city"
+                              placeholder="Enter City"
+                              booking
+                            />
+                            <TextField
+                              label="Zip Code"
+                              name="zipCode"
+                              placeholder="64116"
+                              length={5}
+                              booking
+                            />
+                          </>
+                        )}
                         {tab !== "self" && (
                           <TextArea
                             label="Notes or Special Requests"
@@ -416,55 +513,28 @@ export const BookingForm = ({
                     </section>
                   )}
                   <section className="booking_information-form-button-container">
-                    {bookingBegun ? (
-                      <button
-                        className={`booking_information-form-button${
-                          Object.keys(formError).length !== 0
-                            ? "--form-error"
-                            : ""
-                        }${
-                          (tab === "self" && totalDays <= 0) ||
-                          (["chauffeured", "commercial"].includes(tab) &&
-                            totalHours < 2)
-                            ? "--submitting"
-                            : ""
-                        }`}
-                        onClick={() => handleSubmit(values)}
-                        disabled={
-                          (tab === "self" && totalDays <= 0) ||
-                          (["chauffeured", "commercial"].includes(tab) &&
-                            totalHours < 2)
-                        }
-                        type="button"
-                      >
-                        Continue To Payment
-                      </button>
-                    ) : (
-                      <button
-                        className={`booking_information-form-button${
-                          Object.keys(formError).length !== 0
-                            ? "--form-error"
-                            : ""
-                        }${
-                          submitting ||
-                          (tab === "self" && totalDays <= 0) ||
-                          (["chauffeured", "commercial"].includes(tab) &&
-                            totalHours < 2)
-                            ? "--submitting"
-                            : ""
-                        }`}
-                        onClick={() => setBookingBegun(true)}
-                        disabled={
-                          submitting ||
-                          (tab === "self" && totalDays <= 0) ||
-                          (["chauffeured", "commercial"].includes(tab) &&
-                            totalHours < 2)
-                        }
-                        type="button"
-                      >
-                        Begin Booking
-                      </button>
-                    )}
+                    <button
+                      className={`booking_information-form-button${
+                        Object.keys(formError).length !== 0
+                          ? "--form-error"
+                          : ""
+                      }${
+                        (tab === "self" && totalDays <= 0) ||
+                        (["chauffeured", "commercial"].includes(tab) &&
+                          totalHours < 2)
+                          ? "--submitting"
+                          : ""
+                      }`}
+                      onClick={() => handleSubmit(values)}
+                      disabled={
+                        (tab === "self" && totalDays <= 0) ||
+                        (["chauffeured", "commercial"].includes(tab) &&
+                          totalHours < 2)
+                      }
+                      type="button"
+                    >
+                      Continue To Payment
+                    </button>
                   </section>
                   {Object.values(fieldError).length !== 0 && (
                     <>

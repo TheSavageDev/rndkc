@@ -224,14 +224,10 @@ const Car = () => {
             <VehicleHeader
               setShowShareModal={setShowShareModal}
               router={router}
+              bookingBegun={bookingBegun}
+              setBookingBegun={setBookingBegun}
             />
-            <VehicleImages
-              vehicle={vehicle}
-              bigImageUrl={bigImageUrl}
-              setBigImageUrl={setBigImageUrl}
-            />
-            <section className="booking_container">
-              <VehicleDetails vehicle={vehicle} />
+            {bookingBegun ? (
               <section className="booking_information_forms">
                 <BookingForm
                   vehicle={vehicle}
@@ -254,10 +250,38 @@ const Car = () => {
                   setPaymentIntent={setPaymentIntent}
                 />
               </section>
-            </section>
+            ) : (
+              <section className="booking_not_begun">
+                <VehicleImages
+                  vehicle={vehicle}
+                  bigImageUrl={bigImageUrl}
+                  setBigImageUrl={setBigImageUrl}
+                />
+                <section className="booking_container">
+                  <VehicleDetails vehicle={vehicle} />
+                </section>
+                <section className="booking_footer">
+                  <section className="booking_footer_text_container">
+                    <p className="booking_footer_text">Starting at</p>
+                    <p className="booking_footer_cost">
+                      {`$${vehicle.rentalCost?.commercial} hr / $${vehicle.rentalCost?.day} day`}
+                    </p>
+                  </section>
+                  <section className="booking_footer_button_container">
+                    <button
+                      className="booking_footer_button"
+                      onClick={() => setBookingBegun(true)}
+                      type="button"
+                    >
+                      Begin Booking
+                    </button>
+                  </section>
+                </section>
+              </section>
+            )}
           </>
         )}
-        <CarPageBottom tab={tab} />
+        {!bookingBegun && <CarPageBottom tab={tab} />}
         <Footer />
       </section>
     </section>

@@ -21,6 +21,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     includeDelivery,
     type,
     values,
+    address,
+    city,
+    zipCode,
   } = req.body;
   const vehicleDoc = collection(db, "vehicles", vin, "bookings");
   try {
@@ -30,6 +33,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       startDate: startDateTime,
       endDate: endDateTime,
       endRefitTime: endRefitTime,
+      delivery: includeDelivery,
+      address,
+      city,
+      zipCode,
     });
 
     const msg = {
@@ -58,6 +65,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 <li>Start Date and Time: ${startDate} at ${startTime}</li>
                 <li>End Date and Time: ${endDate} at ${endTime}</li>
                 <li>Delivery?: ${includeDelivery ? "Yes" : "No"}</li>
+                <li>Address: ${includeDelivery && `${address}`}</li>
+                <li>City: ${includeDelivery && `${city}`}</li>
+                <li>Zip Code: ${includeDelivery && `${zipCode}`}</li>
                 <li>Type: ${type}</li>
                 <li>Notes?: ${values?.notes}
               </ul>

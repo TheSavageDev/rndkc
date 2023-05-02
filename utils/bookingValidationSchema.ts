@@ -18,4 +18,7 @@ export const validationSchema = Yup.object({
     .min(moment().toDate(), "End Date must be later than today.")
     .required("Please choose a drop off date."),
   endTime: Yup.string().required("Please choose a drop off time."),
+  address: Yup.string(),
+  city: Yup.string(),
+  zipCode: Yup.string().min(5).max(5),
 });
