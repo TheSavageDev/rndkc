@@ -19,9 +19,7 @@ type CheckoutFormProps = {
   customerData: CustomerData;
   fieldError: FieldError;
   submissionData: SubmissionData;
-  setSubmitting: Dispatch<SetStateAction<boolean>>;
   setFieldError: Dispatch<SetStateAction<FieldError>>;
-  setButtonText: Dispatch<SetStateAction<string>>;
   setSuccess: Dispatch<SetStateAction<boolean>>;
   success: boolean;
   setPaymentIntent: (paymentIntent: PaymentIntent | null) => void;
@@ -33,7 +31,6 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
   customerData,
   submissionData,
   fieldError,
-  setSubmitting,
   setFieldError,
   setSuccess,
   setPaymentIntent,
@@ -129,14 +126,12 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
         if (bookingError) {
           console.error(bookingError);
           setFieldError(fieldError);
-          setSubmitting(false);
           return;
         }
         useEventTracking("booking", {
           vehicle: customerData.vehicle,
         });
         setSuccess(true);
-        setSubmitting(false);
       }
       const leadDoc = doc(
         db,

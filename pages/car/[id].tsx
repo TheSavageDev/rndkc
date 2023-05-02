@@ -66,22 +66,15 @@ const Car = () => {
     endDate: "",
     endTime: "10:00",
   });
-  const [routerReady, setRouterReady] = useState(false);
   const [bigImageUrl, setBigImageUrl] = useState("");
   const [showShareModal, setShowShareModal] = useState(false);
   const [paymentIntent, setPaymentIntent] = useState<PaymentIntent | null>(
     null
   );
   const [tab, setTab] = useState("self");
-  const initialButtonText =
-    vehicle.rentalStatus === "D"
-      ? "Begin Booking"
-      : "Email Me When It's Available";
   const [success, setSuccess] = useState(false);
   const [formError, setFormError] = useState(false);
   const [fieldError, setFieldError] = useState<FieldError>({});
-  const [submitting, setSubmitting] = useState(false);
-  const [buttonText, setButtonText] = useState(initialButtonText);
   const [bookingBegun, setBookingBegun] = useState(false);
   const [currentBookings, setCurrentBookings] = useState([]);
   const [submissionData, setSubmissionData] = useState<SubmissionData>({
@@ -168,7 +161,6 @@ const Car = () => {
         setPaymentIntent(data);
       });
       window.scrollTo({ top: 0, behavior: "smooth" });
-      setSubmitting(true);
       setSubmissionData({
         ...values,
         vin: vehicle.vin,
@@ -194,7 +186,6 @@ const Car = () => {
 
   useEffect(() => {
     if (router.isReady) {
-      setRouterReady(true);
       const { id } = router.query;
       getVehicle(id);
     }
@@ -238,15 +229,11 @@ const Car = () => {
                   handleSubmit={handleSubmit}
                   success={success}
                   submissionData={submissionData}
-                  setSubmitting={setSubmitting}
                   setFieldError={setFieldError}
-                  setButtonText={setButtonText}
                   fieldError={fieldError}
                   setSuccess={setSuccess}
                   bookingBegun={bookingBegun}
                   formError={formError}
-                  submitting={submitting}
-                  setBookingBegun={setBookingBegun}
                   setPaymentIntent={setPaymentIntent}
                 />
               </section>

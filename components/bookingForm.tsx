@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { Form, Formik, useFormikContext } from "formik";
-import moment, { Moment } from "moment";
+import { Moment } from "moment";
 import { CheckoutForm } from "./checkoutForm";
 import getStripe from "../utils/get-stripejs";
 import { TextField } from "./TextField";
@@ -80,9 +80,7 @@ export const BookingForm = ({
   handleSubmit,
   success,
   submissionData,
-  setSubmitting,
   setFieldError,
-  setButtonText,
   fieldError,
   setSuccess,
   bookingBegun,
@@ -167,7 +165,6 @@ export const BookingForm = ({
   };
 
   const handleDateChange = (startDate, endDate) => {
-    setSubmitting(false);
     if (startDate && endDate) {
       let newTotalDays: number;
       const differenceInTime = endDate.getTime() - startDate.getTime();
@@ -177,7 +174,6 @@ export const BookingForm = ({
   };
 
   const handleTimeChange = (startTime, endTime) => {
-    setSubmitting(false);
     if (startTime && endTime) {
       const newTotalHours = (endTime - startTime) / (1000 * 3600);
       setTotalHours(newTotalHours);
@@ -233,9 +229,7 @@ export const BookingForm = ({
                         type: tab,
                       }}
                       submissionData={submissionData}
-                      setSubmitting={setSubmitting}
                       setFieldError={setFieldError}
-                      setButtonText={setButtonText}
                       fieldError={fieldError}
                       setSuccess={setSuccess}
                       success={success}

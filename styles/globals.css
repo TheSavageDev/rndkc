@@ -1792,13 +1792,9 @@ html {
   }
 
   .booking_container {
-    display: flex;
     padding: 2rem 4rem;
   }
 
-  .booking_information {
-    width: 50%;
-  }
   .booking_information_forms {
     padding: 2rem;
     width: 50%;
