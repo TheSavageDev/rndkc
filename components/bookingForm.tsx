@@ -118,6 +118,7 @@ export const BookingForm = ({
         setFieldValue("endTime", "12:00");
         setFieldValue("endDate", (values as Values).startDate);
       }
+      console.log(values);
     };
 
     return (
@@ -165,6 +166,10 @@ export const BookingForm = ({
   };
 
   const handleDateChange = (startDate, endDate) => {
+    if (["chauffeured", "commercial"].includes(tab)) {
+      if (startDate) {
+      }
+    }
     if (startDate && endDate) {
       let newTotalDays: number;
       const differenceInTime = endDate.getTime() - startDate.getTime();
@@ -262,6 +267,7 @@ export const BookingForm = ({
                               name="startDate"
                               label="Start Date"
                               handleDateChange={handleDateChange}
+                              tab={tab}
                             />
                             <TimePicker
                               name="startTime"
@@ -276,6 +282,7 @@ export const BookingForm = ({
                               name="endDate"
                               label="End Date"
                               handleDateChange={handleDateChange}
+                              tab={tab}
                             />
                             <TimePicker
                               name="endTime"
@@ -299,6 +306,7 @@ export const BookingForm = ({
                             name="startDate"
                             label="Date"
                             handleDateChange={handleDateChange}
+                            tab={tab}
                           />
                         </section>
                         <section className="booking_information-form-date">

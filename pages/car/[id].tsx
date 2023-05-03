@@ -155,6 +155,10 @@ const Car = () => {
           name: values.name,
           email: values.email,
           phone: values.phoneNumber,
+          startDateTime: data.startDateTime,
+          endDateTime: data.endDateTime,
+          endRefitTime: data.endRefitTime,
+          type: tab,
           vehicle,
         },
       }).then((data) => {

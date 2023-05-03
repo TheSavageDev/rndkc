@@ -110,6 +110,8 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
       }
 
       if (!error) {
+        console.log(submissionData);
+        console.log(customerData);
         const res = await fetch("/api/booking", {
           body: JSON.stringify({
             ...submissionData,

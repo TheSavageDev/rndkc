@@ -2,7 +2,7 @@ import { ErrorMessage, useField, useFormikContext } from "formik";
 import { useEffect } from "react";
 import { Values } from "./bookingForm";
 
-export const DatePicker = ({ label, name, handleDateChange }) => {
+export const DatePicker = ({ label, name, handleDateChange, tab }) => {
   const { values }: { values: Values } = useFormikContext();
   const [field, meta] = useField(name);
 
@@ -16,6 +16,9 @@ export const DatePicker = ({ label, name, handleDateChange }) => {
       startTimestamp.setMinutes(
         startTimestamp.getMinutes() + parseInt(values.startTime.split(":")[1])
       );
+      if (["chauffeured", "commercial"].includes(tab)) {
+        endTimestamp = new Date(values.startDate);
+      }
     }
     if (field.name === "endDate" && values.endTime) {
       endTimestamp.setHours(
