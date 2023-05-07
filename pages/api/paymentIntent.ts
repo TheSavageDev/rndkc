@@ -42,7 +42,6 @@ export default async function handler(
     };
   } = req.body;
 
-  console.log(req.body);
   // Validate the amount that was passed from the client.
   if (!(amount >= MIN_AMOUNT && amount <= MAX_AMOUNT)) {
     return res
@@ -62,9 +61,13 @@ export default async function handler(
         );
 
         try {
-          await updateDoc(leadDoc, {
-            status: "cancelled",
-          });
+          await setDoc(
+            leadDoc,
+            {
+              status: "cancelled",
+            },
+            { merge: true }
+          );
         } catch (e) {
           console.error(e);
         }
@@ -91,6 +94,23 @@ export default async function handler(
               amount: formatAmountForStripe(amount, CURRENCY),
             }
           );
+          const leadDoc = doc(
+            db,
+            "leads",
+            `${contact.email}:${contact.vehicle.year}:${contact.vehicle.model}`
+          );
+
+          try {
+            await setDoc(
+              leadDoc,
+              {
+                status: "incomplete",
+              },
+              { merge: true }
+            );
+          } catch (e) {
+            console.error(e);
+          }
           return res.status(200).json(updated_intent);
         }
       } catch (e) {
@@ -124,10 +144,14 @@ export default async function handler(
       );
 
       try {
-        await setDoc(leadDoc, {
-          ...contact,
-          status: "incomplete",
-        });
+        await setDoc(
+          leadDoc,
+          {
+            ...contact,
+            status: "incomplete",
+          },
+          { merge: true }
+        );
       } catch (e) {
         console.error(e);
       }

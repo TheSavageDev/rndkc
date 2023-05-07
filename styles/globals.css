@@ -1795,11 +1795,6 @@ html {
     padding: 2rem 4rem;
   }
 
-  .booking_information_forms {
-    padding: 2rem;
-    width: 50%;
-  }
-
   .getInTouch {
     padding: 4rem 2rem;
     background-image: url("/img/ContactBkgd.png");

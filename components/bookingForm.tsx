@@ -86,10 +86,11 @@ export const BookingForm = ({
   bookingBegun,
   formError,
   setPaymentIntent,
+  includeDelivery,
+  setIncludeDelivery,
 }) => {
   const [totalDays, setTotalDays] = useState(0);
   const [totalHours, setTotalHours] = useState(0);
-  const [includeDelivery, setIncludeDelivery] = useState(false);
 
   const ScrollToFieldError = () => {
     const { errors, isSubmitting, isValidating } = useFormikContext();
@@ -167,7 +168,7 @@ export const BookingForm = ({
   const handleDateChange = (startDate, endDate) => {
     if (startDate && endDate) {
       let newTotalDays: number;
-      const differenceInTime = endDate.getTime() - startDate.getTime();
+      const differenceInTime = endDate - startDate;
       newTotalDays = differenceInTime / (1000 * 3600 * 24);
       setTotalDays(Math.round(newTotalDays));
     }
@@ -179,19 +180,6 @@ export const BookingForm = ({
       setTotalHours(newTotalHours);
     }
   };
-
-  useEffect(() => {
-    const query = new URLSearchParams(window.location.search);
-    if (query.get("success")) {
-      console.log("Order placed! You will receive an email confirmation");
-    }
-
-    if (query.get("canceled")) {
-      console.log(
-        "Order canceled -- continue to shop around and checkout when you're ready"
-      );
-    }
-  }, []);
 
   return (
     <Formik
@@ -262,6 +250,7 @@ export const BookingForm = ({
                               name="startDate"
                               label="Start Date"
                               handleDateChange={handleDateChange}
+                              tab={tab}
                             />
                             <TimePicker
                               name="startTime"
@@ -276,6 +265,7 @@ export const BookingForm = ({
                               name="endDate"
                               label="End Date"
                               handleDateChange={handleDateChange}
+                              tab={tab}
                             />
                             <TimePicker
                               name="endTime"
@@ -299,6 +289,7 @@ export const BookingForm = ({
                             name="startDate"
                             label="Date"
                             handleDateChange={handleDateChange}
+                            tab={tab}
                           />
                         </section>
                         <section className="booking_information-form-date">
@@ -358,6 +349,7 @@ export const BookingForm = ({
                             name="startDate"
                             label="Date"
                             handleDateChange={handleDateChange}
+                            tab={tab}
                           />
                         </section>
                         <section className="booking_information-form-date">

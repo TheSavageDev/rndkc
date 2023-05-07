@@ -392,6 +392,7 @@
 
 .booking_information_forms {
   background-color: #282828;
+  padding: 2rem;
 }
 
 .booking_information_forms_header {
@@ -709,7 +710,7 @@
 }
 
 .booking_information_card_image {
-  width: 50%;
+  width: 25%;
   margin-top: 2rem;
 }
 

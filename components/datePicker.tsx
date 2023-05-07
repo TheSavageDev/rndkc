@@ -1,31 +1,42 @@
 import { ErrorMessage, useField, useFormikContext } from "formik";
 import { useEffect } from "react";
+import moment from "moment";
 import { Values } from "./bookingForm";
 
-export const DatePicker = ({ label, name, handleDateChange }) => {
+export const DatePicker = ({ label, name, handleDateChange, tab }) => {
   const { values }: { values: Values } = useFormikContext();
   const [field, meta] = useField(name);
 
   useEffect(() => {
-    let startTimestamp = new Date(values.startDate);
-    let endTimestamp = new Date(values.endDate);
+    let startTimestamp = moment(values.startDate);
+    let endTimestamp = moment(values.endDate);
     if (field.name === "startDate" && values.startTime) {
-      startTimestamp.setHours(
-        startTimestamp.getHours() + parseInt(values.startTime.split(":")[0])
+      startTimestamp.add(
+        startTimestamp.hours() + parseInt(values.startTime.split(":")[0]),
+        "hours"
       );
-      startTimestamp.setMinutes(
-        startTimestamp.getMinutes() + parseInt(values.startTime.split(":")[1])
+      startTimestamp.add(
+        startTimestamp.minutes() + parseInt(values.startTime.split(":")[1]),
+        "minutes"
       );
+      if (["chauffeured", "commercial"].includes(tab)) {
+        endTimestamp = moment(startTimestamp).add(2, "hours");
+      }
     }
     if (field.name === "endDate" && values.endTime) {
-      endTimestamp.setHours(
-        endTimestamp.getHours() + parseInt(values.endTime.split(":")[0])
+      endTimestamp.add(
+        endTimestamp.hours() + parseInt(values.endTime.split(":")[0]),
+        "hours"
       );
-      endTimestamp.setMinutes(
-        endTimestamp.getMinutes() + parseInt(values.endTime.split(":")[1])
+      endTimestamp.add(
+        endTimestamp.minutes() + parseInt(values.endTime.split(":")[1]),
+        "minutes"
       );
     }
-    if (values.startDate && values.endDate) {
+    if (
+      (values.startDate && values.endDate) ||
+      (values.startDate && ["chauffeured", "commercial"].includes(tab))
+    ) {
       handleDateChange(startTimestamp, endTimestamp);
     }
   }, [values.startDate, values.endDate, values.startTime, values.endTime]);
