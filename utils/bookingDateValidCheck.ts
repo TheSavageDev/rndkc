@@ -8,19 +8,27 @@ export const bookingValidCheck = ({
   endTime,
   refitHours,
   setFieldError,
+  tab,
   ...rest
 }) => {
   const startDateTime = moment(startDate)
     .set("hour", parseInt(startTime.split(":")[0]))
     .set("minute", parseInt(startTime.split(":")[1]));
-  const endDateTime = moment(endDate)
-    .set("hour", parseInt(endTime.split(":")[0]))
-    .set("minute", parseInt(endTime.split(":")[1]));
-  const endRefitTime = moment(
-    moment(endDate)
+  let endDateTime;
+  let endRefitTime;
+  if (["chauffeured", "commercial"].includes(tab)) {
+    endDateTime = moment(startDateTime.add(2, "hours"));
+    endRefitTime = moment(endDateTime.add(1, "day"));
+  } else {
+    endDateTime = moment(endDate)
       .set("hour", parseInt(endTime.split(":")[0]))
-      .set("minute", parseInt(endTime.split(":")[1]))
-  ).add(refitHours, "h");
+      .set("minute", parseInt(endTime.split(":")[1]));
+    endRefitTime = moment(
+      moment(endDate)
+        .set("hour", parseInt(endTime.split(":")[0]))
+        .set("minute", parseInt(endTime.split(":")[1]))
+    ).add(refitHours, "h");
+  }
 
   let startDateConflict: boolean;
   let endDateConflict: boolean;

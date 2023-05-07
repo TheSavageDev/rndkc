@@ -71,6 +71,7 @@ const Car = () => {
   const [paymentIntent, setPaymentIntent] = useState<PaymentIntent | null>(
     null
   );
+  const [includeDelivery, setIncludeDelivery] = useState(false);
   const [tab, setTab] = useState("self");
   const [success, setSuccess] = useState(false);
   const [formError, setFormError] = useState(false);
@@ -84,24 +85,6 @@ const Car = () => {
     endRefitTime: moment(),
     vehicle,
   });
-  const dateRanges = [];
-
-  const getDisabledDates = () => {
-    vehicle?.bookings?.length !== 0 &&
-      vehicle?.bookings?.forEach((booking) => {
-        const start = moment(booking.startDate).subtract(
-          vehicle.refitHours,
-          "h"
-        );
-        const end = moment(booking.endRefitDate);
-        const range = moment.range(start, end);
-        dateRanges.push(range);
-      });
-  };
-
-  useEffect(() => {
-    getDisabledDates();
-  }, []);
 
   const getCurrentBookings = async () => {
     let bookings = [];
@@ -119,25 +102,13 @@ const Car = () => {
     getCurrentBookings();
   }, [vehicle]);
 
-  useEffect(() => {
-    const query = new URLSearchParams(window.location.search);
-    if (query.get("success")) {
-      console.log("Order placed! You will receive an email confirmation");
-    }
-
-    if (query.get("canceled")) {
-      console.log(
-        "Order canceled -- continue to shop around and checkout when you're ready"
-      );
-    }
-  }, []);
-
   const handleSubmit = async (values) => {
     const validCheckProps = {
       ...values,
       currentBookings,
       refitHours: vehicle.refitHours,
       setFieldError,
+      tab,
     };
 
     const data = bookingValidCheck(validCheckProps);
@@ -145,35 +116,33 @@ const Car = () => {
       setFormError(true);
       return;
     }
-    if (
-      (data.startDateTime && data.endDateTime && data.endRefitTime) ||
-      (["chauffeured", "commercial"].includes(tab) && data.startDateTime)
-    ) {
+    setSubmissionData({
+      ...values,
+      vin: vehicle.vin,
+      startDateTime: data.startDateTime,
+      endDateTime: data.endDateTime,
+      endRefitTime: data.endRefitTime,
+      vehicle,
+      type: tab,
+    });
+    if (data.startDateTime && data.endDateTime && data.endRefitTime) {
       fetchPostJSON("/api/paymentIntent", {
         amount: 50,
         contact: {
           name: values.name,
           email: values.email,
           phone: values.phoneNumber,
-          startDateTime: data.startDateTime,
-          endDateTime: data.endDateTime,
-          endRefitTime: data.endRefitTime,
+          startDateTime: submissionData.startDateTime,
+          endDateTime: submissionData.endDateTime,
+          endRefitTime: submissionData.endRefitTime,
           type: tab,
+          delivery: includeDelivery,
           vehicle,
         },
       }).then((data) => {
         setPaymentIntent(data);
       });
       window.scrollTo({ top: 0, behavior: "smooth" });
-      setSubmissionData({
-        ...values,
-        vin: vehicle.vin,
-        startDateTime: data.startDateTime,
-        endDateTime: data.endDateTime,
-        endRefitTime: data.endRefitTime,
-        vehicle,
-        type: tab,
-      });
     }
   };
 
@@ -239,6 +208,8 @@ const Car = () => {
                   bookingBegun={bookingBegun}
                   formError={formError}
                   setPaymentIntent={setPaymentIntent}
+                  includeDelivery={includeDelivery}
+                  setIncludeDelivery={setIncludeDelivery}
                 />
               </section>
             ) : (

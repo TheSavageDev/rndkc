@@ -26,7 +26,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     zipCode,
   } = req.body;
   const vehicleDoc = collection(db, "vehicles", vin, "bookings");
-  console.log(req.body);
   try {
     await addDoc(vehicleDoc, {
       name,
@@ -41,8 +40,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     const msg = {
-      // to: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
-      to: "jasavage42@gmail.com",
+      to: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
       from: `${process.env.NEXT_PUBLIC_FROM_EMAIL}`,
       subject: `New Booking for ${vehicle.year} ${vehicle.make} ${vehicle.model}`,
       text: `New Booking for ${vehicle.year} ${vehicle.make} ${vehicle.model} check Firestore for the booking information`,

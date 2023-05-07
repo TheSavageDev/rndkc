@@ -11,7 +11,7 @@ import moment from "moment";
 import { PaymentIntent } from "@stripe/stripe-js";
 import { CustomerData, FieldError, SubmissionData } from "./bookingForm";
 import { useEventTracking } from "../hooks/useEventTracking";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/clientApp";
 
 type CheckoutFormProps = {
@@ -46,11 +46,15 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
         name: customerData.name,
         email: customerData.email,
         phone: customerData.phoneNumber,
-        vehicle: submissionData.vehicle,
+        startDateTime: submissionData.startDateTime,
+        endDateTime: submissionData.endDateTime,
+        endRefitTime: submissionData.endRefitTime,
         type: customerData.type,
-        startDate: submissionData.startDateTime,
-        endDate: submissionData.endDateTime,
+        vehicle: submissionData.vehicle,
         delivery: customerData.includeDelivery,
+        address: customerData.address,
+        city: customerData.city,
+        zipCode: customerData.zipCode,
       },
     }).then(() => setPaymentIntent(null));
   };
@@ -110,18 +114,32 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
       }
 
       if (!error) {
-        console.log(submissionData);
-        console.log(customerData);
+        const leadDoc = doc(
+          db,
+          "leads",
+          `${customerData.email}:${customerData.vehicle.year}:${customerData.vehicle.model}`
+        );
+
+        try {
+          await setDoc(
+            leadDoc,
+            {
+              status: "completed",
+            },
+            { merge: true }
+          );
+        } catch (e) {
+          console.error(e);
+        }
         const res = await fetch("/api/booking", {
-          body: JSON.stringify({
-            ...submissionData,
-            includeDelivery,
-            ...customerData,
-          }),
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          method: "POST",
+          body: JSON.stringify({
+            ...submissionData,
+            includeDelivery,
+          }),
         });
         const { bookingError } = await res.json();
 
@@ -134,19 +152,6 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
           vehicle: customerData.vehicle,
         });
         setSuccess(true);
-      }
-      const leadDoc = doc(
-        db,
-        "leads",
-        `${customerData.email}:${customerData.vehicle.year}:${customerData.vehicle.model}`
-      );
-
-      try {
-        await updateDoc(leadDoc, {
-          status: "completed",
-        });
-      } catch (e) {
-        console.error(e);
       }
     } catch (err) {
       console.log(err);
