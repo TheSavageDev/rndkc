@@ -88,10 +88,11 @@ export const BookingForm = ({
   setPaymentIntent,
   includeDelivery,
   setIncludeDelivery,
+  totalDays,
+  setTotalDays,
+  totalHours,
+  setTotalHours,
 }) => {
-  const [totalDays, setTotalDays] = useState(0);
-  const [totalHours, setTotalHours] = useState(0);
-
   const ScrollToFieldError = () => {
     const { errors, isSubmitting, isValidating } = useFormikContext();
 

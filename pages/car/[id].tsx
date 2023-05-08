@@ -85,6 +85,8 @@ const Car = () => {
     endRefitTime: moment(),
     vehicle,
   });
+  const [totalDays, setTotalDays] = useState(0);
+  const [totalHours, setTotalHours] = useState(0);
 
   const getCurrentBookings = async () => {
     let bookings = [];
@@ -127,7 +129,12 @@ const Car = () => {
     });
     if (data.startDateTime && data.endDateTime && data.endRefitTime) {
       fetchPostJSON("/api/paymentIntent", {
-        amount: 50,
+        amount:
+          tab === "self"
+            ? totalDays * vehicle?.rentalCost?.day
+            : tab === "chauffeured"
+            ? totalHours * vehicle?.rentalCost?.chauffeured
+            : totalHours * vehicle?.rentalCost?.commercial,
         contact: {
           name: values.name,
           email: values.email,
@@ -210,6 +217,10 @@ const Car = () => {
                   setPaymentIntent={setPaymentIntent}
                   includeDelivery={includeDelivery}
                   setIncludeDelivery={setIncludeDelivery}
+                  totalDays={totalDays}
+                  setTotalDays={setTotalDays}
+                  totalHours={totalHours}
+                  setTotalHours={setTotalHours}
                 />
               </section>
             ) : (
