@@ -37,9 +37,15 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
   success,
   includeDelivery,
 }) => {
+  const rentalCost =
+    customerData.type === "self"
+      ? customerData.totalDays * customerData.vehicle.rentalCost.day
+      : customerData.type === "chauffeured"
+      ? customerData.totalHours * customerData.vehicle.rentalCost.chauffeured
+      : customerData.totalHours * customerData.vehicle.rentalCost.commercial;
   const goBack = () => {
     fetchPostJSON("/api/paymentIntent", {
-      amount: 50,
+      amount: rentalCost,
       payment_intent_id: paymentIntent.id,
       cancel: true,
       contact: {
@@ -73,7 +79,7 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
 
     // Create a PaymentIntent with the specified amount.
     const response = await fetchPostJSON("/api/paymentIntent", {
-      amount: 50,
+      amount: rentalCost,
       payment_intent_id: paymentIntent?.id,
       contact: {
         name: customerData.name,
@@ -245,84 +251,20 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
                 </p>
                 {customerData.type === "self" ? (
                   <p className="checkout-form_summary_line-item_value">
-                    {customerData.totalDays}
+                    {customerData.totalDays} days
                   </p>
                 ) : (
                   <p className="checkout-form_summary_line-item_value">
-                    {customerData.totalHours}
+                    {customerData.totalHours} hours
                   </p>
                 )}
-              </article>
-              <article className="checkout-form_summary_line-item">
-                <p className="checkout-form_summary_line-item_title">
-                  Booking Total
-                </p>
-                <p className="checkout-form_summary_line-item_value">
-                  {customerData.type === "self" ? (
-                    <>
-                      $
-                      {customerData.totalDays *
-                        customerData.vehicle.rentalCost.day}
-                    </>
-                  ) : customerData.type === "chauffeured" ? (
-                    <>
-                      $
-                      {customerData.totalHours *
-                        customerData.vehicle.rentalCost.chauffeured}
-                    </>
-                  ) : (
-                    <>
-                      $
-                      {customerData.totalHours *
-                        customerData.vehicle.rentalCost.commercial}
-                    </>
-                  )}
-                </p>
-              </article>
-              <article className="checkout-form_summary_line-item">
-                <p className="checkout-form_summary_line-item_title">
-                  Reservation Deposit
-                </p>
-                <p className="checkout-form_summary_line-item_value">{`-${formatAmountForDisplay(
-                  50,
-                  "USD"
-                )}`}</p>
-              </article>
-              <article className="checkout-form_summary_subtotal">
-                <p className="checkout-form_summary_line-item_title">
-                  Total Due Upon Pickup or Deliver
-                </p>
-                <p className="checkout-form_summary_line-item_value">
-                  {customerData.type === "self" ? (
-                    <>
-                      $
-                      {customerData.totalDays *
-                        customerData.vehicle.rentalCost.day -
-                        50}
-                    </>
-                  ) : customerData.type === "chauffeured" ? (
-                    <>
-                      $
-                      {customerData.totalHours *
-                        customerData.vehicle.rentalCost.chauffeured -
-                        50}
-                    </>
-                  ) : (
-                    <>
-                      $
-                      {customerData.totalHours *
-                        customerData.vehicle.rentalCost.commercial -
-                        50}
-                    </>
-                  )}
-                </p>
               </article>
               <article className="checkout-form_summary_total">
                 <p className="checkout-form_summary_total_title">
                   Total Due Today
                 </p>
                 <p className="checkout-form_summary_total_value">
-                  {formatAmountForDisplay(50, "USD")}
+                  {formatAmountForDisplay(rentalCost, "USD")}
                 </p>
               </article>
             </section>
@@ -351,7 +293,7 @@ export const CheckoutForm: FC<CheckoutFormProps> = ({
               !stripe
             }
           >
-            Submit Deposit {formatAmountForDisplay(50, "USD")}
+            Submit Payment {formatAmountForDisplay(rentalCost, "USD")}
           </button>
         ) : (
           <section className="confirmation_pickup">

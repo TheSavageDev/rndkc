@@ -34,9 +34,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       endDate: endDateTime,
       endRefitTime: endRefitTime,
       delivery: includeDelivery,
-      address,
-      city,
-      zipCode,
+      address: address ?? "",
+      city: city ?? "",
+      zipCode: zipCode ?? "",
     });
 
     const msg = {
